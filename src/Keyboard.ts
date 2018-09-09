@@ -1,4 +1,4 @@
-enum Key {
+export enum Key {
   Tab   = 9,
   Enter = 13,
   Shift = 16,
@@ -76,7 +76,7 @@ enum Key {
   Numlock  = 144
 }
 
-class Keyboard {
+export class Keyboard {
   private keys: { [key: number]: boolean }
   private lasts: number[]
 
@@ -84,35 +84,35 @@ class Keyboard {
     this.keys  = []
     this.lasts = []
 
-    document.addEventListener('keyup', this.onkeyup)
-    document.addEventListener('keydown', this.onkeydown)
+    document.addEventListener('keyup', (e) => this.onkeyup(e))
+    document.addEventListener('keydown', (e) => this.onkeydown(e))
   }
 
-  public onkeyup(e: KeyboardEvent) {
+  private onkeyup(e: KeyboardEvent) {
     this.lasts.push(e.keyCode)
     this.keys[e.keyCode] = false
   }
 
-  public onkeydown(e: KeyboardEvent) {
+  private onkeydown(e: KeyboardEvent) {
     this.keys[e.keyCode] = true
   }
 
-  public up(k: Key) {
+  public up(k: Key): boolean {
     return !this.keys[k]
   }
 
-  public down(k: Key) {
-    this.keys[k]
+  public down(k: Key): boolean {
+    return this.keys[k]
   }
 
-  public press(k: Key) {
+  public press(k: Key): boolean {
     const v = this.keys[k]
     this.keys[k] = false
 
     return v
   }
 
-  public release(k: Key) {
+  public release(k: Key): boolean {
     const last = this.lasts[this.lasts.indexOf(k)]
 
     if (typeof last !== 'undefined') {

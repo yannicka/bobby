@@ -1,11 +1,13 @@
 import Player from './Player'
 import Map from './Map'
+import { Keyboard, Key } from './Keyboard'
 
 export default class Bobby {
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
   private map: Map
   private player: Player
+  private keyboard: Keyboard
 
   public constructor() {
     this.canvas = <HTMLCanvasElement> document.getElementById('app')
@@ -26,6 +28,8 @@ export default class Bobby {
 
     this.player = new Player()
 
+    this.keyboard = new Keyboard()
+
     window.addEventListener('resize', () => this.resize())
 
     this.resize()
@@ -33,6 +37,18 @@ export default class Bobby {
   }
 
   public update() {
+    if (this.keyboard.down(Key.Up))
+      this.player.y--
+
+    if (this.keyboard.down(Key.Down))
+      this.player.y++
+
+    if (this.keyboard.down(Key.Right))
+      this.player.x++
+
+    if (this.keyboard.down(Key.Left))
+      this.player.x--
+
     this.render()
 
     requestAnimationFrame(() => this.update())
