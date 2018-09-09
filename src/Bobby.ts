@@ -8,6 +8,7 @@ export default class Bobby {
   private map: Map
   private player: Player
   private keyboard: Keyboard
+  private lastUpdate: number
 
   public constructor() {
     this.canvas = <HTMLCanvasElement> document.getElementById('app')
@@ -26,6 +27,8 @@ export default class Bobby {
       [ 1, 1, 1, 1, 1, 1, 1 ],
     ])
 
+    this.lastUpdate = Date.now()
+
     this.player = new Player()
 
     this.keyboard = new Keyboard()
@@ -37,17 +40,26 @@ export default class Bobby {
   }
 
   public update() {
+    const now = Date.now()
+    const dt = (now - this.lastUpdate) / 1000
+    this.lastUpdate = now
+
+    this.player.velocity.x = 0
+    this.player.velocity.y = 0
+
     if (this.keyboard.down(Key.Up))
-      this.player.y--
+      this.player.velocity.y = -25
 
     if (this.keyboard.down(Key.Down))
-      this.player.y++
+      this.player.velocity.y = 25
 
     if (this.keyboard.down(Key.Right))
-      this.player.x++
+      this.player.velocity.x = 25
 
     if (this.keyboard.down(Key.Left))
-      this.player.x--
+      this.player.velocity.x = -25
+
+    this.player.update(dt)
 
     this.render()
 
