@@ -6,7 +6,7 @@
   "license": "GPL-3.0-or-later",
 
   "scripts": {
-    "build-dev": "webpack --config webpack.dev.js",
+    "build-dev": "webpack --config webpack.dev.js --watch",
     "build": "webpack --config webpack.prod.js"
   },
 
