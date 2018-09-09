@@ -1,6 +1,7 @@
 import Player from './Player'
 import Map from './Map'
 import { Keyboard, Key } from './Keyboard'
+import Direction from './Direction';
 
 export default class Bobby {
   private canvas: HTMLCanvasElement
@@ -44,20 +45,19 @@ export default class Bobby {
     const dt = (now - this.lastUpdate) / 1000
     this.lastUpdate = now
 
-    this.player.velocity.x = 0
-    this.player.velocity.y = 0
+    if (this.player.canmove) {
+      if (this.keyboard.down(Key.Up))
+        this.player.move(Direction.Up)
 
-    if (this.keyboard.down(Key.Up))
-      this.player.velocity.y = -25
+      if (this.keyboard.down(Key.Down))
+        this.player.move(Direction.Down)
 
-    if (this.keyboard.down(Key.Down))
-      this.player.velocity.y = 25
+      if (this.keyboard.down(Key.Right))
+        this.player.move(Direction.Right)
 
-    if (this.keyboard.down(Key.Right))
-      this.player.velocity.x = 25
-
-    if (this.keyboard.down(Key.Left))
-      this.player.velocity.x = -25
+      if (this.keyboard.down(Key.Left))
+        this.player.move(Direction.Left)
+    }
 
     this.player.update(dt)
 
