@@ -6,4 +6,8 @@ export default class Point {
     this.x = x
     this.y = y
   }
+
+  public clone(): Point {
+    return new Point(this.x, this.y)
+  }
 }
