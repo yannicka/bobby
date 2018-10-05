@@ -6,8 +6,8 @@ export enum CellType {
   Grass, // Herbe (bloquant : impossible de marcher dessus)
   Fence, // Barrière (bloquant)
 
-  SpadeDeactivated, // Pique (avant que l'on marche dessus)
-  SpadeActivated,   // Pique (après avoir marché dessus)
+  SpadeDeactivated, // Pique avant que l'on marche dessus (actif)
+  SpadeActivated,   // Pique après avoir marché dessus (mortel)
 
   ConveyorBeltUp,    // Tapis roulant vers le haut
   ConveyorBeltDown,  // Tapis roulant vers le bas
@@ -46,4 +46,41 @@ export function nextState(cellType: CellType) {
     default:
       return cellType
   }
+}
+
+export function isSolid(cellType: CellType): boolean {
+  switch (cellType) {
+    case CellType.Grass:
+    case CellType.Fence:
+      return true
+
+    default:
+      return false
+  }
+}
+
+const cells = {
+  1: CellType.Ground,
+
+  2: CellType.Grass,
+  3: CellType.Fence,
+
+  4: CellType.SpadeDeactivated,
+  5: CellType.SpadeActivated,
+
+  6: CellType.ConveyorBeltUp,
+  7: CellType.ConveyorBeltDown,
+  8: CellType.ConveyorBeltRight,
+  9: CellType.ConveyorBeltLeft,
+
+  10: CellType.TurnstileUpRight,
+  11: CellType.TurnstileUpLeft,
+  12: CellType.TurnstileDownRight,
+  13: CellType.TurnstileDownLeft,
+
+  14: CellType.Start,
+  15: CellType.End,
+
+  16: CellType.Carrot,
+  17: CellType.CarrotHole,
 }

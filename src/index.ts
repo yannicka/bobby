@@ -1,3 +1,3 @@
-import Bobby from './Bobby'
+import Game from './Game'
 
-const bobby = new Bobby()
+new Game()

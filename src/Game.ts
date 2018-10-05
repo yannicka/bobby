@@ -3,7 +3,7 @@ import Map from './Map'
 import { Keyboard, Key } from './Keyboard'
 import Direction from './Direction';
 
-export default class Bobby {
+export default class Game {
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
   private map: Map
@@ -18,19 +18,11 @@ export default class Bobby {
     this.canvas.width = 640
     this.canvas.height = 480
 
-    this.map = new Map([
-      [ 1, 1, 1, 1, 1, 1, 1 ],
-      [ 1, 0, 0, 0, 0, 0, 1 ],
-      [ 1, 0, 0, 0, 0, 0, 1 ],
-      [ 1, 0, 0, 0, 0, 0, 1 ],
-      [ 1, 0, 0, 1, 1, 0, 1 ],
-      [ 1, 0, 0, 0, 1, 0, 1 ],
-      [ 1, 1, 1, 1, 1, 1, 1 ],
-    ])
+    this.map = Map.firstLevel()
 
     this.lastUpdate = Date.now()
 
-    this.player = new Player()
+    this.player = new Player(this)
 
     this.keyboard = new Keyboard()
 
@@ -79,5 +71,9 @@ export default class Bobby {
   private resize() {
     this.canvas.width = window.innerWidth
     this.canvas.height = window.innerHeight
+  }
+
+  public getMap(): Map {
+    return this.map
   }
 }

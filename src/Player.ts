@@ -1,23 +1,28 @@
-import { CELL_SIZE } from './Cell'
+import { CELL_SIZE, isSolid } from './Cell'
 import Point from './Point'
 import Direction from './Direction'
+import Game from './Game';
 
 export default class Player {
-  public position: Point
-  public startPosition: Point
-  public targetPosition: Point
   public canmove: boolean
+  private mapPosition: Point
+  private position: Point
+  private startPosition: Point
+  private targetPosition: Point
   private mov: number
   private timer = 0
+  private game: Game
 
-  public constructor() {
+  public constructor(game: Game) {
+    this.game = game
+    this.mapPosition = new Point(1, 1)
     this.position = new Point(CELL_SIZE, CELL_SIZE)
     this.targetPosition = this.position.clone()
     this.canmove = true
     this.mov = 0
   }
 
-  public update(dt: number) {
+  public update(dt: number): void {
     // Déplace le joueur tant qu'il n'a plus de contrôles
     if (!this.canmove) {
       this.timer += dt * 4
@@ -35,7 +40,7 @@ export default class Player {
     }
   }
 
-  public render(ctx: CanvasRenderingContext2D) {
+  public render(ctx: CanvasRenderingContext2D): void {
     if (this.mov === 0)
       ctx.fillStyle = 'red'
     else if (this.mov === 1)
@@ -46,31 +51,41 @@ export default class Player {
     ctx.fillRect(this.position.x, this.position.y, CELL_SIZE, CELL_SIZE)
   }
 
-  public move(direction: Direction) {
+  public move(direction: Direction): void {
     if (!this.canmove)
       return
 
-    this.canmove = false
-    this.startPosition = this.position.clone()
-    this.targetPosition = this.position.clone()
+    const newMapPosition = this.mapPosition.clone()
 
     switch (direction) {
       case Direction.Up:
-        this.targetPosition.y -= CELL_SIZE
+        newMapPosition.y -= 1
         break
 
       case Direction.Down:
-        this.targetPosition.y += CELL_SIZE
+        newMapPosition.y += 1
         break
 
       case Direction.Right:
-        this.targetPosition.x += CELL_SIZE
+        newMapPosition.x += 1
         break
 
       case Direction.Left:
-        this.targetPosition.x -= CELL_SIZE
+        newMapPosition.x -= 1
         break
     }
+
+    const cell = this.game.getMap().getCell(newMapPosition)
+
+    if (isSolid(cell))
+      return
+
+    this.mapPosition = newMapPosition
+    this.canmove = false
+
+    this.startPosition = this.position.clone()
+    this.targetPosition.x = this.mapPosition.x * CELL_SIZE
+    this.targetPosition.y = this.mapPosition.y * CELL_SIZE
   }
 }
 

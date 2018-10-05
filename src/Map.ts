@@ -1,4 +1,5 @@
 import { CELL_SIZE } from './Cell'
+import Point from './Point';
 
 export default class Map {
   private cells: number[][]
@@ -20,5 +21,21 @@ export default class Map {
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
       }
     }
+  }
+
+  public getCell(p: Point) {
+    return this.cells[p.y][p.x];
+  }
+
+  public static firstLevel() {
+    return new Map([
+      [ 1, 1, 1, 1, 1, 1, 1 ],
+      [ 1, 0, 0, 0, 0, 0, 1 ],
+      [ 1, 0, 0, 0, 0, 0, 1 ],
+      [ 1, 0, 0, 0, 0, 0, 1 ],
+      [ 1, 0, 0, 1, 1, 0, 1 ],
+      [ 1, 0, 0, 0, 1, 0, 1 ],
+      [ 1, 1, 1, 1, 1, 1, 1 ],
+    ])
   }
 }
