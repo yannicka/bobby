@@ -26,7 +26,7 @@ export enum CellType {
   CarrotHole, // Trou de carotte (s'affiche après avoir mangé la carotte)
 }
 
-export function nextState(cellType: CellType) {
+export function nextState(cellType: CellType): CellType {
   switch (cellType) {
     case CellType.SpadeDeactivated:
       return CellType.SpadeActivated
@@ -59,7 +59,7 @@ export function isSolid(cellType: CellType): boolean {
   }
 }
 
-const cells = {
+export const cells: { [key: number]: CellType } = {
   1: CellType.Ground,
 
   2: CellType.Grass,

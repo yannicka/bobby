@@ -88,12 +88,12 @@ export class Keyboard {
     document.addEventListener('keydown', (e) => this.onkeydown(e))
   }
 
-  private onkeyup(e: KeyboardEvent) {
+  private onkeyup(e: KeyboardEvent): void {
     this.lasts.push(e.keyCode)
     this.keys[e.keyCode] = false
   }
 
-  private onkeydown(e: KeyboardEvent) {
+  private onkeydown(e: KeyboardEvent): void {
     this.keys[e.keyCode] = true
   }
 

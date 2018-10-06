@@ -32,7 +32,7 @@ export default class Game {
     this.update()
   }
 
-  public update() {
+  public update(): void {
     const now = Date.now()
     const dt = (now - this.lastUpdate) / 1000
     this.lastUpdate = now
@@ -58,7 +58,7 @@ export default class Game {
     requestAnimationFrame(() => this.update())
   }
 
-  public render() {
+  public render(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.ctx.fillStyle = 'rgb(240, 240, 240)'
@@ -68,7 +68,7 @@ export default class Game {
     this.player.render(this.ctx)
   }
 
-  private resize() {
+  private resize(): void {
     this.canvas.width = window.innerWidth
     this.canvas.height = window.innerHeight
   }
