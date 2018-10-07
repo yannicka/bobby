@@ -6,6 +6,7 @@ import Game from './Game';
 export default class Player {
   public canmove: boolean
   private position: Point
+  private previousPosition: Point
   private startPosition: Point
   private targetPosition: Point
   private displayPosition: Point
@@ -19,6 +20,7 @@ export default class Player {
 
     this.game = game
     this.position = new Point(startX, startY)
+    this.previousPosition = this.position.clone()
     this.startPosition = new Point(startX * CELL_SIZE, startY * CELL_SIZE)
     this.targetPosition = this.startPosition.clone()
     this.displayPosition = this.startPosition.clone()
@@ -42,7 +44,7 @@ export default class Player {
         this.canmove = true
         this.displayPosition = this.targetPosition.clone()
 
-        this.game.getMap().nextStateOf(this.position)
+        this.game.getMap().nextStateOf(this.previousPosition)
       }
     }
   }
@@ -55,7 +57,7 @@ export default class Player {
     else if (this.mov === 2)
       ctx.fillStyle = 'yellow'
 
-    ctx.fillRect(this.displayPosition.x, this.displayPosition.y, CELL_SIZE, CELL_SIZE)
+    ctx.fillRect(this.displayPosition.x, this.displayPosition.y, CELL_SIZE / 2, CELL_SIZE / 2)
   }
 
   public move(direction: Direction): void {
@@ -87,7 +89,12 @@ export default class Player {
     if (isSolid(cell))
       return
 
-    this.position = newMapPosition
+    this.moveTo(newMapPosition)
+  }
+
+  private moveTo(poisiton: Point) {
+    this.previousPosition = this.position
+    this.position = poisiton
     this.canmove = false
 
     this.startPosition = this.targetPosition.clone()

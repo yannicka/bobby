@@ -19,7 +19,6 @@ export default class Map {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle = 'black'
 
     for (let y = 0 ; y < this.cells.length ; y++) {
       const row = this.cells[y]
@@ -27,8 +26,30 @@ export default class Map {
       for (let x = 0 ; x < row.length ; x++) {
         const cell = row[x]
 
-        if (cell === CellType.Grass)
+        if (cell === CellType.Grass) {
+          ctx.fillStyle = 'black'
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        }
+
+        if (cell === CellType.TurnstileUpRight) {
+          ctx.fillStyle = 'red'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        }
+
+        if (cell === CellType.TurnstileUpLeft) {
+          ctx.fillStyle = 'green'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        }
+
+        if (cell === CellType.TurnstileDownRight) {
+          ctx.fillStyle = 'blue'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        }
+
+        if (cell === CellType.TurnstileDownLeft) {
+          ctx.fillStyle = 'yellow'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        }
       }
     }
   }
@@ -47,7 +68,7 @@ export default class Map {
     return new Map([
       [ 2, 2, 2, 2, 2, 2, 2 ],
       [ 2, 1, 1, 1, 1, 1, 2 ],
-      [ 2, 1, 1, 1, 1, 1, 2 ],
+      [ 2, 1, 1, 10, 1, 1, 2 ],
       [ 2, 1, 1, 1, 1, 1, 2 ],
       [ 2, 1, 1, 2, 2, 1, 2 ],
       [ 2, 1, 1, 1, 2, 1, 2 ],
