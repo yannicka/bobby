@@ -44,6 +44,7 @@ export default class Player {
         this.canmove = true
         this.displayPosition = this.targetPosition.clone()
 
+        this.game.getMap().onPassingEvent(this.position, this)
         this.game.getMap().nextStateOf(this.previousPosition)
       }
     }
@@ -57,7 +58,12 @@ export default class Player {
     else if (this.mov === 2)
       ctx.fillStyle = 'yellow'
 
-    ctx.fillRect(this.displayPosition.x, this.displayPosition.y, CELL_SIZE / 2, CELL_SIZE / 2)
+    ctx.fillRect(
+      this.displayPosition.x + CELL_SIZE / 4,
+      this.displayPosition.y + CELL_SIZE / 4,
+      CELL_SIZE / 2,
+      CELL_SIZE / 2,
+    )
   }
 
   public move(direction: Direction): void {

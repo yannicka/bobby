@@ -1,5 +1,6 @@
-import { CELL_SIZE, CellType, cells as cellsIndex, nextState } from './Cell'
-import Point from './Point';
+import { CELL_SIZE, CellType, cells as cellsIndex, nextState, onPassingEvent } from './Cell'
+import Point from './Point'
+import Player from './Player'
 
 export default class Map {
   private cells: CellType[][]
@@ -19,7 +20,6 @@ export default class Map {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-
     for (let y = 0 ; y < this.cells.length ; y++) {
       const row = this.cells[y]
 
@@ -33,21 +33,30 @@ export default class Map {
 
         if (cell === CellType.TurnstileUpRight) {
           ctx.fillStyle = 'red'
-          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE / 4)
+          ctx.fillRect(x * CELL_SIZE + CELL_SIZE - CELL_SIZE / 4, y * CELL_SIZE, CELL_SIZE / 4, CELL_SIZE)
         }
 
         if (cell === CellType.TurnstileUpLeft) {
-          ctx.fillStyle = 'green'
-          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+          ctx.fillStyle = 'red'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE / 4)
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE / 4, CELL_SIZE)
         }
 
         if (cell === CellType.TurnstileDownRight) {
-          ctx.fillStyle = 'blue'
-          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+          ctx.fillStyle = 'red'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE + CELL_SIZE - CELL_SIZE / 4, CELL_SIZE, CELL_SIZE / 4)
+          ctx.fillRect(x * CELL_SIZE + CELL_SIZE - CELL_SIZE / 4, y * CELL_SIZE, CELL_SIZE / 4, CELL_SIZE)
         }
 
         if (cell === CellType.TurnstileDownLeft) {
-          ctx.fillStyle = 'yellow'
+          ctx.fillStyle = 'red'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE + CELL_SIZE - CELL_SIZE / 4, CELL_SIZE, CELL_SIZE / 4)
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE / 4, CELL_SIZE)
+        }
+
+        if (cell === CellType.ConveyorBeltRight) {
+          ctx.fillStyle = 'purple'
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
         }
       }
@@ -64,15 +73,21 @@ export default class Map {
     this.cells[position.y][position.x] = nextState(cell)
   }
 
+  public onPassingEvent(position: Point, player: Player) {
+    const cell = this.cells[position.y][position.x]
+
+    onPassingEvent(cell, player)
+  }
+
   public static firstLevel(): Map {
     return new Map([
-      [ 2, 2, 2, 2, 2, 2, 2 ],
-      [ 2, 1, 1, 1, 1, 1, 2 ],
-      [ 2, 1, 1, 10, 1, 1, 2 ],
-      [ 2, 1, 1, 1, 1, 1, 2 ],
-      [ 2, 1, 1, 2, 2, 1, 2 ],
-      [ 2, 1, 1, 1, 2, 1, 2 ],
-      [ 2, 2, 2, 2, 2, 2, 2 ],
+      [  2,  2,  2,  2,  2,  2,  2 ],
+      [  2,  1,  1,  1,  1,  1,  2 ],
+      [  2,  1,  1,  8,  8,  1,  2 ],
+      [  2,  1,  1, 10,  1,  1,  2 ],
+      [  2,  1,  1,  2,  2,  1,  2 ],
+      [  2,  1,  1,  1,  2,  1,  2 ],
+      [  2,  2,  2,  2,  2,  2,  2 ],
     ])
   }
 }

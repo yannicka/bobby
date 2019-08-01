@@ -1,3 +1,6 @@
+import Player from './Player'
+import Direction from './Direction'
+
 export const CELL_SIZE = 50
 
 export enum CellType {
@@ -45,6 +48,15 @@ export function nextState(cellType: CellType): CellType {
 
     default:
       return cellType
+  }
+}
+
+export function onPassingEvent(cellType: CellType, player: Player): void {
+  switch (cellType) {
+    case CellType.ConveyorBeltRight:
+      player.move(Direction.Right)
+
+      break
   }
 }
 
