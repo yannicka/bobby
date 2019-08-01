@@ -92,7 +92,7 @@ export default class Player {
 
     const cell = this.game.getMap().getCell(newMapPosition)
 
-    if (isSolid(cell))
+    if (isSolid(cell, direction))
       return
 
     this.moveTo(newMapPosition)

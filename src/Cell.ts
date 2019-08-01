@@ -60,11 +60,23 @@ export function onPassingEvent(cellType: CellType, player: Player): void {
   }
 }
 
-export function isSolid(cellType: CellType): boolean {
+export function isSolid(cellType: CellType, direction: Direction): boolean {
   switch (cellType) {
     case CellType.Grass:
     case CellType.Fence:
       return true
+
+    case CellType.TurnstileUpRight:
+      return [ Direction.Down, Direction.Left ].includes(direction)
+
+    case CellType.TurnstileUpLeft:
+      return [ Direction.Down, Direction.Right ].includes(direction)
+
+    case CellType.TurnstileDownRight:
+      return [ Direction.Up, Direction.Left ].includes(direction)
+
+    case CellType.TurnstileDownLeft:
+      return [ Direction.Up, Direction.Right ].includes(direction)
 
     default:
       return false
