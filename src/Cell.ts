@@ -83,6 +83,29 @@ export function isSolid(cellType: CellType, direction: Direction): boolean {
   }
 }
 
+export function isBlocking(cellType: CellType, direction: Direction): boolean {
+  switch (cellType) {
+    case CellType.Grass:
+    case CellType.Fence:
+      return true
+
+    case CellType.TurnstileUpRight:
+      return [ Direction.Up, Direction.Right ].includes(direction)
+
+    case CellType.TurnstileUpLeft:
+      return [ Direction.Up, Direction.Left ].includes(direction)
+
+    case CellType.TurnstileDownRight:
+      return [ Direction.Down, Direction.Right ].includes(direction)
+
+    case CellType.TurnstileDownLeft:
+      return [ Direction.Down, Direction.Left ].includes(direction)
+
+    default:
+      return false
+  }
+}
+
 export const cells: { [key: number]: CellType } = {
   1: CellType.Ground,
 
