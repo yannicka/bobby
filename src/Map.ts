@@ -58,6 +58,12 @@ export default class Map {
         if (cell === CellType.ConveyorBeltRight) {
           ctx.fillStyle = 'purple'
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+          ctx.strokeStyle = 'white'
+          ctx.lineWidth = 4
+          ctx.moveTo(x * CELL_SIZE, y * CELL_SIZE)
+          ctx.lineTo(x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2)
+          ctx.lineTo(x * CELL_SIZE, y * CELL_SIZE + CELL_SIZE)
+          ctx.stroke()
         }
       }
     }
