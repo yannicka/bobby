@@ -60,6 +60,7 @@ export default class Map {
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
           ctx.strokeStyle = 'white'
           ctx.lineWidth = 4
+          ctx.beginPath() // @see https://stackoverflow.com/a/9559703/7564882
           ctx.moveTo(x * CELL_SIZE, y * CELL_SIZE)
           ctx.lineTo(x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2)
           ctx.lineTo(x * CELL_SIZE, y * CELL_SIZE + CELL_SIZE)
