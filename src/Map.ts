@@ -76,6 +76,20 @@ export default class Map {
           ctx.fillStyle = 'grey'
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
         }
+
+        if (cell === CellType.Start) {
+          ctx.fillStyle = 'grey'
+          ctx.beginPath()
+          ctx.arc(x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2, CELL_SIZE / 2.6, 0, 2 * Math.PI)
+          ctx.fill()
+        }
+
+        if (cell === CellType.End) {
+          ctx.fillStyle = 'green'
+          ctx.beginPath()
+          ctx.arc(x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2, CELL_SIZE / 2.6, 0, 2 * Math.PI)
+          ctx.fill()
+        }
       }
     }
   }
@@ -119,12 +133,12 @@ export default class Map {
   public static firstLevel(): Map {
     return new Map([
       [  2,  2,  2,  2,  2,  2,  2,  2 ],
-      [  2,  1,  1,  8,  8,  1,  1,  2 ],
-      [  2, 14,  1,  1,  1,  1,  1,  2 ],
+      [  2, 14,  1,  8,  8,  1,  1,  2 ],
+      [  2,  1,  1,  1,  1,  1,  1,  2 ],
       [  2,  1,  1, 10,  1,  1,  1,  2 ],
       [  2, 16,  1,  1,  1,  1,  1,  2 ],
       [  2, 16,  1,  2,  2,  1,  1,  2 ],
-      [  2,  1,  1,  1,  2,  1,  1,  2 ],
+      [  2,  1,  1,  1,  2,  1, 15,  2 ],
       [  2,  2,  2,  2,  2,  2,  2,  2 ],
     ])
   }
