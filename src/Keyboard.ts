@@ -73,7 +73,7 @@ export enum Key {
   Home     = 36,
   Isert    = 45,
   Delete   = 46,
-  Numlock  = 144
+  Numlock  = 144,
 }
 
 export class Keyboard {

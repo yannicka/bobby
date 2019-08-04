@@ -51,13 +51,18 @@ export function nextState(cellType: CellType): CellType {
   }
 }
 
-export function onPassingEvent(cellType: CellType, player: Player): void {
+export function onPassingEvent(cellType: CellType, player: Player): CellType|null {
   switch (cellType) {
     case CellType.ConveyorBeltRight:
       player.move(Direction.Right)
 
       break
+
+    case CellType.Carrot:
+      return CellType.CarrotHole
   }
+
+  return null
 }
 
 export function isSolid(cellType: CellType, direction: Direction): boolean {

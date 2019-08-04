@@ -66,6 +66,16 @@ export default class Map {
           ctx.lineTo(x * CELL_SIZE, y * CELL_SIZE + CELL_SIZE)
           ctx.stroke()
         }
+
+        if (cell === CellType.Carrot) {
+          ctx.fillStyle = 'orange'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        }
+
+        if (cell === CellType.CarrotHole) {
+          ctx.fillStyle = 'grey'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        }
       }
     }
   }
@@ -83,7 +93,11 @@ export default class Map {
   public onPassingEvent(position: Point, player: Player) {
     const cell = this.cells[position.y][position.x]
 
-    onPassingEvent(cell, player)
+    const newCellType = onPassingEvent(cell, player)
+
+    if (newCellType) {
+      this.cells[position.y][position.x] = newCellType
+    }
   }
 
   public static firstLevel(): Map {
@@ -92,8 +106,8 @@ export default class Map {
       [  2,  1,  1,  8,  8,  1,  1,  2 ],
       [  2,  1,  1,  1,  1,  1,  1,  2 ],
       [  2,  1,  1, 10,  1,  1,  1,  2 ],
-      [  2,  1,  1,  1,  1,  1,  1,  2 ],
-      [  2,  1,  1,  2,  2,  1,  1,  2 ],
+      [  2, 16,  1,  1,  1,  1,  1,  2 ],
+      [  2, 16,  1,  2,  2,  1,  1,  2 ],
       [  2,  1,  1,  1,  2,  1,  1,  2 ],
       [  2,  2,  2,  2,  2,  2,  2,  2 ],
     ])
