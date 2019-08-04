@@ -1,7 +1,7 @@
 import { CELL_SIZE, isSolid, isBlocking } from './Cell'
 import Point from './Point'
 import Direction from './Direction'
-import Game from './Game';
+import Game from './Game'
 
 export default class Player {
   public canmove: boolean
@@ -14,9 +14,9 @@ export default class Player {
   private timer: number
   private game: Game
 
-  public constructor(game: Game) {
-    const startX = 1
-    const startY = 1
+  public constructor(game: Game, start: Point) {
+    const startX = start.x
+    const startY = start.y
 
     this.game = game
     this.position = new Point(startX, startY)

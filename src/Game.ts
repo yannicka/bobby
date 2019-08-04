@@ -22,7 +22,7 @@ export default class Game {
 
     this.lastUpdate = Date.now()
 
-    this.player = new Player(this)
+    this.player = new Player(this, this.map.startLocation())
 
     this.keyboard = new Keyboard()
 
