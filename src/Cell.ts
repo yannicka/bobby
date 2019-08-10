@@ -46,6 +46,9 @@ export function nextState(cellType: CellType): CellType {
     case CellType.TurnstileDownLeft:
       return CellType.TurnstileUpLeft
 
+    case CellType.SpadeDeactivated:
+      return CellType.SpadeActivated
+
     default:
       return cellType
   }
@@ -69,6 +72,7 @@ export function isSolid(cellType: CellType, direction: Direction): boolean {
   switch (cellType) {
     case CellType.Grass:
     case CellType.Fence:
+    case CellType.SpadeActivated:
       return true
 
     case CellType.TurnstileUpRight:

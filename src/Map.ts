@@ -77,6 +77,16 @@ export default class Map {
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
         }
 
+        if (cell === CellType.SpadeDeactivated) {
+          ctx.fillStyle = 'darkgray'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        }
+
+        if (cell === CellType.SpadeActivated) {
+          ctx.fillStyle = 'dimgray'
+          ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+        }
+
         if (cell === CellType.Start) {
           ctx.fillStyle = 'grey'
           ctx.beginPath()
@@ -156,7 +166,7 @@ export default class Map {
     return new Map([
       [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
       [  2, 14,  1,  8,  8,  1,  1,  1,  2 ],
-      [  2,  1,  1,  1,  1,  1,  1,  1,  2 ],
+      [  2,  1,  1,  1,  1,  1,  4,  1,  2 ],
       [  2,  1,  1, 10,  1,  1,  1,  1,  2 ],
       [  2, 16,  1,  1,  1,  1,  1,  1,  2 ],
       [  2, 16,  1,  1,  1,  1,  1,  1,  2 ],
