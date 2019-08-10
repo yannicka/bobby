@@ -4,7 +4,7 @@ import Direction from './Direction'
 import Game from './Game'
 
 export default class Player {
-  public canmove: boolean
+  private canmove: boolean
   private position: Point
   private previousPosition: Point
   private startPosition: Point
@@ -97,6 +97,10 @@ export default class Player {
       return
 
     this.moveTo(newMapPosition)
+  }
+
+  public isAbleToMove(): boolean {
+    return this.canmove
   }
 
   private moveTo(poisiton: Point) {

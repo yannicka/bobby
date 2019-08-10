@@ -37,7 +37,7 @@ export default class Game {
     const dt = (now - this.lastUpdate) / 1000
     this.lastUpdate = now
 
-    if (this.player.canmove) {
+    if (this.player.isAbleToMove()) {
       if (this.keyboard.down(Key.Up))
         this.player.move(Direction.Up)
 

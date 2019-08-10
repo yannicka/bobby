@@ -85,7 +85,11 @@ export default class Map {
         }
 
         if (cell === CellType.End) {
-          ctx.fillStyle = 'green'
+          if (this.countCarrots() === 0) {
+            ctx.fillStyle = 'green'
+          } else {
+            ctx.fillStyle = 'red'
+          }
           ctx.beginPath()
           ctx.arc(x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2, CELL_SIZE / 2.6, 0, 2 * Math.PI)
           ctx.fill()
@@ -128,6 +132,24 @@ export default class Map {
     }
 
     return null
+  }
+
+  public countCarrots(): number {
+    let nbCarrots = 0
+
+    for (let y = 0 ; y < this.cells.length ; y++) {
+      const row = this.cells[y]
+
+      for (let x = 0 ; x < row.length ; x++) {
+        const cell = row[x]
+
+        if (cell === CellType.Carrot) {
+          nbCarrots++
+        }
+      }
+    }
+
+    return nbCarrots
   }
 
   public static firstLevel(): Map {
