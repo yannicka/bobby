@@ -1,31 +1,30 @@
-// Gestion du chargement des images
+// Gestion du chargement des images.
 //
 // Fonctionnement :
-//   const imageManager = new ImageManager()
-//   imageManager.setPath('assets/img')
-//   const loader = imageManager.load(images)
-//   Promise.all(loader).then(() => {
-//     // your code
-//   })
+// 
+// ```
+// const imageManager = new ImageManager()
+// imageManager.setPath('assets/img')
+//
+// const loader = imageManager.load(images)
+//
+// Promise.all(loader).then(() => {
+//   // code
+// })
+// ```
 export default class ImageManager {
   // Images chargées
-  private images: { [key: string]: HTMLImageElement }
+  private images: { [key: string]: HTMLImageElement } = {}
 
   // Chemin où sont recupérées les images
-  private path: string
-
-  public constructor() {
-    this.images = {}
-    this.path = ''
-  }
+  private path: string = ''
 
   // Obtenir une image par son nom
   public getImage(name: string): HTMLImageElement {
     return this.images[name]
   }
 
-  // Définir le chemin dans lequel les images sont chargées (sans la barre
-  // oblique (slash) finale).
+  // Définir le chemin dans lequel les images sont chargées
   public setPath(path: string): void {
     this.path = path
   }
@@ -35,18 +34,14 @@ export default class ImageManager {
     return this.path
   }
 
-  // Exécute le chargement des images et lance la fonction callback une fois le
-  // chargement terminé.
-  // Note : si toutes les images ne sont pas chargées (par exemple une URL
-  // incorrecte), la fonction callback n'est pas appelée.
-  public load(images: { [key: string]: string }): Array<Promise<object>> {
-      const promises = new Array<Promise<object>>()
+  // Exécute le chargement des images
+  public load(images: { [key: string]: string }): Array<Promise<HTMLImageElement>> {
+    const promises = new Array<Promise<HTMLImageElement>>()
 
-    // Chargement des images
     for (const [name, url] of Object.entries(images)) {
-      const img = new Image()
+      const img = document.createElement('img') as HTMLImageElement
 
-      const promise = new Promise<object>((resolve, reject) => {
+      const promise = new Promise<HTMLImageElement>((resolve, reject) => {
         img.addEventListener('load', () => {
           this.images[name] = img
           resolve(img)
