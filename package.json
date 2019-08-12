@@ -4,17 +4,16 @@
   "description": "Bobby",
   "author": "Yannick Armand",
   "license": "GPL-3.0-or-later",
-
   "scripts": {
-    "build-dev": "webpack --config webpack.dev.js --watch",
+    "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
-
   "devDependencies": {
-    "webpack": "^4.17.2",
-    "webpack-cli": "^3.1.0",
-    "webpack-merge": "^4.1.4",
-    "ts-loader": "^5.0.0",
-    "typescript": "^3.0.3"
+    "ts-loader": "^5.4.5",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.8.0",
+    "webpack-merge": "^4.2.1"
   }
 }

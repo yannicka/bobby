@@ -1,7 +1,8 @@
 import Player from './Player'
 import Map from './Map'
 import { Keyboard, Key } from './Keyboard'
-import Direction from './Direction';
+import Direction from './Direction'
+import ImageManager from './ImageManager'
 
 export default class Game {
   private canvas: HTMLCanvasElement
@@ -28,8 +29,21 @@ export default class Game {
 
     window.addEventListener('resize', () => this.resize())
 
-    this.resize()
-    this.update()
+    this.init()
+  }
+
+  public init(): void {
+    const imageManager = new ImageManager()
+    imageManager.setPath('assets/img/')
+
+    const loader = imageManager.load({
+      'tiles': 'tiles.png',
+    })
+
+    Promise.all(loader).then(() => {
+      this.resize()
+      this.update()
+    })
   }
 
   public update(): void {
