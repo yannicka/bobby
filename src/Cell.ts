@@ -37,6 +37,8 @@ interface Cell {
 }
 
 const cells2: { [key: number]: Cell } = {
+  [CellType.Ground]: {},
+
   [CellType.Grass]: {
     isSolid(_direction: Direction): boolean {
       return true
@@ -49,15 +51,47 @@ const cells2: { [key: number]: Cell } = {
     },
   },
 
+  [CellType.SpadeDeactivated]: {
+    nextState(): CellType {
+      return CellType.SpadeActivated
+    },
+  },
+
   [CellType.SpadeActivated]: {
     isSolid(_direction: Direction): boolean {
       return true
     },
   },
 
-  [CellType.SpadeDeactivated]: {
-    nextState(): CellType {
-      return CellType.SpadeActivated
+  [CellType.ConveyorBeltUp]: {
+    onPassingEvent(player: Player): CellType|null {
+      player.move(Direction.Up)
+
+      return null
+    },
+  },
+
+  [CellType.ConveyorBeltDown]: {
+    onPassingEvent(player: Player): CellType|null {
+      player.move(Direction.Down)
+
+      return null
+    },
+  },
+
+  [CellType.ConveyorBeltRight]: {
+    onPassingEvent(player: Player): CellType|null {
+      player.move(Direction.Right)
+
+      return null
+    },
+  },
+
+  [CellType.ConveyorBeltLeft]: {
+    onPassingEvent(player: Player): CellType|null {
+      player.move(Direction.Left)
+
+      return null
     },
   },
 
@@ -117,19 +151,17 @@ const cells2: { [key: number]: Cell } = {
     },
   },
 
-  [CellType.ConveyorBeltRight]: {
-    onPassingEvent(player: Player): CellType|null {
-      player.move(Direction.Right)
+  [CellType.Start]: {},
 
-      return null
-    },
-  },
+  [CellType.End]: {},
 
   [CellType.Carrot]: {
     onPassingEvent(_player: Player): CellType|null {
       return CellType.CarrotHole
     },
   },
+
+  [CellType.CarrotHole]: {},
 }
 
 
