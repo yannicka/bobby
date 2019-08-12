@@ -9,8 +9,8 @@ export enum CellType {
   Grass, // Herbe (bloquant : impossible de marcher dessus)
   Fence, // Barrière (bloquant)
 
-  SpadeDeactivated, // Pique avant que l'on marche dessus (actif)
-  SpadeActivated,   // Pique après avoir marché dessus (mortel)
+  SpadeDeactivated, // Pique avant que l'on marche dessus
+  SpadeActivated,   // Pique après avoir marché dessus
 
   ConveyorBeltUp,    // Tapis roulant vers le haut
   ConveyorBeltDown,  // Tapis roulant vers le bas
@@ -29,90 +29,140 @@ export enum CellType {
   CarrotHole, // Trou de carotte (s'affiche après avoir mangé la carotte)
 }
 
-export function nextState(cellType: CellType): CellType {
-  switch (cellType) {
-    case CellType.SpadeDeactivated:
-      return CellType.SpadeActivated
+interface Cell {
+  nextState?(): CellType
+  onPassingEvent?(player: Player): CellType|null
+  isSolid?(direction: Direction): boolean
+  isBlocking?(direction: Direction): boolean
+}
 
-    case CellType.TurnstileUpRight:
+const cells2: { [key: number]: Cell } = {
+  [CellType.Grass]: {
+    isSolid(_direction: Direction): boolean {
+      return true
+    },
+  },
+
+  [CellType.Fence]: {
+    isSolid(_direction: Direction): boolean {
+      return true
+    },
+  },
+
+  [CellType.SpadeActivated]: {
+    isSolid(_direction: Direction): boolean {
+      return true
+    },
+  },
+
+  [CellType.SpadeDeactivated]: {
+    nextState(): CellType {
+      return CellType.SpadeActivated
+    },
+  },
+
+  [CellType.TurnstileUpRight]: {
+    nextState(): CellType {
       return CellType.TurnstileDownRight
+    },
 
-    case CellType.TurnstileUpLeft:
+    isSolid(direction: Direction): boolean {
+      return [ Direction.Down, Direction.Left ].includes(direction)
+    },
+
+    isBlocking(direction: Direction): boolean {
+      return [ Direction.Up, Direction.Right ].includes(direction)
+    },
+  },
+
+  [CellType.TurnstileUpLeft]: {
+    nextState(): CellType {
       return CellType.TurnstileUpRight
+    },
 
-    case CellType.TurnstileDownRight:
+    isSolid(direction: Direction): boolean {
+      return [ Direction.Down, Direction.Right ].includes(direction)
+    },
+
+    isBlocking(direction: Direction): boolean {
+      return [ Direction.Up, Direction.Left ].includes(direction)
+    },
+  },
+
+  [CellType.TurnstileDownRight]: {
+    nextState(): CellType {
       return CellType.TurnstileDownLeft
+    },
 
-    case CellType.TurnstileDownLeft:
+    isSolid(direction: Direction): boolean {
+      return [ Direction.Up, Direction.Left ].includes(direction)
+    },
+
+    isBlocking(direction: Direction): boolean {
+      return [ Direction.Down, Direction.Right ].includes(direction)
+    },
+  },
+
+  [CellType.TurnstileDownLeft]: {
+    nextState(): CellType {
       return CellType.TurnstileUpLeft
+    },
 
-    case CellType.SpadeDeactivated:
-      return CellType.SpadeActivated
+    isSolid(direction: Direction): boolean {
+      return [ Direction.Up, Direction.Right ].includes(direction)
+    },
 
-    default:
-      return cellType
+    isBlocking(direction: Direction): boolean {
+      return [ Direction.Down, Direction.Left ].includes(direction)
+    },
+  },
+
+  [CellType.ConveyorBeltRight]: {
+    onPassingEvent(player: Player): CellType|null {
+      player.move(Direction.Right)
+
+      return null
+    },
+  },
+
+  [CellType.Carrot]: {
+    onPassingEvent(_player: Player): CellType|null {
+      return CellType.CarrotHole
+    },
+  },
+}
+
+
+export function nextState(cellType: CellType): CellType {
+  if (typeof cells2[cellType] !== 'undefined' && typeof cells2[cellType].nextState === 'function') {
+    return cells2[cellType].nextState()
   }
+
+  return cellType
 }
 
 export function onPassingEvent(cellType: CellType, player: Player): CellType|null {
-  switch (cellType) {
-    case CellType.ConveyorBeltRight:
-      player.move(Direction.Right)
-
-      break
-
-    case CellType.Carrot:
-      return CellType.CarrotHole
+  if (typeof cells2[cellType] !== 'undefined' && typeof cells2[cellType].onPassingEvent === 'function') {
+    return cells2[cellType].onPassingEvent(player)
   }
 
   return null
 }
 
 export function isSolid(cellType: CellType, direction: Direction): boolean {
-  switch (cellType) {
-    case CellType.Grass:
-    case CellType.Fence:
-    case CellType.SpadeActivated:
-      return true
-
-    case CellType.TurnstileUpRight:
-      return [ Direction.Down, Direction.Left ].includes(direction)
-
-    case CellType.TurnstileUpLeft:
-      return [ Direction.Down, Direction.Right ].includes(direction)
-
-    case CellType.TurnstileDownRight:
-      return [ Direction.Up, Direction.Left ].includes(direction)
-
-    case CellType.TurnstileDownLeft:
-      return [ Direction.Up, Direction.Right ].includes(direction)
-
-    default:
-      return false
+  if (typeof cells2[cellType] !== 'undefined' && typeof cells2[cellType].isSolid === 'function') {
+    return cells2[cellType].isSolid(direction)
   }
+
+  return false
 }
 
 export function isBlocking(cellType: CellType, direction: Direction): boolean {
-  switch (cellType) {
-    case CellType.Grass:
-    case CellType.Fence:
-      return true
-
-    case CellType.TurnstileUpRight:
-      return [ Direction.Up, Direction.Right ].includes(direction)
-
-    case CellType.TurnstileUpLeft:
-      return [ Direction.Up, Direction.Left ].includes(direction)
-
-    case CellType.TurnstileDownRight:
-      return [ Direction.Down, Direction.Right ].includes(direction)
-
-    case CellType.TurnstileDownLeft:
-      return [ Direction.Down, Direction.Left ].includes(direction)
-
-    default:
-      return false
+  if (typeof cells2[cellType] !== 'undefined' && typeof cells2[cellType].isBlocking === 'function') {
+    return cells2[cellType].isBlocking(direction)
   }
+
+  return false
 }
 
 export const cells: { [key: number]: CellType } = {
