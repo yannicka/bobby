@@ -1,7 +1,11 @@
 import Player from './Player'
 import Direction from './Direction'
+import Point from './Point'
+import Angle from './Angle'
 
 export const CELL_SIZE = 50
+
+/*
 
 export enum CellType {
   Ground, // Sol
@@ -29,196 +33,212 @@ export enum CellType {
   CarrotHole, // Trou de carotte (s'affiche après avoir mangé la carotte)
 }
 
-interface Cell {
-  nextState?(): CellType
-  onPassingEvent?(player: Player): CellType|null
-  isSolid?(direction: Direction): boolean
-  isBlocking?(direction: Direction): boolean
-}
+*/
 
-const cells2: { [key: number]: Cell } = {
-  [CellType.Ground]: {},
+export abstract class Cell {
+  private position: Point
+  // private animation: Animation
 
-  [CellType.Grass]: {
-    isSolid(_direction: Direction): boolean {
-      return true
-    },
-  },
+  constructor(position: Point) {
+    this.position = position
 
-  [CellType.Fence]: {
-    isSolid(_direction: Direction): boolean {
-      return true
-    },
-  },
-
-  [CellType.SpadeDeactivated]: {
-    nextState(): CellType {
-      return CellType.SpadeActivated
-    },
-  },
-
-  [CellType.SpadeActivated]: {
-    isSolid(_direction: Direction): boolean {
-      return true
-    },
-  },
-
-  [CellType.ConveyorBeltUp]: {
-    onPassingEvent(player: Player): CellType|null {
-      player.move(Direction.Up)
-
-      return null
-    },
-  },
-
-  [CellType.ConveyorBeltDown]: {
-    onPassingEvent(player: Player): CellType|null {
-      player.move(Direction.Down)
-
-      return null
-    },
-  },
-
-  [CellType.ConveyorBeltRight]: {
-    onPassingEvent(player: Player): CellType|null {
-      player.move(Direction.Right)
-
-      return null
-    },
-  },
-
-  [CellType.ConveyorBeltLeft]: {
-    onPassingEvent(player: Player): CellType|null {
-      player.move(Direction.Left)
-
-      return null
-    },
-  },
-
-  [CellType.TurnstileUpRight]: {
-    nextState(): CellType {
-      return CellType.TurnstileDownRight
-    },
-
-    isSolid(direction: Direction): boolean {
-      return [ Direction.Down, Direction.Left ].includes(direction)
-    },
-
-    isBlocking(direction: Direction): boolean {
-      return [ Direction.Up, Direction.Right ].includes(direction)
-    },
-  },
-
-  [CellType.TurnstileUpLeft]: {
-    nextState(): CellType {
-      return CellType.TurnstileUpRight
-    },
-
-    isSolid(direction: Direction): boolean {
-      return [ Direction.Down, Direction.Right ].includes(direction)
-    },
-
-    isBlocking(direction: Direction): boolean {
-      return [ Direction.Up, Direction.Left ].includes(direction)
-    },
-  },
-
-  [CellType.TurnstileDownRight]: {
-    nextState(): CellType {
-      return CellType.TurnstileDownLeft
-    },
-
-    isSolid(direction: Direction): boolean {
-      return [ Direction.Up, Direction.Left ].includes(direction)
-    },
-
-    isBlocking(direction: Direction): boolean {
-      return [ Direction.Down, Direction.Right ].includes(direction)
-    },
-  },
-
-  [CellType.TurnstileDownLeft]: {
-    nextState(): CellType {
-      return CellType.TurnstileUpLeft
-    },
-
-    isSolid(direction: Direction): boolean {
-      return [ Direction.Up, Direction.Right ].includes(direction)
-    },
-
-    isBlocking(direction: Direction): boolean {
-      return [ Direction.Down, Direction.Left ].includes(direction)
-    },
-  },
-
-  [CellType.Start]: {},
-
-  [CellType.End]: {},
-
-  [CellType.Carrot]: {
-    onPassingEvent(_player: Player): CellType|null {
-      return CellType.CarrotHole
-    },
-  },
-
-  [CellType.CarrotHole]: {},
-}
-
-
-export function nextState(cellType: CellType): CellType {
-  if (typeof cells2[cellType] !== 'undefined' && typeof cells2[cellType].nextState === 'function') {
-    return cells2[cellType].nextState()
+    // this.animation = new Animation()
   }
 
-  return cellType
-}
-
-export function onPassingEvent(cellType: CellType, player: Player): CellType|null {
-  if (typeof cells2[cellType] !== 'undefined' && typeof cells2[cellType].onPassingEvent === 'function') {
-    return cells2[cellType].onPassingEvent(player)
+  public onPassingEvent(_player: Player): void {
+    return null
   }
 
-  return null
-}
-
-export function isSolid(cellType: CellType, direction: Direction): boolean {
-  if (typeof cells2[cellType] !== 'undefined' && typeof cells2[cellType].isSolid === 'function') {
-    return cells2[cellType].isSolid(direction)
+  public isSolid?(_direction: Direction): boolean {
+    return false
   }
 
-  return false
-}
-
-export function isBlocking(cellType: CellType, direction: Direction): boolean {
-  if (typeof cells2[cellType] !== 'undefined' && typeof cells2[cellType].isBlocking === 'function') {
-    return cells2[cellType].isBlocking(direction)
+  public isBlocking?(_direction: Direction): boolean {
+    return false
   }
 
-  return false
+  public nextState(): void {
+  }
+
+  public update(dt: number): void {
+    // this.animation.update(dt)
+  }
+
+  public render(ctx: CanvasRenderingContext2D): void {
+    // this.animation.render(ctx)
+
+    // @todo Temporaire, histoire d'avoir un affichage en attendant
+    if (this instanceof Start) {
+      ctx.fillStyle = 'yellow'
+    } else if (this instanceof End) {
+      ctx.fillStyle = 'gold'
+    } else if (this instanceof Spade) {
+      ctx.fillStyle = 'gray'
+    } else if (this instanceof Conveyor) {
+      ctx.fillStyle = 'purple'
+    } else if (this instanceof Carrot) {
+      ctx.fillStyle = 'orange'
+    } else if (this instanceof Turnstile) {
+      ctx.fillStyle = 'blue'
+    } else if (this instanceof Fence) {
+      ctx.fillStyle = 'brown'
+    } else if (this instanceof Grass) {
+      ctx.fillStyle = 'green'
+    } else if (this instanceof Ground) {
+      ctx.fillStyle = 'white'
+    } else {
+      ctx.fillStyle = 'black'
+    }
+
+    ctx.fillRect(
+      this.position.x * CELL_SIZE,
+      this.position.y * CELL_SIZE,
+      CELL_SIZE,
+      CELL_SIZE,
+    )
+  }
+
+  public getPosition(): Point {
+    return this.position
+  }
+
+  // abstract render(ctx: CanvasRenderingContext2D): void
 }
 
-export const cells: { [key: number]: CellType } = {
-  1: CellType.Ground,
+export class Ground extends Cell {}
 
-  2: CellType.Grass,
-  3: CellType.Fence,
+export class Grass extends Cell {
+  public isSolid(_direction: Direction): boolean {
+    return true
+  }
+}
 
-  4: CellType.SpadeDeactivated,
-  5: CellType.SpadeActivated,
+export class Fence extends Cell {
+  public isSolid(_direction: Direction): boolean {
+    return true
+  }
+}
 
-  6: CellType.ConveyorBeltUp,
-  7: CellType.ConveyorBeltDown,
-  8: CellType.ConveyorBeltRight,
-  9: CellType.ConveyorBeltLeft,
+export class Spade extends Cell {
+  private activated: boolean = false
 
-  10: CellType.TurnstileUpRight,
-  11: CellType.TurnstileUpLeft,
-  12: CellType.TurnstileDownRight,
-  13: CellType.TurnstileDownLeft,
+  public nextState(): void {
+    this.activated = true
+  }
 
-  14: CellType.Start,
-  15: CellType.End,
+  public isSolid(_direction: Direction): boolean {
+    return this.activated
+  }
+}
 
-  16: CellType.Carrot,
-  17: CellType.CarrotHole,
+export class Conveyor extends Cell {
+  private direction: Direction
+
+  public constructor(position: Point, direction: Direction) {
+    super(position)
+
+    this.direction = direction
+  }
+
+  public onPassingEvent(player: Player): void {
+    player.move(this.direction)
+  }
+}
+
+export class Turnstile extends Cell {
+  private angle: Angle
+
+  public constructor(position: Point, angle: Angle) {
+    super(position)
+
+    this.angle = angle
+  }
+
+  public nextState(): void {
+    switch (this.angle) {
+      case Angle.UpRight:
+        this.angle = Angle.UpRight
+        break
+
+      case Angle.UpLeft:
+        this.angle = Angle.UpRight
+        break
+
+      case Angle.DownRight:
+        this.angle = Angle.UpRight
+        break
+
+      case Angle.DownLeft:
+        this.angle = Angle.UpRight
+        break
+    }
+  }
+
+  public isSolid(direction: Direction): boolean {
+    switch (this.angle) {
+      case Angle.UpRight:
+        return [ Direction.Down, Direction.Left ].includes(direction)
+
+      case Angle.UpLeft:
+        return [ Direction.Down, Direction.Left ].includes(direction)
+
+      case Angle.DownRight:
+        return [ Direction.Down, Direction.Left ].includes(direction)
+
+      case Angle.DownLeft:
+        return [ Direction.Down, Direction.Left ].includes(direction)
+    }
+  }
+
+  public isBlocking(direction: Direction): boolean {
+    switch (this.angle) {
+      case Angle.UpRight:
+        return [ Direction.Up, Direction.Right ].includes(direction)
+
+      case Angle.UpLeft:
+        return [ Direction.Up, Direction.Left ].includes(direction)
+
+      case Angle.DownRight:
+        return [ Direction.Down, Direction.Right ].includes(direction)
+
+      case Angle.DownLeft:
+        return [ Direction.Down, Direction.Left ].includes(direction)
+    }
+  }
+}
+
+export class Start extends Cell {}
+
+export class End extends Cell {}
+
+export class Carrot extends Cell {
+  private eated: boolean = false
+
+  public onPassingEvent(_player: Player): void {
+    this.eated = true
+  }
+}
+
+export const cells: { [key: number]: (position: Point) => Cell } = {
+  1: (position: Point) => new Ground(position),
+
+  2: (position: Point) => new Grass(position),
+  3: (position: Point) => new Fence(position),
+
+  4: (position: Point) => new Spade(position),
+
+  6: (position: Point) => new Conveyor(position, Direction.Up),
+  7: (position: Point) => new Conveyor(position, Direction.Down),
+  8: (position: Point) => new Conveyor(position, Direction.Right),
+  9: (position: Point) => new Conveyor(position, Direction.Left),
+
+  10: (position: Point) => new Turnstile(position, Angle.UpRight),
+  11: (position: Point) => new Turnstile(position, Angle.UpLeft),
+  12: (position: Point) => new Turnstile(position, Angle.DownRight),
+  13: (position: Point) => new Turnstile(position, Angle.DownLeft),
+
+  14: (position: Point) => new Start(position),
+  15: (position: Point) => new End(position),
+
+  16: (position: Point) => new Carrot(position),
 }

@@ -1,4 +1,4 @@
-import { CELL_SIZE, isSolid, isBlocking } from './Cell'
+import { CELL_SIZE } from './Cell'
 import Point from './Point'
 import Direction from './Direction'
 import Game from './Game'
@@ -93,7 +93,7 @@ export default class Player {
     const previousCell = this.game.getMap().getCell(this.position)
     const nextCell = this.game.getMap().getCell(newMapPosition)
 
-    if (isBlocking(previousCell, direction) || isSolid(nextCell, direction))
+    if (previousCell.isBlocking(direction) || nextCell.isSolid(direction))
       return
 
     this.moveTo(newMapPosition)
