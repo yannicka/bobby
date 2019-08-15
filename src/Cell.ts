@@ -157,7 +157,7 @@ export class Turnstile extends Cell {
   public nextState(): void {
     switch (this.angle) {
       case Angle.UpRight:
-        this.angle = Angle.UpRight
+        this.angle = Angle.DownRight
         break
 
       case Angle.UpLeft:
@@ -165,11 +165,11 @@ export class Turnstile extends Cell {
         break
 
       case Angle.DownRight:
-        this.angle = Angle.UpRight
+        this.angle = Angle.DownLeft
         break
 
       case Angle.DownLeft:
-        this.angle = Angle.UpRight
+        this.angle = Angle.UpLeft
         break
     }
   }
@@ -180,13 +180,13 @@ export class Turnstile extends Cell {
         return [ Direction.Down, Direction.Left ].includes(direction)
 
       case Angle.UpLeft:
-        return [ Direction.Down, Direction.Left ].includes(direction)
+        return [ Direction.Down, Direction.Right ].includes(direction)
 
       case Angle.DownRight:
-        return [ Direction.Down, Direction.Left ].includes(direction)
+        return [ Direction.Up, Direction.Left ].includes(direction)
 
       case Angle.DownLeft:
-        return [ Direction.Down, Direction.Left ].includes(direction)
+        return [ Direction.Up, Direction.Right ].includes(direction)
     }
   }
 
