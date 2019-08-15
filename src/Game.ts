@@ -25,27 +25,25 @@ export default class Game {
     this.ctx.imageSmoothingEnabled = false
     this.ctx.scale(this.zoom, this.zoom)
 
-    this.map = Map.firstLevel()
-
     this.lastUpdate = Date.now()
-
-    this.player = new Player(this, this.map.startLocation())
 
     this.keyboard = new Keyboard()
 
-    this.init()
-  }
-
-  public init(): void {
-    ImageManager.setPath('assets/img/')
-
-    const loader = ImageManager.load({
+    const imagesLoader = ImageManager.load('assets/img/', {
       'tiles': 'tiles.png',
     })
 
-    Promise.all(loader).then(() => {
-      this.update()
+    Promise.all(imagesLoader).then(() => {
+      this.init()
     })
+  }
+
+  public init(): void {
+    this.map = Map.firstLevel()
+
+    this.player = new Player(this, this.map.startLocation())
+
+    this.update()
   }
 
   public update(): void {
@@ -67,6 +65,7 @@ export default class Game {
         this.player.move(Direction.Left)
     }
 
+    this.map.update(dt)
     this.player.update(dt)
 
     this.render()

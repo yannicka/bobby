@@ -1,4 +1,4 @@
-import { cells as cellsIndex, Cell, Start, Carrot } from './Cell'
+import { cells as cellsIndex, Cell, Start, Carrot, End } from './Cell'
 import Point from './Point'
 import Player from './Player'
 
@@ -15,6 +15,23 @@ export default class Map {
         const i = cells[y][x]
 
         this.cells[y][x] = cellsIndex[i](new Point(x, y))
+      }
+    }
+  }
+  
+  public update(dt: number): void {
+    if (this.countCarrots() === 0) {
+      const endCell = this.endCell()
+      if (!endCell.isActive()) {
+        endCell.activate()
+      }
+    }
+
+    for (let y = 0 ; y < this.cells.length ; y++) {
+      for (let x = 0 ; x < this.cells[y].length ; x++) {
+        const cell = this.cells[y][x]
+
+        cell.update(dt)
       }
     }
   }
@@ -50,10 +67,22 @@ export default class Map {
       for (let x = 0 ; x < this.cells[y].length ; x++) {
         const cell = this.cells[y][x]
 
-        console.log(typeof Cell)
-
         if (cell instanceof Start) {
           return cell.getPosition().clone()
+        }
+      }
+    }
+
+    return null
+  }
+
+  public endCell(): End {
+    for (let y = 0 ; y < this.cells.length ; y++) {
+      for (let x = 0 ; x < this.cells[y].length ; x++) {
+        const cell = this.cells[y][x]
+
+        if (cell instanceof End) {
+          return cell
         }
       }
     }
@@ -70,7 +99,7 @@ export default class Map {
       for (let x = 0 ; x < row.length ; x++) {
         const cell = row[x]
 
-        if (cell instanceof Carrot) {
+        if (cell instanceof Carrot && !cell.isEated()) {
           nbCarrots++
         }
       }

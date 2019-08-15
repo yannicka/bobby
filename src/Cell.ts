@@ -3,6 +3,7 @@ import Direction from './Direction'
 import Point from './Point'
 import Angle from './Angle'
 import ImageManager from './ImageManager';
+import AnimationManager from './AnimationManager';
 
 export const CELL_SIZE = 16
 
@@ -38,12 +39,14 @@ export enum CellType {
 
 export abstract class Cell {
   private position: Point
-  // private animation: Animation
+  private animation: AnimationManager
 
   constructor(position: Point) {
     this.position = position
 
-    // this.animation = new Animation()
+    const image = ImageManager.getImage('tiles')
+
+    this.animation = new AnimationManager(image, CELL_SIZE, CELL_SIZE)
   }
 
   public onPassingEvent(_player: Player): void {
@@ -62,66 +65,60 @@ export abstract class Cell {
   }
 
   public update(dt: number): void {
-    // this.animation.update(dt)
+    this.animation.update(dt)
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    // this.animation.render(ctx)
+    ctx.save()
+    ctx.translate(this.position.x * CELL_SIZE, this.position.y * CELL_SIZE)
 
-    // @todo Temporaire, histoire d'avoir un affichage en attendant
-    const image = ImageManager.getImage('tiles')
+    this.animation.render(ctx)
 
-    let index = 0
-
-    if (this instanceof Start) {
-      index = 12
-    } else if (this instanceof End) {
-      index = 13
-    } else if (this instanceof Spade) {
-      index = 1 // ou 2
-    } else if (this instanceof Conveyor) {
-      index = 4 // ou 5, 6 et 7
-    } else if (this instanceof Carrot) {
-      index = 15 // ou 16
-    } else if (this instanceof Turnstile) {
-      index = 8 // ou 9, 10 et 11
-    } else if (this instanceof Fence) {
-      index = 3
-    } else if (this instanceof Grass) {
-      index = 0
-    } else if (this instanceof Ground) {
-      index = 14
-    } else {
-      index = 1
-    }
-
-    drawImageByIndex(
-      ctx,
-      image,
-      this.position.x * CELL_SIZE,
-      this.position.y * CELL_SIZE,
-      index,
-      CELL_SIZE,
-      CELL_SIZE,
-    )
+    ctx.restore()
   }
 
   public getPosition(): Point {
     return this.position
   }
 
-  // abstract render(ctx: CanvasRenderingContext2D): void
+  public getAnimation(): AnimationManager {
+    return this.animation
+  }
 }
 
-export class Ground extends Cell {}
+export class Ground extends Cell {
+  public constructor(position: Point) {
+    super(position)
+
+    this.getAnimation().addAnimation('idle', [ 14 ])
+
+    this.getAnimation().play('idle')
+  }
+}
 
 export class Grass extends Cell {
+  public constructor(position: Point) {
+    super(position)
+
+    this.getAnimation().addAnimation('idle', [ 0 ])
+
+    this.getAnimation().play('idle')
+  }
+
   public isSolid(_direction: Direction): boolean {
     return true
   }
 }
 
 export class Fence extends Cell {
+  public constructor(position: Point) {
+    super(position)
+
+    this.getAnimation().addAnimation('idle', [ 3 ])
+
+    this.getAnimation().play('idle')
+  }
+
   public isSolid(_direction: Direction): boolean {
     return true
   }
@@ -130,8 +127,19 @@ export class Fence extends Cell {
 export class Spade extends Cell {
   private activated: boolean = false
 
+  public constructor(position: Point) {
+    super(position)
+
+    this.getAnimation().addAnimation('deactivated', [ 1 ])
+    this.getAnimation().addAnimation('activated', [ 2 ])
+
+    this.getAnimation().play('deactivated')
+  }
+
   public nextState(): void {
     this.activated = true
+
+    this.getAnimation().play('activated')
   }
 
   public isSolid(_direction: Direction): boolean {
@@ -146,6 +154,13 @@ export class Conveyor extends Cell {
     super(position)
 
     this.direction = direction
+
+    this.getAnimation().addAnimation(Direction.Up.toString(), [ 4 ])
+    this.getAnimation().addAnimation(Direction.Down.toString(), [ 5 ])
+    this.getAnimation().addAnimation(Direction.Right.toString(), [ 6 ])
+    this.getAnimation().addAnimation(Direction.Left.toString(), [ 7 ])
+
+    this.getAnimation().play(direction.toString())
   }
 
   public onPassingEvent(player: Player): void {
@@ -160,6 +175,13 @@ export class Turnstile extends Cell {
     super(position)
 
     this.angle = angle
+
+    this.getAnimation().addAnimation(Angle.UpRight.toString(), [ 8 ])
+    this.getAnimation().addAnimation(Angle.UpLeft.toString(), [ 9 ])
+    this.getAnimation().addAnimation(Angle.DownRight.toString(), [ 10 ])
+    this.getAnimation().addAnimation(Angle.DownLeft.toString(), [ 11 ])
+
+    this.getAnimation().play(angle.toString())
   }
 
   public nextState(): void {
@@ -180,6 +202,8 @@ export class Turnstile extends Cell {
         this.angle = Angle.UpLeft
         break
     }
+
+    this.getAnimation().play(this.angle.toString())
   }
 
   public isSolid(direction: Direction): boolean {
@@ -215,15 +239,57 @@ export class Turnstile extends Cell {
   }
 }
 
-export class Start extends Cell {}
+export class Start extends Cell {
+  public constructor(position: Point) {
+    super(position)
 
-export class End extends Cell {}
+    this.getAnimation().addAnimation('idle', [ 12 ])
+
+    this.getAnimation().play('idle')
+  }
+}
+
+export class End extends Cell {
+  private active: boolean = false
+
+  public constructor(position: Point) {
+    super(position)
+
+    this.getAnimation().addAnimation('inactive', [ 13 ])
+    this.getAnimation().addAnimation('active', [ 17, 18 ])
+
+    this.getAnimation().play('inactive')
+  }
+
+  public activate(): void {
+    this.getAnimation().play('active')
+  }
+
+  public isActive(): boolean {
+    return this.active
+  }
+}
 
 export class Carrot extends Cell {
   private eated: boolean = false
 
+  public constructor(position: Point) {
+    super(position)
+
+    this.getAnimation().addAnimation('not-eated', [ 15 ])
+    this.getAnimation().addAnimation('eated', [ 16 ])
+
+    this.getAnimation().play('not-eated')
+  }
+
   public onPassingEvent(_player: Player): void {
     this.eated = true
+
+    this.getAnimation().play('eated')
+  }
+
+  public isEated(): boolean {
+    return this.eated
   }
 }
 
@@ -249,36 +315,4 @@ export const cells: { [key: number]: (position: Point) => Cell } = {
   15: (position: Point) => new End(position),
 
   16: (position: Point) => new Carrot(position),
-}
-
-function drawImageByIndex(
-  ctx: CanvasRenderingContext2D,
-  img: HTMLImageElement,
-  x: number,
-  y: number,
-  index: number,
-  width: number,
-  height: number,
-): void {
-  // Nombre de tiles par ligne
-  const nbTilesByLine = Math.ceil(img.width / width)
-
-  // Position x depuis laquelle découper le morceau
-  const basex = (index % nbTilesByLine) * width
-
-  // Position y depuis laquelle découper le morceau
-  const basey = Math.floor(index / nbTilesByLine) * height
-
-  // Afficher le morceau d'image
-  ctx.drawImage(
-    img,
-    basex,
-    basey,
-    width,
-    height,
-    x,
-    y,
-    width,
-    height,
-  )
 }
