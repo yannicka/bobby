@@ -2,8 +2,9 @@ import Player from './Player'
 import Direction from './Direction'
 import Point from './Point'
 import Angle from './Angle'
+import ImageManager from './ImageManager';
 
-export const CELL_SIZE = 50
+export const CELL_SIZE = 16
 
 /*
 
@@ -68,31 +69,38 @@ export abstract class Cell {
     // this.animation.render(ctx)
 
     // @todo Temporaire, histoire d'avoir un affichage en attendant
+    const image = ImageManager.getImage('tiles')
+
+    let index = 0
+
     if (this instanceof Start) {
-      ctx.fillStyle = 'yellow'
+      index = 12
     } else if (this instanceof End) {
-      ctx.fillStyle = 'gold'
+      index = 13
     } else if (this instanceof Spade) {
-      ctx.fillStyle = 'gray'
+      index = 1 // ou 2
     } else if (this instanceof Conveyor) {
-      ctx.fillStyle = 'purple'
+      index = 4 // ou 5, 6 et 7
     } else if (this instanceof Carrot) {
-      ctx.fillStyle = 'orange'
+      index = 15 // ou 16
     } else if (this instanceof Turnstile) {
-      ctx.fillStyle = 'blue'
+      index = 8 // ou 9, 10 et 11
     } else if (this instanceof Fence) {
-      ctx.fillStyle = 'brown'
+      index = 3
     } else if (this instanceof Grass) {
-      ctx.fillStyle = 'green'
+      index = 0
     } else if (this instanceof Ground) {
-      ctx.fillStyle = 'white'
+      index = 14
     } else {
-      ctx.fillStyle = 'black'
+      index = 1
     }
 
-    ctx.fillRect(
+    drawImageByIndex(
+      ctx,
+      image,
       this.position.x * CELL_SIZE,
       this.position.y * CELL_SIZE,
+      index,
       CELL_SIZE,
       CELL_SIZE,
     )
@@ -241,4 +249,36 @@ export const cells: { [key: number]: (position: Point) => Cell } = {
   15: (position: Point) => new End(position),
 
   16: (position: Point) => new Carrot(position),
+}
+
+function drawImageByIndex(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement,
+  x: number,
+  y: number,
+  index: number,
+  width: number,
+  height: number,
+): void {
+  // Nombre de tiles par ligne
+  const nbTilesByLine = Math.ceil(img.width / width)
+
+  // Position x depuis laquelle découper le morceau
+  const basex = (index % nbTilesByLine) * width
+
+  // Position y depuis laquelle découper le morceau
+  const basey = Math.floor(index / nbTilesByLine) * height
+
+  // Afficher le morceau d'image
+  ctx.drawImage(
+    img,
+    basex,
+    basey,
+    width,
+    height,
+    x,
+    y,
+    width,
+    height,
+  )
 }

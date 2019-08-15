@@ -3,10 +3,9 @@
 // Fonctionnement :
 // 
 // ```
-// const imageManager = new ImageManager()
-// imageManager.setPath('assets/img')
+// ImageManager.setPath('assets/img')
 //
-// const loader = imageManager.load(images)
+// const loader = ImageManager.load(images)
 //
 // Promise.all(loader).then(() => {
 //   // code
@@ -14,28 +13,28 @@
 // ```
 export default class ImageManager {
   // Images chargées
-  private images: { [key: string]: HTMLImageElement } = {}
+  private static images: { [key: string]: HTMLImageElement } = {}
 
   // Chemin où sont recupérées les images
-  private path: string = ''
+  private static path: string = ''
 
   // Obtenir une image par son nom
-  public getImage(name: string): HTMLImageElement {
+  public static getImage(name: string): HTMLImageElement {
     return this.images[name]
   }
 
   // Définir le chemin dans lequel les images sont chargées
-  public setPath(path: string): void {
+  public static setPath(path: string): void {
     this.path = path
   }
 
   // Obtenir le chemin dans lequel les images sont chargées
-  public getPath(): string {
+  public static getPath(): string {
     return this.path
   }
 
   // Exécute le chargement des images
-  public load(images: { [key: string]: string }): Array<Promise<HTMLImageElement>> {
+  public static load(images: { [key: string]: string }): Array<Promise<HTMLImageElement>> {
     const promises = new Array<Promise<HTMLImageElement>>()
 
     for (const [name, url] of Object.entries(images)) {

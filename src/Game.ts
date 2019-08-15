@@ -33,10 +33,9 @@ export default class Game {
   }
 
   public init(): void {
-    const imageManager = new ImageManager()
-    imageManager.setPath('assets/img/')
+    ImageManager.setPath('assets/img/')
 
-    const loader = imageManager.load({
+    const loader = ImageManager.load({
       'tiles': 'tiles.png',
     })
 
