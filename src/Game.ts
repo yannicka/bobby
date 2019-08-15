@@ -11,13 +11,19 @@ export default class Game {
   private player: Player
   private keyboard: Keyboard
   private lastUpdate: number
+  private zoom: number
 
   public constructor() {
     this.canvas = <HTMLCanvasElement> document.getElementById('app')
     this.ctx = <CanvasRenderingContext2D> this.canvas.getContext('2d')
 
-    this.canvas.width = 640
-    this.canvas.height = 480
+    this.zoom = 2
+
+    this.canvas.width = 320 * this.zoom
+    this.canvas.height = 240 * this.zoom
+
+    this.ctx.imageSmoothingEnabled = false
+    this.ctx.scale(this.zoom, this.zoom)
 
     this.map = Map.firstLevel()
 
@@ -26,8 +32,6 @@ export default class Game {
     this.player = new Player(this, this.map.startLocation())
 
     this.keyboard = new Keyboard()
-
-    window.addEventListener('resize', () => this.resize())
 
     this.init()
   }
@@ -40,7 +44,6 @@ export default class Game {
     })
 
     Promise.all(loader).then(() => {
-      this.resize()
       this.update()
     })
   }
@@ -79,11 +82,6 @@ export default class Game {
 
     this.map.render(this.ctx)
     this.player.render(this.ctx)
-  }
-
-  private resize(): void {
-    this.canvas.width = window.innerWidth
-    this.canvas.height = window.innerHeight
   }
 
   public getMap(): Map {
