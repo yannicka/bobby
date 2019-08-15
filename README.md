@@ -2,7 +2,7 @@
 
 ```
 npm install
-npm run build-dev
+npm run serve # ou npm run build
 ```
 
 ## Ressources intéressantes
