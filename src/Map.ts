@@ -1,4 +1,4 @@
-import { cells as cellsIndex, Cell, Start } from './Cell'
+import { cells as cellsIndex, Cell, Start, Carrot } from './Cell'
 import Point from './Point'
 import Player from './Player'
 
@@ -62,10 +62,6 @@ export default class Map {
   }
 
   public countCarrots(): number {
-    return 1
-
-    /*
-
     let nbCarrots = 0
 
     for (let y = 0 ; y < this.cells.length ; y++) {
@@ -74,15 +70,13 @@ export default class Map {
       for (let x = 0 ; x < row.length ; x++) {
         const cell = row[x]
 
-        if (cell === CellType.Carrot) {
+        if (cell instanceof Carrot) {
           nbCarrots++
         }
       }
     }
 
     return nbCarrots
-
-    */
   }
 
   public static firstLevel(): Map {
