@@ -21,7 +21,8 @@ export default class Map {
   
   public update(dt: number): void {
     if (this.countCarrots() === 0) {
-      const endCell = this.endCell()
+      const endCell = this.getEndCell()
+
       if (!endCell.isActive()) {
         endCell.activate()
       }
@@ -76,7 +77,7 @@ export default class Map {
     return null
   }
 
-  public endCell(): End {
+  public getEndCell(): End|null {
     for (let y = 0 ; y < this.cells.length ; y++) {
       for (let x = 0 ; x < this.cells[y].length ; x++) {
         const cell = this.cells[y][x]
