@@ -155,10 +155,10 @@ export class Conveyor extends Cell {
 
     this.direction = direction
 
-    this.getAnimation().addAnimation(Direction.Up.toString(), [ 4 ])
-    this.getAnimation().addAnimation(Direction.Down.toString(), [ 5 ])
-    this.getAnimation().addAnimation(Direction.Right.toString(), [ 6 ])
-    this.getAnimation().addAnimation(Direction.Left.toString(), [ 7 ])
+    this.getAnimation().addAnimation(Direction.Up.toString(), [ 4, 20 ])
+    this.getAnimation().addAnimation(Direction.Down.toString(), [ 5, 21 ])
+    this.getAnimation().addAnimation(Direction.Right.toString(), [ 6, 22 ])
+    this.getAnimation().addAnimation(Direction.Left.toString(), [ 7, 23 ])
 
     this.getAnimation().play(direction.toString())
   }
