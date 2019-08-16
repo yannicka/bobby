@@ -1,0 +1,14 @@
+image: node:12
+
+variables:
+  APP_ENV: production
+
+pages:
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
