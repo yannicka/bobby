@@ -31,6 +31,8 @@ export default class Game {
 
     const imagesLoader = ImageManager.load('assets/img/', {
       'tiles': 'tiles.png',
+      'player': 'player.png',
+      'background': 'background.png',
     })
 
     Promise.all(imagesLoader).then(() => {
@@ -76,8 +78,11 @@ export default class Game {
   public render(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
-    this.ctx.fillStyle = 'rgb(240, 240, 240)'
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    const bgImg = ImageManager.getImage('background')
+    const pat = this.ctx.createPattern(bgImg, 'repeat')
+    this.ctx.rect(0, 0, 140, 140)
+    this.ctx.fillStyle = pat
+    this.ctx.fill()
 
     this.map.render(this.ctx)
     this.player.render(this.ctx)

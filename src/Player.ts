@@ -2,6 +2,8 @@ import { CELL_SIZE } from './Cell'
 import Point from './Point'
 import Direction from './Direction'
 import Game from './Game'
+import AnimationManager from './AnimationManager'
+import ImageManager from './ImageManager';
 
 export default class Player {
   private canmove: boolean
@@ -10,9 +12,9 @@ export default class Player {
   private startPosition: Point
   private targetPosition: Point
   private displayPosition: Point
-  private mov: number
   private timer: number
   private game: Game
+  private animationManager: AnimationManager
 
   public constructor(game: Game, start: Point) {
     const startX = start.x
@@ -25,8 +27,18 @@ export default class Player {
     this.targetPosition = this.startPosition.clone()
     this.displayPosition = this.startPosition.clone()
     this.canmove = true
-    this.mov = 0
     this.timer = 0
+
+    const image = ImageManager.getImage('player')
+
+    this.animationManager = new AnimationManager(image, 14, 15)
+
+    this.animationManager.addAnimation(Direction.Up.toString(), [ 8, 9, 10, 11 ])
+    this.animationManager.addAnimation(Direction.Down.toString(), [ 0, 1, 2, 3 ])
+    this.animationManager.addAnimation(Direction.Right.toString(), [ 12, 13, 14, 15 ])
+    this.animationManager.addAnimation(Direction.Left.toString(), [ 4, 5, 6, 7 ])
+
+    this.animationManager.play(Direction.Down.toString())
   }
 
   public update(dt: number): void {
@@ -51,24 +63,19 @@ export default class Player {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    if (this.mov === 0)
-      ctx.fillStyle = 'red'
-    else if (this.mov === 1)
-      ctx.fillStyle = 'blue'
-    else if (this.mov === 2)
-      ctx.fillStyle = 'yellow'
+    ctx.save()
+    ctx.translate(this.displayPosition.x + 1, this.displayPosition.y - 4)
 
-    ctx.fillRect(
-      this.displayPosition.x + CELL_SIZE / 4,
-      this.displayPosition.y + CELL_SIZE / 4,
-      CELL_SIZE / 2,
-      CELL_SIZE / 2,
-    )
+    this.animationManager.render(ctx)
+
+    ctx.restore()
   }
 
   public move(direction: Direction): void {
     if (!this.canmove)
       return
+
+    this.animationManager.play(direction.toString())
 
     const newMapPosition = this.position.clone()
 
