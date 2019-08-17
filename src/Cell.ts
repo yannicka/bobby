@@ -90,7 +90,7 @@ export class Ground extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 14 ])
+    this.getAnimation().addAnimation('idle', [ 14 ], 1)
 
     this.getAnimation().play('idle')
   }
@@ -100,7 +100,7 @@ export class Grass extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 0 ])
+    this.getAnimation().addAnimation('idle', [ 0 ], 1)
 
     this.getAnimation().play('idle')
   }
@@ -114,7 +114,7 @@ export class Fence extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 3 ])
+    this.getAnimation().addAnimation('idle', [ 3 ], 1)
 
     this.getAnimation().play('idle')
   }
@@ -130,8 +130,8 @@ export class Spade extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('deactivated', [ 1 ])
-    this.getAnimation().addAnimation('activated', [ 2 ])
+    this.getAnimation().addAnimation('deactivated', [ 1 ], 1)
+    this.getAnimation().addAnimation('activated', [ 2 ], 1)
 
     this.getAnimation().play('deactivated')
   }
@@ -155,10 +155,10 @@ export class Conveyor extends Cell {
 
     this.direction = direction
 
-    this.getAnimation().addAnimation(Direction.Up.toString(), [ 4, 20 ])
-    this.getAnimation().addAnimation(Direction.Down.toString(), [ 5, 21 ])
-    this.getAnimation().addAnimation(Direction.Right.toString(), [ 6, 22 ])
-    this.getAnimation().addAnimation(Direction.Left.toString(), [ 7, 23 ])
+    this.getAnimation().addAnimation(Direction.Up.toString(), [ 4, 20 ], 0.1)
+    this.getAnimation().addAnimation(Direction.Down.toString(), [ 5, 21 ], 0.1)
+    this.getAnimation().addAnimation(Direction.Right.toString(), [ 6, 22 ], 0.1)
+    this.getAnimation().addAnimation(Direction.Left.toString(), [ 7, 23 ], 0.1)
 
     this.getAnimation().play(direction.toString())
   }
@@ -176,10 +176,10 @@ export class Turnstile extends Cell {
 
     this.angle = angle
 
-    this.getAnimation().addAnimation(Angle.UpRight.toString(), [ 8 ])
-    this.getAnimation().addAnimation(Angle.UpLeft.toString(), [ 9 ])
-    this.getAnimation().addAnimation(Angle.DownRight.toString(), [ 10 ])
-    this.getAnimation().addAnimation(Angle.DownLeft.toString(), [ 11 ])
+    this.getAnimation().addAnimation(Angle.UpRight.toString(), [ 8 ], 1)
+    this.getAnimation().addAnimation(Angle.UpLeft.toString(), [ 9 ], 1)
+    this.getAnimation().addAnimation(Angle.DownRight.toString(), [ 10 ], 1)
+    this.getAnimation().addAnimation(Angle.DownLeft.toString(), [ 11 ], 1)
 
     this.getAnimation().play(angle.toString())
   }
@@ -243,7 +243,7 @@ export class Start extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 12 ])
+    this.getAnimation().addAnimation('idle', [ 12 ], 1)
 
     this.getAnimation().play('idle')
   }
@@ -255,8 +255,8 @@ export class End extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('inactive', [ 13 ])
-    this.getAnimation().addAnimation('active', [ 17, 18 ])
+    this.getAnimation().addAnimation('inactive', [ 13 ], 1)
+    this.getAnimation().addAnimation('active', [ 17, 18 ], 0.1)
 
     this.getAnimation().play('inactive')
   }
@@ -276,8 +276,8 @@ export class Carrot extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('not-eated', [ 15 ])
-    this.getAnimation().addAnimation('eated', [ 16 ])
+    this.getAnimation().addAnimation('not-eated', [ 15 ], 1)
+    this.getAnimation().addAnimation('eated', [ 16 ], 1)
 
     this.getAnimation().play('not-eated')
   }

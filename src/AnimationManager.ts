@@ -2,10 +2,10 @@ import Animation from './Animation'
 
 export default class AnimationManager {
   // Image qui servira de sprite aux animations
-  // La taille de chaque frame doit être fixée (par frameWidth et frameHeight)
-  // car elles sont référencées par des index.
   private image: HTMLImageElement
 
+  // La taille d'une frame doit être fixée car les frames sont référencées par
+  // des index
   private frameWidth: number
   private frameHeight: number
 
@@ -23,46 +23,44 @@ export default class AnimationManager {
   }
 
   public update(dt: number): void {
-    if (this.currentAnimation instanceof Animation)
+    if (this.currentAnimation)
       this.currentAnimation.update(dt)
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    if (this.currentAnimation instanceof Animation)
+    if (this.currentAnimation)
       this.currentAnimation.render(ctx)
-    // else if (!this.hasAnimations())
-    //   ctx.drawImage(this.image, 0, 0)
   }
 
-  public addAnimation(name: string, frames: Array<number>): void {
-    const animation = new Animation(this.image, frames, this.frameWidth, this.frameHeight)
+  // @todo Revoir la signature de la fonction avec un paramètre `options`
+  //       plutôt qu'une longue liste de paramètres.
+  public addAnimation(
+    name: string,
+    frames: Array<number>,
+    frameDuration: number,
+    loop: boolean = true,
+  ): void {
+    const animation = new Animation(
+      this.image,
+      frames,
+      this.frameWidth,
+      this.frameHeight,
+      frameDuration,
+      loop,
+    )
 
     this.animations[name] = animation
   }
 
-  public hasCurrentAnimation(): boolean {
-    return this.currentAnimation instanceof Animation
-  }
-
-  public getAnimation(name: string): Animation {
-    return this.animations[name]
-  }
-
-  public hasAnimations(): boolean {
-    return Object.keys(this.animations).length > 0
-  }
-
-  public getCurrentAnimation(): Animation | null {
-    return this.currentAnimation
-  }
-
-  public setCurrentAnimation(currentAnimation: Animation): this {
-    this.currentAnimation = currentAnimation
-
-    return this
-  }
-
-  public play(name: string): void {
+  public play(name: string, force: boolean = false): void {
     this.currentAnimation = this.animations[name]
+
+    const nextAnimation = this.animations[name]
+
+    if (this.currentAnimation !== nextAnimation || force) {
+      this.animations.currentAnimation = nextAnimation
+
+      nextAnimation.restart()
+    }
   }
 }

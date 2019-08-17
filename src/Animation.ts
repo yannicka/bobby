@@ -7,19 +7,23 @@ export default class Animation {
 
   private frameDuration: number
 
-  private looped: boolean
+  private loop: boolean
 
   private frameWidth: number
   private frameHeight: number
 
   private timer: number
   private currentIndex: number
+  private finished: boolean
 
+  // @todo Voir AnimationManager
   public constructor(
     image: HTMLImageElement,
     frames: Array<number>,
     frameWidth: number,
     frameHeight: number,
+    frameDuration: number,
+    loop: boolean = true,
   ) {
     this.image = image
     this.frames = frames
@@ -27,15 +31,17 @@ export default class Animation {
     this.frameWidth = frameWidth
     this.frameHeight = frameHeight
 
-    this.frameDuration = 0.1
-    this.looped = true
+    this.frameDuration = frameDuration
+    this.loop = loop
 
     this.timer = 0
     this.currentIndex = 0
+
+    this.finished = false
   }
 
   public update(dt: number): void {
-    if (this.isCurrentAnimationFinished())
+    if (this.finished || !this.hasMultipleFrames())
       return
 
     this.timer += dt
@@ -43,8 +49,15 @@ export default class Animation {
     if (this.timer > this.frameDuration) {
       this.currentIndex += 1
 
-      if (this.currentIndex >= this.frames.length && this.looped)
-        this.currentIndex = 0
+      if (this.currentIndex >= this.frames.length) {
+        if (this.loop) {
+          this.currentIndex = 0
+        } else {
+          this.finished = true
+
+          this.currentIndex -= 1
+        }
+      }
 
       this.timer = 0
     }
@@ -66,7 +79,13 @@ export default class Animation {
     return this.frames[this.currentIndex]
   }
 
-  public isCurrentAnimationFinished(): boolean {
-    return this.currentIndex >= this.frames.length && !this.looped
+  public hasMultipleFrames(): boolean {
+    return this.frames.length > 1
+  }
+
+  public restart(): void {
+    this.timer = 0
+    this.currentIndex = 0
+    this.finished = false
   }
 }

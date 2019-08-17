@@ -33,15 +33,17 @@ export default class Player {
 
     this.animationManager = new AnimationManager(image, 14, 15)
 
-    this.animationManager.addAnimation(Direction.Up.toString(), [ 8, 9, 10, 11 ])
-    this.animationManager.addAnimation(Direction.Down.toString(), [ 0, 1, 2, 3 ])
-    this.animationManager.addAnimation(Direction.Right.toString(), [ 12, 13, 14, 15 ])
-    this.animationManager.addAnimation(Direction.Left.toString(), [ 4, 5, 6, 7 ])
+    this.animationManager.addAnimation(Direction.Up.toString(), [ 8, 9, 10, 11, 8 ], 0.04, false)
+    this.animationManager.addAnimation(Direction.Down.toString(), [ 0, 1, 2, 3, 0 ], 0.04, false)
+    this.animationManager.addAnimation(Direction.Right.toString(), [ 12, 13, 14, 15, 12 ], 0.04, false)
+    this.animationManager.addAnimation(Direction.Left.toString(), [ 4, 5, 6, 7, 4 ], 0.04, false)
 
     this.animationManager.play(Direction.Down.toString())
   }
 
   public update(dt: number): void {
+    this.animationManager.update(dt)
+
     // Déplace le joueur tant qu'il n'a plus de contrôles
     if (!this.canmove) {
       this.timer += dt * 5
@@ -75,7 +77,7 @@ export default class Player {
     if (!this.canmove)
       return
 
-    this.animationManager.play(direction.toString())
+    this.animationManager.play(direction.toString(), true)
 
     const newMapPosition = this.position.clone()
 
