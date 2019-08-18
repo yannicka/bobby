@@ -78,7 +78,7 @@ export enum Key {
 
 export class Keyboard {
   private keys: { [key: number]: boolean }
-  private lasts: number[]
+  private lasts: Array<number>
 
   public constructor() {
     this.keys  = []
@@ -86,15 +86,6 @@ export class Keyboard {
 
     document.addEventListener('keyup', (e) => this.onkeyup(e))
     document.addEventListener('keydown', (e) => this.onkeydown(e))
-  }
-
-  private onkeyup(e: KeyboardEvent): void {
-    this.lasts.push(e.keyCode)
-    this.keys[e.keyCode] = false
-  }
-
-  private onkeydown(e: KeyboardEvent): void {
-    this.keys[e.keyCode] = true
   }
 
   public up(k: Key): boolean {
@@ -119,6 +110,15 @@ export class Keyboard {
       this.lasts.splice(this.lasts.indexOf(k), 1)
     }
 
-    return last == k
+    return last === k
+  }
+
+  private onkeyup(e: KeyboardEvent): void {
+    this.lasts.push(e.keyCode)
+    this.keys[e.keyCode] = false
+  }
+
+  private onkeydown(e: KeyboardEvent): void {
+    this.keys[e.keyCode] = true
   }
 }

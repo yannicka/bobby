@@ -1,8 +1,8 @@
-import Player from './Player'
-import Map from './Map'
-import { Keyboard, Key } from './Keyboard'
 import Direction from './Direction'
 import ImageManager from './ImageManager'
+import { Key, Keyboard } from './Keyboard'
+import Map from './Map'
+import Player from './Player'
 
 export default class Game {
   private canvas: HTMLCanvasElement
@@ -14,8 +14,8 @@ export default class Game {
   private zoom: number
 
   public constructor() {
-    this.canvas = <HTMLCanvasElement> document.getElementById('app')
-    this.ctx = <CanvasRenderingContext2D> this.canvas.getContext('2d')
+    this.canvas = document.getElementById('app') as HTMLCanvasElement
+    this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
 
     this.zoom = 2
 
@@ -54,17 +54,21 @@ export default class Game {
     this.lastUpdate = now
 
     if (this.player.isAbleToMove()) {
-      if (this.keyboard.down(Key.Up))
+      if (this.keyboard.down(Key.Up)) {
         this.player.move(Direction.Up)
+      }
 
-      if (this.keyboard.down(Key.Down))
+      if (this.keyboard.down(Key.Down)) {
         this.player.move(Direction.Down)
+      }
 
-      if (this.keyboard.down(Key.Right))
+      if (this.keyboard.down(Key.Right)) {
         this.player.move(Direction.Right)
+      }
 
-      if (this.keyboard.down(Key.Left))
+      if (this.keyboard.down(Key.Left)) {
         this.player.move(Direction.Left)
+      }
     }
 
     this.map.update(dt)

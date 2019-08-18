@@ -1,11 +1,11 @@
-import { cells as cellsIndex, Cell, Start, Carrot, End } from './Cell'
-import Point from './Point'
+import { Carrot, Cell, cells as cellsIndex, End, Start } from './Cell'
 import Player from './Player'
+import Point from './Point'
 
 export default class Map {
   private cells: Array<Array<Cell>>
 
-  public constructor(cells: number[][]) {
+  public constructor(cells: Array<Array<number>>) {
     this.cells = []
 
     for (let y = 0 ; y < cells.length ; y++) {
@@ -18,7 +18,7 @@ export default class Map {
       }
     }
   }
-  
+
   public update(dt: number): void {
     if (this.countCarrots() === 0) {
       const endCell = this.getEndCell()

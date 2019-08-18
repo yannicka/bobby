@@ -1,9 +1,9 @@
+import AnimationManager from './AnimationManager'
 import { CELL_SIZE } from './Cell'
-import Point from './Point'
 import Direction from './Direction'
 import Game from './Game'
-import AnimationManager from './AnimationManager'
-import ImageManager from './ImageManager';
+import ImageManager from './ImageManager'
+import Point from './Point'
 
 export default class Player {
   private canmove: boolean
@@ -74,8 +74,9 @@ export default class Player {
   }
 
   public move(direction: Direction): void {
-    if (!this.canmove)
+    if (!this.canmove) {
       return
+    }
 
     this.animationManager.play(direction.toString(), true)
 
@@ -102,8 +103,9 @@ export default class Player {
     const previousCell = this.game.getMap().getCell(this.position)
     const nextCell = this.game.getMap().getCell(newMapPosition)
 
-    if (previousCell.isBlocking(direction) || nextCell.isSolid(direction))
+    if (previousCell.isBlocking(direction) || nextCell.isSolid(direction)) {
       return
+    }
 
     this.moveTo(newMapPosition)
   }

@@ -41,8 +41,9 @@ export default class Animation {
   }
 
   public update(dt: number): void {
-    if (this.finished || !this.hasMultipleFrames())
+    if (this.finished || !this.hasMultipleFrames()) {
       return
+    }
 
     this.timer += dt
 

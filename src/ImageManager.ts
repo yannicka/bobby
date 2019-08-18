@@ -1,7 +1,7 @@
 // Gestion du chargement des images.
 //
 // Fonctionnement :
-// 
+//
 // ```
 // const imagesLoader = ImageManager.load('assets/img/', images)
 //

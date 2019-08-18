@@ -23,13 +23,15 @@ export default class AnimationManager {
   }
 
   public update(dt: number): void {
-    if (this.currentAnimation)
+    if (this.currentAnimation) {
       this.currentAnimation.update(dt)
+    }
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    if (this.currentAnimation)
+    if (this.currentAnimation) {
       this.currentAnimation.render(ctx)
+    }
   }
 
   // @todo Revoir la signature de la fonction avec un paramètre `options`
