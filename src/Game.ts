@@ -4,6 +4,8 @@ import { Key, Keyboard } from './Keyboard'
 import Map from './Map'
 import Player from './Player'
 
+const ZOOM = 2
+
 export default class Game {
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
@@ -11,23 +13,18 @@ export default class Game {
   private player: Player
   private keyboard: Keyboard
   private lastUpdate: number
-  private zoom: number
 
   public constructor() {
     this.canvas = document.getElementById('app') as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
 
-    this.zoom = 2
-
-    this.canvas.width = 320 * this.zoom
-    this.canvas.height = 240 * this.zoom
-
-    this.ctx.imageSmoothingEnabled = false
-    this.ctx.scale(this.zoom, this.zoom)
-
     this.lastUpdate = Date.now()
 
     this.keyboard = new Keyboard()
+
+    window.addEventListener('resize', (e: UIEvent) => this.resize(e))
+
+    this.resize()
 
     const imagesLoader = ImageManager.load('assets/img/', {
       'tiles': 'tiles.png',
@@ -94,5 +91,13 @@ export default class Game {
 
   public getMap(): Map {
     return this.map
+  }
+
+  public resize(_e: UIEvent | null = null): void {
+    this.canvas.width = window.innerWidth
+    this.canvas.height = window.innerHeight
+
+    this.ctx.imageSmoothingEnabled = false
+    this.ctx.scale(ZOOM, ZOOM)
   }
 }
