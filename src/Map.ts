@@ -8,10 +8,10 @@ export default class Map {
   public constructor(cells: Array<Array<number>>) {
     this.cells = []
 
-    for (let y = 0 ; y < cells.length ; y++) {
+    for (let y = 0 ; y < cells.length ; y += 1) {
       this.cells[y] = []
 
-      for (let x = 0 ; x < cells[y].length ; x++) {
+      for (let x = 0 ; x < cells[y].length ; x += 1) {
         const i = cells[y][x]
 
         this.cells[y][x] = cellsIndex[i](new Point(x, y))
@@ -28,8 +28,8 @@ export default class Map {
       }
     }
 
-    for (let y = 0 ; y < this.cells.length ; y++) {
-      for (let x = 0 ; x < this.cells[y].length ; x++) {
+    for (let y = 0 ; y < this.cells.length ; y += 1) {
+      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
         const cell = this.cells[y][x]
 
         cell.update(dt)
@@ -38,8 +38,8 @@ export default class Map {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    for (let y = 0 ; y < this.cells.length ; y++) {
-      for (let x = 0 ; x < this.cells[y].length ; x++) {
+    for (let y = 0 ; y < this.cells.length ; y += 1) {
+      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
         const cell = this.cells[y][x]
 
         cell.render(ctx)
@@ -63,9 +63,9 @@ export default class Map {
     cell.onPassingEvent(player)
   }
 
-  public startLocation(): Point|null {
-    for (let y = 0 ; y < this.cells.length ; y++) {
-      for (let x = 0 ; x < this.cells[y].length ; x++) {
+  public startLocation(): Point | null {
+    for (let y = 0 ; y < this.cells.length ; y += 1) {
+      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
         const cell = this.cells[y][x]
 
         if (cell instanceof Start) {
@@ -77,9 +77,9 @@ export default class Map {
     return null
   }
 
-  public getEndCell(): End|null {
-    for (let y = 0 ; y < this.cells.length ; y++) {
-      for (let x = 0 ; x < this.cells[y].length ; x++) {
+  public getEndCell(): End | null {
+    for (let y = 0 ; y < this.cells.length ; y += 1) {
+      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
         const cell = this.cells[y][x]
 
         if (cell instanceof End) {
@@ -94,14 +94,12 @@ export default class Map {
   public countCarrots(): number {
     let nbCarrots = 0
 
-    for (let y = 0 ; y < this.cells.length ; y++) {
-      const row = this.cells[y]
-
-      for (let x = 0 ; x < row.length ; x++) {
-        const cell = row[x]
+    for (let y = 0 ; y < this.cells.length ; y += 1) {
+      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
+        const cell = this.cells[y][x]
 
         if (cell instanceof Carrot && !cell.isEated()) {
-          nbCarrots++
+          nbCarrots += 1
         }
       }
     }

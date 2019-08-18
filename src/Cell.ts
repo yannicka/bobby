@@ -12,7 +12,7 @@ export const CELL_SIZE = 16
 export enum CellType {
   Ground, // Sol
 
-  Grass, // Herbe (bloquant : impossible de marcher dessus)
+  Grass, // Herbe (bloquant : impossible de marcher dessus)
   Fence, // Barrière (bloquant)
 
   SpadeDeactivated, // Pique avant que l'on marche dessus
@@ -41,7 +41,7 @@ export abstract class Cell {
   private position: Point
   private animation: AnimationManager
 
-  constructor(position: Point) {
+  public constructor(position: Point) {
     this.position = position
 
     const image = ImageManager.getImage('tiles')
@@ -50,7 +50,6 @@ export abstract class Cell {
   }
 
   public onPassingEvent(_player: Player): void {
-    return null
   }
 
   public isSolid?(_direction: Direction): boolean {
@@ -125,10 +124,12 @@ export class Fence extends Cell {
 }
 
 export class Spade extends Cell {
-  private activated: boolean = false
+  private activated: boolean
 
   public constructor(position: Point) {
     super(position)
+
+    this.activated = false
 
     this.getAnimation().addAnimation('deactivated', [ 1 ], 1)
     this.getAnimation().addAnimation('activated', [ 2 ], 1)
@@ -250,10 +251,12 @@ export class Start extends Cell {
 }
 
 export class End extends Cell {
-  private active: boolean = false
+  private active: boolean
 
   public constructor(position: Point) {
     super(position)
+
+    this.active = false
 
     this.getAnimation().addAnimation('inactive', [ 13 ], 1)
     this.getAnimation().addAnimation('active', [ 17, 18 ], 0.1)
@@ -271,10 +274,12 @@ export class End extends Cell {
 }
 
 export class Carrot extends Cell {
-  private eated: boolean = false
+  private eated: boolean
 
   public constructor(position: Point) {
     super(position)
+
+    this.eated = false
 
     this.getAnimation().addAnimation('not-eated', [ 15 ], 1)
     this.getAnimation().addAnimation('eated', [ 16 ], 1)
@@ -294,25 +299,25 @@ export class Carrot extends Cell {
 }
 
 export const cells: { [key: number]: (position: Point) => Cell } = {
-  1: (position: Point) => new Ground(position),
+  1: (position: Point): Cell => new Ground(position),
 
-  2: (position: Point) => new Grass(position),
-  3: (position: Point) => new Fence(position),
+  2: (position: Point): Cell => new Grass(position),
+  3: (position: Point): Cell => new Fence(position),
 
-  4: (position: Point) => new Spade(position),
+  4: (position: Point): Cell => new Spade(position),
 
-  6: (position: Point) => new Conveyor(position, Direction.Up),
-  7: (position: Point) => new Conveyor(position, Direction.Down),
-  8: (position: Point) => new Conveyor(position, Direction.Right),
-  9: (position: Point) => new Conveyor(position, Direction.Left),
+  6: (position: Point): Cell => new Conveyor(position, Direction.Up),
+  7: (position: Point): Cell => new Conveyor(position, Direction.Down),
+  8: (position: Point): Cell => new Conveyor(position, Direction.Right),
+  9: (position: Point): Cell => new Conveyor(position, Direction.Left),
 
-  10: (position: Point) => new Turnstile(position, Angle.UpRight),
-  11: (position: Point) => new Turnstile(position, Angle.UpLeft),
-  12: (position: Point) => new Turnstile(position, Angle.DownRight),
-  13: (position: Point) => new Turnstile(position, Angle.DownLeft),
+  10: (position: Point): Cell => new Turnstile(position, Angle.UpRight),
+  11: (position: Point): Cell => new Turnstile(position, Angle.UpLeft),
+  12: (position: Point): Cell => new Turnstile(position, Angle.DownRight),
+  13: (position: Point): Cell => new Turnstile(position, Angle.DownLeft),
 
-  14: (position: Point) => new Start(position),
-  15: (position: Point) => new End(position),
+  14: (position: Point): Cell => new Start(position),
+  15: (position: Point): Cell => new End(position),
 
-  16: (position: Point) => new Carrot(position),
+  16: (position: Point): Cell => new Carrot(position),
 }

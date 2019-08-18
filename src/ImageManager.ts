@@ -15,7 +15,7 @@ export default class ImageManager {
 
   // Obtenir une image par son nom
   public static getImage(name: string): HTMLImageElement {
-    return this.images[name]
+    return ImageManager.images[name]
   }
 
   // Exécute le chargement des images
@@ -27,12 +27,12 @@ export default class ImageManager {
 
       const promise = new Promise<HTMLImageElement>((resolve, reject) => {
         img.addEventListener('load', () => {
-          this.images[name] = img
+          ImageManager.images[name] = img
           resolve(img)
         })
 
         img.addEventListener('error', () => {
-          reject(`Impossible de charger l'image « ${url} »`)
+          reject(`Impossible de charger l'image « ${url} »`)
         })
       })
 

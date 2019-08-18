@@ -84,8 +84,8 @@ export class Keyboard {
     this.keys  = []
     this.lasts = []
 
-    document.addEventListener('keyup', (e) => this.onkeyup(e))
-    document.addEventListener('keydown', (e) => this.onkeydown(e))
+    document.addEventListener('keyup', (e: KeyboardEvent) => this.onkeyup(e))
+    document.addEventListener('keydown', (e: KeyboardEvent) => this.onkeydown(e))
   }
 
   public up(k: Key): boolean {

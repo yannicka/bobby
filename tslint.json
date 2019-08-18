@@ -1,26 +1,40 @@
 {
   "defaultSeverity": "error",
   "extends": [
-    "tslint:recommended"
+    "tslint:all"
   ],
   "jsRules": {},
   "rules": {
     "semicolon": [true, "never"],
     "quotemark": [true, "single"],
     "array-type": [true, "generic"],
-    "max-classes-per-file": false,
-    "object-literal-key-quotes": [true, "consitent"],
-    "prefer-for-of": false,
-    "object-literal-sort-keys": false,
-    "variable-name": {
-      "options": [
-        "ban-keywords",
-        "check-format",
-        "allow-leading-underscore"
-      ]
-    },
+
+    "completed-docs": false,
+    "newline-per-chained-call": false,
+    "file-name-casing": [true, "ignored"],
     "member-ordering": false,
-    "no-empty": [true, "allow-empty-functions"]
+    "jsdoc-format": false,
+    "no-null-keyword": false,
+    "variable-name": [true, "allow-leading-underscore"],
+    "max-classes-per-file": false,
+    "binary-expression-operand-order": false,
+    "prefer-function-over-method": false,
+    "object-literal-key-quotes": [true, "consistent"],
+    "only-arrow-functions": false,
+    "comment-format": [true, "check-space"],
+    "object-literal-sort-keys": false,
+    "prefer-for-of": false,
+    "no-unnecessary-class": [true, "allow-static-only"],
+    "no-empty": false,
+
+    "no-default-export": false,
+    "no-default-import": false,
+
+    "no-magic-numbers": false,
+    "switch-default": false,
+    "switch-final-break": [true, "always"],
+
+    "typedef": false
   },
   "rulesDirectory": []
 }
