@@ -1,10 +1,9 @@
+import { CELL_SIZE } from './Cell'
 import Direction from './Direction'
 import ImageManager from './ImageManager'
 import { Key, Keyboard } from './Keyboard'
 import Map from './Map'
 import Player from './Player'
-
-const ZOOM = 2
 
 export default class Game {
   private canvas: HTMLCanvasElement
@@ -13,6 +12,7 @@ export default class Game {
   private player: Player
   private keyboard: Keyboard
   private lastUpdate: number
+  private zoom: number
 
   public constructor() {
     this.canvas = document.getElementById('app') as HTMLCanvasElement
@@ -20,11 +20,11 @@ export default class Game {
 
     this.lastUpdate = Date.now()
 
+    this.zoom = 1
+
     this.keyboard = new Keyboard()
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
-
-    this.resize()
 
     const imagesLoader = ImageManager.load('assets/img/', {
       'tiles': 'tiles.png',
@@ -41,6 +41,8 @@ export default class Game {
     this.map = Map.firstLevel()
 
     this.player = new Player(this, this.map.startLocation())
+
+    this.resize()
 
     this.update()
   }
@@ -79,6 +81,9 @@ export default class Game {
   public render(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
+    this.ctx.fillStyle = 'black'
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+
     const bgImg = ImageManager.getImage('background')
     const pat = this.ctx.createPattern(bgImg, 'repeat')
     this.ctx.rect(0, 0, 140, 140)
@@ -94,10 +99,19 @@ export default class Game {
   }
 
   public resize(_e: UIEvent | null = null): void {
+    let { width, height } = this.map.getSize()
+    width *= CELL_SIZE
+    height *= CELL_SIZE
+
+    const widthZoom = window.innerWidth / width
+    const heightZoom = window.innerHeight / height
+
+    this.zoom = Math.min(widthZoom, heightZoom)
+
     this.canvas.width = window.innerWidth
     this.canvas.height = window.innerHeight
 
     this.ctx.imageSmoothingEnabled = false
-    this.ctx.scale(ZOOM, ZOOM)
+    this.ctx.scale(this.zoom, this.zoom)
   }
 }

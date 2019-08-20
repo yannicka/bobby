@@ -107,6 +107,13 @@ export default class Map {
     return nbCarrots
   }
 
+  public getSize(): { width: number; height: number } {
+    return {
+      width: this.cells[0].length,
+      height: this.cells.length,
+    }
+  }
+
   public static firstLevel(): Map {
     return new Map([
       [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
