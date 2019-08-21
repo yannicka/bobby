@@ -84,6 +84,22 @@ export default class Game {
     this.ctx.fillStyle = 'black'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
+    let { width, height } = this.map.getSize()
+
+    width *= CELL_SIZE
+    height *= CELL_SIZE
+
+    width *= this.zoom
+    height *= this.zoom
+
+    const screenWidth = window.innerWidth
+    const screenHeight = window.innerHeight
+    const diffWidth = (screenWidth - width) / 2 / this.zoom
+    const diffHeight = (screenHeight - height) / 2 / this.zoom
+
+    this.ctx.save()
+    this.ctx.translate(diffWidth, diffHeight)
+
     const bgImg = ImageManager.getImage('background')
     const pat = this.ctx.createPattern(bgImg, 'repeat')
     this.ctx.beginPath() // Nécessaire : https://gamedev.stackexchange.com/a/120250
@@ -93,6 +109,8 @@ export default class Game {
 
     this.map.render(this.ctx)
     this.player.render(this.ctx)
+
+    this.ctx.restore()
   }
 
   public getMap(): Map {
