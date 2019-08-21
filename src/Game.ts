@@ -1,18 +1,17 @@
 import { CELL_SIZE } from './Cell'
-import Direction from './Direction'
+import GameScene from './GameScene'
+import HomeScene from './HomeScene'
 import ImageManager from './ImageManager'
-import { Key, Keyboard } from './Keyboard'
 import Map from './Map'
-import Player from './Player'
+import Scene from './Scene'
 
 export default class Game {
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
   private map: Map
-  private player: Player
-  private keyboard: Keyboard
   private lastUpdate: number
   private zoom: number
+  private scene: Scene
 
   public constructor() {
     this.canvas = document.getElementById('app') as HTMLCanvasElement
@@ -21,8 +20,6 @@ export default class Game {
     this.lastUpdate = Date.now()
 
     this.zoom = 1
-
-    this.keyboard = new Keyboard()
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
 
@@ -38,9 +35,8 @@ export default class Game {
   }
 
   public init(): void {
-    this.map = Map.firstLevel()
-
-    this.player = new Player(this, this.map.startLocation())
+    // this.scene = new HomeScene(this.canvas)
+    this.scene = new GameScene(this)
 
     this.resize()
 
@@ -52,26 +48,7 @@ export default class Game {
     const dt = (now - this.lastUpdate) / 1000
     this.lastUpdate = now
 
-    if (this.player.isAbleToMove()) {
-      if (this.keyboard.down(Key.Up)) {
-        this.player.move(Direction.Up)
-      }
-
-      if (this.keyboard.down(Key.Down)) {
-        this.player.move(Direction.Down)
-      }
-
-      if (this.keyboard.down(Key.Right)) {
-        this.player.move(Direction.Right)
-      }
-
-      if (this.keyboard.down(Key.Left)) {
-        this.player.move(Direction.Left)
-      }
-    }
-
-    this.map.update(dt)
-    this.player.update(dt)
+    this.scene.update(dt)
 
     this.render()
 
@@ -84,7 +61,8 @@ export default class Game {
     this.ctx.fillStyle = 'black'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
-    let { width, height } = this.map.getSize()
+    // let { width, height } = this.map.getSize()
+    let [ width, height ] = [ 9, 9 ]
 
     width *= CELL_SIZE
     height *= CELL_SIZE
@@ -100,15 +78,7 @@ export default class Game {
     this.ctx.save()
     this.ctx.translate(diffWidth, diffHeight)
 
-    const bgImg = ImageManager.getImage('background')
-    const pat = this.ctx.createPattern(bgImg, 'repeat')
-    this.ctx.beginPath() // Nécessaire : https://gamedev.stackexchange.com/a/120250
-    this.ctx.rect(0, 0, 140, 140)
-    this.ctx.fillStyle = pat
-    this.ctx.fill()
-
-    this.map.render(this.ctx)
-    this.player.render(this.ctx)
+    this.scene.render(this.ctx)
 
     this.ctx.restore()
   }
@@ -118,7 +88,8 @@ export default class Game {
   }
 
   public resize(_e: UIEvent | null = null): void {
-    let { width, height } = this.map.getSize()
+    // let { width, height } = this.map.getSize()
+    let [ width, height ] = [ 9, 9 ]
     width *= CELL_SIZE
     height *= CELL_SIZE
 
@@ -132,5 +103,13 @@ export default class Game {
 
     this.ctx.imageSmoothingEnabled = false
     this.ctx.scale(this.zoom, this.zoom)
+  }
+
+  public getCanvas(): HTMLCanvasElement {
+    return this.canvas
+  }
+
+  public getCtx(): CanvasRenderingContext2D {
+    return this.ctx
   }
 }

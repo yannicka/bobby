@@ -26,6 +26,7 @@
     "prefer-for-of": false,
     "no-unnecessary-class": [true, "allow-static-only"],
     "no-empty": false,
+    "interface-name": false,
 
     "no-default-export": false,
     "no-default-import": false,

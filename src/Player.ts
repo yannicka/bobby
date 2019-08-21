@@ -3,6 +3,7 @@ import { CELL_SIZE } from './Cell'
 import Direction from './Direction'
 import Game from './Game'
 import ImageManager from './ImageManager'
+import Map from './Map'
 import Point from './Point'
 
 export default class Player {
@@ -14,13 +15,17 @@ export default class Player {
   private displayPosition: Point
   private timer: number
   private game: Game
+  private map: Map
   private animationManager: AnimationManager
 
-  public constructor(game: Game, start: Point) {
+  public constructor(game: Game, map: Map) {
+    const start = map.startLocation()
+
     const startX = start.x
     const startY = start.y
 
     this.game = game
+    this.map = map
     this.position = new Point(startX, startY)
     this.previousPosition = this.position.clone()
     this.startPosition = new Point(startX * CELL_SIZE, startY * CELL_SIZE)
@@ -58,8 +63,8 @@ export default class Player {
         this.canmove = true
         this.displayPosition = this.targetPosition.clone()
 
-        this.game.getMap().onPassingEvent(this.position, this)
-        this.game.getMap().nextStateOf(this.previousPosition)
+        this.map.onPassingEvent(this.position, this)
+        this.map.nextStateOf(this.previousPosition)
       }
     }
   }
@@ -100,8 +105,8 @@ export default class Player {
         break
     }
 
-    const previousCell = this.game.getMap().getCell(this.position)
-    const nextCell = this.game.getMap().getCell(newMapPosition)
+    const previousCell = this.map.getCell(this.position)
+    const nextCell = this.map.getCell(newMapPosition)
 
     if (previousCell.isBlocking(direction) || nextCell.isSolid(direction)) {
       return
