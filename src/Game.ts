@@ -86,6 +86,7 @@ export default class Game {
 
     const bgImg = ImageManager.getImage('background')
     const pat = this.ctx.createPattern(bgImg, 'repeat')
+    this.ctx.beginPath() // Nécessaire : https://gamedev.stackexchange.com/a/120250
     this.ctx.rect(0, 0, 140, 140)
     this.ctx.fillStyle = pat
     this.ctx.fill()
