@@ -35,8 +35,8 @@ export default class Game {
   }
 
   public init(): void {
-    // this.scene = new HomeScene(this.canvas)
-    this.scene = new GameScene(this)
+    this.scene = new HomeScene(this)
+    // this.scene = new GameScene(this)
 
     this.resize()
 
@@ -111,5 +111,13 @@ export default class Game {
 
   public getCtx(): CanvasRenderingContext2D {
     return this.ctx
+  }
+
+  public getZoom(): number {
+    return this.zoom
+  }
+
+  public changeScene<T extends Scene>(sceneName: new (game: Game) => T): void {
+    this.scene = new sceneName(this)
   }
 }

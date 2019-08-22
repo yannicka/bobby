@@ -7,7 +7,6 @@ import Player from './Player'
 import Scene from './Scene'
 
 export default class GameScene implements Scene {
-  private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
   private game: Game
   private map: Map
@@ -17,7 +16,6 @@ export default class GameScene implements Scene {
   public constructor(game: Game) {
     this.game = game
 
-    this.canvas = this.game.getCanvas()
     this.ctx = this.game.getCtx()
 
     this.map = Map.firstLevel()

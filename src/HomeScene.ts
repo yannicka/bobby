@@ -1,19 +1,41 @@
+import { CELL_SIZE } from './Cell'
+import Game from './Game'
+import GameScene from './GameScene'
+import { Key, Keyboard } from './Keyboard'
 import Scene from './Scene'
 
 export default class HomeScene implements Scene {
+  private game: Game
   private canvas: HTMLCanvasElement
+  private keyboard: Keyboard
 
-  public constructor(canvas: HTMLCanvasElement) {
-    this.canvas = canvas
+  public constructor(game: Game) {
+    this.game = game
+    this.canvas = game.getCanvas()
+
+    this.keyboard = new Keyboard()
   }
 
   public update(dt: number): void {
+    if (this.keyboard.down(Key.Space)) {
+      this.game.changeScene(GameScene)
+    }
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    let [ screenWidth, screenHeight ] = [ 9, 9 ]
+    screenWidth *= CELL_SIZE
+    screenHeight *= CELL_SIZE
+    // screenWidth *= this.game.getZoom()
+    // screenHeight *= this.game.getZoom()
+
+    ctx.clearRect(0, 0, screenWidth, screenHeight)
 
     ctx.fillStyle = 'red'
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    ctx.fillRect(0, 0, screenWidth, screenHeight)
+
+    ctx.fillStyle = 'black'
+    ctx.font = '7px Arial'
+    ctx.fillText('Appuyer sur Espace pour démarrer', 10, 10)
   }
 }
