@@ -23,11 +23,7 @@ export default class HomeScene implements Scene {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    let [ screenWidth, screenHeight ] = [ 9, 9 ]
-    screenWidth *= CELL_SIZE
-    screenHeight *= CELL_SIZE
-    // screenWidth *= this.game.getZoom()
-    // screenHeight *= this.game.getZoom()
+    const [ screenWidth, screenHeight ] = this.game.getScreenSize()
 
     ctx.clearRect(0, 0, screenWidth, screenHeight)
 

@@ -62,10 +62,7 @@ export default class Game {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
     // let { width, height } = this.map.getSize()
-    let [ width, height ] = [ 9, 9 ]
-
-    width *= CELL_SIZE
-    height *= CELL_SIZE
+    let [ width, height ] = this.getScreenSize()
 
     width *= this.zoom
     height *= this.zoom
@@ -89,9 +86,7 @@ export default class Game {
 
   public resize(_e: UIEvent | null = null): void {
     // let { width, height } = this.map.getSize()
-    let [ width, height ] = [ 9, 9 ]
-    width *= CELL_SIZE
-    height *= CELL_SIZE
+    const [ width, height ] = this.getScreenSize()
 
     const widthZoom = window.innerWidth / width
     const heightZoom = window.innerHeight / height
@@ -119,5 +114,13 @@ export default class Game {
 
   public changeScene<T extends Scene>(sceneName: new (game: Game) => T): void {
     this.scene = new sceneName(this)
+  }
+
+  public getScreenSize(): [ number, number ] {
+    let [ width, height ] = [ 9, 9 ]
+    width *= CELL_SIZE
+    height *= CELL_SIZE
+
+    return [ width, height ]
   }
 }
