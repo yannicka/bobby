@@ -12,6 +12,8 @@ export default class Game {
   private lastUpdate: number
   private zoom: number
   private scene: Scene
+  private transition: number | null
+  private nextScene: new (game: Game) => Scene | null
 
   public constructor() {
     this.canvas = document.getElementById('app') as HTMLCanvasElement
@@ -20,6 +22,9 @@ export default class Game {
     this.lastUpdate = Date.now()
 
     this.zoom = 1
+
+    this.transition = null
+    this.nextScene = null
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
 
@@ -47,6 +52,17 @@ export default class Game {
     const now = Date.now()
     const dt = (now - this.lastUpdate) / 1000
     this.lastUpdate = now
+
+    if (this.nextScene) {
+      this.transition += dt
+
+      if (this.transition >= 1) {
+        this.scene = new this.nextScene(this)
+
+        this.transition = null
+        this.nextScene = null
+      }
+    }
 
     this.scene.update(dt)
 
@@ -76,6 +92,13 @@ export default class Game {
     this.ctx.translate(diffWidth, diffHeight)
 
     this.scene.render(this.ctx)
+
+    if (this.nextScene) {
+      this.ctx.fillStyle = 'black'
+      this.ctx.globalAlpha = this.transition
+      this.ctx.fillRect(0, 0, width, height)
+      this.ctx.globalAlpha = 1
+    }
 
     this.ctx.restore()
   }
@@ -113,7 +136,8 @@ export default class Game {
   }
 
   public changeScene<T extends Scene>(sceneName: new (game: Game) => T): void {
-    this.scene = new sceneName(this)
+    this.transition = 0
+    this.nextScene = sceneName
   }
 
   public getScreenSize(): [ number, number ] {
