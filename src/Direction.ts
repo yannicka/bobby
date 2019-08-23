@@ -1,4 +1,4 @@
-enum Direction {
+const enum Direction {
   Up,
   Down,
   Right,

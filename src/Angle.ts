@@ -1,4 +1,4 @@
-enum Angle {
+const enum Angle {
   UpRight,
   UpLeft,
   DownRight,

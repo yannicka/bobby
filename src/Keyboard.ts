@@ -1,4 +1,4 @@
-export enum Key {
+export const enum Key {
   Tab   = 9,
   Enter = 13,
   Shift = 16,
