@@ -24,11 +24,15 @@ export class HomeScene implements Scene {
 
     ctx.clearRect(0, 0, gameWidth, gameHeight)
 
-    ctx.fillStyle = 'red'
+    ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, gameWidth, gameHeight)
 
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = 'white'
+
+    ctx.font = '20px Arial'
+    ctx.fillText('Bobby', 14, 30)
+
     ctx.font = '7px Arial'
-    ctx.fillText('Appuyez sur Espace pour démarrer', 14, 40)
+    ctx.fillText('Appuyez sur Espace pour démarrer', 14, 50)
   }
 }
