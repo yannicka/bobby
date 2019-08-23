@@ -1,9 +1,9 @@
-import AnimationManager from './AnimationManager'
-import Direction from './Direction'
-import ImageManager from './ImageManager'
-import Player from './Player'
-import Point from './Point'
-import Rotation from './Rotation'
+import { AnimationManager } from './AnimationManager'
+import { Direction } from './Direction'
+import { ImageManager } from './ImageManager'
+import { Player } from './Player'
+import { Point } from './Point'
+import { Rotation } from './Rotation'
 
 export const CELL_SIZE = 16
 

@@ -1,8 +1,8 @@
 /*
 
-import Point from './Point'
+import { Point } from './Point'
 
-export default class Camera {
+export class Camera {
   private position: Point
   private width: number
   private height: number

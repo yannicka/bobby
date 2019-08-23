@@ -9,7 +9,7 @@
 //   // code
 // })
 // ```
-export default class ImageManager {
+export class ImageManager {
   // Images chargées
   private static images: { [key: string]: HTMLImageElement } = {}
 

@@ -1,13 +1,13 @@
 import { CELL_SIZE } from './Cell'
-import GameScene from './GameScene'
-import HomeScene from './HomeScene'
-import ImageManager from './ImageManager'
-import Map from './Map'
-import Scene from './Scene'
-import SceneTransition from './SceneTransition'
-import Storage from './Storage'
+import { GameScene } from './GameScene'
+import { HomeScene } from './HomeScene'
+import { ImageManager } from './ImageManager'
+import { Map } from './Map'
+import { Scene } from './Scene'
+import { SceneTransition } from './SceneTransition'
+import { Storage } from './Storage'
 
-export default class Game {
+export class Game {
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
   private map: Map

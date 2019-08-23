@@ -1,6 +1,6 @@
 import { Animation, AnimationOptions } from './Animation'
 
-export default class AnimationManager {
+export class AnimationManager {
   // Image qui servira de sprite aux animations
   private image: HTMLImageElement
 

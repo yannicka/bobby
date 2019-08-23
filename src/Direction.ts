@@ -1,8 +1,6 @@
-const enum Direction {
+export const enum Direction {
   Up,
   Down,
   Right,
   Left,
 }
-
-export default Direction

@@ -1,9 +1,9 @@
-import Game from './Game'
-import GameScene from './GameScene'
+import { Game } from './Game'
+import { GameScene } from './GameScene'
 import { Key, Keyboard } from './Keyboard'
-import Scene from './Scene'
+import { Scene } from './Scene'
 
-export default class HomeScene implements Scene {
+export class HomeScene implements Scene {
   private game: Game
   private keyboard: Keyboard
 

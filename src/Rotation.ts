@@ -1,4 +1,4 @@
-const enum Rotation {
+export const enum Rotation {
   UpRight,
   UpLeft,
   DownRight,
@@ -6,5 +6,3 @@ const enum Rotation {
   Vertical,
   Horizontal,
 }
-
-export default Rotation

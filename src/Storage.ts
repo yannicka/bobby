@@ -10,7 +10,7 @@ interface Level {
   }
 }
 
-export default class Storage {
+export class Storage {
   // public constructor() {
   // }
 

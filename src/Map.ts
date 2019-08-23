@@ -1,8 +1,8 @@
 import { Carrot, Cell, cells as cellsIndex, End, Start } from './Cell'
-import Player from './Player'
-import Point from './Point'
+import { Player } from './Player'
+import { Point } from './Point'
 
-export default class Map {
+export class Map {
   private cells: Array<Array<Cell>>
 
   public constructor(cells: Array<Array<number>>) {

@@ -1,12 +1,12 @@
-import Direction from './Direction'
-import Game from './Game'
-import ImageManager from './ImageManager'
+import { Direction } from './Direction'
+import { Game } from './Game'
+import { ImageManager } from './ImageManager'
 import { Key, Keyboard } from './Keyboard'
-import Map from './Map'
-import Player from './Player'
-import Scene from './Scene'
+import { Map } from './Map'
+import { Player } from './Player'
+import { Scene } from './Scene'
 
-export default class GameScene implements Scene {
+export class GameScene implements Scene {
   private game: Game
   private map: Map
   private player: Player

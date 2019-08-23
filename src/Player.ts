@@ -1,16 +1,16 @@
-import AnimationManager from './AnimationManager'
+import { AnimationManager } from './AnimationManager'
 import { CELL_SIZE } from './Cell'
-import Direction from './Direction'
-import Game from './Game'
-import ImageManager from './ImageManager'
-import Map from './Map'
-import Point from './Point'
+import { Direction } from './Direction'
+import { Game } from './Game'
+import { ImageManager } from './ImageManager'
+import { Map } from './Map'
+import { Point } from './Point'
 
 function linear(a: number, b: number, t: number): number {
   return a * (1 - t) + b * t
 }
 
-export default class Player {
+export class Player {
   private canmove: boolean
   private position: Point
   private previousPosition: Point

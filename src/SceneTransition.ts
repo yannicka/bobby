@@ -1,5 +1,5 @@
-import Game from './Game'
-import Scene from './Scene'
+import { Game } from './Game'
+import { Scene } from './Scene'
 
 enum Transition {
   None,
@@ -7,7 +7,7 @@ enum Transition {
   In,
 }
 
-export default class SceneTransition {
+export class SceneTransition {
   private transition: Transition
   private game: Game
   private nextScene: Scene | null
