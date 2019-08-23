@@ -181,6 +181,8 @@ export class Turnstile extends Cell {
     this.getAnimation().addAnimation(Angle.UpLeft.toString(), [ 9 ], 1)
     this.getAnimation().addAnimation(Angle.DownRight.toString(), [ 10 ], 1)
     this.getAnimation().addAnimation(Angle.DownLeft.toString(), [ 11 ], 1)
+    this.getAnimation().addAnimation(Angle.Horizontal.toString(), [ 25 ], 1)
+    this.getAnimation().addAnimation(Angle.Vertical.toString(), [ 26 ], 1)
 
     this.getAnimation().play(angle.toString())
   }
@@ -202,6 +204,14 @@ export class Turnstile extends Cell {
       case Angle.DownLeft:
         this.angle = Angle.UpLeft
         break
+
+      case Angle.Vertical:
+        this.angle = Angle.Horizontal
+        break
+
+      case Angle.Horizontal:
+        this.angle = Angle.Vertical
+        break
     }
 
     this.getAnimation().play(this.angle.toString())
@@ -220,6 +230,12 @@ export class Turnstile extends Cell {
 
       case Angle.DownLeft:
         return [ Direction.Up, Direction.Right ].includes(direction)
+
+      case Angle.Vertical:
+        return [ Direction.Right, Direction.Left ].includes(direction)
+
+      case Angle.Horizontal:
+        return [ Direction.Up, Direction.Down ].includes(direction)
     }
   }
 
@@ -236,6 +252,12 @@ export class Turnstile extends Cell {
 
       case Angle.DownLeft:
         return [ Direction.Down, Direction.Left ].includes(direction)
+
+      case Angle.Vertical:
+        return [ Direction.Right, Direction.Left ].includes(direction)
+
+      case Angle.Horizontal:
+        return [ Direction.Up, Direction.Down ].includes(direction)
     }
   }
 }
@@ -302,7 +324,7 @@ export class Ice extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 24 ], 0.1)
+    this.getAnimation().addAnimation('idle', [ 24 ], 1)
 
     this.getAnimation().play('idle')
   }
@@ -336,4 +358,7 @@ export const cells: { [key: number]: (position: Point) => Cell } = {
   16: (position: Point): Cell => new Carrot(position),
 
   17: (position: Point): Cell => new Ice(position),
+
+  18: (position: Point): Cell => new Turnstile(position, Angle.Horizontal),
+  19: (position: Point): Cell => new Turnstile(position, Angle.Vertical),
 }

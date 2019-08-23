@@ -6,6 +6,10 @@ import ImageManager from './ImageManager'
 import Map from './Map'
 import Point from './Point'
 
+function linear(a: number, b: number, t: number): number {
+  return a * (1 - t) + b * t
+}
+
 export default class Player {
   private canmove: boolean
   private position: Point
@@ -137,8 +141,4 @@ export default class Player {
   public getDirection(): Direction {
     return this.direction
   }
-}
-
-function linear(a: number, b: number, t: number): number {
-  return a * (1 - t) + b * t
 }

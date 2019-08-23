@@ -4,7 +4,7 @@ import HomeScene from './HomeScene'
 import ImageManager from './ImageManager'
 import Map from './Map'
 import Scene from './Scene'
-import SceneTransition from './SceneTransition';
+import SceneTransition from './SceneTransition'
 
 export default class Game {
   private canvas: HTMLCanvasElement
