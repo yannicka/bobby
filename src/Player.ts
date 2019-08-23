@@ -63,8 +63,8 @@ export default class Player {
         this.canmove = true
         this.displayPosition = this.targetPosition.clone()
 
-        this.map.onPassingEvent(this.position, this)
         this.map.nextStateOf(this.previousPosition)
+        this.map.onPassingEvent(this.position, this)
       }
     }
   }
