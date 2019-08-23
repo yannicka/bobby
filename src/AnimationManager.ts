@@ -1,4 +1,4 @@
-import Animation from './Animation'
+import { Animation, AnimationOptions } from './Animation'
 
 export default class AnimationManager {
   // Image qui servira de sprite aux animations
@@ -34,21 +34,17 @@ export default class AnimationManager {
     }
   }
 
-  // @todo Revoir la signature de la fonction avec un paramètre `options`
-  //       plutôt qu'une longue liste de paramètres.
   public addAnimation(
     name: string,
     frames: Array<number>,
-    frameDuration: number,
-    loop: boolean = true,
+    options: AnimationOptions = {},
   ): void {
     const animation = new Animation(
       this.image,
       frames,
       this.frameWidth,
       this.frameHeight,
-      frameDuration,
-      loop,
+      options,
     )
 
     this.animations[name] = animation

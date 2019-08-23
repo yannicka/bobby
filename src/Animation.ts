@@ -1,6 +1,11 @@
 import { drawImageByIndex } from './Util'
 
-export default class Animation {
+export interface AnimationOptions {
+  frameDuration?: number
+  loop?: boolean
+}
+
+export class Animation {
   private image: HTMLImageElement
 
   private frames: Array<number>
@@ -16,14 +21,12 @@ export default class Animation {
   private currentIndex: number
   private finished: boolean
 
-  // @todo Voir AnimationManager
   public constructor(
     image: HTMLImageElement,
     frames: Array<number>,
     frameWidth: number,
     frameHeight: number,
-    frameDuration: number,
-    loop: boolean = true,
+    options: AnimationOptions = {},
   ) {
     this.image = image
     this.frames = frames
@@ -31,8 +34,8 @@ export default class Animation {
     this.frameWidth = frameWidth
     this.frameHeight = frameHeight
 
-    this.frameDuration = frameDuration
-    this.loop = loop
+    this.frameDuration = options.frameDuration || 1
+    this.loop = options.loop || true
 
     this.timer = 0
     this.currentIndex = 0

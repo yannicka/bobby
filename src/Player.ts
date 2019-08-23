@@ -43,10 +43,25 @@ export default class Player {
 
     this.animationManager = new AnimationManager(image, 14, 15)
 
-    this.animationManager.addAnimation(Direction.Up.toString(), [ 8, 9, 10, 11, 8 ], 0.04, false)
-    this.animationManager.addAnimation(Direction.Down.toString(), [ 0, 1, 2, 3, 0 ], 0.04, false)
-    this.animationManager.addAnimation(Direction.Right.toString(), [ 12, 13, 14, 15, 12 ], 0.04, false)
-    this.animationManager.addAnimation(Direction.Left.toString(), [ 4, 5, 6, 7, 4 ], 0.04, false)
+    this.animationManager.addAnimation(Direction.Up.toString(), [ 8, 9, 10, 11, 8 ], {
+      frameDuration: 0.04,
+      loop: false,
+    })
+
+    this.animationManager.addAnimation(Direction.Down.toString(), [ 0, 1, 2, 3, 0 ], {
+      frameDuration: 0.04,
+      loop: false,
+    })
+
+    this.animationManager.addAnimation(Direction.Right.toString(), [ 12, 13, 14, 15, 12 ], {
+      frameDuration: 0.04,
+      loop: false,
+    })
+
+    this.animationManager.addAnimation(Direction.Left.toString(), [ 4, 5, 6, 7, 4 ], {
+      frameDuration: 0.04,
+      loop: false,
+    })
 
     this.direction = Direction.Down
 
