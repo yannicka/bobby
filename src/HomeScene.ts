@@ -1,4 +1,3 @@
-import { CELL_SIZE } from './Cell'
 import Game from './Game'
 import GameScene from './GameScene'
 import { Key, Keyboard } from './Keyboard'
@@ -6,19 +5,19 @@ import Scene from './Scene'
 
 export default class HomeScene implements Scene {
   private game: Game
-  private canvas: HTMLCanvasElement
+  // private canvas: HTMLCanvasElement
   private keyboard: Keyboard
 
   public constructor(game: Game) {
     this.game = game
-    this.canvas = game.getCanvas()
+    // this.canvas = game.getCanvas()
 
     this.keyboard = new Keyboard()
   }
 
-  public update(dt: number): void {
+  public update(_dt: number): void {
     if (this.keyboard.down(Key.Space)) {
-      this.game.changeScene(GameScene)
+      this.game.changeSceneWithTransition(GameScene)
     }
   }
 

@@ -4,6 +4,7 @@ import HomeScene from './HomeScene'
 import ImageManager from './ImageManager'
 import Map from './Map'
 import Scene from './Scene'
+import SceneTransition from './SceneTransition';
 
 export default class Game {
   private canvas: HTMLCanvasElement
@@ -12,8 +13,7 @@ export default class Game {
   private lastUpdate: number
   private zoom: number
   private scene: Scene
-  private transition: number | null
-  private nextScene: new (game: Game) => Scene | null
+  private sceneTransition: SceneTransition
 
   public constructor() {
     this.canvas = document.getElementById('app') as HTMLCanvasElement
@@ -23,8 +23,7 @@ export default class Game {
 
     this.zoom = 1
 
-    this.transition = null
-    this.nextScene = null
+    this.sceneTransition = new SceneTransition(this)
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
 
@@ -53,29 +52,20 @@ export default class Game {
     const dt = (now - this.lastUpdate) / 1000
     this.lastUpdate = now
 
-    if (this.nextScene) {
-      this.transition += dt
-
-      if (this.transition >= 1) {
-        this.scene = new this.nextScene(this)
-
-        this.transition = null
-        this.nextScene = null
-      }
-    }
-
     this.scene.update(dt)
 
-    this.render()
+    this.sceneTransition.update(dt)
+
+    this.render(this.ctx)
 
     requestAnimationFrame(() => this.update())
   }
 
-  public render(): void {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+  public render(ctx: CanvasRenderingContext2D): void {
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
-    this.ctx.fillStyle = 'black'
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    ctx.fillStyle = 'black'
+    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
     // let { width, height } = this.map.getSize()
     let [ width, height ] = this.getScreenSize()
@@ -88,19 +78,14 @@ export default class Game {
     const diffWidth = (screenWidth - width) / 2 / this.zoom
     const diffHeight = (screenHeight - height) / 2 / this.zoom
 
-    this.ctx.save()
-    this.ctx.translate(diffWidth, diffHeight)
+    ctx.save()
+    ctx.translate(diffWidth, diffHeight)
 
-    this.scene.render(this.ctx)
+    this.scene.render(ctx)
 
-    if (this.nextScene) {
-      this.ctx.fillStyle = 'black'
-      this.ctx.globalAlpha = this.transition
-      this.ctx.fillRect(0, 0, width, height)
-      this.ctx.globalAlpha = 1
-    }
+    this.sceneTransition.render(ctx)
 
-    this.ctx.restore()
+    ctx.restore()
   }
 
   public getMap(): Map {
@@ -136,8 +121,11 @@ export default class Game {
   }
 
   public changeScene<T extends Scene>(sceneName: new (game: Game) => T): void {
-    this.transition = 0
-    this.nextScene = sceneName
+    this.scene = new sceneName(this)
+  }
+
+  public changeSceneWithTransition<T extends Scene>(sceneName: new (game: Game) => T): void {
+    this.sceneTransition.changeScene(sceneName)
   }
 
   public getScreenSize(): [ number, number ] {
