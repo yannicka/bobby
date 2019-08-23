@@ -33,7 +33,13 @@ npm run serve # ou npm run build
   marche alors qu'il devrait plutôt « glisser » (ne pas bouger les pieds) ;
 
 - Au chargement d'un niveau, l'animation de marche est lancé, ce qui fait que
-  le personnage bouge les jambes dans le vide.
+  le personnage bouge les jambes dans le vide ;
+
+- Améliorer les transitions, très peu paramétrables actuellement.
+
+### Graphismes
+
+- Améliorer les graphismes.
 
 ### Nettoyage du code
 
