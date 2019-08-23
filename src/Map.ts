@@ -14,7 +14,9 @@ export default class Map {
       for (let x = 0 ; x < cells[y].length ; x += 1) {
         const i = cells[y][x]
 
-        this.cells[y][x] = cellsIndex[i](new Point(x, y))
+        if (i !== 0) {
+          this.cells[y][x] = cellsIndex[i](new Point(x, y))
+        }
       }
     }
   }
@@ -32,7 +34,9 @@ export default class Map {
       for (let x = 0 ; x < this.cells[y].length ; x += 1) {
         const cell = this.cells[y][x]
 
-        cell.update(dt)
+        if (typeof cell !== 'undefined') {
+          cell.update(dt)
+        }
       }
     }
   }
@@ -42,25 +46,31 @@ export default class Map {
       for (let x = 0 ; x < this.cells[y].length ; x += 1) {
         const cell = this.cells[y][x]
 
-        cell.render(ctx)
+        if (typeof cell !== 'undefined') {
+          cell.render(ctx)
+        }
       }
     }
   }
 
-  public getCell(position: Point): Cell {
+  public getCell(position: Point): Cell | undefined {
     return this.cells[position.y][position.x]
   }
 
   public nextStateOf(position: Point) {
     const cell = this.cells[position.y][position.x]
 
-    cell.nextState()
+    if (typeof cell !== 'undefined') {
+      cell.nextState()
+    }
   }
 
-  public onPassingEvent(position: Point, player: Player) {
+  public onPassingEvent(position: Point, player: Player): void {
     const cell = this.cells[position.y][position.x]
 
-    cell.onPassingEvent(player)
+    if (typeof cell !== 'undefined') {
+      cell.onPassingEvent(player)
+    }
   }
 
   public startLocation(): Point | null {

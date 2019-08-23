@@ -1,3 +1,5 @@
+/*
+
 import Point from './Point'
 
 export default class Camera {
@@ -11,3 +13,5 @@ export default class Camera {
     this.height = height
   }
 }
+
+*/

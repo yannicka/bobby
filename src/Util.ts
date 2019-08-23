@@ -7,7 +7,7 @@ export function drawImageByIndex(
   width: number,
   height: number,
 ): void {
-  // Nombre de tiles par ligne
+  // Nombre de tuiles par ligne
   const nbTilesByLine = Math.ceil(img.width / width)
 
   // Position x depuis laquelle découper le morceau

@@ -7,7 +7,6 @@ import Player from './Player'
 import Scene from './Scene'
 
 export default class GameScene implements Scene {
-  private ctx: CanvasRenderingContext2D
   private game: Game
   private map: Map
   private player: Player
@@ -16,8 +15,6 @@ export default class GameScene implements Scene {
 
   public constructor(game: Game, level: number = 0) {
     this.game = game
-
-    this.ctx = this.game.getCtx()
 
     this.currentLevel = level
 
@@ -54,14 +51,16 @@ export default class GameScene implements Scene {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    const bgImg = ImageManager.getImage('background')
-    const pat = this.ctx.createPattern(bgImg, 'repeat')
-    this.ctx.beginPath() // Nécessaire : https://gamedev.stackexchange.com/a/120250
-    this.ctx.rect(0, 0, 140, 140)
-    this.ctx.fillStyle = pat
-    this.ctx.fill()
+    const [ gameWidth, gameHeight ] = this.game.getGameSize()
 
-    this.map.render(this.ctx)
-    this.player.render(this.ctx)
+    const bgImg = ImageManager.getImage('background')
+    const pat = ctx.createPattern(bgImg, 'repeat')
+    ctx.beginPath() // Nécessaire : https://gamedev.stackexchange.com/a/120250
+    ctx.rect(0, 0, gameWidth, gameHeight)
+    ctx.fillStyle = pat
+    ctx.fill()
+
+    this.map.render(ctx)
+    this.player.render(ctx)
   }
 }

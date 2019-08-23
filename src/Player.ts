@@ -130,7 +130,7 @@ export default class Player {
     const previousCell = this.map.getCell(this.position)
     const nextCell = this.map.getCell(newMapPosition)
 
-    if (previousCell.isBlocking(direction) || nextCell.isSolid(direction)) {
+    if ((previousCell && previousCell.isBlocking(direction)) || (nextCell && nextCell.isSolid(direction))) {
       return
     }
 

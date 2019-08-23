@@ -56,7 +56,7 @@ export default class SceneTransition {
 
   public render(ctx: CanvasRenderingContext2D): void {
     if (this.nextScene) {
-      const [ width, height ] = this.game.getScreenSize()
+      const [ width, height ] = this.game.getGameSize()
 
       ctx.fillStyle = 'black'
       ctx.globalAlpha = this.counter

@@ -5,7 +5,7 @@ import ImageManager from './ImageManager'
 import Map from './Map'
 import Scene from './Scene'
 import SceneTransition from './SceneTransition'
-import Storage from './Storage';
+import Storage from './Storage'
 
 export default class Game {
   private canvas: HTMLCanvasElement
@@ -72,7 +72,7 @@ export default class Game {
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
     // let { width, height } = this.map.getSize()
-    let [ width, height ] = this.getScreenSize()
+    let [ width, height ] = this.getGameSize()
 
     width *= this.zoom
     height *= this.zoom
@@ -97,8 +97,7 @@ export default class Game {
   }
 
   public resize(_e: UIEvent | null = null): void {
-    // let { width, height } = this.map.getSize()
-    const [ width, height ] = this.getScreenSize()
+    const [ width, height ] = this.getGameSize()
 
     const widthZoom = window.innerWidth / width
     const heightZoom = window.innerHeight / height
@@ -136,8 +135,9 @@ export default class Game {
     this.changeSceneWithTransition(new GameScene(this, 1))
   }
 
-  public getScreenSize(): [ number, number ] {
+  public getGameSize(): [ number, number ] {
     let [ width, height ] = [ 9, 9 ]
+
     width *= CELL_SIZE
     height *= CELL_SIZE
 

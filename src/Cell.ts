@@ -1,41 +1,11 @@
-import Rotation from './Rotation'
 import AnimationManager from './AnimationManager'
 import Direction from './Direction'
 import ImageManager from './ImageManager'
 import Player from './Player'
 import Point from './Point'
+import Rotation from './Rotation'
 
 export const CELL_SIZE = 16
-
-/*
-
-export enum CellType {
-  Ground, // Sol
-
-  Grass, // Herbe (bloquant : impossible de marcher dessus)
-  Fence, // Barrière (bloquant)
-
-  SpadeDeactivated, // Pique avant que l'on marche dessus
-  SpadeActivated,   // Pique après avoir marché dessus
-
-  ConveyorBeltUp,    // Tapis roulant vers le haut
-  ConveyorBeltDown,  // Tapis roulant vers le bas
-  ConveyorBeltRight, // Tapis roulant vers la droite
-  ConveyorBeltLeft,  // Tapis roulant vers la gauche
-
-  TurnstileUpRight,   // Tourniquet (haut/droite)
-  TurnstileUpLeft,    // Tourniquet (haut/gauche)
-  TurnstileDownRight, // Tourniquet (bas/droite)
-  TurnstileDownLeft,  // Tourniquet (bas/gauche)
-
-  Start, // Balise de début de niveau
-  End,   // Balise de fin de niveau
-
-  Carrot,     // Carotte à manger
-  CarrotHole, // Trou de carotte (s'affiche après avoir mangé la carotte)
-}
-
-*/
 
 export abstract class Cell {
   private position: Point
@@ -85,17 +55,8 @@ export abstract class Cell {
   }
 }
 
-export class Ground extends Cell {
-  public constructor(position: Point) {
-    super(position)
-
-    this.getAnimation().addAnimation('idle', [ 14 ])
-
-    this.getAnimation().play('idle')
-  }
-}
-
-export class Grass extends Cell {
+// Rocher
+export class Stone extends Cell {
   public constructor(position: Point) {
     super(position)
 
@@ -104,26 +65,13 @@ export class Grass extends Cell {
     this.getAnimation().play('idle')
   }
 
-  public isSolid(_direction: Direction): boolean {
+  public isSolid(): boolean {
     return true
   }
 }
 
-export class Fence extends Cell {
-  public constructor(position: Point) {
-    super(position)
-
-    this.getAnimation().addAnimation('idle', [ 3 ])
-
-    this.getAnimation().play('idle')
-  }
-
-  public isSolid(_direction: Direction): boolean {
-    return true
-  }
-}
-
-export class Spade extends Cell {
+// Bouton
+export class Button extends Cell {
   private activated: boolean
 
   public constructor(position: Point) {
@@ -148,6 +96,7 @@ export class Spade extends Cell {
   }
 }
 
+// Tapis roulant
 export class Conveyor extends Cell {
   private direction: Direction
 
@@ -169,6 +118,7 @@ export class Conveyor extends Cell {
   }
 }
 
+// Tourniquet
 export class Turnstile extends Cell {
   private angle: Rotation
 
@@ -262,6 +212,7 @@ export class Turnstile extends Cell {
   }
 }
 
+// Balise de début de niveau
 export class Start extends Cell {
   public constructor(position: Point) {
     super(position)
@@ -272,6 +223,7 @@ export class Start extends Cell {
   }
 }
 
+// Balise de fin de niveau
 export class End extends Cell {
   private active: boolean
 
@@ -303,6 +255,7 @@ export class End extends Cell {
   }
 }
 
+// Carotte à manger
 export class Carrot extends Cell {
   private eated: boolean
 
@@ -328,6 +281,7 @@ export class Carrot extends Cell {
   }
 }
 
+// Glace
 export class Ice extends Cell {
   public constructor(position: Point) {
     super(position)
@@ -343,12 +297,9 @@ export class Ice extends Cell {
 }
 
 export const cells: { [key: number]: (position: Point) => Cell } = {
-  1: (position: Point): Cell => new Ground(position),
+  2: (position: Point): Cell => new Stone(position),
 
-  2: (position: Point): Cell => new Grass(position),
-  3: (position: Point): Cell => new Fence(position),
-
-  4: (position: Point): Cell => new Spade(position),
+  4: (position: Point): Cell => new Button(position),
 
   6: (position: Point): Cell => new Conveyor(position, Direction.Up),
   7: (position: Point): Cell => new Conveyor(position, Direction.Down),

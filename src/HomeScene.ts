@@ -5,12 +5,10 @@ import Scene from './Scene'
 
 export default class HomeScene implements Scene {
   private game: Game
-  // private canvas: HTMLCanvasElement
   private keyboard: Keyboard
 
   public constructor(game: Game) {
     this.game = game
-    // this.canvas = game.getCanvas()
 
     this.keyboard = new Keyboard()
   }
@@ -22,15 +20,15 @@ export default class HomeScene implements Scene {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    const [ screenWidth, screenHeight ] = this.game.getScreenSize()
+    const [ gameWidth, gameHeight ] = this.game.getGameSize()
 
-    ctx.clearRect(0, 0, screenWidth, screenHeight)
+    ctx.clearRect(0, 0, gameWidth, gameHeight)
 
     ctx.fillStyle = 'red'
-    ctx.fillRect(0, 0, screenWidth, screenHeight)
+    ctx.fillRect(0, 0, gameWidth, gameHeight)
 
     ctx.fillStyle = 'black'
     ctx.font = '7px Arial'
-    ctx.fillText('Appuyer sur Espace pour démarrer', 10, 10)
+    ctx.fillText('Appuyez sur Espace pour démarrer', 14, 40)
   }
 }
