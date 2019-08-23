@@ -287,10 +287,14 @@ export class End extends Cell {
   }
 
   public onPassingEvent(player: Player): void {
-    player.nextLevel()
+    if (this.isActive()) {
+      player.nextLevel()
+    }
   }
 
   public activate(): void {
+    this.active = true
+
     this.getAnimation().play('active')
   }
 
