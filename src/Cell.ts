@@ -298,6 +298,20 @@ export class Carrot extends Cell {
   }
 }
 
+export class Ice extends Cell {
+  public constructor(position: Point) {
+    super(position)
+
+    this.getAnimation().addAnimation('idle', [ 24 ], 0.1)
+
+    this.getAnimation().play('idle')
+  }
+
+  public onPassingEvent(player: Player): void {
+    player.move(player.getDirection())
+  }
+}
+
 export const cells: { [key: number]: (position: Point) => Cell } = {
   1: (position: Point): Cell => new Ground(position),
 
@@ -320,4 +334,6 @@ export const cells: { [key: number]: (position: Point) => Cell } = {
   15: (position: Point): Cell => new End(position),
 
   16: (position: Point): Cell => new Carrot(position),
+
+  17: (position: Point): Cell => new Ice(position),
 }

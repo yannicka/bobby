@@ -17,6 +17,7 @@ export default class Player {
   private game: Game
   private map: Map
   private animationManager: AnimationManager
+  private direction: Direction
 
   public constructor(game: Game, map: Map) {
     const start = map.startLocation()
@@ -43,7 +44,9 @@ export default class Player {
     this.animationManager.addAnimation(Direction.Right.toString(), [ 12, 13, 14, 15, 12 ], 0.04, false)
     this.animationManager.addAnimation(Direction.Left.toString(), [ 4, 5, 6, 7, 4 ], 0.04, false)
 
-    this.animationManager.play(Direction.Down.toString())
+    this.direction = Direction.Down
+
+    this.animationManager.play(this.direction.toString())
   }
 
   public update(dt: number): void {
@@ -112,6 +115,8 @@ export default class Player {
       return
     }
 
+    this.direction = direction
+
     this.moveTo(newMapPosition)
   }
 
@@ -127,6 +132,10 @@ export default class Player {
     this.startPosition = this.targetPosition.clone()
     this.targetPosition.x = this.position.x * CELL_SIZE
     this.targetPosition.y = this.position.y * CELL_SIZE
+  }
+
+  public getDirection(): Direction {
+    return this.direction
   }
 }
 
