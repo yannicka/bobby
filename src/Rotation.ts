@@ -1,4 +1,4 @@
-const enum Angle {
+const enum Rotation {
   UpRight,
   UpLeft,
   DownRight,
@@ -7,4 +7,4 @@ const enum Angle {
   Horizontal,
 }
 
-export default Angle
+export default Rotation

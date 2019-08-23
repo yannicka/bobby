@@ -1,4 +1,4 @@
-import Angle from './Angle'
+import Rotation from './Rotation'
 import AnimationManager from './AnimationManager'
 import Direction from './Direction'
 import ImageManager from './ImageManager'
@@ -170,47 +170,47 @@ export class Conveyor extends Cell {
 }
 
 export class Turnstile extends Cell {
-  private angle: Angle
+  private angle: Rotation
 
-  public constructor(position: Point, angle: Angle) {
+  public constructor(position: Point, angle: Rotation) {
     super(position)
 
     this.angle = angle
 
-    this.getAnimation().addAnimation(Angle.UpRight.toString(), [ 8 ], 1)
-    this.getAnimation().addAnimation(Angle.UpLeft.toString(), [ 9 ], 1)
-    this.getAnimation().addAnimation(Angle.DownRight.toString(), [ 10 ], 1)
-    this.getAnimation().addAnimation(Angle.DownLeft.toString(), [ 11 ], 1)
-    this.getAnimation().addAnimation(Angle.Horizontal.toString(), [ 25 ], 1)
-    this.getAnimation().addAnimation(Angle.Vertical.toString(), [ 26 ], 1)
+    this.getAnimation().addAnimation(Rotation.UpRight.toString(), [ 8 ], 1)
+    this.getAnimation().addAnimation(Rotation.UpLeft.toString(), [ 9 ], 1)
+    this.getAnimation().addAnimation(Rotation.DownRight.toString(), [ 10 ], 1)
+    this.getAnimation().addAnimation(Rotation.DownLeft.toString(), [ 11 ], 1)
+    this.getAnimation().addAnimation(Rotation.Horizontal.toString(), [ 25 ], 1)
+    this.getAnimation().addAnimation(Rotation.Vertical.toString(), [ 26 ], 1)
 
     this.getAnimation().play(angle.toString())
   }
 
   public nextState(): void {
     switch (this.angle) {
-      case Angle.UpRight:
-        this.angle = Angle.DownRight
+      case Rotation.UpRight:
+        this.angle = Rotation.DownRight
         break
 
-      case Angle.UpLeft:
-        this.angle = Angle.UpRight
+      case Rotation.UpLeft:
+        this.angle = Rotation.UpRight
         break
 
-      case Angle.DownRight:
-        this.angle = Angle.DownLeft
+      case Rotation.DownRight:
+        this.angle = Rotation.DownLeft
         break
 
-      case Angle.DownLeft:
-        this.angle = Angle.UpLeft
+      case Rotation.DownLeft:
+        this.angle = Rotation.UpLeft
         break
 
-      case Angle.Vertical:
-        this.angle = Angle.Horizontal
+      case Rotation.Vertical:
+        this.angle = Rotation.Horizontal
         break
 
-      case Angle.Horizontal:
-        this.angle = Angle.Vertical
+      case Rotation.Horizontal:
+        this.angle = Rotation.Vertical
         break
     }
 
@@ -219,44 +219,44 @@ export class Turnstile extends Cell {
 
   public isSolid(direction: Direction): boolean {
     switch (this.angle) {
-      case Angle.UpRight:
+      case Rotation.UpRight:
         return [ Direction.Down, Direction.Left ].includes(direction)
 
-      case Angle.UpLeft:
+      case Rotation.UpLeft:
         return [ Direction.Down, Direction.Right ].includes(direction)
 
-      case Angle.DownRight:
+      case Rotation.DownRight:
         return [ Direction.Up, Direction.Left ].includes(direction)
 
-      case Angle.DownLeft:
+      case Rotation.DownLeft:
         return [ Direction.Up, Direction.Right ].includes(direction)
 
-      case Angle.Vertical:
+      case Rotation.Vertical:
         return [ Direction.Right, Direction.Left ].includes(direction)
 
-      case Angle.Horizontal:
+      case Rotation.Horizontal:
         return [ Direction.Up, Direction.Down ].includes(direction)
     }
   }
 
   public isBlocking(direction: Direction): boolean {
     switch (this.angle) {
-      case Angle.UpRight:
+      case Rotation.UpRight:
         return [ Direction.Up, Direction.Right ].includes(direction)
 
-      case Angle.UpLeft:
+      case Rotation.UpLeft:
         return [ Direction.Up, Direction.Left ].includes(direction)
 
-      case Angle.DownRight:
+      case Rotation.DownRight:
         return [ Direction.Down, Direction.Right ].includes(direction)
 
-      case Angle.DownLeft:
+      case Rotation.DownLeft:
         return [ Direction.Down, Direction.Left ].includes(direction)
 
-      case Angle.Vertical:
+      case Rotation.Vertical:
         return [ Direction.Right, Direction.Left ].includes(direction)
 
-      case Angle.Horizontal:
+      case Rotation.Horizontal:
         return [ Direction.Up, Direction.Down ].includes(direction)
     }
   }
@@ -355,10 +355,10 @@ export const cells: { [key: number]: (position: Point) => Cell } = {
   8: (position: Point): Cell => new Conveyor(position, Direction.Right),
   9: (position: Point): Cell => new Conveyor(position, Direction.Left),
 
-  10: (position: Point): Cell => new Turnstile(position, Angle.UpRight),
-  11: (position: Point): Cell => new Turnstile(position, Angle.UpLeft),
-  12: (position: Point): Cell => new Turnstile(position, Angle.DownRight),
-  13: (position: Point): Cell => new Turnstile(position, Angle.DownLeft),
+  10: (position: Point): Cell => new Turnstile(position, Rotation.UpRight),
+  11: (position: Point): Cell => new Turnstile(position, Rotation.UpLeft),
+  12: (position: Point): Cell => new Turnstile(position, Rotation.DownRight),
+  13: (position: Point): Cell => new Turnstile(position, Rotation.DownLeft),
 
   14: (position: Point): Cell => new Start(position),
   15: (position: Point): Cell => new End(position),
@@ -367,6 +367,6 @@ export const cells: { [key: number]: (position: Point) => Cell } = {
 
   17: (position: Point): Cell => new Ice(position),
 
-  18: (position: Point): Cell => new Turnstile(position, Angle.Horizontal),
-  19: (position: Point): Cell => new Turnstile(position, Angle.Vertical),
+  18: (position: Point): Cell => new Turnstile(position, Rotation.Horizontal),
+  19: (position: Point): Cell => new Turnstile(position, Rotation.Vertical),
 }
