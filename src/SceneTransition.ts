@@ -64,4 +64,8 @@ export class SceneTransition {
       ctx.globalAlpha = 1
     }
   }
+
+  public isInChange(): boolean {
+    return this.transition !== Transition.None
+  }
 }

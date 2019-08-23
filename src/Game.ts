@@ -147,4 +147,8 @@ export class Game {
   public getStorage(): Storage {
     return this.storage
   }
+
+  public getSceneTransition(): SceneTransition {
+    return this.sceneTransition
+  }
 }

@@ -28,21 +28,23 @@ export class GameScene implements Scene {
   }
 
   public update(dt: number): void {
-    if (this.player.isAbleToMove()) {
-      if (this.keyboard.down(Key.Up)) {
-        this.player.move(Direction.Up)
-      }
+    if (!this.game.getSceneTransition().isInChange()) {
+      if (this.player.isAbleToMove()) {
+        if (this.keyboard.down(Key.Up)) {
+          this.player.move(Direction.Up)
+        }
 
-      if (this.keyboard.down(Key.Down)) {
-        this.player.move(Direction.Down)
-      }
+        if (this.keyboard.down(Key.Down)) {
+          this.player.move(Direction.Down)
+        }
 
-      if (this.keyboard.down(Key.Right)) {
-        this.player.move(Direction.Right)
-      }
+        if (this.keyboard.down(Key.Right)) {
+          this.player.move(Direction.Right)
+        }
 
-      if (this.keyboard.down(Key.Left)) {
-        this.player.move(Direction.Left)
+        if (this.keyboard.down(Key.Left)) {
+          this.player.move(Direction.Left)
+        }
       }
     }
 
