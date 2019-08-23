@@ -1,4 +1,4 @@
-import { Carrot, Cell, cells as cellsIndex, End, Start } from './Cell'
+import { Cell, cells as cellsIndex, Coin, End, Start } from './Cell'
 import { Player } from './Player'
 import { Point } from './Point'
 
@@ -22,7 +22,7 @@ export class Map {
   }
 
   public update(dt: number): void {
-    if (this.countCarrots() === 0) {
+    if (this.countCoins() === 0) {
       const endCell = this.getEndCell()
 
       if (!endCell.isActive()) {
@@ -101,20 +101,20 @@ export class Map {
     return null
   }
 
-  public countCarrots(): number {
-    let nbCarrots = 0
+  public countCoins(): number {
+    let nbCoins = 0
 
     for (let y = 0 ; y < this.cells.length ; y += 1) {
       for (let x = 0 ; x < this.cells[y].length ; x += 1) {
         const cell = this.cells[y][x]
 
-        if (cell instanceof Carrot && !cell.isEated()) {
-          nbCarrots += 1
+        if (cell instanceof Coin && !cell.isCollected()) {
+          nbCoins += 1
         }
       }
     }
 
-    return nbCarrots
+    return nbCoins
   }
 
   public getSize(): { width: number; height: number } {

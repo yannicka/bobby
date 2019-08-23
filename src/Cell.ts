@@ -256,28 +256,28 @@ export class End extends Cell {
 }
 
 // Carotte à manger
-export class Carrot extends Cell {
-  private eated: boolean
+export class Coin extends Cell {
+  private collected: boolean
 
   public constructor(position: Point) {
     super(position)
 
-    this.eated = false
+    this.collected = false
 
-    this.getAnimation().addAnimation('not-eated', [ 15 ])
-    this.getAnimation().addAnimation('eated', [ 16 ])
+    this.getAnimation().addAnimation('not-collected', [ 15 ])
+    this.getAnimation().addAnimation('collected', [ 16 ])
 
-    this.getAnimation().play('not-eated')
+    this.getAnimation().play('not-collected')
   }
 
   public onPassingEvent(_player: Player): void {
-    this.eated = true
+    this.collected = true
 
-    this.getAnimation().play('eated')
+    this.getAnimation().play('collected')
   }
 
-  public isEated(): boolean {
-    return this.eated
+  public isCollected(): boolean {
+    return this.collected
   }
 }
 
@@ -314,7 +314,7 @@ export const cells: { [key: number]: (position: Point) => Cell } = {
   14: (position: Point): Cell => new Start(position),
   15: (position: Point): Cell => new End(position),
 
-  16: (position: Point): Cell => new Carrot(position),
+  16: (position: Point): Cell => new Coin(position),
 
   17: (position: Point): Cell => new Ice(position),
 
