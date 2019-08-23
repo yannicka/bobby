@@ -4,9 +4,9 @@ import Scene from './Scene'
 type ClassScene = new (game: Game) => Scene
 
 enum Transition {
+  None,
   Out,
   In,
-  None,
 }
 
 export default class SceneTransition {
