@@ -34,8 +34,8 @@ export class Animation {
     this.frameWidth = frameWidth
     this.frameHeight = frameHeight
 
-    this.frameDuration = options.frameDuration || 1
-    this.loop = options.loop || true
+    this.frameDuration = typeof options.frameDuration === 'number' ? options.frameDuration : 1
+    this.loop = typeof options.loop === 'boolean' ? options.loop : true
 
     this.timer = 0
     this.currentIndex = 0
