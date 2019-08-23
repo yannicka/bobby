@@ -17,7 +17,7 @@ export default class HomeScene implements Scene {
 
   public update(_dt: number): void {
     if (this.keyboard.down(Key.Space)) {
-      this.game.changeSceneWithTransition(GameScene)
+      this.game.changeSceneWithTransition(new GameScene(this.game))
     }
   }
 

@@ -1,8 +1,6 @@
 import Game from './Game'
 import Scene from './Scene'
 
-type ClassScene = new (game: Game) => Scene
-
 enum Transition {
   None,
   Out,
@@ -12,7 +10,7 @@ enum Transition {
 export default class SceneTransition {
   private transition: Transition
   private game: Game
-  private nextScene: ClassScene | null
+  private nextScene: Scene | null
   private counter: number
 
   public constructor(game: Game) {
@@ -24,7 +22,7 @@ export default class SceneTransition {
     this.counter = 0
   }
 
-  public changeScene(nextScene: ClassScene) {
+  public changeScene(nextScene: Scene) {
     this.nextScene = nextScene
 
     this.transition = Transition.Out

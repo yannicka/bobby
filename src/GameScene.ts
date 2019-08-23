@@ -12,13 +12,18 @@ export default class GameScene implements Scene {
   private map: Map
   private player: Player
   private keyboard: Keyboard
+  private currentLevel: number
 
-  public constructor(game: Game) {
+  public constructor(game: Game, level: number = 0) {
     this.game = game
 
     this.ctx = this.game.getCtx()
 
-    this.map = Map.firstLevel()
+    this.currentLevel = level
+
+    const levels = this.game.getStorage().getLevels()
+
+    this.map = new Map(levels[this.currentLevel].fixed.map)
 
     this.keyboard = new Keyboard()
 
@@ -46,7 +51,6 @@ export default class GameScene implements Scene {
 
     this.map.update(dt)
     this.player.update(dt)
-
   }
 
   public render(ctx: CanvasRenderingContext2D): void {

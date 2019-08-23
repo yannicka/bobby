@@ -141,4 +141,8 @@ export default class Player {
   public getDirection(): Direction {
     return this.direction
   }
+
+  public nextLevel(): void {
+    this.game.nextLevel()
+  }
 }

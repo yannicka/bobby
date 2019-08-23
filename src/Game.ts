@@ -5,6 +5,7 @@ import ImageManager from './ImageManager'
 import Map from './Map'
 import Scene from './Scene'
 import SceneTransition from './SceneTransition'
+import Storage from './Storage';
 
 export default class Game {
   private canvas: HTMLCanvasElement
@@ -14,6 +15,7 @@ export default class Game {
   private zoom: number
   private scene: Scene
   private sceneTransition: SceneTransition
+  private storage: Storage
 
   public constructor() {
     this.canvas = document.getElementById('app') as HTMLCanvasElement
@@ -24,6 +26,8 @@ export default class Game {
     this.zoom = 1
 
     this.sceneTransition = new SceneTransition(this)
+
+    this.storage = new Storage()
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
 
@@ -120,12 +124,16 @@ export default class Game {
     return this.zoom
   }
 
-  public changeScene<T extends Scene>(sceneName: new (game: Game) => T): void {
-    this.scene = new sceneName(this)
+  public changeScene(scene: Scene): void {
+    this.scene = scene
   }
 
-  public changeSceneWithTransition<T extends Scene>(sceneName: new (game: Game) => T): void {
-    this.sceneTransition.changeScene(sceneName)
+  public changeSceneWithTransition(scene: Scene): void {
+    this.sceneTransition.changeScene(scene)
+  }
+
+  public nextLevel() {
+    this.changeSceneWithTransition(new GameScene(this, 1))
   }
 
   public getScreenSize(): [ number, number ] {
@@ -134,5 +142,9 @@ export default class Game {
     height *= CELL_SIZE
 
     return [ width, height ]
+  }
+
+  public getStorage(): Storage {
+    return this.storage
   }
 }
