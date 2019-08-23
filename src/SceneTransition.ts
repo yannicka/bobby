@@ -3,12 +3,21 @@ import Scene from './Scene'
 
 type ClassScene = new (game: Game) => Scene
 
+enum Transition {
+  Out,
+  In,
+  None,
+}
+
 export default class SceneTransition {
+  private transition: Transition
   private game: Game
   private nextScene: ClassScene | null
   private counter: number
 
   public constructor(game: Game) {
+    this.transition = Transition.None
+
     this.game = game
     this.nextScene = null
 
@@ -17,18 +26,33 @@ export default class SceneTransition {
 
   public changeScene(nextScene: ClassScene) {
     this.nextScene = nextScene
+
+    this.transition = Transition.Out
   }
 
   public update(dt: number): void {
-    if (this.nextScene) {
-      this.counter += dt
+    switch (this.transition) {
+      case Transition.Out:
+        this.counter += dt
 
-      if (this.counter >= 1) {
-        this.game.changeScene(this.nextScene)
+        if (this.counter >= 1) {
+          this.counter = 1
 
-        this.counter = null
-        this.nextScene = null
-      }
+          this.game.changeScene(this.nextScene)
+
+          this.transition = Transition.In
+        }
+        break
+
+      case Transition.In:
+        this.counter -= dt
+
+        if (this.counter <= 0) {
+          this.counter = 0
+
+          this.transition = Transition.None
+        }
+        break
     }
   }
 
