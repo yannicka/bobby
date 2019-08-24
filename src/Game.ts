@@ -71,25 +71,9 @@ export class Game {
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
-    // let { width, height } = this.map.getSize()
-    let [ width, height ] = this.getGameSize()
-
-    width *= this.zoom
-    height *= this.zoom
-
-    const screenWidth = window.innerWidth
-    const screenHeight = window.innerHeight
-    const diffWidth = (screenWidth - width) / 2 / this.zoom
-    const diffHeight = (screenHeight - height) / 2 / this.zoom
-
-    ctx.save()
-    ctx.translate(diffWidth, diffHeight)
-
     this.scene.render(ctx)
 
     this.sceneTransition.render(ctx)
-
-    ctx.restore()
   }
 
   public getMap(): Map {
@@ -104,8 +88,8 @@ export class Game {
 
     this.zoom = Math.min(widthZoom, heightZoom)
 
-    this.canvas.width = window.innerWidth
-    this.canvas.height = window.innerHeight
+    this.canvas.width = width * this.zoom
+    this.canvas.height = height * this.zoom
 
     this.ctx.imageSmoothingEnabled = false
     this.ctx.scale(this.zoom, this.zoom)
