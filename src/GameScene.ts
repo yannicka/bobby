@@ -28,7 +28,7 @@ export class GameScene implements Scene {
   }
 
   public update(dt: number): void {
-    if (!this.game.getSceneTransition().isInChange()) {
+    if (!this.game.getSceneTransition().isChanging()) {
       if (this.player.isAbleToMove()) {
         if (this.keyboard.down(Key.Up)) {
           this.player.move(Direction.Up)
