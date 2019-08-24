@@ -9,19 +9,21 @@ export class Mouse extends Pointer {
   private mtime: number
   private loose: number | boolean | null
   private wheelValue: number
+  private element: HTMLElement
 
-  public constructor() {
+  public constructor(element: HTMLElement | null = null) {
     super()
 
     this.click = null
     this.mtime = 0
     this.loose = null
     this.wheelValue = 0
+    this.element = element || document.body
 
-    document.addEventListener('mousedown', (e: MouseEvent) => this.onMouseDown(e))
-    document.addEventListener('mousemove', (e: MouseEvent) => this.onMouseMove(e))
-    document.addEventListener('mouseup', (e: MouseEvent) => this.onMouseUp(e))
-    document.addEventListener('wheel', (e: WheelEvent) => this.onWheel(e))
+    this.element.addEventListener('mousedown', (e: MouseEvent) => this.onMouseDown(e))
+    this.element.addEventListener('mousemove', (e: MouseEvent) => this.onMouseMove(e))
+    this.element.addEventListener('mouseup', (e: MouseEvent) => this.onMouseUp(e))
+    this.element.addEventListener('wheel', (e: WheelEvent) => this.onWheel(e))
   }
 
   // à faire : trouver une méthode pour éviter un appel à une méthode, comme
@@ -31,23 +33,6 @@ export class Mouse extends Pointer {
 
     this.wheelValue = 0
   }
-
-  /*
-
-  public getCanvasCoordinates(camera: Camera): Point {
-    let x = this.position.getX()
-    let y = this.position.getY()
-
-    x /= 1 // Game.scale
-    y /= 1 // Game.scale
-
-    x -= camera.getX()
-    y -= camera.getY()
-
-    return new Point(x, y)
-  }
-
-  */
 
   // Tant que le bouton est levé
   public up(): boolean {
@@ -69,6 +54,7 @@ export class Mouse extends Pointer {
     return this.loose === this.mtime
   }
 
+  // Roulette
   public wheel(): WheelDirection {
     if (this.wheelValue < 0) {
       return WheelDirection.Top
@@ -85,20 +71,9 @@ export class Mouse extends Pointer {
   }
 
   private onMouseMove(e: MouseEvent): void {
-    /*
-
-    const can = this.game.getCanvas()
-
     const position = new Point(
-      e.pageX - (can !== null ? can.offsetLeft : 0),
-      e.pageY - (can !== null ? can.offsetTop : 0),
-    )
-
-    */
-
-    const position = new Point(
-      e.pageX,
-      e.pageY,
+      e.pageX - this.element.offsetLeft,
+      e.pageY - this.element.offsetTop,
     )
 
     this.setPosition(position)

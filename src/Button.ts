@@ -7,18 +7,27 @@ export class Button {
   private height: number
   private position: Point
   private onClick: OnClickCallback
+  private text: string
+
+  public constructor(text: string) {
+    this.text = text
+  }
 
   public update(dt: number): void {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle = 'red'
+    ctx.fillStyle = 'darkgrey'
     ctx.fillRect(
       this.position.x,
-      this.position.x,
+      this.position.y,
       this.width,
       this.height,
     )
+
+    ctx.fillStyle = 'black'
+    ctx.font = '10px Arial'
+    ctx.fillText(this.text, this.position.x + 4, this.position.y + 12)
   }
 
   public setSize(width: number, height: number): void {
@@ -40,5 +49,8 @@ export class Button {
 
   public isHover(pointerPosition: Point): boolean {
     return pointerPosition.x >= this.position.x
+      && pointerPosition.y >= this.position.y
+      && pointerPosition.x <= this.position.x + this.width
+      && pointerPosition.y <= this.position.y + this.height
   }
 }
