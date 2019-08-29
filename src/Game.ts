@@ -120,7 +120,7 @@ export class Game {
   }
 
   public getGameSize(): [ number, number ] {
-    let [ width, height ] = [ 5, 5 ]
+    let [ width, height ] = [ 9, 9 ]
 
     width *= CELL_SIZE
     height *= CELL_SIZE

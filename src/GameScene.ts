@@ -8,6 +8,7 @@ import { Scene } from './Scene'
 import { Camera } from './Camera'
 import { Point } from './Point'
 import { CELL_SIZE } from './Cell';
+import { clamp } from './Util';
 
 export class GameScene implements Scene {
   private game: Game
@@ -35,6 +36,7 @@ export class GameScene implements Scene {
 
   public update(dt: number): void {
     const [ gameWidth, gameHeight ] = this.game.getGameSize()
+    const { width: mapWidth, height: mapHeight } = this.map.getDisplayedSize()
 
     let cameraPosition = this.player.getDisplayPosition().clone()
 
@@ -46,6 +48,9 @@ export class GameScene implements Scene {
 
     cameraPosition.x += gameWidth / 2
     cameraPosition.y += gameHeight / 2
+
+    cameraPosition.x = clamp(cameraPosition.x, -mapWidth + gameWidth, 0)
+    cameraPosition.y = clamp(cameraPosition.y, -mapHeight + gameHeight, 0)
 
     this.camera.setPosition(cameraPosition)
 

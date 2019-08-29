@@ -1,4 +1,4 @@
-import { Cell, cells as cellsIndex, Coin, End, Start } from './Cell'
+import { Cell, cells as cellsIndex, Coin, End, Start, CELL_SIZE } from './Cell'
 import { Player } from './Player'
 import { Point } from './Point'
 
@@ -121,6 +121,18 @@ export class Map {
     return {
       width: this.cells[0].length,
       height: this.cells.length,
+    }
+  }
+
+  public getDisplayedSize(): { width: number, height: number } {
+    let { width, height } = this.getSize()
+
+    width *= CELL_SIZE
+    height *= CELL_SIZE
+
+    return {
+      width,
+      height,
     }
   }
 }
