@@ -160,4 +160,8 @@ export class Player {
   public nextLevel(): void {
     this.game.nextLevel()
   }
+  
+  public getDisplayPosition(): Point {
+    return this.displayPosition
+  }
 }

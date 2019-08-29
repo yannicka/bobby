@@ -5,6 +5,9 @@ import { Key, Keyboard } from './Keyboard'
 import { Map } from './Map'
 import { Player } from './Player'
 import { Scene } from './Scene'
+import { Camera } from './Camera'
+import { Point } from './Point'
+import { CELL_SIZE } from './Cell';
 
 export class GameScene implements Scene {
   private game: Game
@@ -12,6 +15,7 @@ export class GameScene implements Scene {
   private player: Player
   private keyboard: Keyboard
   private currentLevel: number
+  private camera: Camera
 
   public constructor(game: Game, level: number = 0) {
     this.game = game
@@ -22,12 +26,29 @@ export class GameScene implements Scene {
 
     this.map = new Map(levels[this.currentLevel].fixed.map)
 
+    this.camera = new Camera(new Point(0, 0), { width: 100, height: 100 })
+
     this.keyboard = new Keyboard()
 
     this.player = new Player(this.game, this.map)
   }
 
   public update(dt: number): void {
+    const [ gameWidth, gameHeight ] = this.game.getGameSize()
+
+    let cameraPosition = this.player.getDisplayPosition().clone()
+
+    cameraPosition.x = -cameraPosition.x
+    cameraPosition.y = -cameraPosition.y
+
+    cameraPosition.x -= CELL_SIZE / 2
+    cameraPosition.y -= CELL_SIZE / 2
+
+    cameraPosition.x += gameWidth / 2
+    cameraPosition.y += gameHeight / 2
+
+    this.camera.setPosition(cameraPosition)
+
     if (!this.game.getSceneTransition().isChanging()) {
       if (this.player.isAbleToMove()) {
         if (this.keyboard.down(Key.Up)) {
@@ -53,16 +74,24 @@ export class GameScene implements Scene {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    const [ gameWidth, gameHeight ] = this.game.getGameSize()
+    let { width, height } = this.map.getSize()
+    width *= CELL_SIZE
+    height *= CELL_SIZE
 
     const bgImg = ImageManager.getImage('background')
     const pat = ctx.createPattern(bgImg, 'repeat')
+
+    ctx.save()
+    ctx.translate(this.camera.getPosition().x, this.camera.getPosition().y)
+
     ctx.beginPath() // Nécessaire : https://gamedev.stackexchange.com/a/120250
-    ctx.rect(0, 0, gameWidth, gameHeight)
+    ctx.rect(0, 0, width, height)
     ctx.fillStyle = pat
     ctx.fill()
 
     this.map.render(ctx)
     this.player.render(ctx)
+
+    ctx.restore()
   }
 }

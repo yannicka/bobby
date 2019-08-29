@@ -117,7 +117,7 @@ export class Map {
     return nbCoins
   }
 
-  public getSize(): { width: number; height: number } {
+  public getSize(): { width: number, height: number } {
     return {
       width: this.cells[0].length,
       height: this.cells.length,

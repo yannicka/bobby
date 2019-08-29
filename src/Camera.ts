@@ -1,17 +1,29 @@
-/*
-
 import { Point } from './Point'
+
+type Size = { width: number, height: number }
 
 export class Camera {
   private position: Point
-  private width: number
-  private height: number
+  private size: Size
 
-  public constructor(position: Point, width: number, height: number) {
+  public constructor(position: Point, size: Size) {
     this.position = position
-    this.width = width
-    this.height = height
+    this.size = size
+  }
+
+  public getPosition(): Point {
+    return this.position
+  }
+
+  public getSize(): Size {
+    return this.size
+  }
+
+  public setPosition(position: Point): void {
+    this.position = position
+  }
+
+  public setSize(size: Size): void {
+    this.size = size
   }
 }
-
-*/
