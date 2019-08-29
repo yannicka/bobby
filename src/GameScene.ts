@@ -3,7 +3,7 @@ import { CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
 import { Game } from './Game'
 import { ImageManager } from './ImageManager'
-import { Key, Keyboard } from './Keyboard'
+import { Keyboard } from './Keyboard'
 import { Map } from './Map'
 import { Player } from './Player'
 import { Point } from './Point'
@@ -56,19 +56,19 @@ export class GameScene implements Scene {
 
     if (!this.game.getSceneTransition().isChanging()) {
       if (this.player.isAbleToMove()) {
-        if (this.keyboard.down(Key.Up)) {
+        if (this.keyboard.down('ArrowUp') || this.keyboard.down('KeyW')) {
           this.player.move(Direction.Up)
         }
 
-        if (this.keyboard.down(Key.Down)) {
+        if (this.keyboard.down('ArrowDown') || this.keyboard.down('KeyS')) {
           this.player.move(Direction.Down)
         }
 
-        if (this.keyboard.down(Key.Right)) {
+        if (this.keyboard.down('ArrowRight') || this.keyboard.down('KeyD')) {
           this.player.move(Direction.Right)
         }
 
-        if (this.keyboard.down(Key.Left)) {
+        if (this.keyboard.down('ArrowLeft') || this.keyboard.down('KeyA')) {
           this.player.move(Direction.Left)
         }
       }
