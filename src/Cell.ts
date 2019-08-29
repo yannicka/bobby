@@ -269,7 +269,7 @@ export class End extends Cell {
   }
 }
 
-// Carotte à manger
+// Pièce
 export class Coin extends Cell {
   private collected: boolean
 
