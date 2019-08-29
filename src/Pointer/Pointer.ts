@@ -1,4 +1,5 @@
 import { Point } from '../Point'
+
 import { WheelDirection } from './WheelDirection'
 
 export abstract class Pointer {

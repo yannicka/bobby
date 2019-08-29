@@ -2,14 +2,14 @@ import { Animation, AnimationOptions } from './Animation'
 
 export class AnimationManager {
   // Image qui servira de sprite aux animations
-  private image: HTMLImageElement
+  private readonly image: HTMLImageElement
 
   // La taille d'une frame doit être fixée car les frames sont référencées par
   // des index
-  private frameWidth: number
-  private frameHeight: number
+  private readonly frameWidth: number
+  private readonly frameHeight: number
 
-  private animations: { [key: string]: Animation }
+  private readonly animations: { [key: string]: Animation }
   private currentAnimation: Animation | null
 
   public constructor(image: HTMLImageElement, frameWidth: number, frameHeight: number) {
@@ -23,13 +23,13 @@ export class AnimationManager {
   }
 
   public update(dt: number): void {
-    if (this.currentAnimation) {
+    if (this.currentAnimation instanceof Animation) {
       this.currentAnimation.update(dt)
     }
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    if (this.currentAnimation) {
+    if (this.currentAnimation instanceof Animation) {
       this.currentAnimation.render(ctx)
     }
   }
@@ -51,12 +51,10 @@ export class AnimationManager {
   }
 
   public play(name: string, force: boolean = false): void {
-    this.currentAnimation = this.animations[name]
-
     const nextAnimation = this.animations[name]
 
     if (this.currentAnimation !== nextAnimation || force) {
-      this.animations.currentAnimation = nextAnimation
+      this.currentAnimation = nextAnimation
 
       nextAnimation.restart()
     }

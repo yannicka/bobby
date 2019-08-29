@@ -1,21 +1,19 @@
 import { drawImageByIndex } from './Util'
 
 export interface AnimationOptions {
-  frameDuration?: number
-  loop?: boolean
+  readonly frameDuration?: number
+  readonly loop?: boolean
 }
 
 export class Animation {
-  private image: HTMLImageElement
+  private readonly image: HTMLImageElement
+  private readonly frames: Array<number>
 
-  private frames: Array<number>
+  private readonly frameWidth: number
+  private readonly frameHeight: number
 
-  private frameDuration: number
-
-  private loop: boolean
-
-  private frameWidth: number
-  private frameHeight: number
+  private readonly frameDuration: number
+  private readonly loop: boolean
 
   private timer: number
   private currentIndex: number
@@ -26,7 +24,7 @@ export class Animation {
     frames: Array<number>,
     frameWidth: number,
     frameHeight: number,
-    options: AnimationOptions = {},
+    { frameDuration = 1, loop = true }: AnimationOptions,
   ) {
     this.image = image
     this.frames = frames
@@ -34,17 +32,20 @@ export class Animation {
     this.frameWidth = frameWidth
     this.frameHeight = frameHeight
 
-    this.frameDuration = typeof options.frameDuration === 'number' ? options.frameDuration : 1
-    this.loop = typeof options.loop === 'boolean' ? options.loop : true
+    this.frameDuration = frameDuration
+    this.loop = loop
 
     this.timer = 0
     this.currentIndex = 0
-
     this.finished = false
   }
 
+  private getCurrentFrame(): number {
+    return this.frames[this.currentIndex]
+  }
+
   public update(dt: number): void {
-    if (this.finished || !this.hasMultipleFrames()) {
+    if (this.finished || this.frames.length <= 1) {
       return
     }
 
@@ -77,14 +78,6 @@ export class Animation {
       this.frameWidth,
       this.frameHeight,
     )
-  }
-
-  public getCurrentFrame(): number {
-    return this.frames[this.currentIndex]
-  }
-
-  public hasMultipleFrames(): boolean {
-    return this.frames.length > 1
   }
 
   public restart(): void {

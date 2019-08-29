@@ -2,7 +2,7 @@ import { Game } from './Game'
 import { Scene } from './Scene'
 
 abstract class Transition {
-  private game: Game
+  private readonly game: Game
 
   public constructor(game: Game) {
     this.game = game
@@ -18,9 +18,9 @@ abstract class Transition {
 }
 
 class OutTransition extends Transition {
-  private duration: number
+  private readonly duration: number
+  private readonly nextScene: Scene
   private counter: number
-  private nextScene: Scene
 
   public constructor(game: Game, nextScene: Scene) {
     super(game)
@@ -90,9 +90,9 @@ class InTransition extends Transition {
 // changement de scène et passer en paramètre de changeScene la taille de
 // l'écran.
 export class SceneTransition {
-  private transitions: Array<Transition>
+  private readonly game: Game
+  private readonly transitions: Array<Transition>
   private currentTransition: Transition | null
-  private game: Game
 
   public constructor(game: Game) {
     this.game = game
@@ -111,7 +111,7 @@ export class SceneTransition {
   }
 
   public update(dt: number): void {
-    if (this.currentTransition) {
+    if (this.currentTransition instanceof Transition) {
       this.currentTransition.update(dt)
 
       if (this.currentTransition.isFinished()) {
@@ -125,7 +125,7 @@ export class SceneTransition {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    if (this.currentTransition) {
+    if (this.currentTransition instanceof Transition) {
       this.currentTransition.render(ctx)
     }
   }

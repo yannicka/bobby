@@ -2,24 +2,22 @@ import { CELL_SIZE } from './Cell'
 import { GameScene } from './GameScene'
 import { HomeScene } from './HomeScene'
 import { ImageManager } from './ImageManager'
-import { Map } from './Map'
 import { Scene } from './Scene'
 import { SceneTransition } from './SceneTransition'
 import { Storage } from './Storage'
 
 export class Game {
-  private canvas: HTMLCanvasElement
-  private ctx: CanvasRenderingContext2D
-  private map: Map
+  private readonly canvas: HTMLCanvasElement
+  private readonly ctx: CanvasRenderingContext2D
+  private readonly sceneTransition: SceneTransition
+  private readonly storage: Storage
   private lastUpdate: number
   private zoom: number
   private scene: Scene
-  private sceneTransition: SceneTransition
-  private storage: Storage
 
   public constructor() {
     this.canvas = document.getElementById('app') as HTMLCanvasElement
-    this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
+    this.ctx = this.canvas.getContext('2d')
 
     this.lastUpdate = Date.now()
 
@@ -74,10 +72,6 @@ export class Game {
     this.scene.render(ctx)
 
     this.sceneTransition.render(ctx)
-  }
-
-  public getMap(): Map {
-    return this.map
   }
 
   public resize(_e: UIEvent | null = null): void {

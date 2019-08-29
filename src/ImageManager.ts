@@ -11,7 +11,7 @@
 // ```
 export class ImageManager {
   // Images chargées
-  private static images: { [key: string]: HTMLImageElement } = {}
+  private static readonly images: { [key: string]: HTMLImageElement } = {}
 
   // Obtenir une image par son nom
   public static getImage(name: string): HTMLImageElement {
@@ -23,7 +23,7 @@ export class ImageManager {
     const promises = new Array<Promise<HTMLImageElement>>()
 
     for (const [name, url] of Object.entries(images)) {
-      const img = document.createElement('img') as HTMLImageElement
+      const img = document.createElement('img')
 
       const promise = new Promise<HTMLImageElement>((resolve, reject) => {
         img.addEventListener('load', () => {

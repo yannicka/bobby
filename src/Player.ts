@@ -11,6 +11,9 @@ function linear(a: number, b: number, t: number): number {
 }
 
 export class Player {
+  private readonly game: Game
+  private readonly map: Map
+  private readonly animationManager: AnimationManager
   private canmove: boolean
   private position: Point
   private previousPosition: Point
@@ -18,9 +21,6 @@ export class Player {
   private targetPosition: Point
   private displayPosition: Point
   private timer: number
-  private game: Game
-  private map: Map
-  private animationManager: AnimationManager
   private direction: Direction
 
   public constructor(game: Game, map: Map) {
@@ -160,7 +160,7 @@ export class Player {
   public nextLevel(): void {
     this.game.nextLevel()
   }
-  
+
   public getDisplayPosition(): Point {
     return this.displayPosition
   }

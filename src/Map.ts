@@ -1,9 +1,9 @@
-import { Cell, cells as cellsIndex, Coin, End, Start, CELL_SIZE } from './Cell'
+import { Cell, CELL_SIZE, cells as cellsIndex, Coin, End, Start } from './Cell'
 import { Player } from './Player'
 import { Point } from './Point'
 
 export class Map {
-  private cells: Array<Array<Cell>>
+  private readonly cells: Array<Array<Cell>>
 
   public constructor(cells: Array<Array<number>>) {
     this.cells = []
@@ -117,14 +117,14 @@ export class Map {
     return nbCoins
   }
 
-  public getSize(): { width: number, height: number } {
+  public getSize(): { width: number; height: number } {
     return {
       width: this.cells[0].length,
       height: this.cells.length,
     }
   }
 
-  public getDisplayedSize(): { width: number, height: number } {
+  public getDisplayedSize(): { width: number; height: number } {
     let { width, height } = this.getSize()
 
     width *= CELL_SIZE

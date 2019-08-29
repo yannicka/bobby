@@ -7,9 +7,9 @@ import { Pointer } from './Pointer/Pointer'
 import { Scene } from './Scene'
 
 export class ChooseLevelScene implements Scene {
-  private game: Game
-  private pointer: Pointer
-  private buttons: Array<Button>
+  private readonly game: Game
+  private readonly pointer: Pointer
+  private readonly buttons: Array<Button>
 
   public constructor(game: Game) {
     this.game = game

@@ -77,8 +77,8 @@ export const enum Key {
 }
 
 export class Keyboard {
-  private keys: { [key: number]: boolean }
-  private lasts: Array<number>
+  private readonly keys: { [key: number]: boolean }
+  private readonly lasts: Array<number>
 
   public constructor() {
     this.keys  = []
@@ -113,6 +113,7 @@ export class Keyboard {
     return last === k
   }
 
+  // @todo Revoir pour utiliser `key` à la place de `keyCode`
   private onkeyup(e: KeyboardEvent): void {
     this.lasts.push(e.keyCode)
     this.keys[e.keyCode] = false

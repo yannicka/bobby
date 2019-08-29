@@ -1,22 +1,22 @@
+import { Camera } from './Camera'
+import { CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
 import { Game } from './Game'
 import { ImageManager } from './ImageManager'
 import { Key, Keyboard } from './Keyboard'
 import { Map } from './Map'
 import { Player } from './Player'
-import { Scene } from './Scene'
-import { Camera } from './Camera'
 import { Point } from './Point'
-import { CELL_SIZE } from './Cell';
-import { clamp } from './Util';
+import { Scene } from './Scene'
+import { clamp } from './Util'
 
 export class GameScene implements Scene {
-  private game: Game
-  private map: Map
-  private player: Player
-  private keyboard: Keyboard
-  private currentLevel: number
-  private camera: Camera
+  private readonly game: Game
+  private readonly map: Map
+  private readonly player: Player
+  private readonly keyboard: Keyboard
+  private readonly currentLevel: number
+  private readonly camera: Camera
 
   public constructor(game: Game, level: number = 0) {
     this.game = game
@@ -38,7 +38,7 @@ export class GameScene implements Scene {
     const [ gameWidth, gameHeight ] = this.game.getGameSize()
     const { width: mapWidth, height: mapHeight } = this.map.getDisplayedSize()
 
-    let cameraPosition = this.player.getDisplayPosition().clone()
+    const cameraPosition = this.player.getDisplayPosition().clone()
 
     cameraPosition.x = -cameraPosition.x
     cameraPosition.y = -cameraPosition.y
@@ -89,7 +89,7 @@ export class GameScene implements Scene {
     ctx.save()
     ctx.translate(this.camera.getPosition().x, this.camera.getPosition().y)
 
-    ctx.beginPath() // Nécessaire : https://gamedev.stackexchange.com/a/120250
+    ctx.beginPath() // @see https://gamedev.stackexchange.com/a/120250
     ctx.rect(0, 0, width, height)
     ctx.fillStyle = pat
     ctx.fill()

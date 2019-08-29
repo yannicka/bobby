@@ -8,8 +8,8 @@ import { Rotation } from './Rotation'
 export const CELL_SIZE = 16
 
 export abstract class Cell {
-  private position: Point
-  private animation: AnimationManager
+  private readonly position: Point
+  private readonly animation: AnimationManager
 
   public constructor(position: Point) {
     this.position = position
@@ -98,17 +98,28 @@ export class Button extends Cell {
 
 // Tapis roulant
 export class Conveyor extends Cell {
-  private direction: Direction
+  private readonly direction: Direction
 
   public constructor(position: Point, direction: Direction) {
     super(position)
 
     this.direction = direction
 
-    this.getAnimation().addAnimation(Direction.Up.toString(), [ 4, 20 ], { frameDuration: 0.1 })
-    this.getAnimation().addAnimation(Direction.Down.toString(), [ 5, 21 ], { frameDuration: 0.1 })
-    this.getAnimation().addAnimation(Direction.Right.toString(), [ 6, 22 ], { frameDuration: 0.1 })
-    this.getAnimation().addAnimation(Direction.Left.toString(), [ 7, 23 ], { frameDuration: 0.1 })
+    this.getAnimation().addAnimation(Direction.Up.toString(), [ 4, 20 ], {
+      frameDuration: 0.1,
+    })
+
+    this.getAnimation().addAnimation(Direction.Down.toString(), [ 5, 21 ], {
+      frameDuration: 0.1,
+    })
+
+    this.getAnimation().addAnimation(Direction.Right.toString(), [ 6, 22 ], {
+      frameDuration: 0.1,
+    })
+
+    this.getAnimation().addAnimation(Direction.Left.toString(), [ 7, 23 ], {
+      frameDuration: 0.1,
+    })
 
     this.getAnimation().play(direction.toString())
   }
@@ -233,7 +244,10 @@ export class End extends Cell {
     this.active = false
 
     this.getAnimation().addAnimation('inactive', [ 13 ])
-    this.getAnimation().addAnimation('active', [ 17, 18 ], { frameDuration: 0.1 })
+
+    this.getAnimation().addAnimation('active', [ 17, 18 ], {
+      frameDuration: 0.1,
+    })
 
     this.getAnimation().play('inactive')
   }
