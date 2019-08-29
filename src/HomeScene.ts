@@ -38,7 +38,7 @@ export class HomeScene implements Scene {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    const [ gameWidth, gameHeight ] = this.game.getGameSize()
+    const [ gameWidth, gameHeight ] = this.game.getScreenSize()
 
     ctx.clearRect(0, 0, gameWidth, gameHeight)
 

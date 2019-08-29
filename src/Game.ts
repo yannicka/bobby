@@ -75,7 +75,7 @@ export class Game {
   }
 
   public resize(_e: UIEvent | null = null): void {
-    const [ width, height ] = this.getGameSize()
+    const [ width, height ] = this.getScreenSize()
 
     const widthZoom = window.innerWidth / width
     const heightZoom = window.innerHeight / height
@@ -91,10 +91,6 @@ export class Game {
 
   public getCanvas(): HTMLCanvasElement {
     return this.canvas
-  }
-
-  public getCtx(): CanvasRenderingContext2D {
-    return this.ctx
   }
 
   public getZoom(): number {
@@ -113,7 +109,7 @@ export class Game {
     this.changeSceneWithTransition(new GameScene(this, 'Encke'))
   }
 
-  public getGameSize(): [ number, number ] {
+  public getScreenSize(): [ number, number ] {
     let [ width, height ] = [ 9, 9 ]
 
     width *= CELL_SIZE

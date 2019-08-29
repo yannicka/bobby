@@ -42,7 +42,7 @@ class OutTransition extends Transition {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    const [ width, height ] = this.getGame().getGameSize()
+    const [ width, height ] = this.getGame().getScreenSize()
 
     ctx.fillStyle = 'black'
     ctx.globalAlpha = this.counter
@@ -73,7 +73,7 @@ class InTransition extends Transition {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    const [ width, height ] = this.getGame().getGameSize()
+    const [ width, height ] = this.getGame().getScreenSize()
 
     ctx.fillStyle = 'black'
     ctx.globalAlpha = this.counter

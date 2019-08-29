@@ -35,7 +35,7 @@ export class GameScene implements Scene {
   }
 
   public update(dt: number): void {
-    const [ gameWidth, gameHeight ] = this.game.getGameSize()
+    const [ gameWidth, gameHeight ] = this.game.getScreenSize()
     const { width: mapWidth, height: mapHeight } = this.map.getDisplayedSize()
 
     const cameraPosition = this.player.getDisplayPosition().clone()
