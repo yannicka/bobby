@@ -1,60 +1,90 @@
+interface LevelUser {
+  success: boolean
+}
+
+interface LevelFixed {
+  readonly map: Array<Array<number>>
+}
+
 interface Level {
   // Statique. Ne change pas.
-  fixed: {
-    map: Array<Array<number>>;
-  }
+  fixed: LevelFixed
 
   // Lié à ce que fait l'utilisateur.
-  user: {
-    success: boolean;
-  }
+  user: LevelUser
 }
 
 export class Storage {
   // public constructor() {
   // }
 
-  public getLevels(): Array<Level> {
-    return [
-      {
-        fixed: {
-          map: [
-            [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-            [  2, 14,  0,  8,  8,  0,  0,  0,  2 ],
-            [  2,  0,  0,  0,  0,  7,  4,  0,  2 ],
-            [  2,  0,  0, 10,  0,  7,  0,  0,  2 ],
-            [  2, 16, 17,  0,  0,  0,  0,  0,  2 ],
-            [  2, 16, 17, 17,  0,  0,  0,  0,  2 ],
-            [  2,  0,  0,  2,  2,  0, 18,  0,  2 ],
-            [  2,  0,  0,  0,  2,  0,  0, 15,  2 ],
-            [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-          ],
-        },
-
-        user: {
-          success: false,
-        },
+  public getLevelsFixed(): { [key: string]: LevelFixed } {
+    return {
+      'Halley': {
+        map: [
+          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
+          [  2, 14,  0,  8,  8,  0,  0,  0,  2 ],
+          [  2,  0,  0,  0,  0,  7,  4,  0,  2 ],
+          [  2,  0,  0, 10,  0,  7,  0,  0,  2 ],
+          [  2, 16, 17,  0,  0,  0,  0,  0,  2 ],
+          [  2, 16, 17, 17,  0,  0,  0,  0,  2 ],
+          [  2,  0,  0,  2,  2,  0, 18,  0,  2 ],
+          [  2,  0,  0,  0,  2,  0,  0, 15,  2 ],
+          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
+        ],
       },
 
-      {
-        fixed: {
-          map: [
-            [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-            [  2, 14,  0,  0,  0,  0,  0,  0,  2 ],
-            [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-            [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-            [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-            [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-            [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-            [  2,  0,  0,  0,  0,  0,  0, 15,  2 ],
-            [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-          ],
-        },
-
-        user: {
-          success: false,
-        },
+      'Encke': {
+        map: [
+          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
+          [  2, 14,  0,  0,  0,  0,  0,  0,  2 ],
+          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
+          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
+          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
+          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
+          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
+          [  2,  0,  0,  0,  0,  0,  0, 15,  2 ],
+          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
+        ],
       },
-    ]
+    }
+  }
+
+  public getLevelsUser(): { [key: string]: LevelUser } {
+    const levels: { [key: string]: LevelUser } = {}
+
+    for (const [ name ] of Object.entries(this.getLevelsFixed())) {
+      levels[name] = {
+        success: false,
+      }
+    }
+
+    if (localStorage.getItem('levels') !== null) {
+      const jsonLevels = localStorage.getItem('levels')
+      const l = JSON.parse(jsonLevels) as { [key: string]: LevelUser }
+
+      for (const [ name, level ] of Object.entries(l)) {
+        levels[name] = level
+      }
+    }
+
+    localStorage.setItem('levels', JSON.stringify(levels))
+
+    return levels
+  }
+
+  public getLevels(): { [key: string]: Level } {
+    const levels: { [key: string]: Level } = {}
+
+    const levelsUser = this.getLevelsUser()
+
+    for (const [ name, fixed ] of Object.entries(this.getLevelsFixed())) {
+      levels[name] = {
+        fixed,
+        user: levelsUser[name],
+      }
+    }
+
+    return levels
   }
 }

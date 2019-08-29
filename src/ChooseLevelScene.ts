@@ -20,17 +20,19 @@ export class ChooseLevelScene implements Scene {
 
     this.buttons = []
 
-    for (const [ index, level ] of Object.entries(levels)) {
-      const i = parseInt(index, 10)
+    let i = 0
 
+    for (const [ index, level ] of Object.entries(levels)) {
       const button = new Button(index)
       button.setPosition(new Point(i * (18 + 4) + 15, 42))
       button.setSize(18, 18)
       button.setOnClick((): void => {
-        this.game.changeSceneWithTransition(new GameScene(this.game, i))
+        this.game.changeSceneWithTransition(new GameScene(this.game, index))
       })
 
       this.buttons.push(button)
+
+      i += 1
     }
   }
 

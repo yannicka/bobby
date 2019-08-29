@@ -110,7 +110,7 @@ export class Game {
   }
 
   public nextLevel() {
-    this.changeSceneWithTransition(new GameScene(this, 1))
+    this.changeSceneWithTransition(new GameScene(this, 'Encke'))
   }
 
   public getGameSize(): [ number, number ] {

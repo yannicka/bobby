@@ -15,10 +15,10 @@ export class GameScene implements Scene {
   private readonly map: Map
   private readonly player: Player
   private readonly keyboard: Keyboard
-  private readonly currentLevel: number
+  private readonly currentLevel: string
   private readonly camera: Camera
 
-  public constructor(game: Game, level: number = 0) {
+  public constructor(game: Game, level: string) {
     this.game = game
 
     this.currentLevel = level
