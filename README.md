@@ -9,8 +9,6 @@ npm run serve # ou npm run build
 
 ### Niveaux
 
-- Une caméra qui suit le joueur ;
-
 - Des niveaux ;
 
 - Une sauvegarde des niveaux faits/à faire ;
