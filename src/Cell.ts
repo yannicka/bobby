@@ -1,5 +1,6 @@
 import { AnimationManager } from './AnimationManager'
 import { Direction } from './Direction'
+import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
 import { Player } from './Player'
 import { Point } from './Point'
@@ -19,7 +20,7 @@ export abstract class Cell {
     this.animation = new AnimationManager(image, CELL_SIZE, CELL_SIZE)
   }
 
-  public onPassingEvent(_player: Player): void {
+  public onPassingEvent(_player: Player, _gameScene: GameScene): void {
   }
 
   public isSolid?(_direction: Direction): boolean {
@@ -124,7 +125,7 @@ export class Conveyor extends Cell {
     this.getAnimation().play(direction.toString())
   }
 
-  public onPassingEvent(player: Player): void {
+  public onPassingEvent(player: Player, _gameScene: GameScene): void {
     player.move(this.direction)
   }
 }
@@ -252,9 +253,9 @@ export class End extends Cell {
     this.getAnimation().play('inactive')
   }
 
-  public onPassingEvent(player: Player): void {
+  public onPassingEvent(_player: Player, gameScene: GameScene): void {
     if (this.isActive()) {
-      player.nextLevel()
+      gameScene.nextLevel()
     }
   }
 
@@ -284,7 +285,7 @@ export class Coin extends Cell {
     this.getAnimation().play('not-collected')
   }
 
-  public onPassingEvent(_player: Player): void {
+  public onPassingEvent(_player: Player, _gameScene: GameScene): void {
     this.collected = true
 
     this.getAnimation().play('collected')
@@ -305,7 +306,7 @@ export class Ice extends Cell {
     this.getAnimation().play('idle')
   }
 
-  public onPassingEvent(player: Player): void {
+  public onPassingEvent(player: Player, _gameScene: GameScene): void {
     player.move(player.getDirection())
   }
 }

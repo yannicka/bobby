@@ -1,6 +1,7 @@
 import { Cell, CELL_SIZE, cells as cellsIndex, Coin, End, Start } from './Cell'
 import { Player } from './Player'
 import { Point } from './Point'
+import { GameScene } from './GameScene';
 
 export class Map {
   private readonly cells: Array<Array<Cell>>
@@ -65,11 +66,11 @@ export class Map {
     }
   }
 
-  public onPassingEvent(position: Point, player: Player): void {
+  public onPassingEvent(position: Point, player: Player, gameScene: GameScene): void {
     const cell = this.cells[position.y][position.x]
 
     if (typeof cell !== 'undefined') {
-      cell.onPassingEvent(player)
+      cell.onPassingEvent(player, gameScene)
     }
   }
 

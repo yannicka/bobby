@@ -1,7 +1,7 @@
 import { AnimationManager } from './AnimationManager'
 import { CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
-import { Game } from './Game'
+import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
 import { Map } from './Map'
 import { Point } from './Point'
@@ -11,7 +11,7 @@ function linear(a: number, b: number, t: number): number {
 }
 
 export class Player {
-  private readonly game: Game
+  private readonly gameScene: GameScene
   private readonly map: Map
   private readonly animationManager: AnimationManager
   private canmove: boolean
@@ -23,14 +23,15 @@ export class Player {
   private timer: number
   private direction: Direction
 
-  public constructor(game: Game, map: Map) {
-    const start = map.startLocation()
+  public constructor(gameScene: GameScene) {
+    this.gameScene = gameScene
+    this.map = this.gameScene.getMap()
+
+    const start = this.map.startLocation()
 
     const startX = start.x
     const startY = start.y
 
-    this.game = game
-    this.map = map
     this.position = new Point(startX, startY)
     this.previousPosition = this.position.clone()
     this.startPosition = new Point(startX * CELL_SIZE, startY * CELL_SIZE)
@@ -86,7 +87,7 @@ export class Player {
         this.displayPosition = this.targetPosition.clone()
 
         this.map.nextStateOf(this.previousPosition)
-        this.map.onPassingEvent(this.position, this)
+        this.map.onPassingEvent(this.position, this, this.gameScene)
       }
     }
   }
@@ -155,10 +156,6 @@ export class Player {
 
   public getDirection(): Direction {
     return this.direction
-  }
-
-  public nextLevel(): void {
-    this.game.nextLevel()
   }
 
   public getDisplayPosition(): Point {

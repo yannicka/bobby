@@ -105,10 +105,6 @@ export class Game {
     this.sceneTransition.changeScene(scene)
   }
 
-  public nextLevel() {
-    this.changeSceneWithTransition(new GameScene(this, 'Encke'))
-  }
-
   public getScreenSize(): [ number, number ] {
     let [ width, height ] = [ 9, 9 ]
 

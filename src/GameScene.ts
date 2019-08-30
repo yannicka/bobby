@@ -31,7 +31,7 @@ export class GameScene implements Scene {
 
     this.keyboard = new Keyboard()
 
-    this.player = new Player(this.game, this.map)
+    this.player = new Player(this)
   }
 
   public update(dt: number): void {
@@ -98,5 +98,19 @@ export class GameScene implements Scene {
     this.player.render(ctx)
 
     ctx.restore()
+  }
+
+  public getMap(): Map {
+    return this.map
+  }
+
+  public nextLevel(): void {
+    const levels = this.game.getStorage().getLevels()
+
+    const keys = Object.keys(levels)
+    const nextIndex = keys.indexOf(this.currentLevel) + 1
+    const nextLevel = keys[nextIndex]
+
+    this.game.changeSceneWithTransition(new GameScene(this.game, nextLevel))
   }
 }
