@@ -11,12 +11,6 @@ npm run serve # ou npm run build
 
 - Des niveaux ;
 
-- Une sauvegarde des niveaux faits/à faire ;
-
-- La possibilité, pour moi, développeur, d'intégrer à tout moment des nouveaux
-  niveaux, n'importe où (par exemple entre le 4e et le 5e) sans rien casser
-  pour la sauvegarde du joueur ;
-
 - Un écran de choix de niveau ;
 
 - Un écran de fin de jeu.
