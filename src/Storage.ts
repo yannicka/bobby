@@ -101,4 +101,13 @@ export class Storage {
 
     return levels
   }
+
+  public success(level: string): void {
+    const jsonLevels = localStorage.getItem('levels')
+    const l = JSON.parse(jsonLevels) as { [key: string]: LevelUser }
+
+    l[level].success = true
+
+    localStorage.setItem('levels', JSON.stringify(l))
+  }
 }

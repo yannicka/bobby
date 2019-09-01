@@ -105,6 +105,8 @@ export class GameScene implements Scene {
   }
 
   public nextLevel(): void {
+    this.game.getStorage().success(this.currentLevel)
+
     const levels = this.game.getStorage().getLevels()
 
     const keys = Object.keys(levels)
