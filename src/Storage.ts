@@ -104,8 +104,20 @@ export class Storage {
     let previousLevel: Level | null = null
 
     for (const [ name, fixed ] of Object.entries(this.getLevelsFixed())) {
+      let accessible = false
+
+      if (levelsUser[name].success) {
+        accessible = true
+      } else {
+        if (previousLevel === null) {
+          accessible = true
+        } else {
+          accessible = previousLevel.user.success
+        }
+      }
+
       const dynamic = {
-        accessible: previousLevel === null ? true : previousLevel.user.success,
+        accessible,
       }
 
       const level = {

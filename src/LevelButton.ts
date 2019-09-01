@@ -21,7 +21,7 @@ export class LevelButton extends Button {
       if (this.level.dynamic.accessible) {
         ctx.fillStyle = '#0f0'
       } else {
-        ctx.fillStyle = '#0a0'
+        ctx.fillStyle = '#040'
       }
     } else {
       if (this.level.dynamic.accessible) {
