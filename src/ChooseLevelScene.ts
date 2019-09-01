@@ -5,11 +5,12 @@ import { Point } from './Point'
 import { Mouse } from './Pointer/Mouse'
 import { Pointer } from './Pointer/Pointer'
 import { Scene } from './Scene'
+import { LevelButton } from './LevelButton'
 
 export class ChooseLevelScene implements Scene {
   private readonly game: Game
   private readonly pointer: Pointer
-  private readonly buttons: Array<Button>
+  private readonly buttons: Array<LevelButton>
 
   public constructor(game: Game) {
     this.game = game
@@ -23,7 +24,7 @@ export class ChooseLevelScene implements Scene {
     let i = 0
 
     for (const [ index, level ] of Object.entries(levels)) {
-      const button = new Button(index)
+      const button = new LevelButton(level)
       button.setPosition(new Point(i * (18 + 4) + 15, 42))
       button.setSize(18, 18)
       button.setOnClick((): void => {

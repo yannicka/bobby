@@ -47,6 +47,18 @@ export class Button {
     this.onClick()
   }
 
+  public getPosition(): Point {
+    return this.position
+  }
+
+  public getWidth(): number {
+    return this.width
+  }
+
+  public getHeight(): number {
+    return this.height
+  }
+
   public isHover(pointerPosition: Point): boolean {
     return pointerPosition.x >= this.position.x
       && pointerPosition.y >= this.position.y

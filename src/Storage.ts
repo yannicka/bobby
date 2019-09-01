@@ -6,7 +6,9 @@ interface LevelFixed {
   readonly map: Array<Array<number>>
 }
 
-interface Level {
+export interface Level {
+  name: string
+
   // Statique. Ne change pas.
   fixed: LevelFixed
 
@@ -94,6 +96,7 @@ export class Storage {
 
     for (const [ name, fixed ] of Object.entries(this.getLevelsFixed())) {
       levels[name] = {
+        name,
         fixed,
         user: levelsUser[name],
       }
