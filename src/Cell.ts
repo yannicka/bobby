@@ -12,7 +12,7 @@ export abstract class Cell {
   private readonly position: Point
   private readonly animation: AnimationManager
 
-  public constructor(position: Point) {
+  protected constructor(position: Point) {
     this.position = position
 
     const image = ImageManager.getImage('tiles')

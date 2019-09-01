@@ -4,7 +4,7 @@ import { Scene } from './Scene'
 abstract class Transition {
   private readonly game: Game
 
-  public constructor(game: Game) {
+  protected constructor(game: Game) {
     this.game = game
   }
 

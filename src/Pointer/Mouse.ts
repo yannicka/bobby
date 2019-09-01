@@ -1,4 +1,3 @@
-// import { Game } from '../Game'
 import { Point } from '../Point'
 
 import { Pointer } from './Pointer'

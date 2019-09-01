@@ -13,7 +13,7 @@ export class Button {
     this.text = text
   }
 
-  public update(dt: number): void {
+  public update(_dt: number): void {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
@@ -41,6 +41,10 @@ export class Button {
 
   public setOnClick(callback: OnClickCallback): void {
     this.onClick = callback
+  }
+
+  public setText(text: string): void {
+    this.text = text
   }
 
   public click(): void {
