@@ -22,7 +22,7 @@ export class ImageManager {
   public static load(path: string, images: { [key: string]: string }): Array<Promise<HTMLImageElement>> {
     const promises = new Array<Promise<HTMLImageElement>>()
 
-    for (const [name, url] of Object.entries(images)) {
+    for (const [ name, url ] of Object.entries(images)) {
       const img = document.createElement('img')
 
       const promise = new Promise<HTMLImageElement>((resolve, reject) => {

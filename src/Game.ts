@@ -1,5 +1,4 @@
 import { CELL_SIZE } from './Cell'
-import { GameScene } from './GameScene'
 import { HomeScene } from './HomeScene'
 import { ImageManager } from './ImageManager'
 import { Scene } from './Scene'

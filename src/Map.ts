@@ -1,7 +1,7 @@
 import { Cell, CELL_SIZE, cells as cellsIndex, Coin, End, Start } from './Cell'
+import { GameScene } from './GameScene'
 import { Player } from './Player'
 import { Point } from './Point'
-import { GameScene } from './GameScene';
 
 export class Map {
   private readonly cells: Array<Array<Cell>>
@@ -9,10 +9,10 @@ export class Map {
   public constructor(cells: Array<Array<number>>) {
     this.cells = []
 
-    for (let y = 0 ; y < cells.length ; y += 1) {
+    for (let y = 0; y < cells.length; y += 1) {
       this.cells[y] = []
 
-      for (let x = 0 ; x < cells[y].length ; x += 1) {
+      for (let x = 0; x < cells[y].length; x += 1) {
         const i = cells[y][x]
 
         if (i !== 0) {
@@ -31,8 +31,8 @@ export class Map {
       }
     }
 
-    for (let y = 0 ; y < this.cells.length ; y += 1) {
-      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
+    for (let y = 0; y < this.cells.length; y += 1) {
+      for (let x = 0; x < this.cells[y].length; x += 1) {
         const cell = this.cells[y][x]
 
         if (typeof cell !== 'undefined') {
@@ -43,8 +43,8 @@ export class Map {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    for (let y = 0 ; y < this.cells.length ; y += 1) {
-      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
+    for (let y = 0; y < this.cells.length; y += 1) {
+      for (let x = 0; x < this.cells[y].length; x += 1) {
         const cell = this.cells[y][x]
 
         if (typeof cell !== 'undefined') {
@@ -75,8 +75,8 @@ export class Map {
   }
 
   public startLocation(): Point | null {
-    for (let y = 0 ; y < this.cells.length ; y += 1) {
-      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
+    for (let y = 0; y < this.cells.length; y += 1) {
+      for (let x = 0; x < this.cells[y].length; x += 1) {
         const cell = this.cells[y][x]
 
         if (cell instanceof Start) {
@@ -89,8 +89,8 @@ export class Map {
   }
 
   public getEndCell(): End | null {
-    for (let y = 0 ; y < this.cells.length ; y += 1) {
-      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
+    for (let y = 0; y < this.cells.length; y += 1) {
+      for (let x = 0; x < this.cells[y].length; x += 1) {
         const cell = this.cells[y][x]
 
         if (cell instanceof End) {
@@ -105,8 +105,8 @@ export class Map {
   public countCoins(): number {
     let nbCoins = 0
 
-    for (let y = 0 ; y < this.cells.length ; y += 1) {
-      for (let x = 0 ; x < this.cells[y].length ; x += 1) {
+    for (let y = 0; y < this.cells.length; y += 1) {
+      for (let x = 0; x < this.cells[y].length; x += 1) {
         const cell = this.cells[y][x]
 
         if (cell instanceof Coin && !cell.isCollected()) {

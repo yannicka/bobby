@@ -1,11 +1,10 @@
-import { Button } from './Button'
 import { Game } from './Game'
 import { GameScene } from './GameScene'
+import { LevelButton } from './LevelButton'
 import { Point } from './Point'
 import { Mouse } from './Pointer/Mouse'
 import { Pointer } from './Pointer/Pointer'
 import { Scene } from './Scene'
-import { LevelButton } from './LevelButton'
 
 export class ChooseLevelScene implements Scene {
   private readonly game: Game
@@ -33,7 +32,8 @@ export class ChooseLevelScene implements Scene {
           this.game.changeSceneWithTransition(new GameScene(this.game, index))
         })
       } else {
-        button.setOnClick((): void => {})
+        button.setOnClick((): void => {
+        })
       }
 
       this.buttons.push(button)

@@ -13,7 +13,9 @@ abstract class Transition {
   }
 
   public abstract update(dt: number): void
+
   public abstract render(ctx: CanvasRenderingContext2D): void
+
   public abstract isFinished(): boolean
 }
 
