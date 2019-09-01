@@ -1,5 +1,5 @@
 import { Button } from './Button'
-import { Level } from './Storage'
+import { Level } from './Level'
 
 export class LevelButton extends Button {
   private readonly level: Level
@@ -40,6 +40,6 @@ export class LevelButton extends Button {
 
     ctx.fillStyle = 'black'
     ctx.font = '10px Arial'
-    ctx.fillText(this.level.name, position.x + 4, position.y + 12)
+    ctx.fillText(`${this.level.fixed.number}`, position.x + 4, position.y + 12)
   }
 }

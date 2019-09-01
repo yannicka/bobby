@@ -1,82 +1,16 @@
-interface LevelUser {
-  success: boolean
-}
-
-interface LevelFixed {
-  readonly map: Array<Array<number>>
-}
-
-interface LevelDynamic {
-  readonly accessible: boolean
-}
-
-export interface Level {
-  name: string
-
-  // Statique. Ne change pas.
-  fixed: LevelFixed
-
-  // Statique. Ne change pas.
-  dynamic: LevelDynamic
-
-  // Lié à ce que fait l'utilisateur.
-  user: LevelUser
-}
+import { Level, LevelDynamic, LevelManager, LevelUser } from './Level'
 
 export class Storage {
-  // public constructor() {
-  // }
+  private levelManager: LevelManager
 
-  public getLevelsFixed(): { [key: string]: LevelFixed } {
-    return {
-      'Halley': {
-        map: [
-          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-          [  2, 14,  0,  8,  8,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  7,  4,  0,  2 ],
-          [  2,  0,  0, 10,  0,  7,  0,  0,  2 ],
-          [  2, 16, 17,  0,  0,  0,  0,  0,  2 ],
-          [  2, 16, 17, 17,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  2,  2,  0, 18,  0,  2 ],
-          [  2,  0,  0,  0,  2,  0,  0, 15,  2 ],
-          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-        ],
-      },
-
-      'Encke': {
-        map: [
-          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-          [  2, 14,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0, 15,  2 ],
-          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-        ],
-      },
-
-      'Biela': {
-        map: [
-          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-          [  2, 15,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0,  0,  2 ],
-          [  2,  0,  0,  0,  0,  0,  0, 14,  2 ],
-          [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
-        ],
-      },
-    }
+  public constructor() {
+    this.levelManager = new LevelManager()
   }
 
   public getLevelsUser(): { [key: string]: LevelUser } {
     const levels: { [key: string]: LevelUser } = {}
 
-    for (const [ name ] of Object.entries(this.getLevelsFixed())) {
+    for (const [ name ] of Object.entries(this.levelManager.getLevelsFixed())) {
       levels[name] = {
         success: false,
       }
@@ -103,7 +37,7 @@ export class Storage {
 
     let previousLevel: Level | null = null
 
-    for (const [ name, fixed ] of Object.entries(this.getLevelsFixed())) {
+    for (const [ name, fixed ] of Object.entries(this.levelManager.getLevelsFixed())) {
       let accessible = false
 
       if (levelsUser[name].success) {
@@ -116,12 +50,11 @@ export class Storage {
         }
       }
 
-      const dynamic = {
+      const dynamic: LevelDynamic = {
         accessible,
       }
 
-      const level = {
-        name,
+      const level: Level = {
         fixed,
         dynamic,
         user: levelsUser[name],
