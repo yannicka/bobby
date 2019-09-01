@@ -15,11 +15,22 @@ export class LevelButton extends Button {
     const width = this.getWidth()
     const height = this.getHeight()
 
+    ctx.fillStyle = 'yellow'
+
     if (this.level.user.success) {
-      ctx.fillStyle = 'darkgreen'
+      if (this.level.dynamic.accessible) {
+        ctx.fillStyle = '#0f0'
+      } else {
+        ctx.fillStyle = '#0a0'
+      }
     } else {
-      ctx.fillStyle = 'darkgrey'
+      if (this.level.dynamic.accessible) {
+        ctx.fillStyle = '#777'
+      } else {
+        ctx.fillStyle = '#333'
+      }
     }
+
     ctx.fillRect(
       position.x,
       position.y,

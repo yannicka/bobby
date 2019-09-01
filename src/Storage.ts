@@ -6,11 +6,18 @@ interface LevelFixed {
   readonly map: Array<Array<number>>
 }
 
+interface LevelDynamic {
+  readonly accessible: boolean
+}
+
 export interface Level {
   name: string
 
   // Statique. Ne change pas.
   fixed: LevelFixed
+
+  // Statique. Ne change pas.
+  dynamic: LevelDynamic
 
   // Lié à ce que fait l'utilisateur.
   user: LevelUser
@@ -94,12 +101,23 @@ export class Storage {
 
     const levelsUser = this.getLevelsUser()
 
+    let previousLevel: Level | null = null
+
     for (const [ name, fixed ] of Object.entries(this.getLevelsFixed())) {
-      levels[name] = {
+      const dynamic = {
+        accessible: previousLevel === null ? true : previousLevel.user.success,
+      }
+
+      const level = {
         name,
         fixed,
+        dynamic,
         user: levelsUser[name],
       }
+
+      levels[name] = level
+
+      previousLevel = level
     }
 
     return levels

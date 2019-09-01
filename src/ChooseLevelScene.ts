@@ -27,9 +27,14 @@ export class ChooseLevelScene implements Scene {
       const button = new LevelButton(level)
       button.setPosition(new Point(i * (18 + 4) + 15, 42))
       button.setSize(18, 18)
-      button.setOnClick((): void => {
-        this.game.changeSceneWithTransition(new GameScene(this.game, index))
-      })
+
+      if (level.dynamic.accessible) {
+        button.setOnClick((): void => {
+          this.game.changeSceneWithTransition(new GameScene(this.game, index))
+        })
+      } else {
+        button.setOnClick((): void => {})
+      }
 
       this.buttons.push(button)
 
