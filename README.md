@@ -11,9 +11,9 @@ npm run serve # ou npm run build
 
 - Des niveaux ;
 
-- Un écran de choix de niveau ;
+- Mettre en forme l'écran de choix de niveau ;
 
-- Un écran de fin de jeu.
+- Mettre en forme l'écran de fin de jeu.
 
 ### Les détails
 
@@ -37,7 +37,7 @@ npm run serve # ou npm run build
 
 - Nettoyer le code qui est sale par endroit.
 
-### En bonus
+### En bonus *(si possible)*
 
 - Compter le nombre de pas et attribuer un score à chaque niveau (3 = parfait,
   nombre de pas minimal atteint ; 2 = bien ; 1 = bof ; 0 = nul) ;
