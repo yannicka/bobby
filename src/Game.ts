@@ -41,7 +41,6 @@ export class Game {
 
   public init(): void {
     this.scene = new HomeScene(this)
-    // this.scene = new GameScene(this)
 
     this.resize()
 

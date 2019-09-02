@@ -1,6 +1,7 @@
 import { Camera } from './Camera'
 import { CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
+import { EndScene } from './EndScene'
 import { Game } from './Game'
 import { ImageManager } from './ImageManager'
 import { Keyboard } from './Keyboard'
@@ -113,6 +114,10 @@ export class GameScene implements Scene {
     const nextIndex = keys.indexOf(this.currentLevel) + 1
     const nextLevel = keys[nextIndex]
 
-    this.game.changeSceneWithTransition(new GameScene(this.game, nextLevel))
+    if (typeof nextLevel === 'undefined') {
+      this.game.changeSceneWithTransition(new EndScene(this.game))
+    } else {
+      this.game.changeSceneWithTransition(new GameScene(this.game, nextLevel))
+    }
   }
 }

@@ -7,7 +7,6 @@ import { Point } from './Point'
 import { Mouse } from './Pointer/Mouse'
 import { Pointer } from './Pointer/Pointer'
 import { Scene } from './Scene'
-import { Direction } from './Direction'
 
 export class HomeScene implements Scene {
   private readonly game: Game
