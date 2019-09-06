@@ -39,34 +39,38 @@ export class Player {
     this.displayPosition = this.startPosition.clone()
     this.canmove = true
     this.timer = 0
+    this.direction = Direction.Down
 
     const image = ImageManager.getImage('player')
 
     this.animationManager = new AnimationManager(image, 14, 15)
 
-    this.animationManager.addAnimation(Direction.Up.toString(), [ 8, 9, 10, 11, 8 ], {
+    this.animationManager.addAnimation(`idle-${Direction.Up.toString()}`, [ 8, 9, 10, 11, 8 ])
+    this.animationManager.addAnimation(`idle-${Direction.Down.toString()}`, [ 0, 1, 2, 3, 0 ])
+    this.animationManager.addAnimation(`idle-${Direction.Right.toString()}`, [ 12, 13, 14, 15, 12 ])
+    this.animationManager.addAnimation(`idle-${Direction.Left.toString()}`, [ 4, 5, 6, 7, 4 ])
+
+    this.animationManager.addAnimation(`walk-${Direction.Up.toString()}`, [ 8, 9, 10, 11, 8 ], {
       frameDuration: 0.04,
       loop: false,
     })
 
-    this.animationManager.addAnimation(Direction.Down.toString(), [ 0, 1, 2, 3, 0 ], {
+    this.animationManager.addAnimation(`walk-${Direction.Down.toString()}`, [ 0, 1, 2, 3, 0 ], {
       frameDuration: 0.04,
       loop: false,
     })
 
-    this.animationManager.addAnimation(Direction.Right.toString(), [ 12, 13, 14, 15, 12 ], {
+    this.animationManager.addAnimation(`walk-${Direction.Right.toString()}`, [ 12, 13, 14, 15, 12 ], {
       frameDuration: 0.04,
       loop: false,
     })
 
-    this.animationManager.addAnimation(Direction.Left.toString(), [ 4, 5, 6, 7, 4 ], {
+    this.animationManager.addAnimation(`walk-${Direction.Left.toString()}`, [ 4, 5, 6, 7, 4 ], {
       frameDuration: 0.04,
       loop: false,
     })
 
-    this.direction = Direction.Down
-
-    this.animationManager.play(this.direction.toString())
+    this.animationManager.play(`idle-${this.direction.toString()}`)
   }
 
   public update(dt: number): void {
@@ -106,7 +110,7 @@ export class Player {
       return
     }
 
-    this.animationManager.play(direction.toString(), true)
+    this.animationManager.play(`walk-${direction.toString()}`, true)
 
     const newMapPosition = this.position.clone()
 

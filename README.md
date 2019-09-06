@@ -17,15 +17,12 @@ npm run serve # ou npm run build
 
 ### Les détails
 
-- Lorsqu'on essaye de se déplcer vers un bloc solide, l'animation ne s'active
+- Lorsqu'on essaye de se déplacer vers un bloc solide, l'animation ne s'active
   qu'au moment où le clic est lâché. À la place, il ne faudrait soit aucun
   mouvement, soit un mouvement tout le long de l'appui ;
 
 - Sur les blocs roulants/glissants (tapis roulant et glace), le personnage
   marche alors qu'il devrait plutôt « glisser » (ne pas bouger les pieds) ;
-
-- Au chargement d'un niveau, l'animation de marche est lancé, ce qui fait que
-  le personnage bouge les jambes dans le vide ;
 
 - Améliorer les transitions, très peu paramétrables actuellement.
 
