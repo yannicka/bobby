@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Bobby",
   "author": "Yannick Armand",
-  "license": "GPL-3.0-or-later",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
