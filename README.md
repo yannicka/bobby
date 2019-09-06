@@ -21,9 +21,6 @@ npm run serve # ou npm run build
   qu'au moment où le clic est lâché. À la place, il ne faudrait soit aucun
   mouvement, soit un mouvement tout le long de l'appui ;
 
-- Sur les blocs roulants/glissants (tapis roulant et glace), le personnage
-  marche alors qu'il devrait plutôt « glisser » (ne pas bouger les pieds) ;
-
 - Améliorer les transitions, très peu paramétrables actuellement.
 
 ### Graphismes

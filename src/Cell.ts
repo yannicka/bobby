@@ -126,7 +126,7 @@ export class Conveyor extends Cell {
   }
 
   public onPassingEvent(player: Player, _gameScene: GameScene): void {
-    player.move(this.direction)
+    player.move(this.direction, false)
   }
 }
 
@@ -307,7 +307,7 @@ export class Ice extends Cell {
   }
 
   public onPassingEvent(player: Player, _gameScene: GameScene): void {
-    player.move(player.getDirection())
+    player.move(player.getDirection(), false)
   }
 }
 
