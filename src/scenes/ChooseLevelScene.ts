@@ -23,9 +23,12 @@ export class ChooseLevelScene implements Scene {
 
     let i = 0
 
+    let xx = 0
+    let yy = 0
+
     for (const [ index, level ] of Object.entries(levels)) {
       const button = new LevelButton(level)
-      button.setPosition(new Point(i * (18 + 4) + 15, 42))
+      button.setPosition(new Point(xx * (18 + 4) + 15, (15 + 7) * yy + 42))
       button.setSize(18, 18)
 
       if (level.dynamic.accessible) {
@@ -40,6 +43,12 @@ export class ChooseLevelScene implements Scene {
       this.buttons.push(button)
 
       i += 1
+      xx += 1
+
+      if (i % 5 === 0) {
+        xx = 0
+        yy += 1
+      }
     }
   }
 
@@ -63,11 +72,10 @@ export class ChooseLevelScene implements Scene {
 
     ctx.clearRect(0, 0, gameWidth, gameHeight)
 
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = '#f7f3ef'
     ctx.fillRect(0, 0, gameWidth, gameHeight)
 
-    ctx.fillStyle = 'white'
-
+    ctx.fillStyle = '#42c79c'
     ctx.font = '20px Arial'
     ctx.fillText('Bobby', 14, 30)
 

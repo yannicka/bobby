@@ -19,15 +19,15 @@ export class LevelButton extends Button {
 
     if (this.level.user.success) {
       if (this.level.dynamic.accessible) {
-        ctx.fillStyle = '#0f0'
+        ctx.fillStyle = '#42c79c'
       } else {
-        ctx.fillStyle = '#040'
+        ctx.fillStyle = 'red' // état normalement impossible
       }
     } else {
       if (this.level.dynamic.accessible) {
-        ctx.fillStyle = '#777'
+        ctx.fillStyle = '#8c5d63'
       } else {
-        ctx.fillStyle = '#333'
+        ctx.fillStyle = '#999'
       }
     }
 
@@ -38,7 +38,7 @@ export class LevelButton extends Button {
       height,
     )
 
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = '#f7f3ef'
     ctx.font = '10px Arial'
     ctx.fillText(`${this.level.fixed.number}`, position.x + 4, position.y + 12)
   }
