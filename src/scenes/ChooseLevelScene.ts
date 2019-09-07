@@ -1,10 +1,11 @@
-import { Game } from './Game'
-import { Mouse } from './input/Mouse'
-import { Pointer } from './input/Pointer'
-import { LevelButton } from './LevelButton'
-import { Point } from './Point'
-import { Scene } from './Scene'
-import { GameScene } from './scenes/GameScene'
+import { Game } from '../Game'
+import { Mouse } from '../input/Mouse'
+import { Pointer } from '../input/Pointer'
+import { LevelButton } from '../LevelButton'
+import { Point } from '../Point'
+import { Scene } from '../Scene'
+
+import { GameScene } from './GameScene'
 
 export class ChooseLevelScene implements Scene {
   private readonly game: Game

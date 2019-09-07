@@ -1,12 +1,13 @@
 import { AnimationManager } from '../AnimationManager'
 import { Button } from '../Button'
-import { ChooseLevelScene } from '../ChooseLevelScene'
 import { Game } from '../Game'
 import { ImageManager } from '../ImageManager'
 import { Mouse } from '../input/Mouse'
 import { Pointer } from '../input/Pointer'
 import { Point } from '../Point'
 import { Scene } from '../Scene'
+
+import { ChooseLevelScene } from './ChooseLevelScene'
 
 export class HomeScene implements Scene {
   private readonly game: Game
