@@ -3,9 +3,9 @@ import { Button } from '../Button'
 import { ChooseLevelScene } from '../ChooseLevelScene'
 import { Game } from '../Game'
 import { ImageManager } from '../ImageManager'
+import { Mouse } from '../input/Mouse'
+import { Pointer } from '../input/Pointer'
 import { Point } from '../Point'
-import { Mouse } from '../Pointer/Mouse'
-import { Pointer } from '../Pointer/Pointer'
 import { Scene } from '../Scene'
 
 export class HomeScene implements Scene {

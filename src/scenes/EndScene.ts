@@ -1,8 +1,8 @@
 import { Button } from '../Button'
 import { Game } from '../Game'
+import { Mouse } from '../input/Mouse'
+import { Pointer } from '../input/Pointer'
 import { Point } from '../Point'
-import { Mouse } from '../Pointer/Mouse'
-import { Pointer } from '../Pointer/Pointer'
 import { Scene } from '../Scene'
 
 import { HomeScene } from './HomeScene'
