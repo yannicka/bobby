@@ -1,12 +1,12 @@
-import { AnimationManager } from './AnimationManager'
-import { Button } from './Button'
-import { ChooseLevelScene } from './ChooseLevelScene'
-import { Game } from './Game'
-import { ImageManager } from './ImageManager'
-import { Point } from './Point'
-import { Mouse } from './Pointer/Mouse'
-import { Pointer } from './Pointer/Pointer'
-import { Scene } from './Scene'
+import { AnimationManager } from '../AnimationManager'
+import { Button } from '../Button'
+import { ChooseLevelScene } from '../ChooseLevelScene'
+import { Game } from '../Game'
+import { ImageManager } from '../ImageManager'
+import { Point } from '../Point'
+import { Mouse } from '../Pointer/Mouse'
+import { Pointer } from '../Pointer/Pointer'
+import { Scene } from '../Scene'
 
 export class HomeScene implements Scene {
   private readonly game: Game
@@ -19,7 +19,7 @@ export class HomeScene implements Scene {
 
     this.pointer = new Mouse(this.game.getCanvas())
 
-    const playerImage = ImageManager.getImage('player');
+    const playerImage = ImageManager.getImage('player')
 
     this.playerAnimation = new AnimationManager(playerImage, 14, 15)
 

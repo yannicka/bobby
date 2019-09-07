@@ -1,10 +1,11 @@
-import { Button } from './Button'
-import { Game } from './Game'
+import { Button } from '../Button'
+import { Game } from '../Game'
+import { Point } from '../Point'
+import { Mouse } from '../Pointer/Mouse'
+import { Pointer } from '../Pointer/Pointer'
+import { Scene } from '../Scene'
+
 import { HomeScene } from './HomeScene'
-import { Point } from './Point'
-import { Mouse } from './Pointer/Mouse'
-import { Pointer } from './Pointer/Pointer'
-import { Scene } from './Scene'
 
 export class EndScene implements Scene {
   private readonly game: Game

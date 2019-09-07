@@ -1,15 +1,16 @@
-import { Camera } from './Camera'
-import { CELL_SIZE } from './Cell'
-import { Direction } from './Direction'
+import { Camera } from '../Camera'
+import { CELL_SIZE } from '../Cell'
+import { Direction } from '../Direction'
+import { Game } from '../Game'
+import { ImageManager } from '../ImageManager'
+import { Keyboard } from '../Keyboard'
+import { Map } from '../Map'
+import { Player } from '../Player'
+import { Point } from '../Point'
+import { Scene } from '../Scene'
+import { clamp } from '../Util'
+
 import { EndScene } from './EndScene'
-import { Game } from './Game'
-import { ImageManager } from './ImageManager'
-import { Keyboard } from './Keyboard'
-import { Map } from './Map'
-import { Player } from './Player'
-import { Point } from './Point'
-import { Scene } from './Scene'
-import { clamp } from './Util'
 
 export class GameScene implements Scene {
   private readonly game: Game

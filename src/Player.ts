@@ -1,10 +1,10 @@
 import { AnimationManager } from './AnimationManager'
 import { CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
-import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
 import { Map } from './Map'
 import { Point } from './Point'
+import { GameScene } from './scenes/GameScene'
 
 function linear(a: number, b: number, t: number): number {
   return a * (1 - t) + b * t

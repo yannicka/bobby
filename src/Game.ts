@@ -1,7 +1,7 @@
 import { CELL_SIZE } from './Cell'
-import { HomeScene } from './HomeScene'
 import { ImageManager } from './ImageManager'
 import { Scene } from './Scene'
+import { HomeScene } from './scenes/HomeScene'
 import { SceneTransition } from './SceneTransition'
 import { Storage } from './Storage'
 
