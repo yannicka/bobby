@@ -4,7 +4,7 @@ import { Storage } from './Storage'
 const storage = new Storage()
 
 export const state = {
-  levels: [] as Array<Level>,
+  levels: {} as { [key: string]: Level },
 
   getStorage() {
     return storage
@@ -12,5 +12,5 @@ export const state = {
 
   loadLevels() {
     this.levels = storage.getLevels()
-  }
+  },
 }

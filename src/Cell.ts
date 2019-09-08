@@ -1,10 +1,10 @@
 import { AnimationManager } from './AnimationManager'
 import { Direction } from './Direction'
+import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
 import { Player } from './Player'
 import { Point } from './Point'
 import { Rotation } from './Rotation'
-import { GameScene } from './scenes/GameScene'
 
 export const CELL_SIZE = 16
 

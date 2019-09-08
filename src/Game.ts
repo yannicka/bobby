@@ -1,49 +1,50 @@
+import m from 'mithril'
+
 import { CELL_SIZE } from './Cell'
+import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
 import { Scene } from './Scene'
-import { SceneTransition } from './SceneTransition'
-import { Storage } from './Storage'
-import { GameScene } from './scenes/GameScene'
+import { ChooseLevelScreen } from './screen/ChooseLevelScreen'
+import { EndGameScreen } from './screen/EndGameScreen'
+import { GameScreen } from './screen/GameScreen'
+import { HomeScreen } from './screen/HomeScreen'
+import { state } from './State'
+
+const screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
+
+function computeAppSize() {
+  const { width, height } = screenSize
+
+  const widthZoom = window.innerWidth / width
+  const heightZoom = window.innerHeight / height
+
+  const zoom = Math.min(widthZoom, heightZoom)
+
+  const appWidth = width * zoom
+  const appHeight = height * zoom
+
+  return {
+    width: appWidth,
+    height: appHeight,
+    zoom,
+  }
+}
 
 export class Game {
   private readonly canvas: HTMLCanvasElement
   private readonly ctx: CanvasRenderingContext2D
-  private readonly sceneTransition: SceneTransition
-  private readonly storage: Storage
-  private readonly level: string
   private lastUpdate: number
-  private zoom: number
   private scene: Scene
 
   public constructor(level: string) {
-    this.level = level
-
     this.canvas = document.getElementById('app') as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d')
 
     this.lastUpdate = Date.now()
 
-    this.zoom = 1
-
-    this.sceneTransition = new SceneTransition(this)
-
-    this.storage = new Storage()
-
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
 
-    const imagesLoader = ImageManager.load('assets/img/', {
-      'tiles': 'tiles.png',
-      'player': 'player.png',
-      'background': 'background.png',
-    })
-
-    Promise.all(imagesLoader).then(() => {
-      this.init()
-    })
-  }
-
-  public init(): void {
-    this.scene = new GameScene(this, this.level)
+    this.scene = new GameScene(this, level, state.getStorage())
 
     this.resize()
 
@@ -57,8 +58,6 @@ export class Game {
 
     this.scene.update(dt)
 
-    this.sceneTransition.update(dt)
-
     this.render(this.ctx)
 
     requestAnimationFrame(() => this.update())
@@ -71,39 +70,65 @@ export class Game {
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.scene.render(ctx)
-
-    this.sceneTransition.render(ctx)
   }
 
   public resize(_e: UIEvent | null = null): void {
-    const [ width, height ] = this.getScreenSize()
+    const { width, height, zoom } = computeAppSize()
 
-    const widthZoom = window.innerWidth / width
-    const heightZoom = window.innerHeight / height
-
-    this.zoom = Math.min(widthZoom, heightZoom)
-
-    this.canvas.width = width * this.zoom
-    this.canvas.height = height * this.zoom
+    this.canvas.width = width
+    this.canvas.height = height
 
     this.ctx.imageSmoothingEnabled = false
-    this.ctx.scale(this.zoom, this.zoom)
+    this.ctx.scale(zoom, zoom)
   }
 
   public getCanvas(): HTMLCanvasElement {
     return this.canvas
   }
 
-  public getZoom(): number {
-    return this.zoom
-  }
-
   public changeScene(scene: Scene): void {
     this.scene = scene
   }
 
-  public changeSceneWithTransition(scene: Scene): void {
-    this.sceneTransition.changeScene(scene)
+  public getScreenSize(): [ number, number ] {
+    let [ width, height ] = [ 9, 9 ]
+
+    width *= CELL_SIZE
+    height *= CELL_SIZE
+
+    return [ width, height ]
+  }
+}
+
+export class Superapp {
+  private superapp: HTMLElement
+
+  public constructor() {
+
+    const imagesLoader = ImageManager.load('assets/img/', {
+      'tiles': 'tiles.png',
+      'player': 'player.png',
+      'background': 'background.png',
+    })
+
+    Promise.all(imagesLoader).then(() => {
+      this.init()
+    })
+  }
+
+  public init() {
+    window.addEventListener('resize', (e: UIEvent) => this.resize(e))
+
+    this.superapp = document.getElementById('superapp')
+
+    this.resize()
+
+    m.route(this.superapp, '/', {
+      '/': HomeScreen,
+      '/choose-level': ChooseLevelScreen,
+      '/game/:level': GameScreen,
+      '/end-game': EndGameScreen,
+    })
   }
 
   public getScreenSize(): [ number, number ] {
@@ -115,11 +140,12 @@ export class Game {
     return [ width, height ]
   }
 
-  public getStorage(): Storage {
-    return this.storage
-  }
+  public resize(_e: UIEvent | null = null): void {
+    const { width, height } = computeAppSize()
 
-  public getSceneTransition(): SceneTransition {
-    return this.sceneTransition
+    this.superapp.style.width = `${width}px`
+    this.superapp.style.height = `${height}px`
   }
 }
+
+const superapp = new Superapp()

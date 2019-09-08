@@ -1,10 +1,10 @@
 import { AnimationManager } from './AnimationManager'
 import { CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
+import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
 import { Map } from './Map'
 import { Point } from './Point'
-import { GameScene } from './scenes/GameScene'
 
 function linear(a: number, b: number, t: number): number {
   return a * (1 - t) + b * t
@@ -45,10 +45,10 @@ export class Player {
 
     this.animationManager = new AnimationManager(image, 14, 15)
 
-    this.animationManager.addAnimation(`idle-${Direction.Up.toString()}`, [ 8, 9, 10, 11, 8 ])
-    this.animationManager.addAnimation(`idle-${Direction.Down.toString()}`, [ 0, 1, 2, 3, 0 ])
-    this.animationManager.addAnimation(`idle-${Direction.Right.toString()}`, [ 12, 13, 14, 15, 12 ])
-    this.animationManager.addAnimation(`idle-${Direction.Left.toString()}`, [ 4, 5, 6, 7, 4 ])
+    this.animationManager.addAnimation(`idle-${Direction.Up.toString()}`, [ 8 ])
+    this.animationManager.addAnimation(`idle-${Direction.Down.toString()}`, [ 0 ])
+    this.animationManager.addAnimation(`idle-${Direction.Right.toString()}`, [ 12 ])
+    this.animationManager.addAnimation(`idle-${Direction.Left.toString()}`, [ 4 ])
 
     this.animationManager.addAnimation(`walk-${Direction.Up.toString()}`, [ 8, 9, 10, 11, 8 ], {
       frameDuration: 0.04,

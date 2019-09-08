@@ -1,7 +1,7 @@
 import { Cell, CELL_SIZE, cells as cellsIndex, Coin, End, Start } from './Cell'
+import { GameScene } from './GameScene'
 import { Player } from './Player'
 import { Point } from './Point'
-import { GameScene } from './scenes/GameScene'
 
 export class Map {
   private readonly cells: Array<Array<Cell>>

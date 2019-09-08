@@ -1,6 +1,6 @@
 import m, { Attributes, Vnode } from 'mithril'
+
 import { Level } from '../Level'
-import { Storage } from '../Storage'
 import { state } from '../State'
 
 export const ChooseLevelScreen: m.Component = {
@@ -9,9 +9,8 @@ export const ChooseLevelScreen: m.Component = {
   },
 
   view(vnode) {
-    const childrens: Array<Vnode> = Object.values(state.levels).map((level: Level) => {
-      return m(LevelComponent, { level } as Attributes)
-    })
+    const childrens: Array<Vnode> = Object.values(state.levels).map((level: Level) =>
+      m(LevelComponent, { level } as Attributes))
 
     return [
       m('h1', 'Bobby'),
@@ -33,6 +32,6 @@ const LevelComponent: m.Component = {
 
     return m('div', { 'class': classesText }, m(m.route.Link, {
       'href': `/game/${level.fixed.name}`,
-    }, level.fixed.number))
+    },                                          level.fixed.number))
   },
 }

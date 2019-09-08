@@ -1,14 +1,18 @@
-import { Camera } from '../Camera'
-import { CELL_SIZE } from '../Cell'
-import { Direction } from '../Direction'
-import { Game } from '../Game'
-import { ImageManager } from '../ImageManager'
-import { Keyboard } from '../input/Keyboard'
-import { Map } from '../Map'
-import { Player } from '../Player'
-import { Point } from '../Point'
-import { Scene } from '../Scene'
-import { clamp } from '../Util'
+import m from 'mithril'
+
+import { Camera } from './Camera'
+import { CELL_SIZE } from './Cell'
+import { Direction } from './Direction'
+import { Game } from './Game'
+import { ImageManager } from './ImageManager'
+import { Keyboard } from './input/Keyboard'
+import { Level } from './Level'
+import { Map } from './Map'
+import { Player } from './Player'
+import { Point } from './Point'
+import { Scene } from './Scene'
+import { Storage } from './Storage'
+import { clamp } from './Util'
 
 export class GameScene implements Scene {
   private readonly game: Game
@@ -17,15 +21,16 @@ export class GameScene implements Scene {
   private readonly keyboard: Keyboard
   private readonly currentLevel: string
   private readonly camera: Camera
+  private readonly storage: Storage
 
-  public constructor(game: Game, level: string) {
+  public constructor(game: Game, level: string, storage: Storage) {
     this.game = game
 
     this.currentLevel = level
 
-    const levels = this.game.getStorage().getLevels()
+    this.storage = storage
 
-    this.map = new Map(levels[this.currentLevel].fixed.map)
+    this.map = new Map(this.storage.getLevels()[this.currentLevel].fixed.map)
 
     this.camera = new Camera(new Point(0, 0), { width: 100, height: 100 })
 
@@ -54,23 +59,21 @@ export class GameScene implements Scene {
 
     this.camera.setPosition(cameraPosition)
 
-    if (!this.game.getSceneTransition().isChanging()) {
-      if (this.player.isAbleToMove()) {
-        if (this.keyboard.down('ArrowUp') || this.keyboard.down('KeyW')) {
-          this.player.move(Direction.Up)
-        }
+    if (this.player.isAbleToMove()) {
+      if (this.keyboard.down('ArrowUp') || this.keyboard.down('KeyW')) {
+        this.player.move(Direction.Up)
+      }
 
-        if (this.keyboard.down('ArrowDown') || this.keyboard.down('KeyS')) {
-          this.player.move(Direction.Down)
-        }
+      if (this.keyboard.down('ArrowDown') || this.keyboard.down('KeyS')) {
+        this.player.move(Direction.Down)
+      }
 
-        if (this.keyboard.down('ArrowRight') || this.keyboard.down('KeyD')) {
-          this.player.move(Direction.Right)
-        }
+      if (this.keyboard.down('ArrowRight') || this.keyboard.down('KeyD')) {
+        this.player.move(Direction.Right)
+      }
 
-        if (this.keyboard.down('ArrowLeft') || this.keyboard.down('KeyA')) {
-          this.player.move(Direction.Left)
-        }
+      if (this.keyboard.down('ArrowLeft') || this.keyboard.down('KeyA')) {
+        this.player.move(Direction.Left)
       }
     }
 
@@ -105,19 +108,19 @@ export class GameScene implements Scene {
   }
 
   public nextLevel(): void {
-    this.game.getStorage().success(this.currentLevel)
+    this.storage.success(this.currentLevel)
 
-    const levels = this.game.getStorage().getLevels()
+    const levels = this.storage.getLevels()
 
     const keys = Object.keys(levels)
     const nextIndex = keys.indexOf(this.currentLevel) + 1
     const nextLevel = keys[nextIndex]
 
     if (typeof nextLevel === 'undefined') {
-      // @todo Scène de fin
-      // this.game.changeSceneWithTransition(new EndScene(this.game))
+      m.route.set('/end-game')
     } else {
-      this.game.changeSceneWithTransition(new GameScene(this.game, nextLevel))
+      // m.route.set(`/game/${nextLevel}`)
+      this.game.changeScene(new GameScene(this.game, nextLevel, this.storage))
     }
   }
 }
