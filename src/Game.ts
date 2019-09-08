@@ -10,10 +10,10 @@ export class Game {
   private readonly ctx: CanvasRenderingContext2D
   private readonly sceneTransition: SceneTransition
   private readonly storage: Storage
+  private readonly level: string
   private lastUpdate: number
   private zoom: number
   private scene: Scene
-  private level: string
 
   public constructor(level: string) {
     this.level = level

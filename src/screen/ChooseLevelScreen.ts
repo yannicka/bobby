@@ -1,12 +1,15 @@
 import m, { Attributes, Vnode } from 'mithril'
 import { Level } from '../Level'
 import { Storage } from '../Storage'
+import { state } from '../State'
 
 export const ChooseLevelScreen: m.Component = {
-  view() {
-    const storage = new Storage()
+  oninit() {
+    state.loadLevels()
+  },
 
-    const childrens: Array<Vnode> = Object.values(storage.getLevels()).map((level: Level) => {
+  view(vnode) {
+    const childrens: Array<Vnode> = Object.values(state.levels).map((level: Level) => {
       return m(LevelComponent, { level } as Attributes)
     })
 

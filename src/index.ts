@@ -1,8 +1,6 @@
-import m, { Attributes, Component, Vnode } from 'mithril'
+import m, { Attributes } from 'mithril'
 
-import { Game } from './Game'
 import { Storage } from './Storage'
-import { Level } from './Level'
 import { HomeScreen } from './screen/HomeScreen'
 import { ChooseLevelScreen } from './screen/ChooseLevelScreen'
 import { GameScreen } from './screen/GameScreen'
