@@ -11,6 +11,8 @@
     "lint-fix": "tslint --fix 'src/**/*.ts'"
   },
   "devDependencies": {
+    "@types/mithril": "^2.0.0",
+    "mithril": "^2.0.4",
     "ts-loader": "^5.4.5",
     "tslint": "^5.19.0",
     "typescript": "^3.6.2",

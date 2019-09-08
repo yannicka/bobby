@@ -10,8 +10,6 @@ import { Point } from '../Point'
 import { Scene } from '../Scene'
 import { clamp } from '../Util'
 
-import { EndScene } from './EndScene'
-
 export class GameScene implements Scene {
   private readonly game: Game
   private readonly map: Map
@@ -116,7 +114,8 @@ export class GameScene implements Scene {
     const nextLevel = keys[nextIndex]
 
     if (typeof nextLevel === 'undefined') {
-      this.game.changeSceneWithTransition(new EndScene(this.game))
+      // @todo Scène de fin
+      // this.game.changeSceneWithTransition(new EndScene(this.game))
     } else {
       this.game.changeSceneWithTransition(new GameScene(this.game, nextLevel))
     }

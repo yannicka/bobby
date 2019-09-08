@@ -11,23 +11,52 @@
     body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
     }
 
     body {
-      background-color: black;
+      background-color: #f7f3ef;
     }
 
-    .wrapper {
+    #superapp {
+      margin: 0 auto;
+      overflow: auto;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+    }
+
+    .levels {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 50px);
+      gap: 16px;
+      overflow: auto;
+      scrollbar-color: #42c79c rgba(0, 0, 0, 0.3);
+      scrollbar-width: thin;
+      padding: 12px;
+    }
+
+    .level a {
+      display: block;
+      background-color: #999999;
+      padding: 16px 8px;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .level.accessible a {
+      background-color: #8c5d63;
+    }
+
+    .level.success.accessible a {
+      background-color: #42c79c;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <canvas id="app"></canvas>
+  <div id="superapp">
+    <div class="page"></div>
   </div>
 
   <script src="app.js"></script>

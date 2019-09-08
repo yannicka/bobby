@@ -15,7 +15,7 @@
     "member-ordering": false,
     "jsdoc-format": false,
     "no-null-keyword": false,
-    "variable-name": [true, "allow-leading-underscore"],
+    "variable-name": [true, "allow-leading-underscore", "allow-pascal-case"],
     "max-classes-per-file": false,
     "binary-expression-operand-order": false,
     "prefer-function-over-method": false,

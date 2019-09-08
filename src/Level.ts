@@ -67,6 +67,15 @@ export class LevelManager {
           [  2,  2,  2,  2,  2,  2,  2,  2,  2 ],
         ],
       },
+
+      'a': { map: [ [ 0 ] ] },
+      'b': { map: [ [ 0 ] ] },
+      'c': { map: [ [ 0 ] ] },
+      'd': { map: [ [ 0 ] ] },
+      'e': { map: [ [ 0 ] ] },
+      'f': { map: [ [ 0 ] ] },
+      'h': { map: [ [ 0 ] ] },
+      'i': { map: [ [ 0 ] ] },
     }
 
     const levelsReturned: { [key: string]: LevelFixed } = {}

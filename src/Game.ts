@@ -1,9 +1,9 @@
 import { CELL_SIZE } from './Cell'
 import { ImageManager } from './ImageManager'
 import { Scene } from './Scene'
-import { HomeScene } from './scenes/HomeScene'
 import { SceneTransition } from './SceneTransition'
 import { Storage } from './Storage'
+import { GameScene } from './scenes/GameScene'
 
 export class Game {
   private readonly canvas: HTMLCanvasElement
@@ -13,8 +13,11 @@ export class Game {
   private lastUpdate: number
   private zoom: number
   private scene: Scene
+  private level: string
 
-  public constructor() {
+  public constructor(level: string) {
+    this.level = level
+
     this.canvas = document.getElementById('app') as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d')
 
@@ -40,7 +43,7 @@ export class Game {
   }
 
   public init(): void {
-    this.scene = new HomeScene(this)
+    this.scene = new GameScene(this, this.level)
 
     this.resize()
 
