@@ -29,6 +29,12 @@ export class GameScene implements Scene {
     this.currentLevel = level
 
     this.storage = storage
+    
+    const truc = this.storage.getLevels()[this.currentLevel]
+    
+    if (!truc.dynamic.accessible) {
+        history.back()
+    }
 
     this.map = new Map(this.storage.getLevels()[this.currentLevel].fixed.map)
 
