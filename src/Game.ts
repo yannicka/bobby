@@ -131,17 +131,9 @@ export class Superapp {
     })
   }
 
-  public getScreenSize(): [ number, number ] {
-    let [ width, height ] = [ 9, 9 ]
-
-    width *= CELL_SIZE
-    height *= CELL_SIZE
-
-    return [ width, height ]
-  }
-
   public resize(_e: UIEvent | null = null): void {
-    const { width, height } = computeAppSize()
+    const { width } = computeAppSize()
+    const height = window.innerHeight
 
     this.superapp.style.width = `${width}px`
     this.superapp.style.height = `${height}px`
