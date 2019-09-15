@@ -9,7 +9,4 @@ module.exports = merge(common, {
     contentBase: path.resolve(__dirname, 'public'),
     watchContentBase: true,
   },
-  resolve: {
-    extensions: ['.js', '.ts'],
-  },
 })

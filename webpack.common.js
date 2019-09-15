@@ -3,8 +3,6 @@ const path = require('path')
 module.exports = {
   entry: './src/index.ts',
 
-  devtool: 'source-map',
-
   module: {
     rules: [
       {
@@ -22,5 +20,9 @@ module.exports = {
   output: {
     filename: 'app.js',
     path: path.resolve(__dirname, 'public'),
+  },
+
+  resolve: {
+    extensions: ['.js', '.ts'],
   },
 }
