@@ -10,14 +10,16 @@
     "lint": "tslint 'src/**/*.ts'",
     "lint-fix": "tslint --fix 'src/**/*.ts'"
   },
+  "dependencies": {
+    "mithril": "^2.0.4"
+  },
   "devDependencies": {
     "@types/mithril": "^2.0.0",
-    "mithril": "^2.0.4",
     "ts-loader": "^5.4.5",
-    "tslint": "^5.19.0",
-    "typescript": "^3.6.2",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.8.0",
     "webpack-merge": "^4.2.2"
   }
