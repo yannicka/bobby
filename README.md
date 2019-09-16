@@ -13,7 +13,11 @@ npm run serve # ou npm run build
 
 - Mettre en forme l'écran de choix de niveau ;
 
-- Mettre en forme l'écran de fin de jeu.
+- Mettre en forme l'écran de fin de jeu ;
+
+- Possibilité de redémarrer un niveau ;
+
+- Possibilité de remttre à zéro son avancement.
 
 ### Les détails
 
