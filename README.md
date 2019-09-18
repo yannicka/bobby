@@ -43,7 +43,9 @@ npm run serve # ou npm run build
   nombre de pas minimal atteint ; 2 = bien ; 1 = bof ; 0 = nul) ;
 
 - Ajouter de nouveaux mécanismes (par exemple des caisses amovibles, mais cela
-  nécessite une refonte du système de grille).
+  nécessite une refonte du système de grille) ;
+
+- Ajouter une vue d'oiseau.
 
 ## Ressources intéressantes
 
