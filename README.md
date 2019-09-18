@@ -27,6 +27,10 @@ npm run serve # ou npm run build
 
 - Améliorer les transitions, très peu paramétrables actuellement.
 
+### Mobile
+
+- Donner la possibilité de jouer depuis un téléphone.
+
 ### Graphismes
 
 - Améliorer les graphismes.
@@ -36,6 +40,11 @@ npm run serve # ou npm run build
 - Nettoyer le code qui est sale par endroit ;
 
 - Optimiser le code, qui est totalement sous-optimisé par endroit.
+
+### Bogues connus (et à corriger)
+
+- Dans certains cas, le jeu nous amène vers la page de fin de jeu en plein
+  milieu d'un niveau.
 
 ### En bonus *(si possible)*
 
