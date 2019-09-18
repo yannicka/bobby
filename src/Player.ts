@@ -70,6 +70,11 @@ export class Player {
       loop: false,
     })
 
+    this.animationManager.addAnimation(`jump-${Direction.Down.toString()}`, [ 16, 17, 16, 0 ], {
+      frameDuration: 0.15,
+      loop: false,
+    })
+
     this.animationManager.play(`idle-${this.direction.toString()}`)
   }
 
@@ -112,8 +117,6 @@ export class Player {
 
     if (animate) {
       this.animationManager.play(`walk-${direction.toString()}`, true)
-    } else {
-      this.animationManager.play(`idle-${direction.toString()}`, true)
     }
 
     const newMapPosition = this.position.clone()
@@ -145,6 +148,10 @@ export class Player {
 
     this.direction = direction
 
+    if (nextCell) {
+      nextCell.beforePassingEvent(this)
+    }
+
     this.moveTo(newMapPosition)
   }
 
@@ -168,5 +175,9 @@ export class Player {
 
   public getDisplayPosition(): Point {
     return this.displayPosition
+  }
+
+  public getAnimationManager(): AnimationManager {
+    return this.animationManager
   }
 }

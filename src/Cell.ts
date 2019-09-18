@@ -20,6 +20,9 @@ export abstract class Cell {
     this.animation = new AnimationManager(image, CELL_SIZE, CELL_SIZE)
   }
 
+  public beforePassingEvent(_player: Player): void {
+  }
+
   public onPassingEvent(_player: Player, _gameScene: GameScene): void {
   }
 
@@ -311,6 +314,33 @@ export class Ice extends Cell {
   }
 }
 
+// Barrière
+export class Fence extends Cell {
+  public constructor(position: Point) {
+    super(position)
+
+    this.getAnimation().addAnimation('idle', [ 3 ])
+
+    this.getAnimation().play('idle')
+  }
+
+  public isSolid(direction: Direction): boolean {
+    if (direction === Direction.Down) {
+      return false
+    }
+
+    return true
+  }
+
+  public beforePassingEvent(player: Player): void {
+    player.getAnimationManager().play(`jump-${Direction.Down.toString()}`, true)
+  }
+
+  public onPassingEvent(player: Player, _gameScene: GameScene): void {
+    player.move(player.getDirection(), false)
+  }
+}
+
 export const cells: { [key: number]: (position: Point) => Cell } = {
   2: (position: Point): Cell => new Stone(position),
 
@@ -335,4 +365,6 @@ export const cells: { [key: number]: (position: Point) => Cell } = {
 
   18: (position: Point): Cell => new Turnstile(position, Rotation.Horizontal),
   19: (position: Point): Cell => new Turnstile(position, Rotation.Vertical),
+
+  20: (position: Point): Cell => new Fence(position),
 }
