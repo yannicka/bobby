@@ -14,7 +14,8 @@ export const ChooseLevelScreen: m.Component = {
 
     return [
       m('div', { 'class': 'actionbar' }, [
-        m('div', { 'class': 'actionbar-gamename' }, 'Bobby'),
+        m('div', { 'class': 'actionbar-level' }, 'Niveau X/Y'),
+        m('div', { 'class': 'actionbar-button actionbar-button-back', 'onclick': goBack }, 'Retour'),
       ]),
       m('div', { 'class': 'levels' }, childrens),
     ]
@@ -36,4 +37,8 @@ const LevelComponent: m.Component = {
       'href': `/game/${level.fixed.name}`,
     },                                          level.fixed.number))
   },
+}
+
+function goBack(): void {
+  m.route.set('/')
 }

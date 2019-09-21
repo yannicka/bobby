@@ -11,7 +11,7 @@ export const GameScreen: m.Component = {
           m('button', { 'class': 'actionbar-button', 'onclick': showMenu }, 'Menu'),
           m('nav', { 'class': 'actionbar-menu-nav' }, [
             m('button', { 'class': 'actionbar-nav-button' }, 'Recommencer le niveau'),
-            m('button', { 'class': 'actionbar-nav-button' }, 'Retourner au menu'),
+            m('button', { 'class': 'actionbar-nav-button', 'onclick': goToMenu }, 'Retourner au menu'),
           ]),
         ]),
       ]),
@@ -40,4 +40,8 @@ function showMenu(e: any): void {
   if (nav) {
     nav.classList.toggle('actionbar-menu-nav-displayed')
   }
+}
+
+function goToMenu(e: any): void {
+  m.route.set('/choose-level')
 }
