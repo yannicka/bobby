@@ -32,7 +32,9 @@ export const GameScreen: m.Component = {
   },
 }
 
-function showMenu(): void {
+function showMenu(e: any): void {
+  e.redraw = false
+
   const nav = document.querySelector('.actionbar-menu-nav')
 
   if (nav) {
