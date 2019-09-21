@@ -4,7 +4,10 @@ import { Game } from '../Game'
 
 export const GameScreen: m.Component = {
   view() {
-    return m('canvas', { 'id': 'app' })
+    return [
+      m('h1', 'Bobby'),
+      m('canvas', { 'id': 'app' }),
+    ]
   },
 
   oncreate(vnode: m.Vnode) {

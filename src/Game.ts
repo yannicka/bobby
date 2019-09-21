@@ -15,8 +15,10 @@ const screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
 function computeAppSize() {
   const { width, height } = screenSize
 
+  const h1 = document.querySelector('h1')
+
   const widthZoom = window.innerWidth / width
-  const heightZoom = window.innerHeight / height
+  const heightZoom = (window.innerHeight - (h1 ? h1.clientHeight : 0)) / height
 
   const zoom = Math.min(widthZoom, heightZoom)
 
