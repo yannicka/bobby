@@ -15,8 +15,19 @@
       padding: 0;
     }
 
+    html {
+      font-size: 1.2em;
+    }
+
     body {
       background-color: #f7f3ef;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font-size: inherit;
     }
 
     #superapp {
@@ -24,15 +35,6 @@
       overflow: auto;
       display: flex;
       flex-direction: column;
-    }
-
-    h1 {
-      background-color: #42c79c;
-      color: #fff;
-      margin: 0;
-      padding: 16px;
-      text-align: center;
-      text-transform: uppercase;
     }
 
     .btn-play {
@@ -76,6 +78,72 @@
 
     .level.success.accessible a {
       background-color: #42c79c;
+    }
+
+    .actionbar {
+      background-color: #42c79c;
+      display: flex;
+    }
+
+    .actionbar-gamename {
+      padding: 12px;
+      color: #fff;
+      margin: 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .actionbar-level {
+      padding: 12px;
+      color: #fff;
+    }
+
+    .actionbar-menu {
+      margin-left: auto;
+      position: relative;
+    }
+
+    .actionbar-button {
+      padding: 12px 18px;
+      margin: 0;
+      border: none;
+      background: transparent;
+      display: inline-block;
+      color: #fff;
+      height: 100%;
+    }
+
+    .actionbar-button:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+    }
+
+    .actionbar-menu-nav {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      width: 276px;
+      box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
+      display: none;
+    }
+
+    .actionbar-menu-nav-displayed {
+      display: block;
+    }
+
+    .actionbar-nav-button {
+      padding: 12px 24px;
+      border: none;
+      background: #fff;
+      text-align: left;
+      width: 100%;
+    }
+
+    .actionbar-nav-button:hover {
+      background: #ccc;
+      cursor: pointer;
     }
   </style>
 </head>

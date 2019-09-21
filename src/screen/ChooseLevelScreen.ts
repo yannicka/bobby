@@ -13,7 +13,9 @@ export const ChooseLevelScreen: m.Component = {
       m(LevelComponent, { level } as Attributes))
 
     return [
-      m('h1', 'Bobby'),
+      m('div', { 'class': 'actionbar' }, [
+        m('div', { 'class': 'actionbar-gamename' }, 'Bobby'),
+      ]),
       m('div', { 'class': 'levels' }, childrens),
     ]
   },
