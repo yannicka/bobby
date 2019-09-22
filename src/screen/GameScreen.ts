@@ -34,6 +34,10 @@ export const GameScreen: m.Component = {
 
     game = new Game(attrs.level)
   },
+
+  onremove(vnode: m.Vnode) {
+    game.stop()
+  },
 }
 
 function showMenu(e: any): void {
