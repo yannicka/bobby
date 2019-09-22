@@ -35,6 +35,7 @@ function computeAppSize() {
 export class Game {
   private readonly canvas: HTMLCanvasElement
   private readonly ctx: CanvasRenderingContext2D
+  private animationFrame: number
   private lastUpdate: number
   private scene: Scene
 
@@ -62,7 +63,7 @@ export class Game {
 
     this.render(this.ctx)
 
-    requestAnimationFrame(() => this.update())
+    this.animationFrame = requestAnimationFrame(() => this.update())
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
@@ -100,13 +101,16 @@ export class Game {
 
     return [ width, height ]
   }
+
+  public stop() {
+    cancelAnimationFrame(this.animationFrame)
+  }
 }
 
 export class Superapp {
   private superapp: HTMLElement
 
   public constructor() {
-
     const imagesLoader = ImageManager.load('assets/img/', {
       'tiles': 'tiles.png',
       'player': 'player.png',

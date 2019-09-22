@@ -29,9 +29,9 @@ export class GameScene implements Scene {
     this.currentLevel = level
 
     this.storage = storage
-    
+
     const truc = this.storage.getLevels()[this.currentLevel]
-    
+
     if (!truc.dynamic.accessible) {
         history.back()
     }
@@ -125,8 +125,10 @@ export class GameScene implements Scene {
     if (typeof nextLevel === 'undefined') {
       m.route.set('/end-game')
     } else {
-      // m.route.set(`/game/${nextLevel}`)
-      this.game.changeScene(new GameScene(this.game, nextLevel, this.storage))
+      m.route.set(`/game/${nextLevel}`, {}, {
+        replace: true,
+      })
+      // this.game.changeScene(new GameScene(this.game, nextLevel, this.storage))
     }
   }
 }

@@ -2,6 +2,8 @@ import m from 'mithril'
 
 import { Game } from '../Game'
 
+let game: Game = null
+
 export const GameScreen: m.Component = {
   view() {
     return [
@@ -10,7 +12,7 @@ export const GameScreen: m.Component = {
         m('div', { 'class': 'actionbar-menu' }, [
           m('button', { 'class': 'actionbar-button', 'onclick': showMenu }, 'Menu'),
           m('nav', { 'class': 'actionbar-menu-nav' }, [
-            m('button', { 'class': 'actionbar-nav-button' }, 'Recommencer le niveau'),
+            m('button', { 'class': 'actionbar-nav-button', 'onclick': restartLevel }, 'Recommencer le niveau'),
             m('button', { 'class': 'actionbar-nav-button', 'onclick': goToMenu }, 'Retourner au menu'),
           ]),
         ]),
@@ -22,13 +24,15 @@ export const GameScreen: m.Component = {
   oncreate(vnode: m.Vnode) {
     const attrs = vnode.attrs as any
 
-    const game = new Game(attrs.level)
+    game = new Game(attrs.level)
   },
 
-  onupdate(vnode): any {
+  onupdate(vnode: m.Vnode) {
     const attrs = vnode.attrs as any
 
-    const game = new Game(attrs.level)
+    game.stop()
+
+    game = new Game(attrs.level)
   },
 }
 
@@ -44,4 +48,14 @@ function showMenu(e: any): void {
 
 function goToMenu(e: any): void {
   m.route.set('/choose-level')
+}
+
+function restartLevel(e: any): void {
+  e.redraw = true
+
+  const nav = document.querySelector('.actionbar-menu-nav')
+
+  if (nav) {
+    nav.classList.remove('actionbar-menu-nav-displayed')
+  }
 }

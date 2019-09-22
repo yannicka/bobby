@@ -43,9 +43,6 @@ npm run serve # ou npm run build
 
 ### Bogues connus (et à corriger)
 
-- Dans certains cas, le jeu nous amène vers la page de fin de jeu en plein
-  milieu d'un niveau ;
-
 - Les tapis roulant (et sûrement la glace) ne changent pas le sens du joueur.
 
 ### En bonus *(si possible)*
