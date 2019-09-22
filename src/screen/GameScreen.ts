@@ -30,6 +30,8 @@ export const GameScreen: m.Component = {
     game = new Game(levelName)
 
     updateActionbarLevel(levelName)
+
+    document.addEventListener('click', documentClickEvent)
   },
 
   onupdate(vnode: m.Vnode) {
@@ -46,6 +48,8 @@ export const GameScreen: m.Component = {
 
   onremove(vnode: m.Vnode) {
     game.stop()
+
+    document.removeEventListener('click', documentClickEvent)
   },
 }
 
@@ -82,5 +86,15 @@ function updateActionbarLevel(levelName: string) {
     const levelNumber = levels[levelName].fixed.number
 
     actionbarLevel.innerText = `${levelNumber}/${nbLevels}`
+  }
+}
+
+function documentClickEvent(e: MouseEvent) {
+  const button = document.querySelector('.actionbar-button')
+  const nav = document.querySelector('.actionbar-menu-nav')
+  const target = e.target as Node
+
+  if (!nav.contains(target) && target !== button) {
+    nav.classList.remove('actionbar-menu-nav-displayed')
   }
 }
