@@ -49,12 +49,9 @@ export class Animation {
       return
     }
 
-    // @todo Si le `dt` est très élevé, l'animation ne se déroulera pas
-    //       correctement. À corriger.
-
     this.timer += dt
 
-    if (this.timer > this.frameDuration) {
+    while (this.timer > this.frameDuration) {
       this.currentFrame += 1
 
       if (this.currentFrame >= this.frames.length) {
@@ -67,7 +64,7 @@ export class Animation {
         }
       }
 
-      this.timer = 0
+      this.timer = this.timer - this.frameDuration
     }
   }
 
