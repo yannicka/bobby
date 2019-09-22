@@ -15,10 +15,11 @@ const screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
 function computeAppSize() {
   const { width, height } = screenSize
 
-  const h1 = document.querySelector('.actionbar')
+  const actionbar = document.querySelector('.actionbar')
+  const actionbarHeight = (actionbar instanceof HTMLElement ? actionbar.clientHeight : 0)
 
   const widthZoom = window.innerWidth / width
-  const heightZoom = (window.innerHeight - (h1 ? h1.clientHeight : 0)) / height
+  const heightZoom = (window.innerHeight - actionbarHeight) / height
 
   const zoom = Math.min(widthZoom, heightZoom)
 

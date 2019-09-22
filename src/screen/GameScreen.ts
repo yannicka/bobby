@@ -45,7 +45,7 @@ function showMenu(e: any): void {
 
   const nav = document.querySelector('.actionbar-menu-nav')
 
-  if (nav) {
+  if (nav instanceof HTMLElement) {
     nav.classList.toggle('actionbar-menu-nav-displayed')
   }
 }
@@ -59,7 +59,7 @@ function restartLevel(e: any): void {
 
   const nav = document.querySelector('.actionbar-menu-nav')
 
-  if (nav) {
+  if (nav instanceof HTMLElement) {
     nav.classList.remove('actionbar-menu-nav-displayed')
   }
 }

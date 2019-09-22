@@ -1,7 +1,7 @@
 import { Level, LevelDynamic, LevelManager, LevelUser } from './Level'
 
 export class Storage {
-  private levelManager: LevelManager
+  private readonly levelManager: LevelManager
 
   public constructor() {
     this.levelManager = new LevelManager()

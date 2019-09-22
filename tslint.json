@@ -27,6 +27,10 @@
     "no-unnecessary-class": [true, "allow-static-only"],
     "no-empty": false,
     "interface-name": false,
+    "match-default-export-name": false,
+    "no-unbound-method": false,
+    "no-floating-promises": false,
+    "no-void-expression": false,
 
     "no-default-export": false,
     "no-default-import": false,

@@ -159,9 +159,9 @@ export class Player {
     return this.canmove
   }
 
-  private moveTo(poisiton: Point) {
+  private moveTo(position: Point) {
     this.previousPosition = this.position
-    this.position = poisiton
+    this.position = position
     this.canmove = false
 
     this.startPosition = this.targetPosition.clone()
