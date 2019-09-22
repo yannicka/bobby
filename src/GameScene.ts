@@ -18,24 +18,24 @@ export class GameScene implements Scene {
   private readonly map: Map
   private readonly player: Player
   private readonly keyboard: Keyboard
-  private readonly currentLevel: string
+  private readonly currentLevelName: string
   private readonly camera: Camera
   private readonly storage: Storage
 
-  public constructor(game: Game, level: string, storage: Storage) {
+  public constructor(game: Game, levelName: string, storage: Storage) {
     this.game = game
 
-    this.currentLevel = level
+    this.currentLevelName = levelName
 
     this.storage = storage
 
-    const truc = this.storage.getLevels()[this.currentLevel]
+    const truc = this.storage.getLevels()[this.currentLevelName]
 
     if (!truc.dynamic.accessible) {
         history.back()
     }
 
-    this.map = new Map(this.storage.getLevels()[this.currentLevel].fixed.map)
+    this.map = new Map(this.storage.getLevels()[this.currentLevelName].fixed.map)
 
     this.camera = new Camera(new Point(0, 0), { width: 100, height: 100 })
 
@@ -113,12 +113,12 @@ export class GameScene implements Scene {
   }
 
   public nextLevel(): void {
-    this.storage.success(this.currentLevel)
+    this.storage.success(this.currentLevelName)
 
     const levels = this.storage.getLevels()
 
     const keys = Object.keys(levels)
-    const nextIndex = keys.indexOf(this.currentLevel) + 1
+    const nextIndex = keys.indexOf(this.currentLevelName) + 1
     const nextLevel = keys[nextIndex]
 
     if (typeof nextLevel === 'undefined') {

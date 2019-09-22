@@ -1,6 +1,7 @@
 import m from 'mithril'
 
 import { Game } from '../Game'
+import { state } from '../State'
 
 let game: Game = null
 
@@ -24,7 +25,11 @@ export const GameScreen: m.Component = {
   oncreate(vnode: m.Vnode) {
     const attrs = vnode.attrs as any
 
-    game = new Game(attrs.level)
+    const levelName = attrs.level as string
+
+    game = new Game(levelName)
+
+    updateActionbarLevel(levelName)
   },
 
   onupdate(vnode: m.Vnode) {
@@ -32,7 +37,11 @@ export const GameScreen: m.Component = {
 
     game.stop()
 
-    game = new Game(attrs.level)
+    const levelName = attrs.level as string
+
+    game = new Game(levelName)
+
+    updateActionbarLevel(levelName)
   },
 
   onremove(vnode: m.Vnode) {
@@ -61,5 +70,17 @@ function restartLevel(e: any): void {
 
   if (nav instanceof HTMLElement) {
     nav.classList.remove('actionbar-menu-nav-displayed')
+  }
+}
+
+function updateActionbarLevel(levelName: string) {
+  const actionbarLevel = document.querySelector('.actionbar-level')
+
+  if (actionbarLevel instanceof HTMLElement) {
+    const levels = state.getStorage().getLevels()
+    const nbLevels = Object.keys(levels).length
+    const levelNumber = levels[levelName].fixed.number
+
+    actionbarLevel.innerText = `${levelNumber}/${nbLevels}`
   }
 }

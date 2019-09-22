@@ -40,7 +40,7 @@ export class Game {
   private lastUpdate: number
   private scene: Scene
 
-  public constructor(level: string) {
+  public constructor(levelName: string) {
     this.canvas = document.getElementById('app') as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d')
 
@@ -48,7 +48,7 @@ export class Game {
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
 
-    this.scene = new GameScene(this, level, state.getStorage())
+    this.scene = new GameScene(this, levelName, state.getStorage())
 
     this.resize()
 
