@@ -16,7 +16,7 @@ export class Animation {
   private readonly loop: boolean
 
   private timer: number
-  private currentIndex: number
+  private currentFrame: number
   private finished: boolean
 
   public constructor(
@@ -36,12 +36,12 @@ export class Animation {
     this.loop = loop
 
     this.timer = 0
-    this.currentIndex = 0
+    this.currentFrame = 0
     this.finished = false
   }
 
   private getCurrentFrame(): number {
-    return this.frames[this.currentIndex]
+    return this.frames[this.currentFrame]
   }
 
   public update(dt: number): void {
@@ -52,15 +52,15 @@ export class Animation {
     this.timer += dt
 
     if (this.timer > this.frameDuration) {
-      this.currentIndex += 1
+      this.currentFrame += 1
 
-      if (this.currentIndex >= this.frames.length) {
+      if (this.currentFrame >= this.frames.length) {
         if (this.loop) {
-          this.currentIndex = 0
+          this.currentFrame = 0
         } else {
           this.finished = true
 
-          this.currentIndex -= 1
+          this.currentFrame -= 1
         }
       }
 
@@ -82,7 +82,7 @@ export class Animation {
 
   public restart(): void {
     this.timer = 0
-    this.currentIndex = 0
+    this.currentFrame = 0
     this.finished = false
   }
 }
