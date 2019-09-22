@@ -110,13 +110,18 @@ export class Player {
     ctx.restore()
   }
 
-  public move(direction: Direction, animate: boolean = true): void {
+  public move(direction: Direction, animate: 'walk' | 'idle' | null = 'walk'): void {
     if (!this.canmove) {
       return
     }
 
-    if (animate) {
-      this.animationManager.play(`walk-${direction.toString()}`, true)
+    switch (animate) {
+      case 'walk':
+        this.animationManager.play(`walk-${direction.toString()}`, true)
+        break
+      case 'idle':
+        this.animationManager.play(`idle-${direction.toString()}`, true)
+        break
     }
 
     const newMapPosition = this.position.clone()

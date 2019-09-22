@@ -43,7 +43,7 @@ npm run serve # ou npm run build
 
 ### Bogues connus (et à corriger)
 
-- Les tapis roulant (et sûrement la glace) ne changent pas le sens du joueur.
+- *Aucun*.
 
 ### En bonus *(si possible)*
 
