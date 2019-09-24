@@ -4,11 +4,11 @@ import { Pointer } from './Pointer'
 import { WheelDirection } from './WheelDirection'
 
 export class Mouse extends Pointer {
+  private readonly element: HTMLElement
   private click: number | boolean | null
   private mtime: number
   private loose: number | boolean | null
   private wheelValue: number
-  private element: HTMLElement
 
   public constructor(element: HTMLElement | null = null) {
     super()
@@ -17,7 +17,7 @@ export class Mouse extends Pointer {
     this.mtime = 0
     this.loose = null
     this.wheelValue = 0
-    this.element = element || document.body
+    this.element = element instanceof HTMLElement ? element : document.body
 
     this.element.addEventListener('mousedown', (e: MouseEvent) => this.onMouseDown(e))
     this.element.addEventListener('mousemove', (e: MouseEvent) => this.onMouseMove(e))
