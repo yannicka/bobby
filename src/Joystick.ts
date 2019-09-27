@@ -16,8 +16,8 @@ export class Joystick {
         this.pointer = pointer
         this.position = position
 
-        this.outerRadius = 14
-        this.innerRadius = 10
+        this.outerRadius = 10
+        this.innerRadius = 6
     }
 
     public update(dt: number): void {
