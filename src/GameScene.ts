@@ -6,6 +6,9 @@ import { Direction } from './Direction'
 import { Game } from './Game'
 import { ImageManager } from './ImageManager'
 import { Keyboard } from './input/Keyboard'
+import { Mouse } from './input/Mouse'
+import { Pointer } from './input/Pointer'
+import { Joystick } from './Joystick'
 import { Map } from './Map'
 import { Player } from './Player'
 import { Point } from './Point'
@@ -21,6 +24,8 @@ export class GameScene implements Scene {
   private readonly currentLevelName: string
   private readonly camera: Camera
   private readonly storage: Storage
+  private readonly pointer: Pointer
+  private readonly joystick: Joystick
 
   public constructor(game: Game, levelName: string, storage: Storage) {
     this.game = game
@@ -40,6 +45,9 @@ export class GameScene implements Scene {
     this.camera = new Camera(new Point(0, 0), { width: 100, height: 100 })
 
     this.keyboard = new Keyboard()
+    this.pointer = new Mouse(this.game.getCanvas())
+
+    this.joystick = new Joystick(this.game, this.pointer, new Point(30, 30))
 
     this.player = new Player(this)
   }
@@ -82,6 +90,11 @@ export class GameScene implements Scene {
       }
     }
 
+    this.joystick.update(dt)
+    this.joystick.updatePlayer(this.player)
+
+    this.pointer.update(dt)
+
     this.map.update(dt)
     this.player.update(dt)
   }
@@ -104,6 +117,8 @@ export class GameScene implements Scene {
 
     this.map.render(ctx)
     this.player.render(ctx)
+
+    this.joystick.render(ctx)
 
     ctx.restore()
   }

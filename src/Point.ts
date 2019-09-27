@@ -10,4 +10,8 @@ export class Point {
   public clone(): Point {
     return new Point(this.x, this.y)
   }
+
+  public static angleBetween(p1: Point, p2: Point): number {
+    return Math.atan2(p2.y - p1.y, p2.x - p1.x)
+  }
 }

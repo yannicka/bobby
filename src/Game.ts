@@ -39,12 +39,15 @@ export class Game {
   private animationFrame: number
   private lastUpdate: number
   private scene: Scene
+  private zoom: number
 
   public constructor(levelName: string) {
     this.canvas = document.getElementById('app') as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d')
 
     this.lastUpdate = Date.now()
+
+    this.zoom = 1
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
 
@@ -79,6 +82,8 @@ export class Game {
   public resize(_e: UIEvent | null = null): void {
     const { width, height, zoom } = computeAppSize()
 
+    this.zoom = zoom
+
     this.canvas.width = width
     this.canvas.height = height
 
@@ -103,8 +108,12 @@ export class Game {
     return [ width, height ]
   }
 
-  public stop() {
+  public stop(): void {
     cancelAnimationFrame(this.animationFrame)
+  }
+
+  public getZoom(): number {
+    return this.zoom
   }
 }
 
