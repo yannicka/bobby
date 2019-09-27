@@ -73,8 +73,6 @@ export class Game {
     const dt = (now - this.lastUpdate) / 1000
     this.lastUpdate = now
 
-    this.scene.update(dt)
-
     if (this.pointer.press()) {
       const newPosition = this.pointer.getPosition().clone()
       newPosition.x /= this.zoom
@@ -82,6 +80,8 @@ export class Game {
 
       this.joystick.setPosition(newPosition)
     }
+
+    this.scene.update(dt)
 
     this.render(this.ctx)
 
