@@ -33,3 +33,21 @@ export function drawImageByIndex(
 export function clamp(num: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, num))
 }
+
+// @see https://stackoverflow.com/a/4819886
+export function isTouchDevice() {
+  const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ')
+
+  const mq = function(query: string): boolean {
+    return window.matchMedia(query).matches
+  }
+
+  // @ts-ignore
+  if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+    return true
+  }
+
+  const query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('')
+
+  return mq(query)
+}

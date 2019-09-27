@@ -14,7 +14,7 @@ import { Player } from './Player'
 import { Point } from './Point'
 import { Scene } from './Scene'
 import { Storage } from './Storage'
-import { clamp } from './Util'
+import { clamp, isTouchDevice } from './Util'
 
 export class GameScene implements Scene {
   private readonly game: Game
@@ -118,7 +118,9 @@ export class GameScene implements Scene {
     this.map.render(ctx)
     this.player.render(ctx)
 
-    this.joystick.render(ctx)
+    if (isTouchDevice()) {
+      this.joystick.render(ctx)
+    }
 
     ctx.restore()
   }
