@@ -3,12 +3,11 @@ import { Point } from '../Point'
 import { Pointer } from './Pointer'
 import { WheelDirection } from './WheelDirection'
 
-export class Mouse extends Pointer {
+export class Touch extends Pointer {
   private readonly element: HTMLElement
   private click: number | boolean | null
   private mtime: number
   private loose: number | boolean | null
-  private wheelValue: number
 
   public constructor(element: HTMLElement | null = null) {
     super()
@@ -16,21 +15,17 @@ export class Mouse extends Pointer {
     this.click = null
     this.mtime = 0
     this.loose = null
-    this.wheelValue = 0
     this.element = element instanceof HTMLElement ? element : document.body
 
-    this.element.addEventListener('mousedown', (e: MouseEvent) => this.onMouseDown(e))
-    this.element.addEventListener('mousemove', (e: MouseEvent) => this.onMouseMove(e))
-    this.element.addEventListener('mouseup', (e: MouseEvent) => this.onMouseUp(e))
-    this.element.addEventListener('wheel', (e: WheelEvent) => this.onWheel(e))
+    this.element.addEventListener('touchstart', (e: TouchEvent) => this.onTouchDown(e))
+    this.element.addEventListener('touchmove', (e: TouchEvent) => this.onTouchMove(e))
+    this.element.addEventListener('touchend', (e: TouchEvent) => this.onTouchUp(e))
   }
 
   // à faire : trouver une méthode pour éviter un appel à une méthode, comme
   // dans la classe Keyboard
   public update(): void {
     this.mtime += 1
-
-    this.wheelValue = 0
   }
 
   // Tant que le bouton est levé
@@ -55,35 +50,27 @@ export class Mouse extends Pointer {
 
   // Roulette
   public wheel(): WheelDirection {
-    if (this.wheelValue < 0) {
-      return WheelDirection.Top
-    } else if (this.wheelValue > 0) {
-      return WheelDirection.Bottom
-    }
+    // throw new Error('No wheel on touch')
 
     return WheelDirection.None
   }
 
-  private onMouseDown(e: MouseEvent): void {
-    this.onMouseMove(e)
+  private onTouchDown(e: TouchEvent): void {
+    this.onTouchMove(e)
     this.click = this.mtime
   }
 
-  private onMouseMove(e: MouseEvent): void {
+  private onTouchMove(e: TouchEvent): void {
     const position = new Point(
-      e.pageX - this.element.offsetLeft,
-      e.pageY - this.element.offsetTop,
+      e.targetTouches[0].pageX - this.element.offsetLeft,
+      e.targetTouches[0].pageY - this.element.offsetTop,
     )
 
     this.setPosition(position)
   }
 
-  private onMouseUp(_e: MouseEvent): void {
+  private onTouchUp(_e: TouchEvent): void {
     this.loose = this.mtime
     this.click = null
-  }
-
-  private onWheel(e: WheelEvent): void {
-    this.wheelValue = e.deltaY
   }
 }

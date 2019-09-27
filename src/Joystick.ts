@@ -21,6 +21,9 @@ export class Joystick {
     }
 
     public update(dt: number): void {
+        if (this.pointer.down()) {
+            console.log(this.pointer.getPosition())
+        }
     }
 
     public render(ctx: CanvasRenderingContext2D): void {

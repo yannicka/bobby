@@ -6,8 +6,8 @@ import { Direction } from './Direction'
 import { Game } from './Game'
 import { ImageManager } from './ImageManager'
 import { Keyboard } from './input/Keyboard'
-import { Mouse } from './input/Mouse'
 import { Pointer } from './input/Pointer'
+import { Touch } from './input/Touch'
 import { Joystick } from './Joystick'
 import { Map } from './Map'
 import { Player } from './Player'
@@ -45,7 +45,7 @@ export class GameScene implements Scene {
     this.camera = new Camera(new Point(0, 0), { width: 100, height: 100 })
 
     this.keyboard = new Keyboard()
-    this.pointer = new Mouse(this.game.getCanvas())
+    this.pointer = new Touch(this.game.getCanvas())
 
     this.joystick = new Joystick(this.game, this.pointer, new Point(30, 30))
 
