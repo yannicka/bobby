@@ -7,9 +7,9 @@ import { Point } from './Point'
 export class Joystick {
     private readonly game: Game
     private readonly pointer: Pointer
-    private readonly position: Point
     private readonly outerRadius: number
     private readonly innerRadius: number
+    private position: Point
 
     public constructor(game: Game, pointer: Pointer, position: Point) {
         this.game = game
@@ -95,5 +95,9 @@ export class Joystick {
             }
 
         }
+    }
+
+    public setPosition(position: Point): void {
+        this.position = position
     }
 }

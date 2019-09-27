@@ -75,11 +75,18 @@ export class Game {
 
     this.scene.update(dt)
 
-    this.joystick.update(dt)
+    if (this.pointer.press()) {
+      const newPosition = this.pointer.getPosition().clone()
+      newPosition.x /= this.zoom
+      newPosition.y /= this.zoom
 
-    this.pointer.update(dt)
+      this.joystick.setPosition(newPosition)
+    }
 
     this.render(this.ctx)
+
+    this.joystick.update(dt)
+    this.pointer.update(dt)
 
     this.animationFrame = requestAnimationFrame(() => this.update())
   }
@@ -92,8 +99,10 @@ export class Game {
 
     this.scene.render(ctx)
 
-    if (isTouchDevice()) {
-      this.joystick.render(ctx)
+    if (this.pointer.down()) {
+      if (isTouchDevice()) {
+        this.joystick.render(ctx)
+      }
     }
   }
 
