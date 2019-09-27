@@ -3,12 +3,17 @@ import m from 'mithril'
 import { CELL_SIZE } from './Cell'
 import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
+import { Pointer } from './input/Pointer'
+import { Touch } from './input/Touch'
+import { Joystick } from './Joystick'
+import { Point } from './Point'
 import { Scene } from './Scene'
 import { ChooseLevelScreen } from './screen/ChooseLevelScreen'
 import { EndGameScreen } from './screen/EndGameScreen'
 import { GameScreen } from './screen/GameScreen'
 import { HomeScreen } from './screen/HomeScreen'
 import { state } from './State'
+import { isTouchDevice } from './Util'
 
 const screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
 
@@ -36,6 +41,8 @@ function computeAppSize() {
 export class Game {
   private readonly canvas: HTMLCanvasElement
   private readonly ctx: CanvasRenderingContext2D
+  private readonly pointer: Pointer
+  private readonly joystick: Joystick
   private animationFrame: number
   private lastUpdate: number
   private scene: Scene
@@ -51,6 +58,9 @@ export class Game {
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
 
+    this.pointer = new Touch(this.canvas)
+    this.joystick = new Joystick(this, this.pointer, new Point(30, 30))
+
     this.scene = new GameScene(this, levelName, state.getStorage())
 
     this.resize()
@@ -65,6 +75,10 @@ export class Game {
 
     this.scene.update(dt)
 
+    this.joystick.update(dt)
+
+    this.pointer.update(dt)
+
     this.render(this.ctx)
 
     this.animationFrame = requestAnimationFrame(() => this.update())
@@ -77,6 +91,10 @@ export class Game {
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.scene.render(ctx)
+
+    if (isTouchDevice()) {
+      this.joystick.render(ctx)
+    }
   }
 
   public resize(_e: UIEvent | null = null): void {
@@ -114,6 +132,10 @@ export class Game {
 
   public getZoom(): number {
     return this.zoom
+  }
+
+  public getJoystick(): Joystick {
+    return this.joystick
   }
 }
 
