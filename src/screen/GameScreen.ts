@@ -18,7 +18,9 @@ export const GameScreen: m.Component = {
           ]),
         ]),
       ]),
-      m('canvas', { 'id': 'app' }),
+      m('div', { 'id': 'app-wrapper' }, [
+        m('canvas', { 'id': 'app' }),
+      ]),
     ]
   },
 
