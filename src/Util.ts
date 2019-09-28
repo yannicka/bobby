@@ -34,16 +34,17 @@ export function clamp(num: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, num))
 }
 
+// @todo Retenir le résultat afin d'éviter de le recalculer à chaque appel.
+//
 // @see https://stackoverflow.com/a/4819886
 export function isTouchDevice() {
   const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ')
 
-  const mq = function(query: string): boolean {
-    return window.matchMedia(query).matches
+  const mq = function(mediaQuery: string): boolean {
+    return window.matchMedia(mediaQuery).matches
   }
 
-  // @ts-ignore
-  if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+  if ('ontouchstart' in window) {
     return true
   }
 

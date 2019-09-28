@@ -4,7 +4,7 @@ export enum WheelDirection {
   Bottom,
 }
 
-export module WheelDirection {
+export namespace WheelDirection {
   export function toInt(wheelDirection: WheelDirection): number {
     switch (wheelDirection) {
       case WheelDirection.None:
