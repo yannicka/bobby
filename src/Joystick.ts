@@ -24,10 +24,14 @@ export class Joystick {
     }
 
     public render(ctx: CanvasRenderingContext2D): void {
+        ctx.lineWidth = 1
+
         ctx.beginPath()
         ctx.arc(this.position.x, this.position.y, this.outerRadius, 0, 2 * Math.PI, false)
-        ctx.fillStyle = 'darkgray'
+        ctx.fillStyle = '#999'
         ctx.fill()
+        ctx.strokeStyle = '#666'
+        ctx.stroke()
 
         const pointerPosition = this.computeForce()
         pointerPosition.x *= this.innerRadius
@@ -37,8 +41,10 @@ export class Joystick {
 
         ctx.beginPath()
         ctx.arc(pointerPosition.x, pointerPosition.y, this.innerRadius, 0, 2 * Math.PI, false)
-        ctx.fillStyle = 'gray'
+        ctx.fillStyle = '#555'
         ctx.fill()
+        ctx.strokeStyle = '#333'
+        ctx.stroke()
     }
 
     // @see https://codepen.io/jiffy/pen/zrqwON
