@@ -32,6 +32,8 @@ export const GameScreen: m.Component = {
     updateActionbarLevel(levelName)
 
     document.addEventListener('click', documentClickEvent)
+
+    document.body.classList.add('bg-dark')
   },
 
   onupdate(vnode: m.Vnode) {
@@ -50,6 +52,8 @@ export const GameScreen: m.Component = {
     game.stop()
 
     document.removeEventListener('click', documentClickEvent)
+
+    document.body.classList.remove('bg-dark')
   },
 }
 
