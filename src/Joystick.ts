@@ -16,8 +16,8 @@ export class Joystick {
         this.pointer = pointer
         this.position = position
 
-        this.outerRadius = 10
-        this.innerRadius = 6
+        this.outerRadius = 8
+        this.innerRadius = 5
     }
 
     public update(dt: number): void {
@@ -77,25 +77,25 @@ export class Joystick {
         if (this.pointer.down()) {
             const force = this.computeForce()
 
-            const direction: Direction | null = null
+            const forceNeeded = 0.65
 
             if (Math.abs(force.x) > Math.abs(force.y)) {
                 // mouvement horizontal
-                if (force.x >= 0.5) {
+                if (force.x >= forceNeeded) {
                     player.move(Direction.Right)
                 }
 
-                if (force.x <= -0.5) {
+                if (force.x <= -forceNeeded) {
                     player.move(Direction.Left)
                 }
             } else {
                 // mouvement vertical
 
-                if (force.y >= 0.5) {
+                if (force.y >= forceNeeded) {
                     player.move(Direction.Down)
                 }
 
-                if (force.y <= -0.5) {
+                if (force.y <= -forceNeeded) {
                     player.move(Direction.Up)
                 }
             }
