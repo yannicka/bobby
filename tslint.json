@@ -31,6 +31,7 @@
     "no-unbound-method": false,
     "no-floating-promises": false,
     "no-void-expression": false,
+    "no-irregular-whitespace": false,
 
     "no-default-export": false,
     "no-default-import": false,

@@ -12,6 +12,7 @@ import { ChooseLevelScreen } from './screen/ChooseLevelScreen'
 import { EndGameScreen } from './screen/EndGameScreen'
 import { GameScreen } from './screen/GameScreen'
 import { HomeScreen } from './screen/HomeScreen'
+import { OptionsScreen } from './screen/OptionsScreen'
 import { state } from './State'
 import { isTouchDevice } from './Util'
 
@@ -172,6 +173,7 @@ export class Superapp {
 
     m.route(this.superapp, '/', {
       '/': HomeScreen,
+      '/options': OptionsScreen,
       '/choose-level': ChooseLevelScreen,
       '/game/:level': GameScreen,
       '/end-game': EndGameScreen,

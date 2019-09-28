@@ -7,6 +7,7 @@ export const HomeScreen: m.Component = {
         m('div', { 'class': 'actionbar-gamename' }, 'Bobby'),
       ]),
       m(m.route.Link, { 'href': '/choose-level', 'class': 'btn-play' }, 'Jouer'),
+      m(m.route.Link, { 'href': '/options', 'class': 'btn' }, 'Options'),
     ]
   },
 }

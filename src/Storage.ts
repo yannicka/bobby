@@ -76,4 +76,8 @@ export class Storage {
 
     localStorage.setItem('levels', JSON.stringify(l))
   }
+
+  public reset(): void {
+    localStorage.clear()
+  }
 }
