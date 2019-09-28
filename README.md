@@ -27,10 +27,6 @@ npm run serve # ou npm run build
 
 - Améliorer les transitions, très peu paramétrables actuellement.
 
-### Mobile
-
-- Donner la possibilité de jouer depuis un téléphone.
-
 ### Graphismes
 
 - Améliorer les graphismes.
