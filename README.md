@@ -15,17 +15,7 @@ npm run serve # ou npm run build
 
 - Mettre en forme l'écran de fin de jeu ;
 
-- Possibilité de redémarrer un niveau ;
-
 - Possibilité de remttre à zéro son avancement.
-
-### Les détails
-
-- Lorsqu'on essaye de se déplacer vers un bloc solide, l'animation ne s'active
-  qu'au moment où le clic est lâché. À la place, il ne faudrait soit aucun
-  mouvement, soit un mouvement tout le long de l'appui ;
-
-- Améliorer les transitions, très peu paramétrables actuellement.
 
 ### Graphismes
 
@@ -43,13 +33,18 @@ npm run serve # ou npm run build
 
 ### En bonus *(si possible)*
 
-- Compter le nombre de pas et attribuer un score à chaque niveau (3 = parfait,
-  nombre de pas minimal atteint ; 2 = bien ; 1 = bof ; 0 = nul) ;
+- Lorsqu'on essaye de se déplacer vers un bloc solide, l'animation ne s'active
+  qu'au moment où le clic est lâché. À la place, il ne faudrait soit aucun
+  mouvement, soit un mouvement tout le long de l'appui ;
+
+- Ajouter des transitions ;
 
 - Ajouter de nouveaux mécanismes (par exemple des caisses amovibles, mais cela
   nécessite une refonte du système de grille) ;
 
-- Ajouter une vue d'oiseau.
+- Ajouter une vue d'oiseau ;
+
+- Retirer le bloc « Barrière » ?
 
 ## Ressources intéressantes
 
