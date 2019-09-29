@@ -31,7 +31,8 @@
     input,
     textarea,
     select {
-      font-size: inherit;
+      font: inherit;
+      color: inherit;
     }
 
     #superapp {
@@ -127,6 +128,8 @@
       display: inline-block;
       color: #fff;
       height: 100%;
+      box-sizing: border-box;
+      text-decoration: none;
     }
 
     .actionbar-button:hover {
@@ -140,7 +143,7 @@
       right: 0;
       display: flex;
       flex-direction: column;
-      width: 276px;
+      width: 290px;
       box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
       display: none;
     }
@@ -155,6 +158,10 @@
       background: #fff;
       text-align: left;
       width: 100%;
+      text-decoration: none;
+      display: inline-block;
+      color: inherit;
+      box-sizing: border-box;
     }
 
     .actionbar-nav-button:hover {

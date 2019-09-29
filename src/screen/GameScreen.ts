@@ -11,10 +11,10 @@ export const GameScreen: m.Component = {
       m('div', { 'class': 'actionbar' }, [
         m('div', { 'class': 'actionbar-level' }, 'Niveau X/Y'),
         m('div', { 'class': 'actionbar-menu' }, [
-          m('button', { 'class': 'actionbar-button', 'onclick': showMenu }, 'Menu'),
+          m('button', { 'onclick': showMenu, 'class': 'actionbar-button' }, 'Menu'),
           m('nav', { 'class': 'actionbar-menu-nav' }, [
-            m('button', { 'class': 'actionbar-nav-button', 'onclick': restartLevel }, 'Recommencer le niveau'),
-            m('button', { 'class': 'actionbar-nav-button', 'onclick': goToMenu }, 'Retourner au menu'),
+            m('button', { 'onclick': restartLevel, 'class': 'actionbar-nav-button' }, 'Recommencer le niveau'),
+            m(m.route.Link, { 'href': '/choose-level', 'class': 'actionbar-nav-button' }, 'Retourner au menu'),
           ]),
         ]),
       ]),

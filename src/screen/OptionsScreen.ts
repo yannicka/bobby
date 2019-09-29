@@ -8,17 +8,13 @@ export const OptionsScreen: m.Component = {
       m('div', { 'class': 'actionbar' }, [
         m('div', { 'class': 'actionbar-gamename' }, 'Bobby'),
         m('div', { 'class': 'actionbar-menu' }, [
-          m('button', { 'class': 'actionbar-button', 'onclick': goBack }, 'Retour'),
+          m(m.route.Link, { 'href': '/', 'class': 'actionbar-button' }, 'Retour'),
         ]),
       ]),
-      m('button', { 'class': 'btn', 'onclick': reset }, 'Remise à zéro'),
+      m('button', { 'onclick': reset, 'class': 'btn' }, 'Remise à zéro'),
       m('p', 'Cela effacera votre progression et vous ramènera au niveau 1'),
     ]
   },
-}
-
-function goBack(): void {
-  m.route.set('/')
 }
 
 function reset(e: any): void {
