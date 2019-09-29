@@ -9,7 +9,7 @@ export const EndGameScreen: m.Component = {
           m(m.route.Link, { 'href': '/', 'class': 'actionbar-button' }, 'Aller à l\'écran d\'accueil'),
         ]),
       ]),
-      'Vous avez fini le jeu. Félicitations.',
+      m('p', 'Vous avez fini le jeu. Félicitations.'),
     ]
   },
 }
