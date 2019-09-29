@@ -54,23 +54,35 @@
       margin: 16px auto;
     }
 
+    .btn:focus,
+    .btn:hover {
+      outline: 3px solid rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+    }
+
     .btn-play {
       padding: 20px 40px;
       display: inline-block;
-      border: 2px solid #fe9b55;
+      color: #fe9b55;
+      border: 2px solid currentColor;
       border-bottom-width: 12px;
       text-align: center;
       font-size: 2em;
       text-transform: uppercase;
-      color: #fe9b55;
       text-decoration: none;
       margin: 16px auto;
+    }
+
+    .btn-play:focus,
+    .btn-play:hover {
+      color: #b15c20;
+      cursor: pointer;
     }
 
     .levels {
       list-style: none;
       display: grid;
-      grid-template-columns: repeat(auto-fill, 50px);
+      grid-template-columns: repeat(auto-fill, 60px);
       gap: 16px;
       overflow: auto;
       scrollbar-color: #42c79c rgba(0, 0, 0, 0.3);
@@ -78,15 +90,21 @@
       margin: 12px;
       margin-top: 32px;
       justify-content: center;
+      padding: 4px;
     }
 
     .level a {
       display: block;
       background-color: #999999;
-      padding: 16px 8px;
+      padding: 20px 8px;
       color: white;
       text-decoration: none;
       text-align: center;
+    }
+
+    .level a:focus,
+    .level a:hover {
+      outline: 3px solid rgba(0, 0, 0, 0.6);
     }
 
     .level.accessible a {
@@ -132,8 +150,10 @@
       text-decoration: none;
     }
 
+    .actionbar-button:focus,
     .actionbar-button:hover {
       background-color: rgba(0, 0, 0, 0.3);
+      outline: none;
       cursor: pointer;
     }
 
@@ -164,6 +184,7 @@
       box-sizing: border-box;
     }
 
+    .actionbar-nav-button:focus,
     .actionbar-nav-button:hover {
       background: #ccc;
       cursor: pointer;
