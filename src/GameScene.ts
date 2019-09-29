@@ -17,7 +17,6 @@ export class GameScene implements Scene {
   private readonly game: Game
   private readonly map: Map
   private readonly player: Player
-  private readonly keyboard: Keyboard
   private readonly currentLevelName: string
   private readonly camera: Camera
   private readonly storage: Storage
@@ -38,8 +37,6 @@ export class GameScene implements Scene {
     this.map = new Map(this.storage.getLevels()[this.currentLevelName].fixed.map)
 
     this.camera = new Camera(new Point(0, 0), { width: 100, height: 100 })
-
-    this.keyboard = new Keyboard()
 
     this.player = new Player(this)
   }
@@ -65,19 +62,19 @@ export class GameScene implements Scene {
     this.camera.setPosition(cameraPosition)
 
     if (this.player.isAbleToMove()) {
-      if (this.keyboard.down('ArrowUp') || this.keyboard.down('KeyW')) {
+      if (this.game.getKeyboard().down('ArrowUp') || this.game.getKeyboard().down('KeyW')) {
         this.player.move(Direction.Up)
       }
 
-      if (this.keyboard.down('ArrowDown') || this.keyboard.down('KeyS')) {
+      if (this.game.getKeyboard().down('ArrowDown') || this.game.getKeyboard().down('KeyS')) {
         this.player.move(Direction.Down)
       }
 
-      if (this.keyboard.down('ArrowRight') || this.keyboard.down('KeyD')) {
+      if (this.game.getKeyboard().down('ArrowRight') || this.game.getKeyboard().down('KeyD')) {
         this.player.move(Direction.Right)
       }
 
-      if (this.keyboard.down('ArrowLeft') || this.keyboard.down('KeyA')) {
+      if (this.game.getKeyboard().down('ArrowLeft') || this.game.getKeyboard().down('KeyA')) {
         this.player.move(Direction.Left)
       }
     }

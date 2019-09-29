@@ -3,6 +3,7 @@ import m from 'mithril'
 import { CELL_SIZE } from './Cell'
 import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
+import { Keyboard } from './input/Keyboard'
 import { Pointer } from './input/Pointer'
 import { Touch } from './input/Touch'
 import { Joystick } from './Joystick'
@@ -42,6 +43,7 @@ function computeAppSize() {
 export class Game {
   private readonly canvas: HTMLCanvasElement
   private readonly ctx: CanvasRenderingContext2D
+  private readonly keyboard: Keyboard
   private readonly pointer: Pointer
   private readonly joystick: Joystick
   private animationFrame: number
@@ -58,6 +60,8 @@ export class Game {
     this.zoom = 1
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
+
+    this.keyboard = new Keyboard()
 
     this.pointer = new Touch(this.canvas)
     this.joystick = new Joystick(this, this.pointer, new Point(30, 30))
@@ -146,6 +150,10 @@ export class Game {
 
   public getJoystick(): Joystick {
     return this.joystick
+  }
+
+  public getKeyboard(): Keyboard {
+    return this.keyboard
   }
 }
 
