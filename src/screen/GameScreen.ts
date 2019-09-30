@@ -1,12 +1,18 @@
 import m from 'mithril'
 
 import { Game } from '../Game'
+import { Keyboard } from '../input/Keyboard'
+import { Pointer } from '../input/Pointer'
+import { Touch } from '../input/Touch'
 import { state } from '../State'
 
 let game: Game = null
 
-export const GameScreen: m.Component = {
-  view() {
+export class GameScreen {
+  private keyboard: Keyboard
+  private pointer: Pointer
+
+  public view() {
     return [
       m('div', { 'class': 'actionbar' }, [
         m('div', { 'class': 'actionbar-level' }, 'Niveau X/Y'),
@@ -22,41 +28,56 @@ export const GameScreen: m.Component = {
         m('canvas', { 'id': 'app' }),
       ]),
     ]
-  },
+  }
 
-  oncreate(vnode: m.Vnode) {
+  public constructor() {
+    const canvas = document.getElementById('app') as HTMLCanvasElement
+
+    this.keyboard = new Keyboard()
+    this.pointer = new Touch(canvas)
+  }
+
+  public oncreate(vnode: m.Vnode) {
     const attrs = vnode.attrs as any
 
     const levelName = attrs.level as string
 
-    game = new Game(levelName)
+    game = new Game(this, levelName)
 
     updateActionbarLevel(levelName)
 
     document.addEventListener('click', documentClickEvent)
 
     document.body.classList.add('bg-dark')
-  },
+  }
 
-  onupdate(vnode: m.Vnode) {
+  public onupdate(vnode: m.Vnode) {
     const attrs = vnode.attrs as any
 
     game.stop()
 
     const levelName = attrs.level as string
 
-    game = new Game(levelName)
+    game = new Game(this, levelName)
 
     updateActionbarLevel(levelName)
-  },
+  }
 
-  onremove(vnode: m.Vnode) {
+  public onremove(vnode: m.Vnode) {
     game.stop()
 
     document.removeEventListener('click', documentClickEvent)
 
     document.body.classList.remove('bg-dark')
-  },
+  }
+
+  public getKeyboard(): Keyboard {
+    return this.keyboard
+  }
+
+  public getPointer(): Pointer {
+    return this.pointer
+  }
 }
 
 function showMenu(e: any): void {

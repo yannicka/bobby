@@ -45,13 +45,16 @@ export class Game {
   private readonly ctx: CanvasRenderingContext2D
   private readonly keyboard: Keyboard
   private readonly pointer: Pointer
+  private readonly gameScreen: GameScreen
   private readonly joystick: Joystick
   private animationFrame: number
   private lastUpdate: number
   private scene: Scene
   private zoom: number
 
-  public constructor(levelName: string) {
+  public constructor(gameScreen: GameScreen, levelName: string) {
+    this.gameScreen = gameScreen
+
     this.canvas = document.getElementById('app') as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d')
 
@@ -61,9 +64,9 @@ export class Game {
 
     window.addEventListener('resize', (e: UIEvent) => this.resize(e))
 
-    this.keyboard = new Keyboard()
+    this.keyboard = this.gameScreen.getKeyboard()
+    this.pointer = this.gameScreen.getPointer()
 
-    this.pointer = new Touch(this.canvas)
     this.joystick = new Joystick(this, this.pointer, new Point(30, 30))
 
     this.scene = new GameScene(this, levelName, state.getStorage())
