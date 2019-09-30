@@ -62,7 +62,7 @@ export class Game {
 
     this.zoom = 1
 
-    window.addEventListener('resize', (e: UIEvent) => this.resize(e))
+    this.listen()
 
     this.keyboard = this.gameScreen.getKeyboard()
     this.pointer = this.gameScreen.getPointer()
@@ -111,6 +111,22 @@ export class Game {
       if (isTouchDevice()) {
         this.joystick.render(ctx)
       }
+    }
+  }
+
+  public listen(): void {
+    window.addEventListener('resize', this)
+  }
+
+  public unlisten(): void {
+    window.removeEventListener('resize', this)
+  }
+
+  public handleEvent(e: UIEvent): void {
+    switch (e.type) {
+      case 'resize':
+        this.resize(e)
+        break
     }
   }
 
@@ -176,7 +192,7 @@ export class Superapp {
   }
 
   public init() {
-    window.addEventListener('resize', (e: UIEvent) => this.resize(e))
+    window.addEventListener('resize', this.resize)
 
     this.superapp = document.getElementById('superapp')
 

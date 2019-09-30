@@ -53,6 +53,7 @@ export class GameScreen {
     const attrs = vnode.attrs as any
 
     game.stop()
+    game.unlisten()
 
     const levelName = attrs.level as string
 
@@ -63,6 +64,7 @@ export class GameScreen {
 
   public onremove(vnode: m.Vnode) {
     game.stop()
+    game.unlisten()
 
     document.removeEventListener('click', documentClickEvent)
 
