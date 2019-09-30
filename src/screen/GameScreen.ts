@@ -30,14 +30,12 @@ export class GameScreen {
     ]
   }
 
-  public constructor() {
+  public oncreate(vnode: m.Vnode) {
     const canvas = document.getElementById('app') as HTMLCanvasElement
 
     this.keyboard = new Keyboard()
     this.pointer = new Touch(canvas)
-  }
 
-  public oncreate(vnode: m.Vnode) {
     const attrs = vnode.attrs as any
 
     const levelName = attrs.level as string
