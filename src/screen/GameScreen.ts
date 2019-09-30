@@ -69,6 +69,9 @@ export class GameScreen {
     document.removeEventListener('click', documentClickEvent)
 
     document.body.classList.remove('bg-dark')
+
+    this.keyboard.unlisten()
+    this.pointer.unlisten()
   }
 
   public getKeyboard(): Keyboard {

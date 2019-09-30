@@ -17,6 +17,8 @@ export abstract class Pointer {
     return this.position
   }
 
+  public abstract unlisten(): void
+
   public abstract update(dt: number): void
 
   // Tant que le bouton est levé

@@ -19,10 +19,41 @@ export class Mouse extends Pointer {
     this.wheelValue = 0
     this.element = element instanceof HTMLElement ? element : document.body
 
-    this.element.addEventListener('mousedown', (e: MouseEvent) => this.onMouseDown(e))
-    this.element.addEventListener('mousemove', (e: MouseEvent) => this.onMouseMove(e))
-    this.element.addEventListener('mouseup', (e: MouseEvent) => this.onMouseUp(e))
-    this.element.addEventListener('wheel', (e: WheelEvent) => this.onWheel(e))
+    this.listen()
+  }
+
+  public listen(): void {
+    this.element.addEventListener('mousedown', this)
+    this.element.addEventListener('mousemove', this)
+    this.element.addEventListener('mouseup', this)
+    this.element.addEventListener('wheel', this)
+  }
+
+  public unlisten(): void {
+    this.element.removeEventListener('mousedown', this)
+    this.element.removeEventListener('mousemove', this)
+    this.element.removeEventListener('mouseup', this)
+    this.element.removeEventListener('wheel', this)
+  }
+
+  public handleEvent(e: MouseEvent | WheelEvent): void {
+    switch (e.type) {
+      case 'mousedown':
+        this.onMouseDown(e as MouseEvent)
+        break
+
+      case 'mousemove':
+        this.onMouseMove(e as MouseEvent)
+        break
+
+      case 'mouseup':
+        this.onMouseUp(e as MouseEvent)
+        break
+
+      case 'wheel':
+        this.onWheel(e as WheelEvent)
+        break
+    }
   }
 
   // à faire : trouver une méthode pour éviter un appel à une méthode, comme

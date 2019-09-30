@@ -17,9 +17,35 @@ export class Touch extends Pointer {
     this.loose = null
     this.element = element instanceof HTMLElement ? element : document.body
 
-    this.element.addEventListener('touchstart', (e: TouchEvent) => this.onTouchDown(e))
-    this.element.addEventListener('touchmove', (e: TouchEvent) => this.onTouchMove(e))
-    this.element.addEventListener('touchend', (e: TouchEvent) => this.onTouchUp(e))
+    this.listen()
+  }
+
+  public listen(): void {
+    this.element.addEventListener('touchstart', this)
+    this.element.addEventListener('touchmove', this)
+    this.element.addEventListener('touchend', this)
+  }
+
+  public unlisten(): void {
+    this.element.removeEventListener('touchstart', this)
+    this.element.removeEventListener('touchmove', this)
+    this.element.removeEventListener('touchend', this)
+  }
+
+  public handleEvent(e: TouchEvent): void {
+    switch (e.type) {
+      case 'touchstart':
+        this.onTouchDown(e)
+        break
+
+      case 'touchmove':
+        this.onTouchMove(e)
+        break
+
+      case 'touchend':
+        this.onTouchUp(e)
+        break
+    }
   }
 
   // à faire : trouver une méthode pour éviter un appel à une méthode, comme

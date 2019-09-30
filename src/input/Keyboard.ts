@@ -6,8 +6,28 @@ export class Keyboard {
     this.keys = {}
     this.lasts = []
 
-    document.addEventListener('keyup', (e: KeyboardEvent) => this.onkeyup(e))
-    document.addEventListener('keydown', (e: KeyboardEvent) => this.onkeydown(e))
+    this.listen()
+  }
+
+  public listen(): void {
+    document.addEventListener('keyup', this)
+    document.addEventListener('keydown', this)
+  }
+
+  public unlisten(): void {
+    document.removeEventListener('keyup', this)
+    document.removeEventListener('keydown', this)
+  }
+
+  public handleEvent(e: KeyboardEvent): void {
+    switch (e.type) {
+      case 'keyup':
+        this.onkeyup(e)
+        break
+      case 'keydown':
+        this.onkeydown(e)
+        break
+    }
   }
 
   public up(k: string): boolean {
