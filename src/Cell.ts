@@ -231,10 +231,10 @@ export class Turnstile extends Cell {
 export class Start extends Cell {
   public constructor(position: Point) {
     super(position)
+  }
 
-    this.getAnimation().addAnimation('idle', [ 12 ])
-
-    this.getAnimation().play('idle')
+  public render(ctx: CanvasRenderingContext2D): void {
+    // Pas de rendu
   }
 }
 
