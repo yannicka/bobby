@@ -23,7 +23,8 @@ export abstract class Cell {
   public beforePassingEvent(_player: Player): void {
   }
 
-  public onPassingEvent(_player: Player, _gameScene: GameScene): void {
+  public onPassingEvent(_player: Player, _gameScene: GameScene): this | null {
+    return this
   }
 
   public isSolid?(_direction: Direction): boolean {
@@ -128,8 +129,10 @@ export class Conveyor extends Cell {
     this.getAnimation().play(direction.toString())
   }
 
-  public onPassingEvent(player: Player, _gameScene: GameScene): void {
+  public onPassingEvent(player: Player, _gameScene: GameScene): this | null {
     player.move(this.direction, 'idle')
+
+    return this
   }
 }
 
@@ -256,10 +259,12 @@ export class End extends Cell {
     this.getAnimation().play('inactive')
   }
 
-  public onPassingEvent(_player: Player, gameScene: GameScene): void {
+  public onPassingEvent(_player: Player, gameScene: GameScene): this | null {
     if (this.isActive()) {
       gameScene.nextLevel()
     }
+
+    return this
   }
 
   public activate(): void {
@@ -275,27 +280,16 @@ export class End extends Cell {
 
 // Pièce
 export class Coin extends Cell {
-  private collected: boolean
-
   public constructor(position: Point) {
     super(position)
 
-    this.collected = false
+    this.getAnimation().addAnimation('idle', [ 15 ])
 
-    this.getAnimation().addAnimation('not-collected', [ 15 ])
-    this.getAnimation().addAnimation('collected', [ 16 ])
-
-    this.getAnimation().play('not-collected')
+    this.getAnimation().play('idle')
   }
 
-  public onPassingEvent(_player: Player, _gameScene: GameScene): void {
-    this.collected = true
-
-    this.getAnimation().play('collected')
-  }
-
-  public isCollected(): boolean {
-    return this.collected
+  public onPassingEvent(_player: Player, _gameScene: GameScene): this | null {
+    return null
   }
 }
 
@@ -309,8 +303,10 @@ export class Ice extends Cell {
     this.getAnimation().play('idle')
   }
 
-  public onPassingEvent(player: Player, _gameScene: GameScene): void {
+  public onPassingEvent(player: Player, _gameScene: GameScene): this | null {
     player.move(player.getDirection(), 'idle')
+
+    return this
   }
 }
 
@@ -336,8 +332,10 @@ export class Fence extends Cell {
     player.getAnimationManager().play(`jump-${Direction.Down.toString()}`, true)
   }
 
-  public onPassingEvent(player: Player, _gameScene: GameScene): void {
+  public onPassingEvent(player: Player, _gameScene: GameScene): this | null {
     player.move(player.getDirection(), null)
+
+    return this
   }
 }
 

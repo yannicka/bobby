@@ -25,7 +25,7 @@ export class Map {
 
     this.endCell = this.getEndCell()
 
-    this.nbCoins = 0
+    this.nbCoins = null
   }
 
   public update(dt: number): void {
@@ -45,7 +45,7 @@ export class Map {
           cell.update(dt)
         }
 
-        if (cell instanceof Coin && !cell.isCollected()) {
+        if (cell instanceof Coin) {
           this.nbCoins += 1
         }
       }
@@ -80,7 +80,15 @@ export class Map {
     const cell = this.cells[position.y][position.x]
 
     if (typeof cell !== 'undefined') {
-      cell.onPassingEvent(player, gameScene)
+      const newCell = cell.onPassingEvent(player, gameScene)
+
+      if (cell !== newCell) {
+        if (newCell === null) {
+          this.cells[position.y][position.x] = undefined
+        } else {
+          this.cells[position.y][position.x] = newCell
+        }
+      }
     }
   }
 
