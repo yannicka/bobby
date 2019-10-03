@@ -5,6 +5,8 @@ import { Point } from './Point'
 
 export class Map {
   private readonly cells: Array<Array<Cell>>
+  private readonly endCell: End
+  private nbCoins: number
 
   public constructor(cells: Array<Array<number>>) {
     this.cells = []
@@ -20,16 +22,20 @@ export class Map {
         }
       }
     }
+
+    this.endCell = this.getEndCell()
+
+    this.nbCoins = 0
   }
 
   public update(dt: number): void {
-    if (this.countCoins() === 0) {
-      const endCell = this.getEndCell()
-
-      if (!endCell.isActive()) {
-        endCell.activate()
+    if (this.nbCoins === 0) {
+      if (!this.endCell.isActive()) {
+        this.endCell.activate()
       }
     }
+
+    this.nbCoins = 0
 
     for (let y = 0; y < this.cells.length; y += 1) {
       for (let x = 0; x < this.cells[y].length; x += 1) {
@@ -37,6 +43,10 @@ export class Map {
 
         if (typeof cell !== 'undefined') {
           cell.update(dt)
+        }
+
+        if (cell instanceof Coin && !cell.isCollected()) {
+          this.nbCoins += 1
         }
       }
     }
@@ -74,7 +84,7 @@ export class Map {
     }
   }
 
-  public startLocation(): Point | null {
+  public getStartPosition(): Point | null {
     for (let y = 0; y < this.cells.length; y += 1) {
       for (let x = 0; x < this.cells[y].length; x += 1) {
         const cell = this.cells[y][x]
@@ -86,36 +96,6 @@ export class Map {
     }
 
     return null
-  }
-
-  public getEndCell(): End | null {
-    for (let y = 0; y < this.cells.length; y += 1) {
-      for (let x = 0; x < this.cells[y].length; x += 1) {
-        const cell = this.cells[y][x]
-
-        if (cell instanceof End) {
-          return cell
-        }
-      }
-    }
-
-    return null
-  }
-
-  public countCoins(): number {
-    let nbCoins = 0
-
-    for (let y = 0; y < this.cells.length; y += 1) {
-      for (let x = 0; x < this.cells[y].length; x += 1) {
-        const cell = this.cells[y][x]
-
-        if (cell instanceof Coin && !cell.isCollected()) {
-          nbCoins += 1
-        }
-      }
-    }
-
-    return nbCoins
   }
 
   public getSize(): { width: number; height: number } {
@@ -135,5 +115,23 @@ export class Map {
       width,
       height,
     }
+  }
+
+  private getEndCell(): End | null {
+    if (this.endCell instanceof End) {
+      return this.endCell
+    }
+
+    for (let y = 0; y < this.cells.length; y += 1) {
+      for (let x = 0; x < this.cells[y].length; x += 1) {
+        const cell = this.cells[y][x]
+
+        if (cell instanceof End) {
+          return cell
+        }
+      }
+    }
+
+    return null
   }
 }

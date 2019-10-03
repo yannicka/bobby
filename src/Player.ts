@@ -27,7 +27,7 @@ export class Player {
     this.gameScene = gameScene
     this.map = this.gameScene.getMap()
 
-    const start = this.map.startLocation()
+    const start = this.map.getStartPosition()
 
     const startX = start.x
     const startY = start.y
