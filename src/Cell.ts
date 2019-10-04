@@ -20,22 +20,27 @@ export abstract class Cell {
     this.animation = new AnimationManager(image, CELL_SIZE, CELL_SIZE)
   }
 
-  public beforePassingEvent(_player: Player): void {
+  // Évènement : avant que le joueur n'entre sur le case
+  public onBeforePlayerIn(_player: Player): void {
   }
 
-  public onPassingEvent(_player: Player, _gameScene: GameScene): this | null {
+  // Évènement : lorsque le joueur est entièrement dans la case
+  public onAfterPlayerIn(_player: Player, _gameScene: GameScene): this | null {
     return this
   }
 
+  // Évènement : lorsque le joueur a quitté la case
+  public onAfterPlayerOut(): void {
+  }
+
+  // Est-ce qu'on peut rentrer sur la case ?
   public isSolid?(_direction: Direction): boolean {
     return false
   }
 
+  // Est-ce qu'on peut sortir de la case ?
   public isBlocking?(_direction: Direction): boolean {
     return false
-  }
-
-  public nextState(): void {
   }
 
   public update(dt: number): void {
@@ -90,7 +95,7 @@ export class Button extends Cell {
     this.getAnimation().play('deactivated')
   }
 
-  public nextState(): void {
+  public onAfterPlayerOut(): void {
     this.activated = true
 
     this.getAnimation().play('activated')
@@ -129,7 +134,7 @@ export class Conveyor extends Cell {
     this.getAnimation().play(direction.toString())
   }
 
-  public onPassingEvent(player: Player, _gameScene: GameScene): this | null {
+  public onAfterPlayerIn(player: Player, _gameScene: GameScene): this | null {
     player.move(this.direction, 'idle')
 
     return this
@@ -155,7 +160,7 @@ export class Turnstile extends Cell {
     this.getAnimation().play(angle.toString())
   }
 
-  public nextState(): void {
+  public onAfterPlayerOut(): void {
     switch (this.angle) {
       case Rotation.UpRight:
         this.angle = Rotation.DownRight
@@ -259,7 +264,7 @@ export class End extends Cell {
     this.getAnimation().play('inactive')
   }
 
-  public onPassingEvent(_player: Player, gameScene: GameScene): this | null {
+  public onAfterPlayerIn(_player: Player, gameScene: GameScene): this | null {
     if (this.isActive()) {
       gameScene.nextLevel()
     }
@@ -288,7 +293,7 @@ export class Coin extends Cell {
     this.getAnimation().play('idle')
   }
 
-  public onPassingEvent(_player: Player, _gameScene: GameScene): this | null {
+  public onAfterPlayerIn(_player: Player, _gameScene: GameScene): this | null {
     return null
   }
 }
@@ -303,7 +308,7 @@ export class Ice extends Cell {
     this.getAnimation().play('idle')
   }
 
-  public onPassingEvent(player: Player, _gameScene: GameScene): this | null {
+  public onAfterPlayerIn(player: Player, _gameScene: GameScene): this | null {
     player.move(player.getDirection(), 'idle')
 
     return this
@@ -320,6 +325,16 @@ export class Fence extends Cell {
     this.getAnimation().play('idle')
   }
 
+  public onBeforePlayerIn(player: Player): void {
+    player.getAnimationManager().play(`jump-${Direction.Down.toString()}`, true)
+  }
+
+  public onAfterPlayerIn(player: Player, _gameScene: GameScene): this | null {
+    player.move(player.getDirection(), null)
+
+    return this
+  }
+
   public isSolid(direction: Direction): boolean {
     if (direction === Direction.Down) {
       return false
@@ -327,22 +342,15 @@ export class Fence extends Cell {
 
     return true
   }
-
-  public beforePassingEvent(player: Player): void {
-    player.getAnimationManager().play(`jump-${Direction.Down.toString()}`, true)
-  }
-
-  public onPassingEvent(player: Player, _gameScene: GameScene): this | null {
-    player.move(player.getDirection(), null)
-
-    return this
-  }
 }
 
 export const cells: { [key: number]: (position: Point) => Cell } = {
   2: (position: Point): Cell => new Stone(position),
 
-  4: (position: Point): Cell => new Button(position),
+  14: (position: Point): Cell => new Start(position),
+  15: (position: Point): Cell => new End(position),
+
+  16: (position: Point): Cell => new Coin(position),
 
   6: (position: Point): Cell => new Conveyor(position, Direction.Up),
   7: (position: Point): Cell => new Conveyor(position, Direction.Down),
@@ -353,16 +361,10 @@ export const cells: { [key: number]: (position: Point) => Cell } = {
   11: (position: Point): Cell => new Turnstile(position, Rotation.UpLeft),
   12: (position: Point): Cell => new Turnstile(position, Rotation.DownRight),
   13: (position: Point): Cell => new Turnstile(position, Rotation.DownLeft),
-
-  14: (position: Point): Cell => new Start(position),
-  15: (position: Point): Cell => new End(position),
-
-  16: (position: Point): Cell => new Coin(position),
-
-  17: (position: Point): Cell => new Ice(position),
-
   18: (position: Point): Cell => new Turnstile(position, Rotation.Horizontal),
   19: (position: Point): Cell => new Turnstile(position, Rotation.Vertical),
 
+  4: (position: Point): Cell => new Button(position),
+  17: (position: Point): Cell => new Ice(position),
   20: (position: Point): Cell => new Fence(position),
 }

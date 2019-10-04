@@ -5,9 +5,9 @@ import { WheelDirection } from './WheelDirection'
 
 export class Touch extends Pointer {
   private readonly element: HTMLElement
-  private click: number | boolean | null
+  private click: number | null
   private mtime: number
-  private loose: number | boolean | null
+  private loose: number | null
 
   public constructor(element: HTMLElement | null = null) {
     super()

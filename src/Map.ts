@@ -68,19 +68,19 @@ export class Map {
     return this.cells[position.y][position.x]
   }
 
-  public nextStateOf(position: Point) {
+  public onAfterPlayerOut(position: Point) {
     const cell = this.cells[position.y][position.x]
 
     if (typeof cell !== 'undefined') {
-      cell.nextState()
+      cell.onAfterPlayerOut()
     }
   }
 
-  public onPassingEvent(position: Point, player: Player, gameScene: GameScene): void {
+  public onAfterPlayerIn(position: Point, player: Player, gameScene: GameScene): void {
     const cell = this.cells[position.y][position.x]
 
     if (typeof cell !== 'undefined') {
-      const newCell = cell.onPassingEvent(player, gameScene)
+      const newCell = cell.onAfterPlayerIn(player, gameScene)
 
       if (cell !== newCell) {
         if (newCell === null) {

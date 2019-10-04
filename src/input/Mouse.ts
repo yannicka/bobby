@@ -5,9 +5,9 @@ import { WheelDirection } from './WheelDirection'
 
 export class Mouse extends Pointer {
   private readonly element: HTMLElement
-  private click: number | boolean | null
+  private click: number | null
   private mtime: number
-  private loose: number | boolean | null
+  private loose: number | null
   private wheelValue: number
 
   public constructor(element: HTMLElement | null = null) {
@@ -88,7 +88,9 @@ export class Mouse extends Pointer {
   public wheel(): WheelDirection {
     if (this.wheelValue < 0) {
       return WheelDirection.Top
-    } else if (this.wheelValue > 0) {
+    }
+
+    if (this.wheelValue > 0) {
       return WheelDirection.Bottom
     }
 

@@ -95,8 +95,8 @@ export class Player {
         this.canmove = true
         this.displayPosition = this.targetPosition.clone()
 
-        this.map.nextStateOf(this.previousPosition)
-        this.map.onPassingEvent(this.position, this, this.gameScene)
+        this.map.onAfterPlayerOut(this.previousPosition)
+        this.map.onAfterPlayerIn(this.position, this, this.gameScene)
       }
     }
   }
@@ -154,7 +154,7 @@ export class Player {
     this.direction = direction
 
     if (nextCell) {
-      nextCell.beforePassingEvent(this)
+      nextCell.onBeforePlayerIn(this)
     }
 
     this.moveTo(newMapPosition)
