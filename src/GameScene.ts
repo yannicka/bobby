@@ -31,7 +31,7 @@ export class GameScene implements Scene {
     const truc = this.storage.getLevels()[this.currentLevelName]
 
     if (!truc.dynamic.accessible) {
-        history.back()
+      m.route.set('/choose-level')
     }
 
     this.map = new Map(this.storage.getLevels()[this.currentLevelName].fixed.map)
@@ -42,44 +42,9 @@ export class GameScene implements Scene {
   }
 
   public update(dt: number): void {
-    const [ gameWidth, gameHeight ] = this.game.getScreenSize()
-    const { width: mapWidth, height: mapHeight } = this.map.getDisplayedSize()
+    this.updateCamera(dt)
 
-    const cameraPosition = this.player.getDisplayPosition().clone()
-
-    cameraPosition.x = -cameraPosition.x
-    cameraPosition.y = -cameraPosition.y
-
-    cameraPosition.x -= CELL_SIZE / 2
-    cameraPosition.y -= CELL_SIZE / 2
-
-    cameraPosition.x += gameWidth / 2
-    cameraPosition.y += gameHeight / 2
-
-    cameraPosition.x = clamp(cameraPosition.x, -mapWidth + gameWidth, 0)
-    cameraPosition.y = clamp(cameraPosition.y, -mapHeight + gameHeight, 0)
-
-    this.camera.setPosition(cameraPosition)
-
-    if (this.player.isAbleToMove()) {
-      if (this.game.getKeyboard().down('ArrowUp') || this.game.getKeyboard().down('KeyW')) {
-        this.player.move(Direction.Up)
-      }
-
-      if (this.game.getKeyboard().down('ArrowDown') || this.game.getKeyboard().down('KeyS')) {
-        this.player.move(Direction.Down)
-      }
-
-      if (this.game.getKeyboard().down('ArrowRight') || this.game.getKeyboard().down('KeyD')) {
-        this.player.move(Direction.Right)
-      }
-
-      if (this.game.getKeyboard().down('ArrowLeft') || this.game.getKeyboard().down('KeyA')) {
-        this.player.move(Direction.Left)
-      }
-    }
-
-    this.game.getJoystick().updatePlayer(this.player)
+    this.movePlayer(dt)
 
     this.map.update(dt)
     this.player.update(dt)
@@ -128,5 +93,48 @@ export class GameScene implements Scene {
       })
       // this.game.changeScene(new GameScene(this.game, nextLevel, this.storage))
     }
+  }
+
+  private updateCamera(_dt: number): void {
+    const [ gameWidth, gameHeight ] = this.game.getScreenSize()
+    const { width: mapWidth, height: mapHeight } = this.map.getDisplayedSize()
+
+    const cameraPosition = this.player.getDisplayPosition().clone()
+
+    cameraPosition.x = -cameraPosition.x
+    cameraPosition.y = -cameraPosition.y
+
+    cameraPosition.x -= CELL_SIZE / 2
+    cameraPosition.y -= CELL_SIZE / 2
+
+    cameraPosition.x += gameWidth / 2
+    cameraPosition.y += gameHeight / 2
+
+    cameraPosition.x = clamp(cameraPosition.x, -mapWidth + gameWidth, 0)
+    cameraPosition.y = clamp(cameraPosition.y, -mapHeight + gameHeight, 0)
+
+    this.camera.setPosition(cameraPosition)
+  }
+
+  public movePlayer(_dt: number): void {
+    if (this.player.isAbleToMove()) {
+      if (this.game.getKeyboard().down('ArrowUp') || this.game.getKeyboard().down('KeyW')) {
+        this.player.move(Direction.Up)
+      }
+
+      if (this.game.getKeyboard().down('ArrowDown') || this.game.getKeyboard().down('KeyS')) {
+        this.player.move(Direction.Down)
+      }
+
+      if (this.game.getKeyboard().down('ArrowRight') || this.game.getKeyboard().down('KeyD')) {
+        this.player.move(Direction.Right)
+      }
+
+      if (this.game.getKeyboard().down('ArrowLeft') || this.game.getKeyboard().down('KeyA')) {
+        this.player.move(Direction.Left)
+      }
+    }
+
+    this.game.getJoystick().updatePlayer(this.player)
   }
 }

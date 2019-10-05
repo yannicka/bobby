@@ -19,12 +19,6 @@ npm run serve # ou npm run build
 
 - Améliorer les graphismes.
 
-### Nettoyage du code
-
-- Nettoyer le code qui est sale par endroit ;
-
-- Optimiser le code, qui est totalement sous-optimisé par endroit.
-
 ### Bogues connus (et à corriger)
 
 - *Aucun*.
