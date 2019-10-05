@@ -9,8 +9,6 @@ npm run serve # ou npm run build
 
 ### Niveaux
 
-- Des niveaux ;
-
 - Mettre en forme l'écran de choix de niveau ;
 
 - Mettre en forme l'écran de fin de jeu ;
