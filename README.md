@@ -1,6 +1,6 @@
 # Bobby
 
-```
+```shell
 npm install
 npm run serve # ou npm run build
 ```
