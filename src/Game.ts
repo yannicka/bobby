@@ -202,6 +202,7 @@ export class Superapp {
     m.route(this.superapp, '/', {
       '/': HomeScreen,
       '/options': OptionsScreen,
+      '/help': HelpScreen,
       '/choose-level': ChooseLevelScreen,
       '/game/:level': GameScreen,
       '/end-game': EndGameScreen,
