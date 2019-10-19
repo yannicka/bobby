@@ -6,8 +6,8 @@ export const HomeScreen: m.Component = {
       m('div', { 'class': 'topbar' }, [
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),
       ]),
-      m('div', { 'class': 'middle' }, [
-        m('div', { 'class': 'middle-content' }, [
+      m('div', { 'class': 'main-wrapper' }, [
+        m('div', { 'class': 'main-content' }, [
           m(m.route.Link, { 'href': '/choose-level', 'class': 'btn-play' }, 'Jouer'),
         ]),
       ]),

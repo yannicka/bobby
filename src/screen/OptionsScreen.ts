@@ -11,8 +11,8 @@ export const OptionsScreen: m.Component = {
           m(m.route.Link, { 'href': '/', 'class': 'topbar-button' }, 'Retour'),
         ]),
       ]),
-      m('div', { 'class': 'middle' }, [
-        m('div', { 'class': 'middle-content' }, [
+      m('div', { 'class': 'main-wrapper' }, [
+        m('div', { 'class': 'main-content' }, [
           m('button', { 'onclick': reset, 'class': 'btn' }, 'Remise à zéro'),
           m('p', 'Cela effacera votre progression et vous ramènera au niveau 1'),
         ]),

@@ -9,8 +9,8 @@ export const HelpScreen: m.Component = {
           m(m.route.Link, { 'href': '/', 'class': 'topbar-button' }, 'Retour'),
         ]),
       ]),
-      m('div', { 'class': 'middle' }, [
-        m('div', { 'class': 'middle-content' }, [
+      m('div', { 'class': 'main-wrapper' }, [
+        m('div', { 'class': 'main-content' }, [
           m('p', 'Récoltez les pièces dans chaque niveau.'),
         ]),
       ]),
