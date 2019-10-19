@@ -22,7 +22,7 @@ export const OptionsScreen: m.Component = {
 }
 
 function reset(e: any): void {
-  if (confirm('Êtes-vous sûr ?')) {
+  if (confirm('Êtes-vous sûr de vouloir effacer votre progression ?')) {
     state.getStorage().reset()
   }
 }
