@@ -3,11 +3,18 @@ import m from 'mithril'
 export const HomeScreen: m.Component = {
   view() {
     return [
-      m('div', { 'class': 'actionbar' }, [
-        m('div', { 'class': 'actionbar-gamename' }, 'Bobby'),
+      m('div', { 'class': 'topbar' }, [
+        m('div', { 'class': 'topbar-gamename' }, 'Bobby'),
       ]),
-      m(m.route.Link, { 'href': '/choose-level', 'class': 'btn-play' }, 'Jouer'),
-      m(m.route.Link, { 'href': '/options', 'class': 'btn' }, 'Options'),
+      m('div', { 'class': 'middle' }, [
+        m('div', { 'class': 'middle-content' }, [
+          m(m.route.Link, { 'href': '/choose-level', 'class': 'btn-play' }, 'Jouer'),
+        ]),
+      ]),
+      m('div', { 'class': 'bottombar' }, [
+        m(m.route.Link, { 'href': '/help', 'class': 'btn' }, 'Instructions'),
+        m(m.route.Link, { 'href': '/options', 'class': 'btn' }, 'Options'),
+      ]),
     ]
   },
 }

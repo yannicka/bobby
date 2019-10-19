@@ -14,13 +14,13 @@ export class GameScreen {
 
   public view() {
     return [
-      m('div', { 'class': 'actionbar' }, [
-        m('div', { 'class': 'actionbar-level' }, 'Niveau X/Y'),
-        m('div', { 'class': 'actionbar-menu' }, [
-          m('button', { 'onclick': showMenu, 'class': 'actionbar-button' }, 'Menu'),
-          m('nav', { 'class': 'actionbar-menu-nav' }, [
-            m('button', { 'onclick': restartLevel, 'class': 'actionbar-nav-button' }, 'Recommencer le niveau'),
-            m(m.route.Link, { 'href': '/choose-level', 'class': 'actionbar-nav-button' }, 'Retourner au menu'),
+      m('div', { 'class': 'topbar' }, [
+        m('div', { 'class': 'topbar-level' }, 'Niveau X/Y'),
+        m('div', { 'class': 'topbar-menu' }, [
+          m('button', { 'onclick': showMenu, 'class': 'topbar-button' }, 'Menu'),
+          m('nav', { 'class': 'topbar-menu-nav' }, [
+            m('button', { 'onclick': restartLevel, 'class': 'topbar-nav-button' }, 'Recommencer le niveau'),
+            m(m.route.Link, { 'href': '/choose-level', 'class': 'topbar-nav-button' }, 'Retourner au menu'),
           ]),
         ]),
       ]),
@@ -42,7 +42,7 @@ export class GameScreen {
 
     game = new Game(this, levelName)
 
-    updateActionbarLevel(levelName)
+    updateTopbarLevel(levelName)
 
     document.addEventListener('click', documentClickEvent)
 
@@ -59,7 +59,7 @@ export class GameScreen {
 
     game = new Game(this, levelName)
 
-    updateActionbarLevel(levelName)
+    updateTopbarLevel(levelName)
   }
 
   public onremove(vnode: m.Vnode) {
@@ -86,10 +86,10 @@ export class GameScreen {
 function showMenu(e: any): void {
   e.redraw = false
 
-  const nav = document.querySelector('.actionbar-menu-nav')
+  const nav = document.querySelector('.topbar-menu-nav')
 
   if (nav instanceof HTMLElement) {
-    nav.classList.toggle('actionbar-menu-nav-displayed')
+    nav.classList.toggle('topbar-menu-nav-displayed')
   }
 }
 
@@ -100,31 +100,31 @@ function goToMenu(e: any): void {
 function restartLevel(e: any): void {
   e.redraw = true
 
-  const nav = document.querySelector('.actionbar-menu-nav')
+  const nav = document.querySelector('.topbar-menu-nav')
 
   if (nav instanceof HTMLElement) {
-    nav.classList.remove('actionbar-menu-nav-displayed')
+    nav.classList.remove('topbar-menu-nav-displayed')
   }
 }
 
-function updateActionbarLevel(levelName: string) {
-  const actionbarLevel = document.querySelector('.actionbar-level')
+function updateTopbarLevel(levelName: string) {
+  const topbarLevel = document.querySelector('.topbar-level')
 
-  if (actionbarLevel instanceof HTMLElement) {
+  if (topbarLevel instanceof HTMLElement) {
     const levels = state.getStorage().getLevels()
     const nbLevels = Object.keys(levels).length
     const levelNumber = levels[levelName].fixed.number
 
-    actionbarLevel.innerText = `${levelNumber}/${nbLevels}`
+    topbarLevel.innerText = `${levelNumber}/${nbLevels}`
   }
 }
 
 function documentClickEvent(e: MouseEvent) {
-  const button = document.querySelector('.actionbar-button')
-  const nav = document.querySelector('.actionbar-menu-nav')
+  const button = document.querySelector('.topbar-button')
+  const nav = document.querySelector('.topbar-menu-nav')
   const target = e.target as Node
 
   if (!nav.contains(target) && target !== button) {
-    nav.classList.remove('actionbar-menu-nav-displayed')
+    nav.classList.remove('topbar-menu-nav-displayed')
   }
 }

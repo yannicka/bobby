@@ -12,6 +12,7 @@ import { Scene } from './Scene'
 import { ChooseLevelScreen } from './screen/ChooseLevelScreen'
 import { EndGameScreen } from './screen/EndGameScreen'
 import { GameScreen } from './screen/GameScreen'
+import { HelpScreen } from './screen/HelpScreen'
 import { HomeScreen } from './screen/HomeScreen'
 import { OptionsScreen } from './screen/OptionsScreen'
 import { state } from './State'
@@ -22,11 +23,11 @@ const screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
 function computeAppSize() {
   const { width, height } = screenSize
 
-  const actionbar = document.querySelector('.actionbar')
-  const actionbarHeight = (actionbar instanceof HTMLElement ? actionbar.clientHeight : 0)
+  const topbar = document.querySelector('.topbar')
+  const topbarHeight = (topbar instanceof HTMLElement ? topbar.clientHeight : 0)
 
   const widthZoom = window.innerWidth / width
-  const heightZoom = (window.innerHeight - actionbarHeight) / height
+  const heightZoom = (window.innerHeight - topbarHeight) / height
 
   const zoom = Math.min(widthZoom, heightZoom)
 

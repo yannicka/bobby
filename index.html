@@ -42,9 +42,10 @@
 
     #superapp {
       margin: 0 auto;
-      overflow: auto;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
     }
 
     .btn {
@@ -121,13 +122,12 @@
       background-color: #177355;
     }
 
-    .actionbar {
+    .topbar {
       background-color: #177355;
       display: flex;
-      align-items: center;
     }
 
-    .actionbar-gamename {
+    .topbar-gamename {
       padding: 12px;
       color: #fff;
       margin: 0;
@@ -135,17 +135,17 @@
       text-transform: uppercase;
     }
 
-    .actionbar-level {
+    .topbar-level {
       padding: 12px;
       color: #fff;
     }
 
-    .actionbar-menu {
+    .topbar-menu {
       margin-left: auto;
       position: relative;
     }
 
-    .actionbar-button {
+    .topbar-button {
       padding: 12px 18px;
       margin: 0;
       border: none;
@@ -157,14 +157,14 @@
       text-decoration: none;
     }
 
-    .actionbar-button:focus,
-    .actionbar-button:hover {
+    .topbar-button:focus,
+    .topbar-button:hover {
       background-color: rgba(0, 0, 0, 0.3);
       outline: none;
       cursor: pointer;
     }
 
-    .actionbar-menu-nav {
+    .topbar-menu-nav {
       position: absolute;
       top: 100%;
       right: 0;
@@ -175,11 +175,11 @@
       display: none;
     }
 
-    .actionbar-menu-nav-displayed {
+    .topbar-menu-nav-displayed {
       display: block;
     }
 
-    .actionbar-nav-button {
+    .topbar-nav-button {
       padding: 12px 24px;
       border: none;
       background: #fff;
@@ -191,8 +191,8 @@
       box-sizing: border-box;
     }
 
-    .actionbar-nav-button:focus,
-    .actionbar-nav-button:hover {
+    .topbar-nav-button:focus,
+    .topbar-nav-button:hover {
       background: #ccc;
       cursor: pointer;
     }
@@ -201,6 +201,33 @@
       height: 100%;
       display: grid;
       align-content: center;
+    }
+
+    .middle {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .middle-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bottombar {
+      background-color: #177355;
+      display: flex;
+      font-size: 80%;
+    }
+
+    .bottombar .btn {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .bottombar .btn:focus,
+    .bottombar .btn:hover {
+      outline-color: #053123;
     }
   </style>
 </head>

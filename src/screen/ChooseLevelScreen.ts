@@ -31,13 +31,17 @@ export const ChooseLevelScreen: m.Component = {
     )
 
     return [
-      m('div', { 'class': 'actionbar' }, [
-        m('div', { 'class': 'actionbar-gamename' }, 'Bobby'),
-        m('div', { 'class': 'actionbar-menu' }, [
-          m(m.route.Link, { 'href': '/', 'class': 'actionbar-button' }, 'Retour'),
+      m('div', { 'class': 'topbar' }, [
+        m('div', { 'class': 'topbar-gamename' }, 'Bobby'),
+        m('div', { 'class': 'topbar-menu' }, [
+          m(m.route.Link, { 'href': '/', 'class': 'topbar-button' }, 'Retour'),
         ]),
       ]),
-      m('div', { 'class': 'levels' }, childrens),
+      m('div', { 'class': 'middle' }, [
+        m('div', { 'class': 'middle-content' }, [
+          m('div', { 'class': 'levels' }, childrens),
+        ]),
+      ]),
     ]
   },
 }
