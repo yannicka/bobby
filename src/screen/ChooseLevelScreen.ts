@@ -37,7 +37,7 @@ export const ChooseLevelScreen: m.Component = {
           m(m.route.Link, { 'href': '/', 'class': 'topbar-button' }, 'Retour'),
         ]),
       ]),
-      m('div', { 'class': 'main-wrapper' }, [
+      m('div', { 'class': 'main-wrapper main-wrapper-unaligned' }, [
         m('div', { 'class': 'main-content' }, [
           m('div', { 'class': 'levels' }, childrens),
         ]),

@@ -91,7 +91,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, 60px);
       gap: 16px;
-      overflow: auto;
       scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.3);
       scrollbar-width: thin;
       margin: 12px;
@@ -201,6 +200,11 @@
       flex: 1;
       display: flex;
       align-items: center;
+      overflow: auto;
+    }
+
+    .main-wrapper-unaligned {
+      align-items: initial;
     }
 
     .main-content {
@@ -229,7 +233,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      overflow: hidden;
     }
 
     #app-wrapper {
