@@ -26,6 +26,7 @@ export class GameScreen {
       ]),
       m('div', { 'id': 'app-wrapper' }, [
         m('canvas', { 'id': 'app' }),
+        m('canvas', { 'id': 'joystick' }),
       ]),
     ]
   }
@@ -34,7 +35,7 @@ export class GameScreen {
     const canvas = document.getElementById('app') as HTMLCanvasElement
 
     this.keyboard = new Keyboard()
-    this.pointer = new Touch(canvas)
+    this.pointer = new Touch()
 
     const attrs = vnode.attrs as any
 

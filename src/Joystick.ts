@@ -9,55 +9,83 @@ export class Joystick {
   private readonly pointer: Pointer
   private readonly outerRadius: number
   private readonly innerRadius: number
+  private readonly canvas: HTMLCanvasElement
+  private readonly ctx: CanvasRenderingContext2D
   private position: Point
+  private zoom: number
 
   public constructor(game: Game, pointer: Pointer, position: Point) {
     this.game = game
     this.pointer = pointer
     this.position = position
 
+    this.zoom = 1
+
     this.outerRadius = 8
     this.innerRadius = 5
+
+    this.canvas = document.getElementById('joystick') as HTMLCanvasElement
+    this.ctx = this.canvas.getContext('2d')
   }
 
   public update(dt: number): void {
+    this.zoom = this.game.getZoom()
   }
 
-  public render(ctx: CanvasRenderingContext2D): void {
-    ctx.lineWidth = 1
+  public render(/* ctx: CanvasRenderingContext2D */): void {
+    this.ctx.scale(this.zoom, this.zoom)
 
-    ctx.beginPath()
-    ctx.arc(this.position.x, this.position.y, this.outerRadius, 0, 2 * Math.PI, false)
-    ctx.fillStyle = '#999'
-    ctx.fill()
-    ctx.strokeStyle = '#666'
-    ctx.stroke()
+    this.canvas.width = this.outerRadius * 2
+    this.canvas.height = this.outerRadius * 2
+
+    this.canvas.style.left = `${this.position.x - this.outerRadius}px`
+    this.canvas.style.top = `${this.position.y - this.outerRadius}px`
+
+    this.ctx.lineWidth = 1
+
+    this.ctx.beginPath()
+    this.ctx.arc(this.outerRadius, this.outerRadius, this.outerRadius, 0, 2 * Math.PI, false)
+    this.ctx.fillStyle = '#999'
+    this.ctx.fill()
+    this.ctx.strokeStyle = '#666'
+    this.ctx.stroke()
 
     const pointerPosition = this.computeForce()
     pointerPosition.x *= this.innerRadius
     pointerPosition.y *= this.innerRadius
-    pointerPosition.x += this.position.x
-    pointerPosition.y += this.position.y
 
-    ctx.beginPath()
-    ctx.arc(pointerPosition.x, pointerPosition.y, this.innerRadius, 0, 2 * Math.PI, false)
-    ctx.fillStyle = '#555'
-    ctx.fill()
-    ctx.strokeStyle = '#333'
-    ctx.stroke()
+    this.ctx.beginPath()
+    this.ctx.arc(
+      this.outerRadius + pointerPosition.x,
+      this.outerRadius + pointerPosition.y,
+      this.innerRadius,
+      0,
+      2 * Math.PI,
+      false,
+    )
+    this.ctx.fillStyle = '#555'
+    this.ctx.fill()
+    this.ctx.strokeStyle = '#333'
+    this.ctx.stroke()
+
+    // document.removeChild(canvas)
   }
 
   // @see https://codepen.io/jiffy/pen/zrqwON
   // @see https://stackoverflow.com/a/20916980
   private computeForce(): Point {
+    const position = this.position.clone()
+    position.x /= this.game.getZoom()
+    position.y /= this.game.getZoom()
+
     const pointerPosition = this.pointer.getPosition().clone()
     pointerPosition.x /= this.game.getZoom()
     pointerPosition.y /= this.game.getZoom()
 
-    const angle = Point.angleBetween(this.position, pointerPosition)
+    const angle = Point.angleBetween(position, pointerPosition)
 
-    const a = pointerPosition.x - this.position.x
-    const b = pointerPosition.y - this.position.y
+    const a = pointerPosition.x - position.x
+    const b = pointerPosition.y - position.y
 
     let distance = Math.sqrt(a * a + b * b)
 

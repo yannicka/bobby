@@ -84,8 +84,6 @@ export class Game {
 
     if (this.pointer.press()) {
       const newPosition = this.pointer.getPosition().clone()
-      newPosition.x /= this.zoom
-      newPosition.y /= this.zoom
 
       this.joystick.setPosition(newPosition)
     }
@@ -110,7 +108,7 @@ export class Game {
 
     if (this.pointer.down()) {
       if (isTouchDevice()) {
-        this.joystick.render(ctx)
+        this.joystick.render()
       }
     }
   }
