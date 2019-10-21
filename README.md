@@ -7,10 +7,6 @@ npm run serve # ou npm run build
 
 ## Choses à faire
 
-### Niveaux
-
-- Possibilité de créer des niveaux plus simplement.
-
 ### Graphismes
 
 - Améliorer les graphismes.
