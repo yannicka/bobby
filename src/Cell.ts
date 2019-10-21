@@ -344,27 +344,27 @@ export class Fence extends Cell {
   }
 }
 
-export const cells: { [key: number]: (position: Point) => Cell } = {
-  2: (position: Point): Cell => new Stone(position),
+export const cells: { [key: string]: (position: Point) => Cell } = {
+  '#': (position: Point): Cell => new Stone(position),
 
-  14: (position: Point): Cell => new Start(position),
-  15: (position: Point): Cell => new End(position),
+  'S': (position: Point): Cell => new Start(position),
+  'E': (position: Point): Cell => new End(position),
 
-  16: (position: Point): Cell => new Coin(position),
+  '$': (position: Point): Cell => new Coin(position),
 
-  6: (position: Point): Cell => new Conveyor(position, Direction.Up),
-  7: (position: Point): Cell => new Conveyor(position, Direction.Down),
-  8: (position: Point): Cell => new Conveyor(position, Direction.Right),
-  9: (position: Point): Cell => new Conveyor(position, Direction.Left),
+  '^': (position: Point): Cell => new Conveyor(position, Direction.Up),
+  'v': (position: Point): Cell => new Conveyor(position, Direction.Down),
+  '>': (position: Point): Cell => new Conveyor(position, Direction.Right),
+  '<': (position: Point): Cell => new Conveyor(position, Direction.Left),
 
-  10: (position: Point): Cell => new Turnstile(position, Rotation.UpRight),
-  11: (position: Point): Cell => new Turnstile(position, Rotation.UpLeft),
-  12: (position: Point): Cell => new Turnstile(position, Rotation.DownRight),
-  13: (position: Point): Cell => new Turnstile(position, Rotation.DownLeft),
-  18: (position: Point): Cell => new Turnstile(position, Rotation.Horizontal),
-  19: (position: Point): Cell => new Turnstile(position, Rotation.Vertical),
+  'T': (position: Point): Cell => new Turnstile(position, Rotation.UpRight),
+  'F': (position: Point): Cell => new Turnstile(position, Rotation.UpLeft),
+  'J': (position: Point): Cell => new Turnstile(position, Rotation.DownRight),
+  'L': (position: Point): Cell => new Turnstile(position, Rotation.DownLeft),
+  '=': (position: Point): Cell => new Turnstile(position, Rotation.Horizontal),
+  'H': (position: Point): Cell => new Turnstile(position, Rotation.Vertical),
 
-  4: (position: Point): Cell => new Button(position),
-  17: (position: Point): Cell => new Ice(position),
-  20: (position: Point): Cell => new Fence(position),
+  'B': (position: Point): Cell => new Button(position),
+  '!': (position: Point): Cell => new Ice(position),
+  'M': (position: Point): Cell => new Fence(position),
 }

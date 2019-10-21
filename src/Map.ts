@@ -8,7 +8,7 @@ export class Map {
   private readonly endCell: End
   private nbCoins: number
 
-  public constructor(cells: Array<Array<number>>) {
+  public constructor(cells: Array<Array<string>>) {
     this.cells = []
 
     for (let y = 0; y < cells.length; y += 1) {
@@ -17,7 +17,7 @@ export class Map {
       for (let x = 0; x < cells[y].length; x += 1) {
         const i = cells[y][x]
 
-        if (i !== 0) {
+        if (i !== '.') {
           this.cells[y][x] = cellsIndex[i](new Point(x, y))
         }
       }
