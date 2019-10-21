@@ -23,6 +23,14 @@ export interface Level {
   user: LevelUser
 }
 
+/*
+ * Parseur de niveaux :
+ *
+ * - Les espaces sont ignorés
+ * - Les lignes vides sont ignorées
+ * - « . » correspond à un vide
+ * - Voir `cells` de `./Cell.ts` pour connaitre la signification des symboles
+ */
 function parseStringLevel(level: string): Array<Array<string>> {
   // Retirer tous les espaces
   const levelWithoutSpace = level.replace(/ /g, '')
