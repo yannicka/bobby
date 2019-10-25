@@ -89,8 +89,8 @@ export class Button extends Cell {
 
     this.activated = false
 
-    this.getAnimation().addAnimation('deactivated', [ 1 ])
-    this.getAnimation().addAnimation('activated', [ 2 ])
+    this.getAnimation().addAnimation('deactivated', [ 40 ])
+    this.getAnimation().addAnimation('activated', [ 41 ])
 
     this.getAnimation().play('deactivated')
   }
@@ -115,19 +115,19 @@ export class Conveyor extends Cell {
 
     this.direction = direction
 
-    this.getAnimation().addAnimation(Direction.Up.toString(), [ 4, 20 ], {
+    this.getAnimation().addAnimation(Direction.Up.toString(), [ 24, 25 ], {
       frameDuration: 0.1,
     })
 
-    this.getAnimation().addAnimation(Direction.Down.toString(), [ 5, 21 ], {
+    this.getAnimation().addAnimation(Direction.Right.toString(), [ 26, 27 ], {
       frameDuration: 0.1,
     })
 
-    this.getAnimation().addAnimation(Direction.Right.toString(), [ 6, 22 ], {
+    this.getAnimation().addAnimation(Direction.Down.toString(), [ 28, 29 ], {
       frameDuration: 0.1,
     })
 
-    this.getAnimation().addAnimation(Direction.Left.toString(), [ 7, 23 ], {
+    this.getAnimation().addAnimation(Direction.Left.toString(), [ 30, 31 ], {
       frameDuration: 0.1,
     })
 
@@ -150,12 +150,12 @@ export class Turnstile extends Cell {
 
     this.angle = angle
 
-    this.getAnimation().addAnimation(Rotation.UpRight.toString(), [ 8 ])
-    this.getAnimation().addAnimation(Rotation.UpLeft.toString(), [ 9 ])
-    this.getAnimation().addAnimation(Rotation.DownRight.toString(), [ 10 ])
-    this.getAnimation().addAnimation(Rotation.DownLeft.toString(), [ 11 ])
-    this.getAnimation().addAnimation(Rotation.Horizontal.toString(), [ 25 ])
-    this.getAnimation().addAnimation(Rotation.Vertical.toString(), [ 26 ])
+    this.getAnimation().addAnimation(Rotation.UpLeft.toString(), [ 32 ])
+    this.getAnimation().addAnimation(Rotation.UpRight.toString(), [ 33 ])
+    this.getAnimation().addAnimation(Rotation.DownRight.toString(), [ 34 ])
+    this.getAnimation().addAnimation(Rotation.DownLeft.toString(), [ 35 ])
+    this.getAnimation().addAnimation(Rotation.Horizontal.toString(), [ 36 ])
+    this.getAnimation().addAnimation(Rotation.Vertical.toString(), [ 37 ])
 
     this.getAnimation().play(angle.toString())
   }
@@ -255,7 +255,7 @@ export class End extends Cell {
 
     this.active = false
 
-    this.getAnimation().addAnimation('inactive', [ 13 ])
+    this.getAnimation().addAnimation('inactive', [ 16 ])
 
     this.getAnimation().addAnimation('active', [ 17, 18 ], {
       frameDuration: 0.1,
@@ -288,7 +288,7 @@ export class Coin extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 15 ])
+    this.getAnimation().addAnimation('idle', [ 8 ])
 
     this.getAnimation().play('idle')
   }
@@ -303,7 +303,7 @@ export class Ice extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 24 ])
+    this.getAnimation().addAnimation('idle', [ 2 ])
 
     this.getAnimation().play('idle')
   }
@@ -320,7 +320,7 @@ export class Fence extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 3 ])
+    this.getAnimation().addAnimation('idle', [ 1 ])
 
     this.getAnimation().play('idle')
   }
