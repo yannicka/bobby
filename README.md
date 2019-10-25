@@ -7,10 +7,6 @@ npm run serve # ou npm run build
 
 ## Choses à faire
 
-### Graphismes
-
-- Améliorer les graphismes.
-
 ### Bogues connus (et à corriger)
 
 - *Aucun*.
