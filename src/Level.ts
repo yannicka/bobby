@@ -55,6 +55,8 @@ function parseStringLevel(level: string): Array<Array<string>> {
 export class LevelManager {
   public getLevelsFixed(): { [key: string]: LevelFixed } {
     const levels = {
+      // Premier niveau, prise en main des déplacements, de la récupération des
+      // pièces et de la balise de fin de niveau
       'Halley': {
         map: `
           # # # # # # # # #
@@ -69,6 +71,7 @@ export class LevelManager {
         `,
       },
 
+      // Prise en main de la caméra
       'Encke': {
         map: `
           # # # # # # # # # # #
@@ -85,6 +88,7 @@ export class LevelManager {
         `,
       },
 
+      // Tapis roulants
       'Biela': {
         map: `
           # # # # # # # # #
@@ -113,6 +117,7 @@ export class LevelManager {
         `,
       },
 
+      // Glace
       'Brorsen': {
         map: `
           # # # # # # # # #
@@ -141,6 +146,7 @@ export class LevelManager {
         `,
       },
 
+      // Tourniquets
       'Tempel': {
         map: `
           # # # # # # # # #
@@ -169,6 +175,7 @@ export class LevelManager {
         `,
       },
 
+      // Boutons
       'Wolf': {
         map: `
           # # # # # # # # #
@@ -197,6 +204,7 @@ export class LevelManager {
         `,
       },
 
+      // Barrières
       'Brooks': {
         map: `
           # # # # # # # # #
@@ -225,6 +233,7 @@ export class LevelManager {
         `,
       },
 
+      // Premiers « vrais » niveaux
       'Borrelly': {
         map: `
           # # # # # # # # #
