@@ -315,8 +315,8 @@ export class Ice extends Cell {
   }
 }
 
-// Barrière
-export class Fence extends Cell {
+// Élévation de terrain
+export class Elevation extends Cell {
   public constructor(position: Point) {
     super(position)
 
@@ -366,5 +366,5 @@ export const cells: { [key: string]: (position: Point) => Cell } = {
 
   'B': (position: Point): Cell => new Button(position),
   '!': (position: Point): Cell => new Ice(position),
-  'M': (position: Point): Cell => new Fence(position),
+  'M': (position: Point): Cell => new Elevation(position),
 }
