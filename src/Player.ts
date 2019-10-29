@@ -43,35 +43,35 @@ export class Player {
 
     const image = ImageManager.getImage('player')
 
-    this.animationManager = new AnimationManager(image, 14, 15)
+    this.animationManager = new AnimationManager(image, 14, 19)
 
-    this.animationManager.addAnimation(`idle-${Direction.Up.toString()}`, [ 8 ])
-    this.animationManager.addAnimation(`idle-${Direction.Down.toString()}`, [ 0 ])
-    this.animationManager.addAnimation(`idle-${Direction.Right.toString()}`, [ 12 ])
-    this.animationManager.addAnimation(`idle-${Direction.Left.toString()}`, [ 4 ])
+    this.animationManager.addAnimation(`idle-${Direction.Up.toString()}`, [ 3 ])
+    this.animationManager.addAnimation(`idle-${Direction.Down.toString()}`, [ 9 ])
+    this.animationManager.addAnimation(`idle-${Direction.Right.toString()}`, [ 6 ])
+    this.animationManager.addAnimation(`idle-${Direction.Left.toString()}`, [ 0 ])
 
-    this.animationManager.addAnimation(`walk-${Direction.Up.toString()}`, [ 8, 9, 10, 11, 8 ], {
-      frameDuration: 0.04,
+    this.animationManager.addAnimation(`walk-${Direction.Up.toString()}`, [ 3, 4, 5, 3 ], {
+      frameDuration: 0.08,
       loop: false,
     })
 
-    this.animationManager.addAnimation(`walk-${Direction.Down.toString()}`, [ 0, 1, 2, 3, 0 ], {
-      frameDuration: 0.04,
+    this.animationManager.addAnimation(`walk-${Direction.Down.toString()}`, [ 9, 10, 11, 9 ], {
+      frameDuration: 0.08,
       loop: false,
     })
 
-    this.animationManager.addAnimation(`walk-${Direction.Right.toString()}`, [ 12, 13, 14, 15, 12 ], {
-      frameDuration: 0.04,
+    this.animationManager.addAnimation(`walk-${Direction.Right.toString()}`, [ 6, 7, 6 ], {
+      frameDuration: 0.08,
       loop: false,
     })
 
-    this.animationManager.addAnimation(`walk-${Direction.Left.toString()}`, [ 4, 5, 6, 7, 4 ], {
-      frameDuration: 0.04,
+    this.animationManager.addAnimation(`walk-${Direction.Left.toString()}`, [ 0, 1, 0 ], {
+      frameDuration: 0.08,
       loop: false,
     })
 
-    this.animationManager.addAnimation(`jump-${Direction.Down.toString()}`, [ 16, 17, 16, 0 ], {
-      frameDuration: 0.15,
+    this.animationManager.addAnimation(`jump-${Direction.Down.toString()}`, [ 16, 17, 16 ], {
+      frameDuration: 0.08,
       loop: false,
     })
 
@@ -103,7 +103,7 @@ export class Player {
 
   public render(ctx: CanvasRenderingContext2D): void {
     ctx.save()
-    ctx.translate(this.displayPosition.x + 1, this.displayPosition.y - 4)
+    ctx.translate(this.displayPosition.x + 1, this.displayPosition.y - 8)
 
     this.animationManager.render(ctx)
 
