@@ -52,6 +52,8 @@ function parseStringLevel(level: string): Array<Array<string>> {
   return map
 }
 
+// Le nommage provient de :
+// https://fr.wikipedia.org/wiki/Liste_des_com%C3%A8tes_p%C3%A9riodiques_num%C3%A9rot%C3%A9es
 export class LevelManager {
   public getLevelsFixed(): { [key: string]: LevelFixed } {
     const levels = {
