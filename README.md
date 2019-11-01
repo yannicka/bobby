@@ -14,6 +14,16 @@ Merci à oräkle - Ethan G. pour son assistance graphique.
 Merci aux membres de Bit My Code pour leur soutien dans le développement du
 projet, et pour leurs divers retours.
 
+## Inspirations
+
+Ce jeu s'inspire de :
+
+- Pascal Penguin : http://www.luduminis.com/pascal/about/ ;
+
+- Bobby Carrot ;
+
+- Pokémon Rouge et Bleu.
+
 ## Choses à faire
 
 ### Bogues connus (et à corriger)
