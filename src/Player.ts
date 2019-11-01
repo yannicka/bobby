@@ -70,8 +70,8 @@ export class Player {
       loop: false,
     })
 
-    this.animationManager.addAnimation(`jump-${Direction.Down.toString()}`, [ 9, 10, 11, 9 ], {
-      frameDuration: 0.08,
+    this.animationManager.addAnimation(`jump-${Direction.Down.toString()}`, [ 12, 13, 9 ], {
+      frameDuration: 0.1,
       loop: false,
     })
 
