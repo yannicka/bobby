@@ -31,9 +31,7 @@ projet, et pour leurs divers retours.
 - Ajouter de nouveaux mécanismes (par exemple des caisses amovibles, mais cela
   nécessite une refonte du système de grille) ;
 
-- Ajouter une vue d'oiseau ;
-
-- Retirer le bloc « Barrière » ?
+- Ajouter une vue d'oiseau.
 
 ## Ressources intéressantes
 
