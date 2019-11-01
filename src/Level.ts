@@ -362,8 +362,8 @@ export class LevelManager {
 
       // Par Aur36
       'Gale': {
-        screenWidth: 12,
-        screenHeight: 12,
+        screenWidth: 13,
+        screenHeight: 13,
         map: `
           # # # # # # # # # # # # # # # # #
           # . . . . . . . . # . . . . . . #
