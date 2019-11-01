@@ -18,7 +18,7 @@ import { OptionsScreen } from './screen/OptionsScreen'
 import { state } from './State'
 import { isTouchDevice } from './Util'
 
-const screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
+let screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
 
 function computeAppSize() {
   const { width, height } = screenSize
@@ -39,6 +39,11 @@ function computeAppSize() {
     height: appHeight,
     zoom,
   }
+}
+
+export function changeScreenSize(width: number, height: number) {
+  screenSize.width = width * CELL_SIZE
+  screenSize.height = width * CELL_SIZE
 }
 
 export class Game {

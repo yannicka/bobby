@@ -6,6 +6,8 @@ export interface LevelFixed {
   readonly map: Array<Array<string>>
   readonly name: string
   readonly number: number
+  readonly screenWidth: number
+  readonly screenHeight: number
 }
 
 export interface LevelDynamic {
@@ -60,7 +62,7 @@ function parseStringLevel(level: string): Array<Array<string>> {
 // https://fr.wikipedia.org/wiki/Liste_des_com%C3%A8tes_p%C3%A9riodiques_num%C3%A9rot%C3%A9es
 export class LevelManager {
   public getLevelsFixed(): { [key: string]: LevelFixed } {
-    const levels = {
+    const levels: { [key: string]: { map: string; screenWidth?: number; screenHeight?: number } } = {
       // Premier niveau, prise en main des déplacements, de la récupération des
       // pièces et de la balise de fin de niveau
       'Halley': {
@@ -360,6 +362,8 @@ export class LevelManager {
 
       // Par Aur36
       'Gale': {
+        screenWidth: 12,
+        screenHeight: 12,
         map: `
           # # # # # # # # # # # # # # # # #
           # . . . . . . . . # . . . . . . #
@@ -379,50 +383,6 @@ export class LevelManager {
           # . . . . S . $ $ . . # . . . . #
           # . . . . . . . . . . # . . . . #
           # # # # # # # # # # # # # # # # #
-        `,
-      },
-
-      // Copié sur Bobby Carrot...
-      'AAA': {
-        map: `
-          # # # # # # # # # # #
-          # . . . . # # # # # #
-          # . S . . B $ B $ B #
-          # . S . . # B $ # $ #
-          # . . . . # $ B $ B #
-          # . . . . B B $ B # #
-          # . E . . # # B $ # #
-          # . . . . # # # # # #
-          # # # # # # # # # # #
-        `,
-      },
-
-      // Copié sur Bobby Carrot...
-      'BBB': {
-        map: `
-          # # # # # # # # # # # # #
-          # S . . . . . . . . . . #
-          # . . . . . . . . . . . #
-          # . . . . . . . . . . . #
-          # . . . . . . . . . . . #
-          # . . . . . . . . . . . #
-          # . . . . . . . . . . . #
-          # . . . . . . . . . . E #
-          # # # # # # # # # # # # #
-        `,
-      },
-
-      'CCC': {
-        map: `
-          #  #  #  #  #  #  #  #  #
-          #  S  .  .  .  .  .  .  #
-          #  .  .  .  .  .  .  .  #
-          #  .  B  .  B2 .  B3 .  #
-          #  .  .  .  .  .  .  .  #
-          #  .  .  .  .  .  .  .  #
-          #  .  .  .  .  .  .  .  #
-          #  .  .  .  .  .  .  E  #
-          #  #  #  #  #  #  #  #  #
         `,
       },
 
@@ -454,6 +414,8 @@ export class LevelManager {
         map: parseStringLevel(level.map),
         number: i,
         name,
+        screenWidth: 'screenWidth' in level ? level.screenWidth : 9,
+        screenHeight: 'screenHeight' in level ? level.screenHeight : 9,
       }
 
       levelsReturned[name] = l

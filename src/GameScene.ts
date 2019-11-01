@@ -3,7 +3,7 @@ import m from 'mithril'
 import { Camera } from './Camera'
 import { CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
-import { Game } from './Game'
+import { Game, changeScreenSize } from './Game'
 import { ImageManager } from './ImageManager'
 import { Keyboard } from './input/Keyboard'
 import { Map } from './Map'
@@ -28,11 +28,13 @@ export class GameScene implements Scene {
 
     this.storage = storage
 
-    const truc = this.storage.getLevels()[this.currentLevelName]
+    const level = this.storage.getLevels()[this.currentLevelName]
 
-    if (!truc.dynamic.accessible) {
+    if (!level.dynamic.accessible) {
       m.route.set('/choose-level')
     }
+
+    changeScreenSize(level.fixed.screenWidth, level.fixed.screenHeight)
 
     this.map = new Map(this.storage.getLevels()[this.currentLevelName].fixed.map)
 
