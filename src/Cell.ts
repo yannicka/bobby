@@ -82,27 +82,33 @@ export class Stone extends Cell {
 
 // Bouton
 export class Button extends Cell {
-  private activated: boolean
+  private value: number
 
-  public constructor(position: Point) {
+  public constructor(position: Point, value: number) {
     super(position)
 
-    this.activated = false
+    this.value = value
 
-    this.getAnimation().addAnimation('deactivated', [ 80 ])
-    this.getAnimation().addAnimation('activated', [ 81 ])
+    this.getAnimation().addAnimation('activated', [ 80 ])
+    this.getAnimation().addAnimation('deactivated-1', [ 81 ])
+    this.getAnimation().addAnimation('deactivated-2', [ 82 ])
+    this.getAnimation().addAnimation('deactivated-3', [ 83 ])
 
-    this.getAnimation().play('deactivated')
+    this.getAnimation().play(`deactivated-${this.value}`)
   }
 
   public onAfterPlayerOut(): void {
-    this.activated = true
+    this.value -= 1
 
-    this.getAnimation().play('activated')
+    if (this.value === 0) {
+      this.getAnimation().play('activated')
+    } else {
+      this.getAnimation().play(`deactivated-${this.value}`)
+    }
   }
 
   public isSolid(_direction: Direction): boolean {
-    return this.activated
+    return this.value === 0
   }
 }
 
@@ -416,7 +422,10 @@ export const cells: { [key: string]: (position: Point) => Cell } = {
   '2': (position: Point): Cell => new Turnstile(position, Rotation.Down),
   '4': (position: Point): Cell => new Turnstile(position, Rotation.Left),
 
-  'B': (position: Point): Cell => new Button(position),
+  'B': (position: Point): Cell => new Button(position, 1),
+  'B2': (position: Point): Cell => new Button(position, 2),
+  'B3': (position: Point): Cell => new Button(position, 3),
+
   '!': (position: Point): Cell => new Ice(position),
   'M': (position: Point): Cell => new Elevation(position),
 }

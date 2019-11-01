@@ -26,14 +26,18 @@ export interface Level {
 /*
  * Parseur de niveaux :
  *
- * - Les espaces sont ignorés
+ * - Les espaces sont ignorés au début de chaque ligne
  * - Les lignes vides sont ignorées
  * - « . » correspond à un vide
+ * - Les espaces séparent les cellules
  * - Voir `cells` de `./Cell.ts` pour connaitre la signification des symboles
  */
 function parseStringLevel(level: string): Array<Array<string>> {
-  // Retirer tous les espaces
-  const levelWithoutSpace = level.replace(/ /g, '')
+  // Retire les espaces au début de chaque ligne
+  let levelWithoutSpace = level.replace(/^ +/gm, '')
+
+  // Remplace les espaces consécutifs par une seule espace
+  levelWithoutSpace = levelWithoutSpace.replace(/ +/g, ' ')
 
   // Coupe à chaque ligne
   let lines = levelWithoutSpace.split(/\n/)
@@ -44,7 +48,7 @@ function parseStringLevel(level: string): Array<Array<string>> {
   const map = []
 
   for (const line of lines) {
-    const cells = line.split('')
+    const cells = line.split(' ')
 
     map.push(cells)
   }
