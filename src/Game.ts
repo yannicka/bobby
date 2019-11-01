@@ -151,13 +151,8 @@ export class Game {
     this.scene = scene
   }
 
-  public getScreenSize(): [ number, number ] {
-    let [ width, height ] = [ 9, 9 ]
-
-    width *= CELL_SIZE
-    height *= CELL_SIZE
-
-    return [ width, height ]
+  public getScreenSize(): { width: number; height: number } {
+    return screenSize
   }
 
   public stop(): void {
