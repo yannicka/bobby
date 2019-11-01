@@ -427,5 +427,5 @@ export const cells: { [key: string]: (position: Point) => Cell } = {
   'B3': (position: Point): Cell => new Button(position, 3),
 
   '!': (position: Point): Cell => new Ice(position),
-  'M': (position: Point): Cell => new Elevation(position),
+  'U': (position: Point): Cell => new Elevation(position),
 }
