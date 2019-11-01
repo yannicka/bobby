@@ -3,6 +3,12 @@ export const enum Rotation {
   UpLeft,
   DownRight,
   DownLeft,
+
   Vertical,
   Horizontal,
+
+  UpRightDown,
+  RightDownLeft,
+  DownLeftUp,
+  LeftUpRight,
 }
