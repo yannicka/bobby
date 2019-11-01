@@ -43,7 +43,7 @@ function computeAppSize() {
 
 export function changeScreenSize(width: number, height: number) {
   screenSize.width = width * CELL_SIZE
-  screenSize.height = width * CELL_SIZE
+  screenSize.height = height * CELL_SIZE
 }
 
 export class Game {
