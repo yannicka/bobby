@@ -158,10 +158,10 @@ export class Turnstile extends Cell {
     this.getAnimation().addAnimation(Rotation.Horizontal.toString(), [ 74 ])
     this.getAnimation().addAnimation(Rotation.Vertical.toString(), [ 75 ])
 
-    this.getAnimation().addAnimation(Rotation.UpRightDown.toString(), [ 76 ])
-    this.getAnimation().addAnimation(Rotation.RightDownLeft.toString(), [ 77 ])
-    this.getAnimation().addAnimation(Rotation.DownLeftUp.toString(), [ 78 ])
-    this.getAnimation().addAnimation(Rotation.LeftUpRight.toString(), [ 79 ])
+    this.getAnimation().addAnimation(Rotation.Up.toString(), [ 76 ])
+    this.getAnimation().addAnimation(Rotation.Right.toString(), [ 77 ])
+    this.getAnimation().addAnimation(Rotation.Down.toString(), [ 78 ])
+    this.getAnimation().addAnimation(Rotation.Left.toString(), [ 79 ])
 
     this.getAnimation().play(angle.toString())
   }
@@ -192,20 +192,20 @@ export class Turnstile extends Cell {
         this.angle = Rotation.Vertical
         break
 
-      case Rotation.UpRightDown:
-        this.angle = Rotation.RightDownLeft
+      case Rotation.Up:
+        this.angle = Rotation.Right
         break
 
-      case Rotation.RightDownLeft:
-        this.angle = Rotation.DownLeftUp
+      case Rotation.Right:
+        this.angle = Rotation.Down
         break
 
-      case Rotation.DownLeftUp:
-        this.angle = Rotation.LeftUpRight
+      case Rotation.Down:
+        this.angle = Rotation.Left
         break
 
-      case Rotation.LeftUpRight:
-        this.angle = Rotation.UpRightDown
+      case Rotation.Left:
+        this.angle = Rotation.Up
         break
     }
 
@@ -232,17 +232,17 @@ export class Turnstile extends Cell {
       case Rotation.Horizontal:
         return [ Direction.Up, Direction.Down ].includes(direction)
 
-      case Rotation.UpRightDown:
-        return direction !== Direction.Right
+      case Rotation.Up:
+        return direction === Direction.Down
 
-      case Rotation.RightDownLeft:
-        return direction !== Direction.Down
+      case Rotation.Right:
+        return direction === Direction.Left
 
-      case Rotation.DownLeftUp:
-        return direction !== Direction.Left
+      case Rotation.Down:
+        return direction === Direction.Up
 
-      case Rotation.LeftUpRight:
-        return direction !== Direction.Up
+      case Rotation.Left:
+        return direction === Direction.Right
     }
   }
 
@@ -266,17 +266,17 @@ export class Turnstile extends Cell {
       case Rotation.Horizontal:
         return [ Direction.Up, Direction.Down ].includes(direction)
 
-      case Rotation.UpRightDown:
-        return direction !== Direction.Left
+      case Rotation.Up:
+        return direction === Direction.Up
 
-      case Rotation.RightDownLeft:
-        return direction !== Direction.Up
+      case Rotation.Right:
+        return direction === Direction.Right
 
-      case Rotation.DownLeftUp:
-        return direction !== Direction.Right
+      case Rotation.Down:
+        return direction === Direction.Down
 
-      case Rotation.LeftUpRight:
-        return direction !== Direction.Down
+      case Rotation.Left:
+        return direction === Direction.Left
     }
   }
 }
@@ -411,10 +411,10 @@ export const cells: { [key: string]: (position: Point) => Cell } = {
   '=': (position: Point): Cell => new Turnstile(position, Rotation.Horizontal),
   'H': (position: Point): Cell => new Turnstile(position, Rotation.Vertical),
 
-  'D': (position: Point): Cell => new Turnstile(position, Rotation.UpRightDown),
-  'U': (position: Point): Cell => new Turnstile(position, Rotation.RightDownLeft),
-  'C': (position: Point): Cell => new Turnstile(position, Rotation.DownLeftUp),
-  'A': (position: Point): Cell => new Turnstile(position, Rotation.LeftUpRight),
+  '8': (position: Point): Cell => new Turnstile(position, Rotation.Up),
+  '6': (position: Point): Cell => new Turnstile(position, Rotation.Right),
+  '2': (position: Point): Cell => new Turnstile(position, Rotation.Down),
+  '4': (position: Point): Cell => new Turnstile(position, Rotation.Left),
 
   'B': (position: Point): Cell => new Button(position),
   '!': (position: Point): Cell => new Ice(position),
