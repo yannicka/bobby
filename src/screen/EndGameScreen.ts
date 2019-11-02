@@ -1,6 +1,8 @@
 import m from 'mithril'
 
-const delay = (t: any) => new Promise(resolve => setTimeout(resolve, t))
+async function delay(ms: number): Promise<unknown> {
+  return new Promise((resolve: () => void) => setTimeout(resolve, ms))
+}
 
 export class EndGameScreen {
   public view() {
@@ -57,7 +59,7 @@ export class EndGameScreen {
 
       return delay(10 * SECOND)
     }).then(() => {
-      endGameText.innerText = 'Vraiment...'
+      endGameText.innerText = 'Vraiment... vous pouvez partir.'
     })
   }
 

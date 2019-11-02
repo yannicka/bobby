@@ -5,7 +5,6 @@ import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
 import { Keyboard } from './input/Keyboard'
 import { Pointer } from './input/Pointer'
-import { Touch } from './input/Touch'
 import { Joystick } from './Joystick'
 import { Point } from './Point'
 import { Scene } from './Scene'
@@ -18,7 +17,7 @@ import { OptionsScreen } from './screen/OptionsScreen'
 import { state } from './State'
 import { isTouchDevice } from './Util'
 
-let screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
+const screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
 
 function computeAppSize() {
   const { width, height } = screenSize
