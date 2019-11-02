@@ -28,6 +28,14 @@
 
     html {
       font-size: 1.2em;
+      scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.3);
+    }
+
+    /* Pour les écrans tactiles : barre de défilement fine */
+    @media (pointer: coarse) {
+      html {
+        scrollbar-width: thin;
+      }
     }
 
     body {
@@ -43,6 +51,13 @@
     p {
       padding: 8px;
       margin: 8px;
+    }
+
+    h2 {
+      padding: 8px;
+      margin: 8px;
+      margin-bottom: 0;
+      font-size: 2em;
     }
 
     .center {
@@ -104,8 +119,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, 60px);
       gap: 16px;
-      scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.3);
-      scrollbar-width: thin;
       margin: 12px;
       margin-top: 32px;
       justify-content: center;
