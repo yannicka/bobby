@@ -2,6 +2,7 @@ import { Cell, CELL_SIZE, cells as cellsIndex, Coin, End, Start } from './Cell'
 import { GameScene } from './GameScene'
 import { Player } from './Player'
 import { Point } from './Point'
+import { Size } from './Size'
 
 export class Map {
   private readonly cells: Array<Array<Cell>>
@@ -106,23 +107,17 @@ export class Map {
     return null
   }
 
-  public getSize(): { width: number; height: number } {
-    return {
-      width: this.cells[0].length,
-      height: this.cells.length,
-    }
+  public getSize(): Size {
+    return new Size(this.cells[0].length, this.cells.length)
   }
 
-  public getDisplayedSize(): { width: number; height: number } {
-    let { width, height } = this.getSize()
+  public getDisplayedSize(): Size {
+    const size = this.getSize().clone()
 
-    width *= CELL_SIZE
-    height *= CELL_SIZE
+    size.width *= CELL_SIZE
+    size.height *= CELL_SIZE
 
-    return {
-      width,
-      height,
-    }
+    return size
   }
 
   private getEndCell(): End | null {

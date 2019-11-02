@@ -47,32 +47,6 @@ export class Joystick {
     ctx.stroke()
   }
 
-  // @see https://codepen.io/jiffy/pen/zrqwON
-  // @see https://stackoverflow.com/a/20916980
-  private computeForce(): Point {
-    const pointerPosition = this.pointer.getPosition().clone()
-    pointerPosition.x /= this.game.getZoom()
-    pointerPosition.y /= this.game.getZoom()
-
-    const angle = Point.angleBetween(this.position, pointerPosition)
-
-    const a = pointerPosition.x - this.position.x
-    const b = pointerPosition.y - this.position.y
-
-    let distance = Math.sqrt(a * a + b * b)
-
-    const coords = new Point(0, 0)
-    distance = Math.min(distance, this.innerRadius)
-
-    coords.x = distance * Math.cos(angle)
-    coords.y = distance * Math.sin(angle)
-
-    coords.x /= this.innerRadius
-    coords.y /= this.innerRadius
-
-    return coords
-  }
-
   public updatePlayer(player: Player): void {
     if (this.pointer.down()) {
       const force = this.computeForce()
@@ -81,6 +55,7 @@ export class Joystick {
 
       if (Math.abs(force.x) > Math.abs(force.y)) {
         // mouvement horizontal
+
         if (force.x >= forceNeeded) {
           player.move(Direction.Right)
         }
@@ -105,5 +80,31 @@ export class Joystick {
 
   public setPosition(position: Point): void {
     this.position = position
+  }
+
+  // @see https://codepen.io/jiffy/pen/zrqwON
+  // @see https://stackoverflow.com/a/20916980
+  private computeForce(): Point {
+    const pointerPosition = this.pointer.getPosition().clone()
+    pointerPosition.x /= this.game.getZoom()
+    pointerPosition.y /= this.game.getZoom()
+
+    const angle = Point.angleBetween(this.position, pointerPosition)
+
+    const a = pointerPosition.x - this.position.x
+    const b = pointerPosition.y - this.position.y
+
+    let distance = Math.sqrt(a * a + b * b)
+
+    const coords = new Point(0, 0)
+    distance = Math.min(distance, this.innerRadius)
+
+    coords.x = distance * Math.cos(angle)
+    coords.y = distance * Math.sin(angle)
+
+    coords.x /= this.innerRadius
+    coords.y /= this.innerRadius
+
+    return coords
   }
 }

@@ -1,3 +1,6 @@
+const DEFAULT_SCREEN_WIDTH = 9
+const DEFAULT_SCREEN_HEIGHT = 9
+
 export interface LevelUser {
   success: boolean
 }
@@ -26,13 +29,11 @@ export interface Level {
 }
 
 /*
- * Parseur de niveaux :
+ * Parseur de niveau :
  *
  * - Les espaces sont ignorés au début de chaque ligne
  * - Les lignes vides sont ignorées
- * - « . » correspond à un vide
  * - Les espaces séparent les cellules
- * - Voir `cells` de `./Cell.ts` pour connaitre la signification des symboles
  */
 function parseStringLevel(level: string): Array<Array<string>> {
   // Retire les espaces au début de chaque ligne
@@ -58,11 +59,24 @@ function parseStringLevel(level: string): Array<Array<string>> {
   return map
 }
 
-// Le nommage provient de :
-// https://fr.wikipedia.org/wiki/Liste_des_com%C3%A8tes_p%C3%A9riodiques_num%C3%A9rot%C3%A9es
+/**
+ * Le nommage provient de :
+ * https://fr.wikipedia.org/wiki/Liste_des_com%C3%A8tes_p%C3%A9riodiques_num%C3%A9rot%C3%A9es
+ *
+ * Avoir un nom à chaque niveau, plutôt qu'un numéro, permet d'intégrer des
+ * nouveaux niveaux n'importe où.
+ */
 export class LevelManager {
-  public getLevelsFixed(): { [key: string]: LevelFixed } {
-    const levels: { [key: string]: { map: string; screenWidth?: number; screenHeight?: number } } = {
+  public getLevels(): { [key: string]: LevelFixed } {
+    interface LevelType {
+      [key: string]: {
+        map: string;
+        screenWidth?: number;
+        screenHeight?: number;
+      }
+    }
+
+    const levels: LevelType = {
       // Premier niveau, prise en main des déplacements, de la récupération des
       // pièces et de la balise de fin de niveau
       'Halley': {
@@ -212,7 +226,7 @@ export class LevelManager {
         `,
       },
 
-      // Barrières
+      // Mottes de terre
       'Brooks': {
         map: `
           # # # # # # # # #
@@ -414,8 +428,8 @@ export class LevelManager {
         map: parseStringLevel(level.map),
         number: i,
         name,
-        screenWidth: 'screenWidth' in level ? level.screenWidth : 9,
-        screenHeight: 'screenHeight' in level ? level.screenHeight : 9,
+        screenWidth: 'screenWidth' in level ? level.screenWidth : DEFAULT_SCREEN_WIDTH,
+        screenHeight: 'screenHeight' in level ? level.screenHeight : DEFAULT_SCREEN_HEIGHT,
       }
 
       levelsReturned[name] = l

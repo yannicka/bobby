@@ -35,4 +35,4 @@ bord haut, droit, bas et gauche) ;
 - `B`, `B2` et `B3` : bouton (respectivement avec 1, 2 et 3 passes
 autorisées) ;
 
-- `U` : botte de terre.
+- `U` : motte de terre.

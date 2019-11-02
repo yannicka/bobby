@@ -6,17 +6,32 @@ export interface AnimationOptions {
 }
 
 export class Animation {
+  // Image de l'animation *(sprite)*
   private readonly image: HTMLImageElement
+
+  // Frames utilisées pour l'animation
   private readonly frames: Array<number>
 
+  // Taille d'une frame
   private readonly frameWidth: number
   private readonly frameHeight: number
 
+  // Durée de chaque frame
   private readonly frameDuration: number
+
+  // Boucle d'animation
+  //
+  // Si `true`, l'animation tourne en boucle
+  // Si `false`, l'animation s'arrête sur la dernière frame
   private readonly loop: boolean
 
+  // Compteur de temps de la frame courante
   private timer: number
+
+  // Index vers la frame en cours
   private currentFrame: number
+
+  // L'animation est-elle terminée ?
   private finished: boolean
 
   public constructor(
@@ -38,10 +53,6 @@ export class Animation {
     this.timer = 0
     this.currentFrame = 0
     this.finished = false
-  }
-
-  private getCurrentFrame(): number {
-    return this.frames[this.currentFrame]
   }
 
   public update(dt: number): void {
@@ -84,5 +95,9 @@ export class Animation {
     this.timer = 0
     this.currentFrame = 0
     this.finished = false
+  }
+
+  private getCurrentFrame(): number {
+    return this.frames[this.currentFrame]
   }
 }

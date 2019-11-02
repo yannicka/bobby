@@ -20,7 +20,20 @@ export abstract class Cell {
     this.animation = new AnimationManager(image, CELL_SIZE, CELL_SIZE)
   }
 
-  // Évènement : avant que le joueur n'entre sur le case
+  public update(dt: number): void {
+    this.animation.update(dt)
+  }
+
+  public render(ctx: CanvasRenderingContext2D): void {
+    ctx.save()
+    ctx.translate(this.position.x * CELL_SIZE, this.position.y * CELL_SIZE)
+
+    this.animation.render(ctx)
+
+    ctx.restore()
+  }
+
+  // Évènement : avant que le joueur n'entre dans la case
   public onBeforePlayerIn(_player: Player): void {
   }
 
@@ -41,19 +54,6 @@ export abstract class Cell {
   // Est-ce qu'on peut sortir de la case ?
   public isBlocking?(_direction: Direction): boolean {
     return false
-  }
-
-  public update(dt: number): void {
-    this.animation.update(dt)
-  }
-
-  public render(ctx: CanvasRenderingContext2D): void {
-    ctx.save()
-    ctx.translate(this.position.x * CELL_SIZE, this.position.y * CELL_SIZE)
-
-    this.animation.render(ctx)
-
-    ctx.restore()
   }
 
   public getPosition(): Point {
@@ -367,7 +367,7 @@ export class Ice extends Cell {
   }
 }
 
-// Élévation de terrain
+// Élévation de terrain / Motte de terre
 export class Elevation extends Cell {
   public constructor(position: Point) {
     super(position)

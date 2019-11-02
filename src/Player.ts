@@ -1,5 +1,5 @@
 import { AnimationManager } from './AnimationManager'
-import { CELL_SIZE } from './Cell'
+import { Cell, CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
 import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
@@ -18,7 +18,7 @@ export class Player {
   private position: Point
   private previousPosition: Point
   private startPosition: Point
-  private targetPosition: Point
+  private readonly targetPosition: Point
   private displayPosition: Point
   private timer: number
   private direction: Direction
@@ -147,13 +147,16 @@ export class Player {
     const previousCell = this.map.getCell(this.position)
     const nextCell = this.map.getCell(newMapPosition)
 
-    if ((previousCell && previousCell.isBlocking(direction)) || (nextCell && nextCell.isSolid(direction))) {
+    if (
+      (previousCell instanceof Cell && previousCell.isBlocking(direction))
+      || (nextCell instanceof Cell && nextCell.isSolid(direction))
+    ) {
       return
     }
 
     this.direction = direction
 
-    if (nextCell) {
+    if (nextCell instanceof Cell) {
       nextCell.onBeforePlayerIn(this)
     }
 
