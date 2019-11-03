@@ -39,7 +39,7 @@ export class Player {
     this.targetPosition = this.startPosition.clone()
     this.displayPosition = this.startPosition.clone()
     this.canmove = true
-    this.immobility = true
+    this.immobility = false
     this.timer = 0
     this.direction = Direction.Down
 
@@ -85,8 +85,6 @@ export class Player {
     this.animationManager.play('turn')
 
     setTimeout(() => {
-      this.immobility = false
-
       this.animationManager.play(`idle-${this.direction.toString()}`)
     }, 480)
   }
