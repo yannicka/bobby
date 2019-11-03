@@ -65,22 +65,32 @@ export class Map {
     }
   }
 
-  public getCell(position: Point): Cell | undefined {
-    return this.cells[position.y][position.x]
+  public getCell(position: Point): Cell | null {
+    if (typeof this.cells[position.y] !== 'undefined') {
+      if (typeof this.cells[position.y][position.x] !== 'undefined') {
+        return this.cells[position.y][position.x]
+      }
+    }
+
+    return null
+  }
+
+  public getCellAt(x: number, y: number): Cell | null {
+    return this.getCell(new Point(x, y))
   }
 
   public onAfterPlayerOut(position: Point) {
-    const cell = this.cells[position.y][position.x]
+    const cell = this.getCellAt(position.x, position.y)
 
-    if (typeof cell !== 'undefined') {
+    if (cell !== null) {
       cell.onAfterPlayerOut()
     }
   }
 
   public onAfterPlayerIn(position: Point, player: Player, gameScene: GameScene): void {
-    const cell = this.cells[position.y][position.x]
+    const cell = this.getCellAt(position.x, position.y)
 
-    if (typeof cell !== 'undefined') {
+    if (cell !== null) {
       const newCell = cell.onAfterPlayerIn(player, gameScene)
 
       if (cell !== newCell) {

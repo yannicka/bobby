@@ -19,7 +19,7 @@ export class Player {
   private position: Point
   private previousPosition: Point
   private startPosition: Point
-  private readonly targetPosition: Point
+  private targetPosition: Point
   private displayPosition: Point
   private timer: number
   private direction: Direction
@@ -99,6 +99,42 @@ export class Player {
       this.displayPosition.x = linear(this.startPosition.x, this.targetPosition.x, this.timer)
       this.displayPosition.y = linear(this.startPosition.y, this.targetPosition.y, this.timer)
 
+      if (this.timer >= 0.5) {
+        const mapSize = this.map.getSize()
+
+        if (this.position.x <= -1) {
+          this.runEvents()
+
+          this.moveFromBound(Direction.Left)
+
+          return
+        }
+
+        if (this.position.y <= -1) {
+          this.runEvents()
+
+          this.moveFromBound(Direction.Up)
+
+          return
+        }
+
+        if (this.position.x >= mapSize.width) {
+          this.runEvents()
+
+          this.moveFromBound(Direction.Right)
+
+          return
+        }
+
+        if (this.position.y >= mapSize.height) {
+          this.runEvents()
+
+          this.moveFromBound(Direction.Down)
+
+          return
+        }
+      }
+
       // Une fois le temps écoulé, remise à zéro du compteur, autorisation du
       // déplacement et positionne le joueur sur sa cible
       if (this.timer >= 1) {
@@ -106,8 +142,7 @@ export class Player {
         this.canmove = true
         this.displayPosition = this.targetPosition.clone()
 
-        this.map.onAfterPlayerOut(this.previousPosition)
-        this.map.onAfterPlayerIn(this.position, this, this.gameScene)
+        this.runEvents()
       }
     }
   }
@@ -206,5 +241,62 @@ export class Player {
 
   public setImmobility(immobility: boolean): void {
     this.immobility = immobility
+  }
+
+  private moveFromBound(bound: Direction) {
+    const mapSize = this.map.getSize()
+
+    this.canmove = true
+
+    switch (bound) {
+      case Direction.Left:
+        this.position.x = mapSize.width
+
+        this.startPosition = new Point(
+          (this.position.x + 1) * CELL_SIZE,
+          this.position.y * CELL_SIZE,
+        )
+
+        break
+
+      case Direction.Right:
+        this.position.x = -1
+
+        this.startPosition = new Point(
+          (this.position.x - 1) * CELL_SIZE,
+          this.position.y * CELL_SIZE,
+        )
+
+        break
+
+      case Direction.Up:
+        this.position.y = mapSize.height
+
+        this.startPosition = new Point(
+          this.position.x * CELL_SIZE,
+          (this.position.y + 1) * CELL_SIZE,
+        )
+
+        break
+
+      case Direction.Down:
+        this.position.y = -1
+
+        this.startPosition = new Point(
+          this.position.x * CELL_SIZE,
+          (this.position.y - 1) * CELL_SIZE,
+        )
+
+        break
+    }
+
+    this.targetPosition = this.startPosition.clone()
+
+    this.move(bound)
+  }
+
+  private runEvents(): void {
+    this.map.onAfterPlayerOut(this.previousPosition)
+    this.map.onAfterPlayerIn(this.position, this, this.gameScene)
   }
 }
