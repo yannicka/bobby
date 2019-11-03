@@ -18,7 +18,7 @@ export class GameScreen {
         m('div', { 'class': 'topbar-level' }, 'Niveau X/Y'),
         m('div', { 'class': 'topbar-menu' }, [
           m('button', { 'onclick': restartLevel, 'class': 'topbar-button', 'title': 'Recommencer le niveau' }, '⟳'),
-          m('button', { 'onclick': showMenu, 'class': 'topbar-button' }, 'Menu'),
+          m('button', { 'onclick': showMenu, 'class': 'topbar-button topbar-button-menu' }, 'Menu'),
           m('nav', { 'class': 'topbar-menu-nav' }, [
             m('button', { 'onclick': restartLevel, 'class': 'topbar-nav-button' }, 'Recommencer le niveau'),
             m(m.route.Link, { 'href': '/choose-level', 'class': 'topbar-nav-button' }, 'Retourner au menu'),
@@ -121,7 +121,7 @@ function updateTopbarLevel(levelName: string) {
 }
 
 function documentClickEvent(e: MouseEvent) {
-  const button = document.querySelector('.topbar-button')
+  const button = document.querySelector('.topbar-button-menu')
   const nav = document.querySelector('.topbar-menu-nav')
   const target = e.target as Node
 
