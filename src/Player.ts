@@ -174,25 +174,7 @@ export class Player {
         break
     }
 
-    const newMapPosition = this.position.clone()
-
-    switch (direction) {
-      case Direction.Up:
-        newMapPosition.y -= 1
-        break
-
-      case Direction.Down:
-        newMapPosition.y += 1
-        break
-
-      case Direction.Right:
-        newMapPosition.x += 1
-        break
-
-      case Direction.Left:
-        newMapPosition.x -= 1
-        break
-    }
+    let newMapPosition = this.computeNewMapPosition(direction, true)
 
     const previousCell = this.map.getCell(this.position)
     const nextCell = this.map.getCell(newMapPosition)
@@ -209,6 +191,8 @@ export class Player {
     if (nextCell instanceof Cell) {
       nextCell.onBeforePlayerIn(this)
     }
+
+    newMapPosition = this.computeNewMapPosition(direction)
 
     this.moveTo(newMapPosition)
   }
@@ -298,5 +282,49 @@ export class Player {
   private runEvents(): void {
     this.map.onAfterPlayerOut(this.previousPosition)
     this.map.onAfterPlayerIn(this.position, this, this.gameScene)
+  }
+
+  private computeNewMapPosition(direction: Direction, bounds: boolean = false): Point {
+    const newMapPosition = this.position.clone()
+
+    switch (direction) {
+      case Direction.Up:
+        newMapPosition.y -= 1
+        break
+
+      case Direction.Down:
+        newMapPosition.y += 1
+        break
+
+      case Direction.Right:
+        newMapPosition.x += 1
+        break
+
+      case Direction.Left:
+        newMapPosition.x -= 1
+        break
+    }
+
+    if (bounds) {
+      const mapSize = this.map.getSize()
+
+      if (newMapPosition.x <= -1) {
+        newMapPosition.x = mapSize.width - 1
+      }
+
+      if (newMapPosition.y <= -1) {
+        newMapPosition.y = mapSize.height - 1
+      }
+
+      if (newMapPosition.x > mapSize.width) {
+        newMapPosition.x = 0
+      }
+
+      if (newMapPosition.y > mapSize.height) {
+        newMapPosition.y = 0
+      }
+    }
+
+    return newMapPosition
   }
 }
