@@ -15,6 +15,7 @@ export class Player {
   private readonly map: Map
   private readonly animationManager: AnimationManager
   private canmove: boolean
+  private immobility: boolean
   private position: Point
   private previousPosition: Point
   private startPosition: Point
@@ -38,6 +39,7 @@ export class Player {
     this.targetPosition = this.startPosition.clone()
     this.displayPosition = this.startPosition.clone()
     this.canmove = true
+    this.immobility = true
     this.timer = 0
     this.direction = Direction.Down
 
@@ -75,7 +77,18 @@ export class Player {
       loop: false,
     })
 
-    this.animationManager.play(`idle-${this.direction.toString()}`)
+    this.animationManager.addAnimation('turn', [ 9, 0, 3, 6 ], {
+      frameDuration: 0.1,
+      loop: true,
+    })
+
+    this.animationManager.play('turn')
+
+    setTimeout(() => {
+      this.immobility = false
+
+      this.animationManager.play(`idle-${this.direction.toString()}`)
+    }, 480)
   }
 
   public update(dt: number): void {
@@ -111,6 +124,10 @@ export class Player {
   }
 
   public move(direction: Direction, animate: 'walk' | 'idle' | null = 'walk'): void {
+    if (this.immobility) {
+      return
+    }
+
     if (!this.canmove) {
       return
     }
@@ -187,5 +204,9 @@ export class Player {
 
   public getAnimationManager(): AnimationManager {
     return this.animationManager
+  }
+
+  public setImmobility(immobility: boolean): void {
+    this.immobility = immobility
   }
 }

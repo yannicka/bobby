@@ -316,9 +316,12 @@ export class End extends Cell {
     this.getAnimation().play('inactive')
   }
 
-  public onAfterPlayerIn(_player: Player, gameScene: GameScene): this | null {
+  public onAfterPlayerIn(player: Player, gameScene: GameScene): this | null {
     if (this.isActive()) {
-      gameScene.nextLevel()
+      player.setImmobility(true)
+      player.getAnimationManager().play('turn')
+
+      setTimeout(() => { gameScene.nextLevel() }, 480)
     }
 
     return this
