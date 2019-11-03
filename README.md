@@ -30,11 +30,18 @@ Ce jeu s'inspire de :
 
 - *Aucun*.
 
-### En bonus *(si possible)*
+### Bogues connus (mais minimes)
 
 - Lorsqu'on essaye de se déplacer vers un bloc solide, l'animation ne s'active
   qu'au moment où le clic est lâché. À la place, il ne faudrait soit aucun
   mouvement, soit un mouvement tout le long de l'appui ;
+
+- La première ligne de définition d'un niveau fait preuve de largeur de ce
+  niveau. Par conséquent le dernier bloc de la ligne définit la largeur de jeu.
+  Cela peut poser problème si on souhaite ne pas mettre de bloc sur toutes les
+  cellules de la première ligne.
+
+### En bonus *(si possible)*
 
 - Possibilité de cliquer n'importe où sur l'écran pour se déplacer, sur un
   écran tactile ;
