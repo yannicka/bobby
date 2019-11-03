@@ -36,7 +36,7 @@ Ce jeu s'inspire de :
   qu'au moment où le clic est lâché. À la place, il ne faudrait soit aucun
   mouvement, soit un mouvement tout le long de l'appui ;
 
-- Ajouter de nouveaux mécanismes (par exemple des caisses amovibles, mais cela
-  nécessite une refonte du système de grille) ;
+- Possibilité de cliquer n'importe où sur l'écran pour se déplacer, sur un
+  écran tactile ;
 
 - Ajouter une vue d'oiseau.
