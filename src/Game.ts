@@ -16,7 +16,6 @@ import { HomeScreen } from './screen/HomeScreen'
 import { OptionsScreen } from './screen/OptionsScreen'
 import { Size } from './Size'
 import { state } from './State'
-import { isTouchDevice } from './Util'
 
 const screenSize = new Size(9 * CELL_SIZE, 9 * CELL_SIZE)
 
@@ -113,9 +112,7 @@ export class Game {
     this.scene.render(ctx)
 
     if (this.pointer.down()) {
-      if (isTouchDevice()) {
-        this.joystick.render(ctx)
-      }
+      this.joystick.render(ctx)
     }
   }
 

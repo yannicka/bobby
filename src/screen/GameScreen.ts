@@ -2,9 +2,11 @@ import m from 'mithril'
 
 import { Game } from '../Game'
 import { Keyboard } from '../input/Keyboard'
+import { Mouse } from '../input/Mouse'
 import { Pointer } from '../input/Pointer'
 import { Touch } from '../input/Touch'
 import { state } from '../State'
+import { isTouchDevice } from '../Util'
 
 let game: Game = null
 
@@ -35,7 +37,12 @@ export class GameScreen {
     const canvas = document.getElementById('app') as HTMLCanvasElement
 
     this.keyboard = new Keyboard()
-    this.pointer = new Touch(canvas)
+
+    if (isTouchDevice()) {
+      this.pointer = new Touch(canvas)
+    } else {
+      this.pointer = new Mouse(canvas)
+    }
 
     const attrs = vnode.attrs as any
 
