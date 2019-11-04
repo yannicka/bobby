@@ -120,20 +120,42 @@ export class GameScene implements Scene {
 
   public movePlayer(_dt: number): void {
     if (this.player.isAbleToMove()) {
+      let keepDirection = false
+
       if (this.game.getKeyboard().down('ArrowUp') || this.game.getKeyboard().down('KeyW')) {
-        this.player.move(Direction.Up)
+        if (this.player.getDirection() === Direction.Up) {
+          keepDirection = true
+        } else {
+          this.player.move(Direction.Up)
+        }
       }
 
       if (this.game.getKeyboard().down('ArrowDown') || this.game.getKeyboard().down('KeyS')) {
-        this.player.move(Direction.Down)
+        if (this.player.getDirection() === Direction.Down) {
+          keepDirection = true
+        } else {
+          this.player.move(Direction.Down)
+        }
       }
 
       if (this.game.getKeyboard().down('ArrowRight') || this.game.getKeyboard().down('KeyD')) {
-        this.player.move(Direction.Right)
+        if (this.player.getDirection() === Direction.Right) {
+          keepDirection = true
+        } else {
+          this.player.move(Direction.Right)
+        }
       }
 
       if (this.game.getKeyboard().down('ArrowLeft') || this.game.getKeyboard().down('KeyA')) {
-        this.player.move(Direction.Left)
+        if (this.player.getDirection() === Direction.Left) {
+          keepDirection = true
+        } else {
+          this.player.move(Direction.Left)
+        }
+      }
+
+      if (keepDirection) {
+        this.player.move(this.player.getDirection())
       }
     }
 
