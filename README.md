@@ -11,6 +11,8 @@ Merci à Aur36 pour son aide sur la réalisation de niveaux.
 
 Merci à oräkle - Ethan G. pour son assistance graphique.
 
+Merci à Alceste_ pour ses améliorations de code et de fonctionnement global.
+
 Merci aux membres de Bit My Code pour leur soutien dans le développement du
 projet, et pour leurs divers retours.
 
