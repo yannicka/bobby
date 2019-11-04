@@ -35,4 +35,7 @@ export abstract class Pointer {
 
   // Roulette
   public abstract wheel(): WheelDirection
+
+  // Dernier évènement
+  public abstract getLastEvent(): Event | null
 }

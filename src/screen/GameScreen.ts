@@ -29,7 +29,7 @@ export class GameScreen {
       ]),
       m('div', { 'id': 'app-wrapper' }, [
         m('canvas', { 'id': 'app' }),
-        m('canvas', { 'id': 'joystick' }),
+        m('canvas', { 'id': 'joystick', 'style': 'display: none;' }),
       ]),
     ]
   }
@@ -55,7 +55,7 @@ export class GameScreen {
 
     document.addEventListener('click', documentClickEvent)
 
-    document.body.classList.add('bg-dark')
+    document.body.classList.add('bg-dark', 'overflow-hidden')
   }
 
   public onupdate(vnode: m.Vnode) {
@@ -77,7 +77,7 @@ export class GameScreen {
 
     document.removeEventListener('click', documentClickEvent)
 
-    document.body.classList.remove('bg-dark')
+    document.body.classList.remove('bg-dark', 'overflow-hidden')
 
     this.keyboard.unlisten()
     this.pointer.unlisten()

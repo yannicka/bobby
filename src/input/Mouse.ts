@@ -9,6 +9,7 @@ export class Mouse extends Pointer {
   private mtime: number
   private loose: number | null
   private wheelValue: number
+  private lastEvent: Event | null
 
   public constructor(element: HTMLElement | null = null) {
     super()
@@ -18,6 +19,8 @@ export class Mouse extends Pointer {
     this.loose = null
     this.wheelValue = 0
     this.element = element instanceof HTMLElement ? element : document.body
+
+    this.lastEvent = null
 
     this.listen()
   }
@@ -37,6 +40,8 @@ export class Mouse extends Pointer {
   }
 
   public handleEvent(e: MouseEvent | WheelEvent): void {
+    this.lastEvent = e
+
     switch (e.type) {
       case 'mousedown':
         this.onMouseDown(e as MouseEvent)
@@ -95,6 +100,10 @@ export class Mouse extends Pointer {
     }
 
     return WheelDirection.None
+  }
+
+  public getLastEvent(): Event | null {
+    return this.lastEvent
   }
 
   private onMouseDown(e: MouseEvent): void {

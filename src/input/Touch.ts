@@ -8,6 +8,7 @@ export class Touch extends Pointer {
   private click: number | null
   private mtime: number
   private loose: number | null
+  private lastEvent: Event | null
 
   public constructor(element: HTMLElement | null = null) {
     super()
@@ -16,6 +17,8 @@ export class Touch extends Pointer {
     this.mtime = 0
     this.loose = null
     this.element = element instanceof HTMLElement ? element : document.body
+
+    this.lastEvent = null
 
     this.listen()
   }
@@ -33,6 +36,8 @@ export class Touch extends Pointer {
   }
 
   public handleEvent(e: TouchEvent): void {
+    this.lastEvent = e
+
     switch (e.type) {
       case 'touchstart':
         this.onTouchDown(e)
@@ -79,6 +84,10 @@ export class Touch extends Pointer {
     // throw new Error('No wheel on touch')
 
     return WheelDirection.None
+  }
+
+  public getLastEvent(): Event | null {
+    return this.lastEvent
   }
 
   private onTouchDown(e: TouchEvent): void {

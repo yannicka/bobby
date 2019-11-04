@@ -32,14 +32,18 @@ export class Joystick {
     this.zoom = this.game.getZoom()
   }
 
-  public render(/* ctx: CanvasRenderingContext2D */): void {
+  public render(): void {
+    const margin = 100 // nombre arbitraire
+
+    this.canvas.width = this.outerRadius * 2 * this.zoom + margin
+    this.canvas.height = this.outerRadius * 2 * this.zoom + margin
+
+    this.canvas.style.left = `${this.position.x - (this.canvas.width / 2)}px`
+    this.canvas.style.top = `${this.position.y - (this.canvas.height / 2)}px`
+
+    this.ctx.save()
     this.ctx.scale(this.zoom, this.zoom)
-
-    this.canvas.width = this.outerRadius * 2
-    this.canvas.height = this.outerRadius * 2
-
-    this.canvas.style.left = `${this.position.x - this.outerRadius}px`
-    this.canvas.style.top = `${this.position.y - this.outerRadius}px`
+    this.ctx.translate(margin / this.zoom / 2, margin / this.zoom / 2)
 
     this.ctx.lineWidth = 1
 
@@ -68,42 +72,55 @@ export class Joystick {
     this.ctx.strokeStyle = '#333'
     this.ctx.stroke()
 
-    // document.removeChild(canvas)
+    this.ctx.restore()
   }
 
   public updatePlayer(player: Player): void {
     if (this.pointer.down()) {
-      const force = this.computeForce()
+      const topbar = document.querySelector('.topbar')
+      const pointerEvent = this.pointer.getLastEvent()
+      const target = pointerEvent.target as Node
 
-      const forceNeeded = 0.65
+      if (!topbar.contains(target)) {
+        const force = this.computeForce()
 
-      if (Math.abs(force.x) > Math.abs(force.y)) {
-        // mouvement horizontal
+        const forceNeeded = 0.65
 
-        if (force.x >= forceNeeded) {
-          player.move(Direction.Right)
-        }
+        if (Math.abs(force.x) > Math.abs(force.y)) {
+          // mouvement horizontal
 
-        if (force.x <= -forceNeeded) {
-          player.move(Direction.Left)
-        }
-      } else {
-        // mouvement vertical
+          if (force.x >= forceNeeded) {
+            player.move(Direction.Right)
+          }
 
-        if (force.y >= forceNeeded) {
-          player.move(Direction.Down)
-        }
+          if (force.x <= -forceNeeded) {
+            player.move(Direction.Left)
+          }
+        } else {
+          // mouvement vertical
 
-        if (force.y <= -forceNeeded) {
-          player.move(Direction.Up)
+          if (force.y >= forceNeeded) {
+            player.move(Direction.Down)
+          }
+
+          if (force.y <= -forceNeeded) {
+            player.move(Direction.Up)
+          }
         }
       }
-
     }
   }
 
   public setPosition(position: Point): void {
     this.position = position
+  }
+
+  public show(): void {
+    this.canvas.style.display = 'block'
+  }
+
+  public hide(): void {
+    this.canvas.style.display = 'none'
   }
 
   // @see https://codepen.io/jiffy/pen/zrqwON

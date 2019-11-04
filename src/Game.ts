@@ -86,9 +86,21 @@ export class Game {
     this.lastUpdate = now
 
     if (this.pointer.press()) {
-      const newPosition = this.pointer.getPosition().clone()
+      const topbar = document.querySelector('.topbar')
+      const pointerEvent = this.pointer.getLastEvent()
+      const target = pointerEvent.target as Node
 
-      this.joystick.setPosition(newPosition)
+      if (!topbar.contains(target)) {
+        const newPosition = this.pointer.getPosition().clone()
+
+        this.joystick.setPosition(newPosition)
+
+        this.joystick.show()
+      }
+    }
+
+    if (this.pointer.release()) {
+      this.joystick.hide()
     }
 
     this.scene.update(dt)
@@ -109,9 +121,7 @@ export class Game {
 
     this.scene.render(ctx)
 
-    if (this.pointer.down()) {
-      this.joystick.render()
-    }
+    this.joystick.render()
   }
 
   public listen(): void {
