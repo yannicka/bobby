@@ -71,6 +71,41 @@ export class Joystick {
     // document.removeChild(canvas)
   }
 
+  public updatePlayer(player: Player): void {
+    if (this.pointer.down()) {
+      const force = this.computeForce()
+
+      const forceNeeded = 0.65
+
+      if (Math.abs(force.x) > Math.abs(force.y)) {
+        // mouvement horizontal
+
+        if (force.x >= forceNeeded) {
+          player.move(Direction.Right)
+        }
+
+        if (force.x <= -forceNeeded) {
+          player.move(Direction.Left)
+        }
+      } else {
+        // mouvement vertical
+
+        if (force.y >= forceNeeded) {
+          player.move(Direction.Down)
+        }
+
+        if (force.y <= -forceNeeded) {
+          player.move(Direction.Up)
+        }
+      }
+
+    }
+  }
+
+  public setPosition(position: Point): void {
+    this.position = position
+  }
+
   // @see https://codepen.io/jiffy/pen/zrqwON
   // @see https://stackoverflow.com/a/20916980
   private computeForce(): Point {
@@ -99,39 +134,5 @@ export class Joystick {
     coords.y /= this.innerRadius
 
     return coords
-  }
-
-  public updatePlayer(player: Player): void {
-    if (this.pointer.down()) {
-      const force = this.computeForce()
-
-      const forceNeeded = 0.65
-
-      if (Math.abs(force.x) > Math.abs(force.y)) {
-        // mouvement horizontal
-        if (force.x >= forceNeeded) {
-          player.move(Direction.Right)
-        }
-
-        if (force.x <= -forceNeeded) {
-          player.move(Direction.Left)
-        }
-      } else {
-        // mouvement vertical
-
-        if (force.y >= forceNeeded) {
-          player.move(Direction.Down)
-        }
-
-        if (force.y <= -forceNeeded) {
-          player.move(Direction.Up)
-        }
-      }
-
-    }
-  }
-
-  public setPosition(position: Point): void {
-    this.position = position
   }
 }

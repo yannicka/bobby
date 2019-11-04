@@ -1,9 +1,5 @@
 import { Point } from './Point'
-
-interface Size {
-  width: number
-  height: number
-}
+import { Size } from './Size'
 
 export class Camera {
   private position: Point

@@ -1,7 +1,8 @@
-import { Level } from './Level'
+import { Level, LevelManager } from './Level'
 import { Storage } from './Storage'
 
-const storage = new Storage()
+const levelManager = new LevelManager()
+const storage = new Storage(levelManager)
 
 export const state = {
   levels: {} as { [key: string]: Level },

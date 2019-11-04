@@ -1,33 +1,12 @@
 import { Level, LevelDynamic, LevelManager, LevelUser } from './Level'
 
+const LEVELS_STORAGE_KEY = 'levels'
+
 export class Storage {
   private readonly levelManager: LevelManager
 
-  public constructor() {
-    this.levelManager = new LevelManager()
-  }
-
-  public getLevelsUser(): { [key: string]: LevelUser } {
-    const levels: { [key: string]: LevelUser } = {}
-
-    for (const [ name ] of Object.entries(this.levelManager.getLevelsFixed())) {
-      levels[name] = {
-        success: false,
-      }
-    }
-
-    if (localStorage.getItem('levels') !== null) {
-      const jsonLevels = localStorage.getItem('levels')
-      const l = JSON.parse(jsonLevels) as { [key: string]: LevelUser }
-
-      for (const [ name, level ] of Object.entries(l)) {
-        levels[name] = level
-      }
-    }
-
-    localStorage.setItem('levels', JSON.stringify(levels))
-
-    return levels
+  public constructor(levelManager: LevelManager) {
+    this.levelManager = levelManager
   }
 
   public getLevels(): { [key: string]: Level } {
@@ -37,7 +16,7 @@ export class Storage {
 
     let previousLevel: Level | null = null
 
-    for (const [ name, fixed ] of Object.entries(this.levelManager.getLevelsFixed())) {
+    for (const [ name, fixed ] of Object.entries(this.levelManager.getLevels())) {
       let accessible = false
 
       if (levelsUser[name].success) {
@@ -68,16 +47,52 @@ export class Storage {
     return levels
   }
 
-  public success(level: string): void {
-    const jsonLevels = localStorage.getItem('levels')
-    const l = JSON.parse(jsonLevels) as { [key: string]: LevelUser }
+  public successfulLevel(levelName: string): void {
+    const levels = this.getStoredLevels()
 
-    l[level].success = true
+    levels[levelName].success = true
 
-    localStorage.setItem('levels', JSON.stringify(l))
+    this.saveLevels(levels)
   }
 
   public reset(): void {
     localStorage.clear()
+  }
+
+  private getLevelsUser(): { [key: string]: LevelUser } {
+    const levels: { [key: string]: LevelUser } = {}
+
+    for (const [ name ] of Object.entries(this.levelManager.getLevels())) {
+      levels[name] = {
+        success: false,
+      }
+    }
+
+    const l = this.getStoredLevels()
+
+    for (const [ name, level ] of Object.entries(l)) {
+      if (name in levels) {
+        levels[name] = level
+      }
+    }
+
+    this.saveLevels(levels)
+
+    return levels
+  }
+
+  private getStoredLevels(): { [key: string]: LevelUser } {
+    if (localStorage.getItem(LEVELS_STORAGE_KEY) !== null) {
+      const jsonLevels = localStorage.getItem(LEVELS_STORAGE_KEY)
+      const levels = JSON.parse(jsonLevels) as { [key: string]: LevelUser }
+
+      return levels
+    }
+
+    return {}
+  }
+
+  private saveLevels(levels: { [key: string]: LevelUser }): void {
+    localStorage.setItem(LEVELS_STORAGE_KEY, JSON.stringify(levels))
   }
 }

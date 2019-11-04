@@ -5,7 +5,6 @@ import { GameScene } from './GameScene'
 import { ImageManager } from './ImageManager'
 import { Keyboard } from './input/Keyboard'
 import { Pointer } from './input/Pointer'
-import { Touch } from './input/Touch'
 import { Joystick } from './Joystick'
 import { Point } from './Point'
 import { Scene } from './Scene'
@@ -15,30 +14,34 @@ import { GameScreen } from './screen/GameScreen'
 import { HelpScreen } from './screen/HelpScreen'
 import { HomeScreen } from './screen/HomeScreen'
 import { OptionsScreen } from './screen/OptionsScreen'
+import { Size } from './Size'
 import { state } from './State'
-import { isTouchDevice } from './Util'
 
-const screenSize = { width: 9 * CELL_SIZE, height: 9 * CELL_SIZE }
+const screenSize = new Size(9 * CELL_SIZE, 9 * CELL_SIZE)
 
 function computeAppSize() {
-  const { width, height } = screenSize
+  const size = screenSize
 
   const topbar = document.querySelector('.topbar')
   const topbarHeight = (topbar instanceof HTMLElement ? topbar.clientHeight : 0)
 
-  const widthZoom = window.innerWidth / width
-  const heightZoom = (window.innerHeight - topbarHeight) / height
+  const widthZoom = window.innerWidth / size.width
+  const heightZoom = (window.innerHeight - topbarHeight) / size.height
 
   const zoom = Math.min(widthZoom, heightZoom)
 
-  const appWidth = width * zoom
-  const appHeight = height * zoom
+  const appWidth = size.width * zoom
+  const appHeight = size.height * zoom
 
   return {
-    width: appWidth,
-    height: appHeight,
+    size: new Size(appWidth, appHeight),
     zoom,
   }
+}
+
+export function changeScreenSize(width: number, height: number) {
+  screenSize.width = width * CELL_SIZE
+  screenSize.height = height * CELL_SIZE
 }
 
 export class Game {
@@ -107,9 +110,7 @@ export class Game {
     this.scene.render(ctx)
 
     if (this.pointer.down()) {
-      if (isTouchDevice()) {
-        this.joystick.render()
-      }
+      this.joystick.render()
     }
   }
 
@@ -130,15 +131,15 @@ export class Game {
   }
 
   public resize(_e: UIEvent | null = null): void {
-    const { width, height, zoom } = computeAppSize()
+    const appSize = computeAppSize()
 
-    this.zoom = zoom
+    this.zoom = appSize.zoom
 
-    this.canvas.width = width
-    this.canvas.height = height
+    this.canvas.width = appSize.size.width
+    this.canvas.height = appSize.size.height
 
     this.ctx.imageSmoothingEnabled = false
-    this.ctx.scale(zoom, zoom)
+    this.ctx.scale(appSize.zoom, appSize.zoom)
   }
 
   public getCanvas(): HTMLCanvasElement {
@@ -149,13 +150,8 @@ export class Game {
     this.scene = scene
   }
 
-  public getScreenSize(): [ number, number ] {
-    let [ width, height ] = [ 9, 9 ]
-
-    width *= CELL_SIZE
-    height *= CELL_SIZE
-
-    return [ width, height ]
+  public getScreenSize(): Size {
+    return screenSize
   }
 
   public stop(): void {
@@ -208,10 +204,10 @@ export class Superapp {
   }
 
   public resize(_e: UIEvent | null = null): void {
-    const { width } = computeAppSize()
+    const appSize = computeAppSize()
     const height = window.innerHeight
 
-    this.superapp.style.width = `${width}px`
+    this.superapp.style.width = `${appSize.size.width}px`
     this.superapp.style.height = `${height}px`
   }
 }

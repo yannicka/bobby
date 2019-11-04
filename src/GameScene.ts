@@ -3,13 +3,14 @@ import m from 'mithril'
 import { Camera } from './Camera'
 import { CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
-import { Game } from './Game'
+import { changeScreenSize, Game } from './Game'
 import { ImageManager } from './ImageManager'
 import { Keyboard } from './input/Keyboard'
 import { Map } from './Map'
 import { Player } from './Player'
 import { Point } from './Point'
 import { Scene } from './Scene'
+import { Size } from './Size'
 import { Storage } from './Storage'
 import { clamp } from './Util'
 
@@ -28,15 +29,17 @@ export class GameScene implements Scene {
 
     this.storage = storage
 
-    const truc = this.storage.getLevels()[this.currentLevelName]
+    const level = this.storage.getLevels()[this.currentLevelName]
 
-    if (!truc.dynamic.accessible) {
+    if (!level.dynamic.accessible) {
       m.route.set('/choose-level')
     }
 
+    changeScreenSize(level.fixed.screenWidth, level.fixed.screenHeight)
+
     this.map = new Map(this.storage.getLevels()[this.currentLevelName].fixed.map)
 
-    this.camera = new Camera(new Point(0, 0), { width: 100, height: 100 })
+    this.camera = new Camera(new Point(0, 0), new Size(100, 100))
 
     this.player = new Player(this)
   }
@@ -51,9 +54,9 @@ export class GameScene implements Scene {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    let { width, height } = this.map.getSize()
-    width *= CELL_SIZE
-    height *= CELL_SIZE
+    const size = this.map.getSize().clone()
+    size.width *= CELL_SIZE
+    size.height *= CELL_SIZE
 
     const bgImg = ImageManager.getImage('background')
     const pat = ctx.createPattern(bgImg, 'repeat')
@@ -62,7 +65,7 @@ export class GameScene implements Scene {
     ctx.translate(this.camera.getPosition().x, this.camera.getPosition().y)
 
     ctx.beginPath() // @see https://gamedev.stackexchange.com/a/120250
-    ctx.rect(0, 0, width, height)
+    ctx.rect(0, 0, size.width, size.height)
     ctx.fillStyle = pat
     ctx.fill()
 
@@ -77,7 +80,7 @@ export class GameScene implements Scene {
   }
 
   public nextLevel(): void {
-    this.storage.success(this.currentLevelName)
+    this.storage.successfulLevel(this.currentLevelName)
 
     const levels = this.storage.getLevels()
 
@@ -91,13 +94,12 @@ export class GameScene implements Scene {
       m.route.set(`/game/${nextLevel}`, {}, {
         replace: true,
       })
-      // this.game.changeScene(new GameScene(this.game, nextLevel, this.storage))
     }
   }
 
   private updateCamera(_dt: number): void {
-    const [ gameWidth, gameHeight ] = this.game.getScreenSize()
-    const { width: mapWidth, height: mapHeight } = this.map.getDisplayedSize()
+    const gameSize = this.game.getScreenSize().clone()
+    const mapSize = this.map.getDisplayedSize().clone()
 
     const cameraPosition = this.player.getDisplayPosition().clone()
 
@@ -107,31 +109,53 @@ export class GameScene implements Scene {
     cameraPosition.x -= CELL_SIZE / 2
     cameraPosition.y -= CELL_SIZE / 2
 
-    cameraPosition.x += gameWidth / 2
-    cameraPosition.y += gameHeight / 2
+    cameraPosition.x += gameSize.width / 2
+    cameraPosition.y += gameSize.height / 2
 
-    cameraPosition.x = clamp(cameraPosition.x, -mapWidth + gameWidth, 0)
-    cameraPosition.y = clamp(cameraPosition.y, -mapHeight + gameHeight, 0)
+    cameraPosition.x = clamp(cameraPosition.x, -mapSize.width + gameSize.width, 0)
+    cameraPosition.y = clamp(cameraPosition.y, -mapSize.height + gameSize.height, 0)
 
     this.camera.setPosition(cameraPosition)
   }
 
   public movePlayer(_dt: number): void {
     if (this.player.isAbleToMove()) {
+      let keepDirection = false
+
       if (this.game.getKeyboard().down('ArrowUp') || this.game.getKeyboard().down('KeyW')) {
-        this.player.move(Direction.Up)
+        if (this.player.getDirection() === Direction.Up) {
+          keepDirection = true
+        } else {
+          this.player.move(Direction.Up)
+        }
       }
 
       if (this.game.getKeyboard().down('ArrowDown') || this.game.getKeyboard().down('KeyS')) {
-        this.player.move(Direction.Down)
+        if (this.player.getDirection() === Direction.Down) {
+          keepDirection = true
+        } else {
+          this.player.move(Direction.Down)
+        }
       }
 
       if (this.game.getKeyboard().down('ArrowRight') || this.game.getKeyboard().down('KeyD')) {
-        this.player.move(Direction.Right)
+        if (this.player.getDirection() === Direction.Right) {
+          keepDirection = true
+        } else {
+          this.player.move(Direction.Right)
+        }
       }
 
       if (this.game.getKeyboard().down('ArrowLeft') || this.game.getKeyboard().down('KeyA')) {
-        this.player.move(Direction.Left)
+        if (this.player.getDirection() === Direction.Left) {
+          keepDirection = true
+        } else {
+          this.player.move(Direction.Left)
+        }
+      }
+
+      if (keepDirection) {
+        this.player.move(this.player.getDirection())
       }
     }
 
