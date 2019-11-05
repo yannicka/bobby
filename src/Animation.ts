@@ -29,7 +29,7 @@ export class Animation {
   private timer: number
 
   // Index vers la frame en cours
-  private currentFrame: number
+  private currentIndex: number
 
   // L'animation est-elle terminée ?
   private finished: boolean
@@ -51,7 +51,7 @@ export class Animation {
     this.loop = loop
 
     this.timer = 0
-    this.currentFrame = 0
+    this.currentIndex = 0
     this.finished = false
   }
 
@@ -63,15 +63,15 @@ export class Animation {
     this.timer += dt
 
     while (this.timer > this.frameDuration) {
-      this.currentFrame += 1
+      this.currentIndex += 1
 
-      if (this.currentFrame >= this.frames.length) {
+      if (this.currentIndex >= this.frames.length) {
         if (this.loop) {
-          this.currentFrame = 0
+          this.currentIndex = 0
         } else {
           this.finished = true
 
-          this.currentFrame -= 1
+          this.currentIndex -= 1
         }
       }
 
@@ -93,11 +93,11 @@ export class Animation {
 
   public restart(): void {
     this.timer = 0
-    this.currentFrame = 0
+    this.currentIndex = 0
     this.finished = false
   }
 
   private getCurrentFrame(): number {
-    return this.frames[this.currentFrame]
+    return this.frames[this.currentIndex]
   }
 }

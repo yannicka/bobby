@@ -14,12 +14,12 @@ export class Camera {
     return this.position
   }
 
-  public getSize(): Size {
-    return this.size
-  }
-
   public setPosition(position: Point): void {
     this.position = position
+  }
+
+  public getSize(): Size {
+    return this.size
   }
 
   public setSize(size: Size): void {

@@ -32,12 +32,7 @@
     "no-floating-promises": false,
     "no-void-expression": false,
     "no-irregular-whitespace": false,
-    "strict-comparisons": [
-      true,
-      {
-        "allow-object-equal-comparison": false
-      }
-    ],
+    "strict-comparisons": false,
 
     "no-default-export": false,
     "no-default-import": false,

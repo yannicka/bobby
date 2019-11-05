@@ -10,25 +10,25 @@ export const CELL_SIZE = 16
 
 export abstract class Cell {
   private readonly position: Point
-  private readonly animation: AnimationManager
+  private readonly animationManager: AnimationManager
 
   protected constructor(position: Point) {
     this.position = position
 
     const image = ImageManager.getImage('tiles')
 
-    this.animation = new AnimationManager(image, CELL_SIZE, CELL_SIZE)
+    this.animationManager = new AnimationManager(image, CELL_SIZE, CELL_SIZE)
   }
 
   public update(dt: number): void {
-    this.animation.update(dt)
+    this.animationManager.update(dt)
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
     ctx.save()
     ctx.translate(this.position.x * CELL_SIZE, this.position.y * CELL_SIZE)
 
-    this.animation.render(ctx)
+    this.animationManager.render(ctx)
 
     ctx.restore()
   }
@@ -60,8 +60,8 @@ export abstract class Cell {
     return this.position
   }
 
-  public getAnimation(): AnimationManager {
-    return this.animation
+  public getAnimationManager(): AnimationManager {
+    return this.animationManager
   }
 }
 
@@ -70,9 +70,9 @@ export class Stone extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 0 ])
+    this.getAnimationManager().addAnimation('idle', [ 0 ])
 
-    this.getAnimation().play('idle')
+    this.getAnimationManager().play('idle')
   }
 
   public canEnter(): boolean {
@@ -89,21 +89,21 @@ export class Button extends Cell {
 
     this.value = value
 
-    this.getAnimation().addAnimation('activated', [ 80 ])
-    this.getAnimation().addAnimation('deactivated-1', [ 81 ])
-    this.getAnimation().addAnimation('deactivated-2', [ 82 ])
-    this.getAnimation().addAnimation('deactivated-3', [ 83 ])
+    this.getAnimationManager().addAnimation('activated', [ 80 ])
+    this.getAnimationManager().addAnimation('deactivated-1', [ 81 ])
+    this.getAnimationManager().addAnimation('deactivated-2', [ 82 ])
+    this.getAnimationManager().addAnimation('deactivated-3', [ 83 ])
 
-    this.getAnimation().play(`deactivated-${this.value}`)
+    this.getAnimationManager().play(`deactivated-${this.value}`)
   }
 
   public onAfterPlayerOut(): void {
     this.value -= 1
 
     if (this.value === 0) {
-      this.getAnimation().play('activated')
+      this.getAnimationManager().play('activated')
     } else {
-      this.getAnimation().play(`deactivated-${this.value}`)
+      this.getAnimationManager().play(`deactivated-${this.value}`)
     }
   }
 
@@ -121,23 +121,23 @@ export class Conveyor extends Cell {
 
     this.direction = direction
 
-    this.getAnimation().addAnimation(Direction.Up.toString(), [ 30, 31, 32, 33 ], {
+    this.getAnimationManager().addAnimation(Direction.Up.toString(), [ 30, 31, 32, 33 ], {
       frameDuration: 0.08,
     })
 
-    this.getAnimation().addAnimation(Direction.Right.toString(), [ 40, 41, 42, 43 ], {
+    this.getAnimationManager().addAnimation(Direction.Right.toString(), [ 40, 41, 42, 43 ], {
       frameDuration: 0.08,
     })
 
-    this.getAnimation().addAnimation(Direction.Down.toString(), [ 50, 51, 52, 53 ], {
+    this.getAnimationManager().addAnimation(Direction.Down.toString(), [ 50, 51, 52, 53 ], {
       frameDuration: 0.08,
     })
 
-    this.getAnimation().addAnimation(Direction.Left.toString(), [ 60, 61, 62, 63 ], {
+    this.getAnimationManager().addAnimation(Direction.Left.toString(), [ 60, 61, 62, 63 ], {
       frameDuration: 0.08,
     })
 
-    this.getAnimation().play(direction.toString())
+    this.getAnimationManager().play(direction.toString())
   }
 
   public onAfterPlayerIn(player: Player, _gameScene: GameScene): this | null {
@@ -156,20 +156,20 @@ export class Turnstile extends Cell {
 
     this.angle = angle
 
-    this.getAnimation().addAnimation(Rotation.UpLeft.toString(), [ 70 ])
-    this.getAnimation().addAnimation(Rotation.UpRight.toString(), [ 71 ])
-    this.getAnimation().addAnimation(Rotation.DownRight.toString(), [ 72 ])
-    this.getAnimation().addAnimation(Rotation.DownLeft.toString(), [ 73 ])
+    this.getAnimationManager().addAnimation(Rotation.UpLeft.toString(), [ 70 ])
+    this.getAnimationManager().addAnimation(Rotation.UpRight.toString(), [ 71 ])
+    this.getAnimationManager().addAnimation(Rotation.DownRight.toString(), [ 72 ])
+    this.getAnimationManager().addAnimation(Rotation.DownLeft.toString(), [ 73 ])
 
-    this.getAnimation().addAnimation(Rotation.Horizontal.toString(), [ 74 ])
-    this.getAnimation().addAnimation(Rotation.Vertical.toString(), [ 75 ])
+    this.getAnimationManager().addAnimation(Rotation.Horizontal.toString(), [ 74 ])
+    this.getAnimationManager().addAnimation(Rotation.Vertical.toString(), [ 75 ])
 
-    this.getAnimation().addAnimation(Rotation.Up.toString(), [ 76 ])
-    this.getAnimation().addAnimation(Rotation.Right.toString(), [ 77 ])
-    this.getAnimation().addAnimation(Rotation.Down.toString(), [ 78 ])
-    this.getAnimation().addAnimation(Rotation.Left.toString(), [ 79 ])
+    this.getAnimationManager().addAnimation(Rotation.Up.toString(), [ 76 ])
+    this.getAnimationManager().addAnimation(Rotation.Right.toString(), [ 77 ])
+    this.getAnimationManager().addAnimation(Rotation.Down.toString(), [ 78 ])
+    this.getAnimationManager().addAnimation(Rotation.Left.toString(), [ 79 ])
 
-    this.getAnimation().play(angle.toString())
+    this.getAnimationManager().play(angle.toString())
   }
 
   public onAfterPlayerOut(): void {
@@ -215,7 +215,7 @@ export class Turnstile extends Cell {
         break
     }
 
-    this.getAnimation().play(this.angle.toString())
+    this.getAnimationManager().play(this.angle.toString())
   }
 
   public canEnter(direction: Direction): boolean {
@@ -307,13 +307,13 @@ export class End extends Cell {
 
     this.active = false
 
-    this.getAnimation().addAnimation('inactive', [ 20 ])
+    this.getAnimationManager().addAnimation('inactive', [ 20 ])
 
-    this.getAnimation().addAnimation('active', [ 21, 22 ], {
+    this.getAnimationManager().addAnimation('active', [ 21, 22 ], {
       frameDuration: 0.1,
     })
 
-    this.getAnimation().play('inactive')
+    this.getAnimationManager().play('inactive')
   }
 
   public onAfterPlayerIn(player: Player, gameScene: GameScene): this | null {
@@ -321,7 +321,9 @@ export class End extends Cell {
       player.setImmobility(true)
       player.getAnimationManager().play('turn')
 
-      setTimeout(() => { gameScene.nextLevel() }, 480)
+      setTimeout(() => {
+        gameScene.nextLevel()
+      }, 480)
     }
 
     return this
@@ -330,7 +332,7 @@ export class End extends Cell {
   public activate(): void {
     this.active = true
 
-    this.getAnimation().play('active')
+    this.getAnimationManager().play('active')
   }
 
   public isActive(): boolean {
@@ -343,9 +345,9 @@ export class Coin extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 10 ])
+    this.getAnimationManager().addAnimation('idle', [ 10 ])
 
-    this.getAnimation().play('idle')
+    this.getAnimationManager().play('idle')
   }
 
   public onAfterPlayerIn(_player: Player, _gameScene: GameScene): this | null {
@@ -358,9 +360,9 @@ export class Ice extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 2 ])
+    this.getAnimationManager().addAnimation('idle', [ 2 ])
 
-    this.getAnimation().play('idle')
+    this.getAnimationManager().play('idle')
   }
 
   public onAfterPlayerIn(player: Player, _gameScene: GameScene): this | null {
@@ -375,9 +377,9 @@ export class Elevation extends Cell {
   public constructor(position: Point) {
     super(position)
 
-    this.getAnimation().addAnimation('idle', [ 1 ])
+    this.getAnimationManager().addAnimation('idle', [ 1 ])
 
-    this.getAnimation().play('idle')
+    this.getAnimationManager().play('idle')
   }
 
   public onBeforePlayerIn(player: Player): void {
