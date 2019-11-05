@@ -22,7 +22,7 @@ export class EndGameScreen {
     ]
   }
 
-  public oncreate(vnode: m.Vnode) {
+  public oncreate(_vnode: m.Vnode) {
     const SECOND = 1000
 
     document.body.classList.add('end-game')
@@ -64,7 +64,7 @@ export class EndGameScreen {
     })
   }
 
-  public onremove(vnode: m.Vnode) {
+  public onremove(_vnode: m.Vnode) {
     document.body.classList.remove('end-game')
   }
 }

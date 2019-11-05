@@ -14,6 +14,7 @@ export class HelpScreen {
         m('div', { 'class': 'main-content' }, [
           m('h2', 'Objectif'),
           m('p', 'Récoltez les pièces dans chaque niveau.'),
+
           m('h2', 'Blocs'),
           m('p', 'Les rochers vous bloque.'),
           m('p', 'Les tapis roulant vous emmène dans une direction donnée.'),

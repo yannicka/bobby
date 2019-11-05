@@ -15,14 +15,14 @@ export class OptionsScreen {
       m('div', { 'class': 'main-wrapper' }, [
         m('div', { 'class': 'main-content' }, [
           m('button', { 'onclick': reset, 'class': 'btn' }, 'Remise à zéro'),
-          m('p', 'Cela effacera votre progression et vous ramènera au niveau 1'),
+          m('p', { 'class': 'center' }, 'Cela effacera votre progression et vous ramènera au niveau 1.'),
         ]),
       ]),
     ]
   }
 }
 
-function reset(e: {}): void {
+function reset(_e: object): void {
   if (confirm('Êtes-vous sûr de vouloir effacer votre progression ?')) {
     state.getStorage().reset()
   }

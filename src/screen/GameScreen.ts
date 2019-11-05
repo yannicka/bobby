@@ -8,9 +8,8 @@ import { Touch } from '../input/Touch'
 import { state } from '../State'
 import { isTouchDevice } from '../Util'
 
-let game: Game = null
-
 export class GameScreen {
+  private game: Game
   private keyboard: Keyboard
   private pointer: Pointer
 
@@ -36,8 +35,6 @@ export class GameScreen {
   }
 
   public oncreate(vnode: m.Vnode) {
-    const canvas = document.getElementById('app') as HTMLCanvasElement
-
     this.keyboard = new Keyboard()
 
     if (isTouchDevice()) {
@@ -50,7 +47,7 @@ export class GameScreen {
 
     const levelName = attrs.level
 
-    game = new Game(this, levelName)
+    this.game = new Game(this, levelName)
 
     updateTopbarLevel(levelName)
 
@@ -62,19 +59,19 @@ export class GameScreen {
   public onupdate(vnode: m.Vnode) {
     const attrs = vnode.attrs as { level: string }
 
-    game.stop()
-    game.unlisten()
+    this.game.stop()
+    this.game.unlisten()
 
     const levelName = attrs.level
 
-    game = new Game(this, levelName)
+    this.game = new Game(this, levelName)
 
     updateTopbarLevel(levelName)
   }
 
   public onremove(vnode: m.Vnode) {
-    game.stop()
-    game.unlisten()
+    this.game.stop()
+    this.game.unlisten()
 
     document.removeEventListener('click', documentClickEvent)
 
@@ -101,10 +98,6 @@ function showMenu(e: { redraw: boolean }): void {
   if (nav instanceof HTMLElement) {
     nav.classList.toggle('topbar-menu-nav-displayed')
   }
-}
-
-function goToMenu(e: {}): void {
-  m.route.set('/choose-level')
 }
 
 function restartLevel(e: { redraw: boolean }): void {

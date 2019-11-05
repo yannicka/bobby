@@ -1,4 +1,4 @@
-import m, { Attributes, Vnode } from 'mithril'
+import m, { Attributes } from 'mithril'
 
 import { Level } from '../Level'
 import { state } from '../State'
