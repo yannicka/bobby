@@ -3,9 +3,10 @@ import m, { Attributes, Vnode } from 'mithril'
 import { Level } from '../Level'
 import { state } from '../State'
 
-const LevelComponent: m.Component = {
-  view(vnode: m.Vnode) {
-    const level: Level = (vnode.attrs as any).level
+class LevelComponent {
+  public view(vnode: m.Vnode) {
+    const attrs = vnode.attrs as { level: Level }
+    const level: Level = attrs.level
 
     const classes: Array<string> = []
     classes.push('level')
@@ -17,31 +18,36 @@ const LevelComponent: m.Component = {
     return m('div', { 'class': classesText }, [
       m(m.route.Link, { 'href': `/game/${level.fixed.name}` }, level.fixed.number),
     ])
-  },
+  }
 }
 
-export const ChooseLevelScreen: m.Component = {
-  oninit() {
+export class ChooseLevelScreen {
+  public oninit() {
     state.loadLevels()
-  },
+  }
 
-  view(vnode) {
-    const childrens: Array<Vnode> = Object.values(state.getLevels()).map((level: Level) =>
-      m(LevelComponent, { level } as Attributes),
-    )
+  public view(_vnode: m.Vnode) {
+    const levels = state.getLevels()
+
+    const childrens = Object.values(levels).map((level: Level) => {
+      const levelAttribute: Attributes = { level }
+
+      return m(LevelComponent, levelAttribute)
+    })
 
     return [
-      m('div', { 'class': 'topbar' }, [
+      m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),
         m('div', { 'class': 'topbar-menu' }, [
           m(m.route.Link, { 'href': '/', 'class': 'topbar-button' }, 'Retour'),
         ]),
       ]),
+
       m('div', { 'class': 'main-wrapper main-wrapper-unaligned' }, [
         m('div', { 'class': 'main-content' }, [
           m('div', { 'class': 'levels' }, childrens),
         ]),
       ]),
     ]
-  },
+  }
 }

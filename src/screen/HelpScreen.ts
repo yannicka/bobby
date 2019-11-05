@@ -1,14 +1,15 @@
 import m from 'mithril'
 
-export const HelpScreen: m.Component = {
-  view() {
+export class HelpScreen {
+  public view() {
     return [
-      m('div', { 'class': 'topbar' }, [
+      m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),
         m('div', { 'class': 'topbar-menu' }, [
           m(m.route.Link, { 'href': '/', 'class': 'topbar-button' }, 'Retour'),
         ]),
       ]),
+
       m('div', { 'class': 'main-wrapper main-wrapper-unaligned' }, [
         m('div', { 'class': 'main-content' }, [
           m('h2', 'Objectif'),
@@ -23,5 +24,5 @@ export const HelpScreen: m.Component = {
         ]),
       ]),
     ]
-  },
+  }
 }

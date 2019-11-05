@@ -22,7 +22,7 @@ const screenSize = new Size(9 * CELL_SIZE, 9 * CELL_SIZE)
 function computeAppSize() {
   const size = screenSize
 
-  const topbar = document.querySelector('.topbar')
+  const topbar = document.getElementById('topbar')
   const topbarHeight = (topbar instanceof HTMLElement ? topbar.clientHeight : 0)
 
   const widthZoom = window.innerWidth / size.width
@@ -86,7 +86,7 @@ export class Game {
     this.lastUpdate = now
 
     if (this.pointer.press()) {
-      const topbar = document.querySelector('.topbar')
+      const topbar = document.getElementById('topbar')
       const pointerEvent = this.pointer.getLastEvent()
       const target = pointerEvent.target as Node
 

@@ -16,7 +16,7 @@ export class GameScreen {
 
   public view() {
     return [
-      m('div', { 'class': 'topbar' }, [
+      m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-level' }, 'Niveau X/Y'),
         m('div', { 'class': 'topbar-menu' }, [
           m('button', { 'onclick': restartLevel, 'class': 'topbar-button', 'title': 'Recommencer le niveau' }, '⟳'),
@@ -27,6 +27,7 @@ export class GameScreen {
           ]),
         ]),
       ]),
+
       m('div', { 'id': 'app-wrapper' }, [
         m('canvas', { 'id': 'app' }),
         m('canvas', { 'id': 'joystick', 'style': 'display: none;' }),
@@ -45,9 +46,9 @@ export class GameScreen {
       this.pointer = new Mouse()
     }
 
-    const attrs = vnode.attrs as any
+    const attrs = vnode.attrs as { level: string }
 
-    const levelName = attrs.level as string
+    const levelName = attrs.level
 
     game = new Game(this, levelName)
 
@@ -59,12 +60,12 @@ export class GameScreen {
   }
 
   public onupdate(vnode: m.Vnode) {
-    const attrs = vnode.attrs as any
+    const attrs = vnode.attrs as { level: string }
 
     game.stop()
     game.unlisten()
 
-    const levelName = attrs.level as string
+    const levelName = attrs.level
 
     game = new Game(this, levelName)
 
@@ -92,7 +93,7 @@ export class GameScreen {
   }
 }
 
-function showMenu(e: any): void {
+function showMenu(e: { redraw: boolean }): void {
   e.redraw = false
 
   const nav = document.querySelector('.topbar-menu-nav')
@@ -102,11 +103,11 @@ function showMenu(e: any): void {
   }
 }
 
-function goToMenu(e: any): void {
+function goToMenu(e: {}): void {
   m.route.set('/choose-level')
 }
 
-function restartLevel(e: any): void {
+function restartLevel(e: { redraw: boolean }): void {
   e.redraw = true
 
   const nav = document.querySelector('.topbar-menu-nav')

@@ -7,12 +7,13 @@ async function delay(ms: number): Promise<unknown> {
 export class EndGameScreen {
   public view() {
     return [
-      m('div', { 'class': 'topbar' }, [
+      m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),
         m('div', { 'class': 'topbar-menu' }, [
           m(m.route.Link, { 'href': '/', 'class': 'topbar-button' }, 'Aller à l\'écran d\'accueil'),
         ]),
       ]),
+
       m('div', { 'class': 'main-wrapper' }, [
         m('div', { 'class': 'main-content' }, [
           m('p', { 'id': 'end-game-text', 'class': 'center' }, 'Jeu terminé.'),

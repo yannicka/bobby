@@ -77,7 +77,7 @@ export class Joystick {
 
   public updatePlayer(player: Player): void {
     if (this.pointer.down()) {
-      const topbar = document.querySelector('.topbar')
+      const topbar = document.getElementById('topbar')
       const pointerEvent = this.pointer.getLastEvent()
       const target = pointerEvent.target as Node
 
