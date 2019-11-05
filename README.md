@@ -45,7 +45,4 @@ Ce jeu s'inspire de :
 
 ### En bonus *(si possible)*
 
-- Possibilité de cliquer n'importe où sur l'écran pour se déplacer, sur un
-  écran tactile ;
-
 - Ajouter une vue d'oiseau.
