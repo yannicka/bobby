@@ -1,18 +1,22 @@
 import { Level, LevelManager } from './Level'
 import { Storage } from './Storage'
 
-const levelManager = new LevelManager()
-const storage = new Storage(levelManager)
-
 class State {
+  private readonly storage: Storage
   private levels: { [key: string]: Level }
 
+  public constructor() {
+    const levelManager = new LevelManager()
+
+    this.storage = new Storage(levelManager)
+  }
+
   public getStorage(): Storage {
-    return storage
+    return this.storage
   }
 
   public loadLevels(): void {
-    this.levels = storage.getLevels()
+    this.levels = this.storage.getLevels()
   }
 
   public getLevels(): { [key: string]: Level } {
