@@ -4,14 +4,20 @@ import { Storage } from './Storage'
 const levelManager = new LevelManager()
 const storage = new Storage(levelManager)
 
-export const state = {
-  levels: {} as { [key: string]: Level },
+class State {
+  private levels: { [key: string]: Level }
 
-  getStorage() {
+  public getStorage(): Storage {
     return storage
-  },
+  }
 
-  loadLevels() {
+  public loadLevels(): void {
     this.levels = storage.getLevels()
-  },
+  }
+
+  public getLevels(): { [key: string]: Level } {
+    return this.levels
+  }
 }
+
+export const state = new State()

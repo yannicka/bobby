@@ -26,7 +26,7 @@ export const ChooseLevelScreen: m.Component = {
   },
 
   view(vnode) {
-    const childrens: Array<Vnode> = Object.values(state.levels).map((level: Level) =>
+    const childrens: Array<Vnode> = Object.values(state.getLevels()).map((level: Level) =>
       m(LevelComponent, { level } as Attributes),
     )
 
