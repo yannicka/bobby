@@ -1,7 +1,7 @@
 import { AnimationManager } from './AnimationManager'
 import { Cell, CELL_SIZE } from './Cell'
 import { Direction } from './Direction'
-import { GameScene } from './GameScene'
+import { Game } from './Game'
 import { ImageManager } from './ImageManager'
 import { Map } from './Map'
 import { Point } from './Point'
@@ -11,7 +11,7 @@ function linear(a: number, b: number, t: number): number {
 }
 
 export class Player {
-  private readonly gameScene: GameScene
+  private readonly game: Game
   private readonly map: Map
   private readonly animationManager: AnimationManager
   private canmove: boolean
@@ -24,9 +24,9 @@ export class Player {
   private timer: number
   private direction: Direction
 
-  public constructor(gameScene: GameScene) {
-    this.gameScene = gameScene
-    this.map = this.gameScene.getMap()
+  public constructor(game: Game) {
+    this.game = game
+    this.map = this.game.getMap()
 
     const start = this.map.getStartPosition()
 
@@ -281,7 +281,7 @@ export class Player {
 
   private runEvents(): void {
     this.map.onAfterPlayerOut(this.previousPosition)
-    this.map.onAfterPlayerIn(this.position, this, this.gameScene)
+    this.map.onAfterPlayerIn(this.position, this, this.game)
   }
 
   private computeNewMapPosition(direction: Direction, bounds: boolean = false): Point {

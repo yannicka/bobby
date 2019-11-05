@@ -1,5 +1,5 @@
 import { Cell, CELL_SIZE, cells as cellsIndex, Coin, End, Start } from './Cell'
-import { GameScene } from './GameScene'
+import { Game } from './Game'
 import { Player } from './Player'
 import { Point } from './Point'
 import { Size } from './Size'
@@ -87,11 +87,11 @@ export class Map {
     }
   }
 
-  public onAfterPlayerIn(position: Point, player: Player, gameScene: GameScene): void {
+  public onAfterPlayerIn(position: Point, player: Player, game: Game): void {
     const cell = this.getCellAt(position.x, position.y)
 
     if (cell !== null) {
-      const newCell = cell.onAfterPlayerIn(player, gameScene)
+      const newCell = cell.onAfterPlayerIn(player, game)
 
       if (cell !== newCell) {
         if (newCell === null) {

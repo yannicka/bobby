@@ -1,6 +1,6 @@
 import { AnimationManager } from './AnimationManager'
 import { Direction } from './Direction'
-import { GameScene } from './GameScene'
+import { Game } from './Game'
 import { ImageManager } from './ImageManager'
 import { Player } from './Player'
 import { Point } from './Point'
@@ -38,7 +38,7 @@ export abstract class Cell {
   }
 
   // Évènement : lorsque le joueur est entièrement dans la case
-  public onAfterPlayerIn(_player: Player, _gameScene: GameScene): this | null {
+  public onAfterPlayerIn(_player: Player, _game: Game): this | null {
     return this
   }
 
@@ -140,7 +140,7 @@ export class Conveyor extends Cell {
     this.getAnimationManager().play(direction.toString())
   }
 
-  public onAfterPlayerIn(player: Player, _gameScene: GameScene): this | null {
+  public onAfterPlayerIn(player: Player, _game: Game): this | null {
     player.move(this.direction, 'idle')
 
     return this
@@ -316,13 +316,13 @@ export class End extends Cell {
     this.getAnimationManager().play('inactive')
   }
 
-  public onAfterPlayerIn(player: Player, gameScene: GameScene): this | null {
+  public onAfterPlayerIn(player: Player, game: Game): this | null {
     if (this.isActive()) {
       player.setImmobility(true)
       player.getAnimationManager().play('turn')
 
       setTimeout(() => {
-        gameScene.nextLevel()
+        game.nextLevel()
       }, 480)
     }
 
@@ -350,7 +350,7 @@ export class Coin extends Cell {
     this.getAnimationManager().play('idle')
   }
 
-  public onAfterPlayerIn(_player: Player, _gameScene: GameScene): this | null {
+  public onAfterPlayerIn(_player: Player, _game: Game): this | null {
     return null
   }
 }
@@ -365,7 +365,7 @@ export class Ice extends Cell {
     this.getAnimationManager().play('idle')
   }
 
-  public onAfterPlayerIn(player: Player, _gameScene: GameScene): this | null {
+  public onAfterPlayerIn(player: Player, _game: Game): this | null {
     player.move(player.getDirection(), 'idle')
 
     return this
@@ -386,7 +386,7 @@ export class Elevation extends Cell {
     player.getAnimationManager().play(`jump-${Direction.Down.toString()}`, true)
   }
 
-  public onAfterPlayerIn(player: Player, _gameScene: GameScene): this | null {
+  public onAfterPlayerIn(player: Player, _game: Game): this | null {
     player.move(player.getDirection(), null)
 
     return this
