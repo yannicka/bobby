@@ -47,12 +47,12 @@ export abstract class Cell {
   }
 
   // Est-ce qu'on peut rentrer sur la case ?
-  public isSolid?(_direction: Direction): boolean {
+  public canEnter?(_direction: Direction): boolean {
     return false
   }
 
   // Est-ce qu'on peut sortir de la case ?
-  public isBlocking?(_direction: Direction): boolean {
+  public canLeave?(_direction: Direction): boolean {
     return false
   }
 
@@ -75,7 +75,7 @@ export class Stone extends Cell {
     this.getAnimation().play('idle')
   }
 
-  public isSolid(): boolean {
+  public canEnter(): boolean {
     return true
   }
 }
@@ -107,7 +107,7 @@ export class Button extends Cell {
     }
   }
 
-  public isSolid(_direction: Direction): boolean {
+  public canEnter(_direction: Direction): boolean {
     return this.value === 0
   }
 }
@@ -218,7 +218,7 @@ export class Turnstile extends Cell {
     this.getAnimation().play(this.angle.toString())
   }
 
-  public isSolid(direction: Direction): boolean {
+  public canEnter(direction: Direction): boolean {
     switch (this.angle) {
       case Rotation.UpRight:
         return [ Direction.Down, Direction.Left ].includes(direction)
@@ -252,7 +252,7 @@ export class Turnstile extends Cell {
     }
   }
 
-  public isBlocking(direction: Direction): boolean {
+  public canLeave(direction: Direction): boolean {
     switch (this.angle) {
       case Rotation.UpRight:
         return [ Direction.Up, Direction.Right ].includes(direction)
@@ -390,7 +390,7 @@ export class Elevation extends Cell {
     return this
   }
 
-  public isSolid(direction: Direction): boolean {
+  public canEnter(direction: Direction): boolean {
     if (direction === Direction.Down) {
       return false
     }

@@ -180,8 +180,8 @@ export class Player {
     const nextCell = this.map.getCell(newMapPosition)
 
     if (
-      (previousCell instanceof Cell && previousCell.isBlocking(direction))
-      || (nextCell instanceof Cell && nextCell.isSolid(direction))
+      (previousCell instanceof Cell && previousCell.canLeave(direction))
+      || (nextCell instanceof Cell && nextCell.canEnter(direction))
     ) {
       return
     }
