@@ -58,10 +58,10 @@ export class Game {
   private animationFrame: number
   private lastUpdate: number
   private zoom: number
-  private readonly map: Map
-  private readonly player: Player
+  private map: Map
+  private player: Player
   private readonly currentLevelName: string
-  private readonly camera: Camera
+  private camera: Camera
   private readonly storage: Storage
 
   public constructor(gameScreen: GameScreen, levelName: string) {
@@ -91,15 +91,7 @@ export class Game {
       m.route.set('/choose-level')
     }
 
-    changeScreenSize(level.fixed.screenWidth, level.fixed.screenHeight)
-
-    this.map = new Map(this.storage.getLevels()[this.currentLevelName].fixed.map)
-
-    this.camera = new Camera(new Point(0, 0), new Size(100, 100))
-
-    this.player = new Player(this)
-
-    this.resize()
+    this.runLevel()
 
     this.update()
   }
@@ -125,6 +117,10 @@ export class Game {
 
     if (this.pointer.release()) {
       this.joystick.hide()
+    }
+
+    if (this.keyboard.press('KeyR')) {
+      this.runLevel()
     }
 
     this.updateCamera(dt)
@@ -217,6 +213,20 @@ export class Game {
     }
   }
 
+  private runLevel(): void {
+    const level = this.storage.getLevels()[this.currentLevelName]
+
+    changeScreenSize(level.fixed.screenWidth, level.fixed.screenHeight)
+
+    this.map = new Map(this.storage.getLevels()[this.currentLevelName].fixed.map)
+
+    this.camera = new Camera(new Point(0, 0), new Size(100, 100))
+
+    this.player = new Player(this)
+
+    this.resize()
+  }
+
   private resize(_e: UIEvent | null = null): void {
     const appSize = computeAppSize()
 
@@ -235,10 +245,6 @@ export class Game {
 
   private getJoystick(): Joystick {
     return this.joystick
-  }
-
-  private getKeyboard(): Keyboard {
-    return this.keyboard
   }
 
   private updateCamera(_dt: number): void {
@@ -266,7 +272,7 @@ export class Game {
     if (this.player.isAbleToMove()) {
       let keepDirection = false
 
-      if (this.getKeyboard().down('ArrowUp') || this.getKeyboard().down('KeyW')) {
+      if (this.keyboard.down('ArrowUp') || this.keyboard.down('KeyW')) {
         if (this.player.getDirection() === Direction.Up) {
           keepDirection = true
         } else {
@@ -274,7 +280,7 @@ export class Game {
         }
       }
 
-      if (this.getKeyboard().down('ArrowDown') || this.getKeyboard().down('KeyS')) {
+      if (this.keyboard.down('ArrowDown') || this.keyboard.down('KeyS')) {
         if (this.player.getDirection() === Direction.Down) {
           keepDirection = true
         } else {
@@ -282,7 +288,7 @@ export class Game {
         }
       }
 
-      if (this.getKeyboard().down('ArrowRight') || this.getKeyboard().down('KeyD')) {
+      if (this.keyboard.down('ArrowRight') || this.keyboard.down('KeyD')) {
         if (this.player.getDirection() === Direction.Right) {
           keepDirection = true
         } else {
@@ -290,7 +296,7 @@ export class Game {
         }
       }
 
-      if (this.getKeyboard().down('ArrowLeft') || this.getKeyboard().down('KeyA')) {
+      if (this.keyboard.down('ArrowLeft') || this.keyboard.down('KeyA')) {
         if (this.player.getDirection() === Direction.Left) {
           keepDirection = true
         } else {

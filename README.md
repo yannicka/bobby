@@ -28,10 +28,6 @@ Ce jeu s'inspire de :
 
 ## Choses à faire
 
-### À faire
-
-- Rajouter un raccourci clavier `r` pour redémarrer le niveau.
-
 ### Bogues connus (et à corriger)
 
 - Lorsqu'on clique sur un niveau inaccessible, il y a un petit saut
