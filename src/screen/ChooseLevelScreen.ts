@@ -25,7 +25,7 @@ class LevelComponent {
     const level = storage.getLevels()[levelName]
 
     if (level.dynamic.accessible) {
-      m.route.set('/game/:level', { level: levelName })
+      m.route.set('/level/:level', { level: levelName })
     }
   }
 }

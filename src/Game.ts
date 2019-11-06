@@ -201,7 +201,7 @@ export class Game {
     if (typeof nextLevel === 'undefined') {
       m.route.set('/end-game')
     } else {
-      m.route.set(`/game/${nextLevel}`, {}, {
+      m.route.set(`/level/${nextLevel}`, {}, {
         replace: true,
       })
     }
@@ -334,7 +334,7 @@ export class Superapp {
       '/options': OptionsScreen,
       '/help': HelpScreen,
       '/choose-level': ChooseLevelScreen,
-      '/game/:level': GameScreen,
+      '/level/:level': GameScreen,
       '/end-game': EndGameScreen,
     })
   }
