@@ -85,12 +85,6 @@ export class Game {
 
     this.storage = state.getStorage()
 
-    const level = this.storage.getLevels()[this.currentLevelName]
-
-    if (!level.dynamic.accessible) {
-      m.route.set('/choose-level')
-    }
-
     this.runLevel()
 
     this.update()

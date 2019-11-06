@@ -16,8 +16,17 @@ class LevelComponent {
     const classesText = classes.join(' ')
 
     return m('div', { 'class': classesText }, [
-      m(m.route.Link, { 'href': `/game/${level.fixed.name}` }, level.fixed.number),
+      m('button', { 'onclick': () => this.gotoLevel(level.fixed.name) }, level.fixed.number),
     ])
+  }
+
+  public gotoLevel(levelName: string): void {
+    const storage = state.getStorage()
+    const level = storage.getLevels()[levelName]
+
+    if (level.dynamic.accessible) {
+      m.route.set('/game/:level', { level: levelName })
+    }
   }
 }
 

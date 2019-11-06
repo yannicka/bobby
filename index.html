@@ -129,25 +129,28 @@
       padding: 4px;
     }
 
-    .level a {
+    .level button {
       display: block;
       background-color: #999999;
       padding: 20px 8px;
       color: white;
       text-decoration: none;
       text-align: center;
+      border: none;
+      width: 100%;
     }
 
-    .level a:focus,
-    .level a:hover {
+    .level button:focus,
+    .level button:hover {
       outline: 3px solid var(--primary-color-darker);
+      cursor: pointer;
     }
 
-    .level.accessible a {
+    .level.accessible button {
       background-color: #842733;
     }
 
-    .level.success.accessible a {
+    .level.success.accessible button {
       background-color: var(--primary-color);
     }
 
