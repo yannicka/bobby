@@ -1,3 +1,3 @@
-import { Superapp } from './Game'
+import { Superapp } from './Superapp'
 
 const app = new Superapp()
