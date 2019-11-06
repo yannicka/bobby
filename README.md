@@ -28,9 +28,18 @@ Ce jeu s'inspire de :
 
 ## Choses à faire
 
+### À faire
+
+- Rajouter un raccourci clavier `r` pour redémarrer le niveau.
+
 ### Bogues connus (et à corriger)
 
-- *Aucun*.
+- Lorsqu'on clique sur un niveau inaccessible, il y a un petit saut
+  d'affichage, à corriger ;
+
+- Des traits noirs apparaissent parfois entre les cases ;
+
+- Le déplacement lorsque trois touches sont appuyées n'est pas intuitif.
 
 ### Bogues connus (mais minimes)
 
