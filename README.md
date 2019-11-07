@@ -30,8 +30,6 @@ Ce jeu s'inspire de :
 
 ### Bogues connus (et à corriger)
 
-- Des traits noirs apparaissent parfois entre les cases ;
-
 - Le déplacement lorsque trois touches sont appuyées n'est pas intuitif.
 
 ### Bogues connus (mais minimes)
