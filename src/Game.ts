@@ -219,13 +219,11 @@ export class Game {
   private resize(_e: UIEvent | null = null): void {
     const appSize = computeAppSize()
 
-    this.zoom = appSize.zoom
+    this.canvas.width = appSize.size.width / appSize.zoom
+    this.canvas.height = appSize.size.height / appSize.zoom
 
-    this.canvas.width = appSize.size.width
-    this.canvas.height = appSize.size.height
-
-    this.ctx.imageSmoothingEnabled = false
-    this.ctx.scale(appSize.zoom, appSize.zoom)
+    this.canvas.style.width = `${appSize.size.width}px`
+    this.canvas.style.height = `${appSize.size.height}px`
   }
 
   private getScreenSize(): Size {
