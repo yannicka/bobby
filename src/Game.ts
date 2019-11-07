@@ -219,6 +219,8 @@ export class Game {
   private resize(_e: UIEvent | null = null): void {
     const appSize = computeAppSize()
 
+    this.zoom = appSize.zoom
+
     this.canvas.width = appSize.size.width / appSize.zoom
     this.canvas.height = appSize.size.height / appSize.zoom
 
