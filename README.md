@@ -41,7 +41,12 @@ Ce jeu s'inspire de :
 - La première ligne de définition d'un niveau fait preuve de largeur de ce
   niveau. Par conséquent le dernier bloc de la ligne définit la largeur de jeu.
   Cela peut poser problème si on souhaite ne pas mettre de bloc sur toutes les
-  cellules de la première ligne.
+  cellules de la première ligne ;
+
+- Il y un flou de mouvement sur le joueur lors du déplacement de la caméra ;
+
+- Lors de la téléportation d'un coté de l'écran à l'autre, le joueur subit une
+  petite accélération involontaire après la téléportation.
 
 ### En bonus *(si possible)*
 
