@@ -84,7 +84,15 @@ export class Storage {
   private getStoredLevels(): { [key: string]: LevelUser } {
     if (localStorage.getItem(LEVELS_STORAGE_KEY) !== null) {
       const jsonLevels = localStorage.getItem(LEVELS_STORAGE_KEY)
-      const levels = JSON.parse(jsonLevels) as { [key: string]: LevelUser }
+
+      let levels: { [key: string]: LevelUser } = {}
+
+      try {
+        levels = JSON.parse(jsonLevels) as { [key: string]: LevelUser }
+      } catch (e) {
+        // Si la donnée est corrompue, on repart à zéro
+        return {}
+      }
 
       return levels
     }

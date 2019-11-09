@@ -30,10 +30,7 @@ Ce jeu s'inspire de :
 
 ### Bogues connus (et à corriger)
 
-- Le déplacement lorsque trois touches sont appuyées n'est pas intuitif ;
-
-- La modification de la valeur dans le stockage navigateur avec des valeurs
-  incorrectes peut entrainer un plantage du jeu.
+- Le déplacement lorsque trois touches sont appuyées n'est pas intuitif.
 
 ### Bogues connus (mais minimes)
 
