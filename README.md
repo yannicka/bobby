@@ -30,7 +30,8 @@ Ce jeu s'inspire de :
 
 ### Bogues connus (et à corriger)
 
-- Le déplacement lorsque trois touches sont appuyées n'est pas intuitif.
+- Il est possible d'être avancé d'une demi-case sur la téléportation de la
+  droite vers la gauche si un élément est bloquant à gauche.
 
 ### Bogues connus (mais minimes)
 
@@ -46,7 +47,9 @@ Ce jeu s'inspire de :
 - Il y un flou de mouvement sur le joueur lors du déplacement de la caméra ;
 
 - Lors de la téléportation d'un coté de l'écran à l'autre, le joueur subit une
-  petite accélération involontaire après la téléportation.
+  petite accélération involontaire après la téléportation ;
+
+- Le déplacement lorsque trois touches sont appuyées n'est pas intuitif.
 
 ### En bonus *(si possible)*
 
