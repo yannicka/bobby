@@ -30,8 +30,7 @@ Ce jeu s'inspire de :
 
 ### Bogues connus (et à corriger)
 
-- Il est possible d'être avancé d'une demi-case sur la téléportation de la
-  droite vers la gauche si un élément est bloquant à gauche.
+- *Aucun*
 
 ### Bogues connus (mais minimes)
 

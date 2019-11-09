@@ -316,11 +316,11 @@ export class Player {
         newMapPosition.y = mapSize.height - 1
       }
 
-      if (newMapPosition.x > mapSize.width) {
+      if (newMapPosition.x >= mapSize.width) {
         newMapPosition.x = 0
       }
 
-      if (newMapPosition.y > mapSize.height) {
+      if (newMapPosition.y >= mapSize.height) {
         newMapPosition.y = 0
       }
     }
