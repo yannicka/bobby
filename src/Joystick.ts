@@ -1,5 +1,20 @@
-import { Pointer } from './input/Pointer'
-import { Point } from './Point'
+class Point {
+  public x: number
+  public y: number
+
+  public constructor(x: number, y: number) {
+    this.x = x
+    this.y = y
+  }
+
+  public clone(): Point {
+    return new Point(this.x, this.y)
+  }
+
+  public static angleBetween(p1: Point, p2: Point): number {
+    return Math.atan2(p2.y - p1.y, p2.x - p1.x)
+  }
+}
 
 export class Joystick {
   private readonly outerRadius: number
@@ -21,7 +36,7 @@ export class Joystick {
     this.ctx = this.canvas.getContext('2d')
   }
 
-  public render(pointer: Pointer): void {
+  public render(_pointerPosition: Point): void {
     const margin = 120 // nombre arbitraire
 
     this.canvas.width = this.outerRadius * 2 * this.zoom + margin
@@ -43,7 +58,7 @@ export class Joystick {
     this.ctx.strokeStyle = '#666'
     this.ctx.stroke()
 
-    const pointerPosition = this.computeForce(pointer)
+    const pointerPosition = this.computeForce(_pointerPosition)
     pointerPosition.x *= this.innerRadius
     pointerPosition.y *= this.innerRadius
 
@@ -86,12 +101,12 @@ export class Joystick {
 
   // @see https://codepen.io/jiffy/pen/zrqwON
   // @see https://stackoverflow.com/a/20916980
-  public computeForce(pointer: Pointer): Point {
+  public computeForce(_pointerPosition: Point): Point {
     const position = this.position.clone()
     position.x /= this.zoom
     position.y /= this.zoom
 
-    const pointerPosition = pointer.getPosition().clone()
+    const pointerPosition = _pointerPosition.clone()
     pointerPosition.x /= this.zoom
     pointerPosition.y /= this.zoom
 

@@ -159,7 +159,7 @@ export class Game {
 
     ctx.restore()
 
-    this.joystick.render(this.pointer)
+    this.joystick.render(this.pointer.getPosition())
   }
 
   public listen(): void {
@@ -316,7 +316,7 @@ export class Game {
       const target = pointerEvent.target as Node
 
       if (!topbar.contains(target)) {
-        const force = this.getJoystick().computeForce(this.pointer)
+        const force = this.getJoystick().computeForce(this.pointer.getPosition())
 
         const forceNeeded = 0.65
 
