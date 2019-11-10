@@ -116,9 +116,9 @@ export class Joystick {
     this.canvas.style.display = 'none'
   }
 
-  // public getZoom(): number {
-  //   return this.zoom
-  // }
+  public getZoom(): number {
+    return this.zoom
+  }
 
   public setZoom(zoom: number) {
     this.zoom = zoom
