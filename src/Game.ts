@@ -74,7 +74,7 @@ export class Game {
     this.keyboard = this.gameScreen.getKeyboard()
     this.pointer = this.gameScreen.getPointer()
 
-    this.joystick = new Joystick(this.pointer, new Point(30, 30))
+    this.joystick = new Joystick(new Point(30, 30))
     this.joystick.setZoom(this.zoom)
 
     this.currentLevelName = levelName
@@ -159,7 +159,7 @@ export class Game {
 
     ctx.restore()
 
-    this.joystick.render()
+    this.joystick.render(this.pointer)
   }
 
   public listen(): void {
@@ -306,6 +306,42 @@ export class Game {
       }
     }
 
-    this.getJoystick().updatePlayer(this.player)
+    this.updatePlayerFromJoystick()
+  }
+
+  private updatePlayerFromJoystick(): void {
+    if (this.pointer.down()) {
+      const topbar = document.getElementById('topbar')
+      const pointerEvent = this.pointer.getLastEvent()
+      const target = pointerEvent.target as Node
+
+      if (!topbar.contains(target)) {
+        const force = this.getJoystick().computeForce(this.pointer)
+
+        const forceNeeded = 0.65
+
+        if (Math.abs(force.x) > Math.abs(force.y)) {
+          // mouvement horizontal
+
+          if (force.x >= forceNeeded) {
+            this.player.move(Direction.Right)
+          }
+
+          if (force.x <= -forceNeeded) {
+            this.player.move(Direction.Left)
+          }
+        } else {
+          // mouvement vertical
+
+          if (force.y >= forceNeeded) {
+            this.player.move(Direction.Down)
+          }
+
+          if (force.y <= -forceNeeded) {
+            this.player.move(Direction.Up)
+          }
+        }
+      }
+    }
   }
 }

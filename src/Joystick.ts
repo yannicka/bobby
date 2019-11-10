@@ -1,10 +1,7 @@
-import { Direction } from './Direction'
 import { Pointer } from './input/Pointer'
-import { Player } from './Player'
 import { Point } from './Point'
 
 export class Joystick {
-  private readonly pointer: Pointer
   private readonly outerRadius: number
   private readonly innerRadius: number
   private readonly canvas: HTMLCanvasElement
@@ -12,8 +9,7 @@ export class Joystick {
   private position: Point
   private zoom: number
 
-  public constructor(pointer: Pointer, position: Point) {
-    this.pointer = pointer
+  public constructor(position: Point) {
     this.position = position
 
     this.zoom = 1
@@ -25,7 +21,7 @@ export class Joystick {
     this.ctx = this.canvas.getContext('2d')
   }
 
-  public render(): void {
+  public render(pointer: Pointer): void {
     const margin = 120 // nombre arbitraire
 
     this.canvas.width = this.outerRadius * 2 * this.zoom + margin
@@ -47,7 +43,7 @@ export class Joystick {
     this.ctx.strokeStyle = '#666'
     this.ctx.stroke()
 
-    const pointerPosition = this.computeForce()
+    const pointerPosition = this.computeForce(pointer)
     pointerPosition.x *= this.innerRadius
     pointerPosition.y *= this.innerRadius
 
@@ -66,42 +62,6 @@ export class Joystick {
     this.ctx.stroke()
 
     this.ctx.restore()
-  }
-
-  public updatePlayer(player: Player): void {
-    if (this.pointer.down()) {
-      const topbar = document.getElementById('topbar')
-      const pointerEvent = this.pointer.getLastEvent()
-      const target = pointerEvent.target as Node
-
-      if (!topbar.contains(target)) {
-        const force = this.computeForce()
-
-        const forceNeeded = 0.65
-
-        if (Math.abs(force.x) > Math.abs(force.y)) {
-          // mouvement horizontal
-
-          if (force.x >= forceNeeded) {
-            player.move(Direction.Right)
-          }
-
-          if (force.x <= -forceNeeded) {
-            player.move(Direction.Left)
-          }
-        } else {
-          // mouvement vertical
-
-          if (force.y >= forceNeeded) {
-            player.move(Direction.Down)
-          }
-
-          if (force.y <= -forceNeeded) {
-            player.move(Direction.Up)
-          }
-        }
-      }
-    }
   }
 
   public setPosition(position: Point): void {
@@ -126,12 +86,12 @@ export class Joystick {
 
   // @see https://codepen.io/jiffy/pen/zrqwON
   // @see https://stackoverflow.com/a/20916980
-  private computeForce(): Point {
+  public computeForce(pointer: Pointer): Point {
     const position = this.position.clone()
     position.x /= this.zoom
     position.y /= this.zoom
 
-    const pointerPosition = this.pointer.getPosition().clone()
+    const pointerPosition = pointer.getPosition().clone()
     pointerPosition.x /= this.zoom
     pointerPosition.y /= this.zoom
 
