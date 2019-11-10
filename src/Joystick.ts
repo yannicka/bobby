@@ -1,11 +1,9 @@
 import { Direction } from './Direction'
-import { Game } from './Game'
 import { Pointer } from './input/Pointer'
 import { Player } from './Player'
 import { Point } from './Point'
 
 export class Joystick {
-  private readonly game: Game
   private readonly pointer: Pointer
   private readonly outerRadius: number
   private readonly innerRadius: number
@@ -14,8 +12,7 @@ export class Joystick {
   private position: Point
   private zoom: number
 
-  public constructor(game: Game, pointer: Pointer, position: Point) {
-    this.game = game
+  public constructor(pointer: Pointer, position: Point) {
     this.pointer = pointer
     this.position = position
 
@@ -28,12 +25,8 @@ export class Joystick {
     this.ctx = this.canvas.getContext('2d')
   }
 
-  public update(dt: number): void {
-    this.zoom = this.game.getZoom()
-  }
-
   public render(): void {
-    const margin = 100 // nombre arbitraire
+    const margin = 120 // nombre arbitraire
 
     this.canvas.width = this.outerRadius * 2 * this.zoom + margin
     this.canvas.height = this.outerRadius * 2 * this.zoom + margin
@@ -123,16 +116,24 @@ export class Joystick {
     this.canvas.style.display = 'none'
   }
 
+  // public getZoom(): number {
+  //   return this.zoom
+  // }
+
+  public setZoom(zoom: number) {
+    this.zoom = zoom
+  }
+
   // @see https://codepen.io/jiffy/pen/zrqwON
   // @see https://stackoverflow.com/a/20916980
   private computeForce(): Point {
     const position = this.position.clone()
-    position.x /= this.game.getZoom()
-    position.y /= this.game.getZoom()
+    position.x /= this.zoom
+    position.y /= this.zoom
 
     const pointerPosition = this.pointer.getPosition().clone()
-    pointerPosition.x /= this.game.getZoom()
-    pointerPosition.y /= this.game.getZoom()
+    pointerPosition.x /= this.zoom
+    pointerPosition.y /= this.zoom
 
     const angle = Point.angleBetween(position, pointerPosition)
 

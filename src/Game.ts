@@ -74,7 +74,8 @@ export class Game {
     this.keyboard = this.gameScreen.getKeyboard()
     this.pointer = this.gameScreen.getPointer()
 
-    this.joystick = new Joystick(this, this.pointer, new Point(30, 30))
+    this.joystick = new Joystick(this.pointer, new Point(30, 30))
+    this.joystick.setZoom(this.zoom)
 
     this.currentLevelName = levelName
 
@@ -127,7 +128,6 @@ export class Game {
 
     this.render(this.ctx)
 
-    this.joystick.update(dt)
     this.pointer.update(dt)
 
     this.animationFrame = requestAnimationFrame(() => this.update())
@@ -232,6 +232,8 @@ export class Game {
 
     this.canvas.style.width = `${appSize.size.width}px`
     this.canvas.style.height = `${appSize.size.height}px`
+
+    this.joystick.setZoom(this.zoom)
   }
 
   private getScreenSize(): Size {
