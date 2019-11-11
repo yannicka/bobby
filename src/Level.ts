@@ -685,7 +685,7 @@ export class LevelManager {
         `,
       },
 
-      'Hermann': {
+      'Hermann': { // Variante à voir : sortie dans la même zone que le joueur
         screenWidth: 13,
         screenHeight: 13,
         map: `
@@ -708,13 +708,13 @@ export class LevelManager {
       'Vorobjov': {
         map: `
           # # # # # # # # #
-          # . . . # . . . #
-          # . $ . = . $ . #
-          # . . . # . . . #
-          # # # H # H # # #
-          # . . ! ! ! . . #
-          # S $ ! ! ! $ . #
-          # . . B E B . . #
+          # ! . . # . . ! #
+          # ! $ . # . $ ! #
+          # ! . J B L . ! #
+          # ^ # H # H # ^ #
+          # ! $ L ! J $ ! #
+          # ! . ! ! ! . ! #
+          # ! S # E # . ! #
           # # # # # # # # #
         `,
       },
