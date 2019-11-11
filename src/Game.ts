@@ -1,4 +1,3 @@
-import { Joystick } from 'canvas-joystick'
 import m from 'mithril'
 
 import { Camera } from './Camera'
@@ -7,6 +6,7 @@ import { Direction } from './Direction'
 import { ImageManager } from './ImageManager'
 import { Keyboard } from './input/Keyboard'
 import { Pointer } from './input/Pointer'
+import { Joystick } from './Joystick'
 import { Map } from './Map'
 import { Player } from './Player'
 import { Point } from './Point'
