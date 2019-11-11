@@ -1,3 +1,4 @@
+import { Joystick } from 'canvas-joystick'
 import m from 'mithril'
 
 import { Camera } from './Camera'
@@ -6,7 +7,6 @@ import { Direction } from './Direction'
 import { ImageManager } from './ImageManager'
 import { Keyboard } from './input/Keyboard'
 import { Pointer } from './input/Pointer'
-import { Joystick } from './Joystick'
 import { Map } from './Map'
 import { Player } from './Player'
 import { Point } from './Point'
@@ -74,8 +74,8 @@ export class Game {
     this.keyboard = this.gameScreen.getKeyboard()
     this.pointer = this.gameScreen.getPointer()
 
-    this.joystick = new Joystick(new Point(30, 30))
-    this.joystick.setZoom(this.zoom)
+    this.joystick = new Joystick()
+    this.joystick.setScale(this.zoom)
 
     this.currentLevelName = levelName
 
@@ -105,7 +105,7 @@ export class Game {
       if (!topbar.contains(target)) {
         const newPosition = this.pointer.getPosition().clone()
 
-        this.joystick.setPosition(newPosition)
+        this.joystick.setStartPosition(newPosition)
 
         this.joystick.show()
       }
@@ -159,7 +159,7 @@ export class Game {
 
     ctx.restore()
 
-    this.joystick.render(this.pointer.getPosition())
+    this.joystick.render()
   }
 
   public listen(): void {
@@ -233,7 +233,7 @@ export class Game {
     this.canvas.style.width = `${appSize.size.width}px`
     this.canvas.style.height = `${appSize.size.height}px`
 
-    this.joystick.setZoom(this.zoom)
+    this.joystick.setScale(this.zoom)
   }
 
   private getScreenSize(): Size {
@@ -316,7 +316,8 @@ export class Game {
       const target = pointerEvent.target as Node
 
       if (!topbar.contains(target)) {
-        const force = this.getJoystick().computeForce(this.pointer.getPosition())
+        this.joystick.setPointerPosition(this.pointer.getPosition())
+        const force = this.getJoystick().getAxisValues()
 
         const forceNeeded = 0.65
 

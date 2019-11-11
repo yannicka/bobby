@@ -11,6 +11,7 @@
     "lint-fix": "tslint --fix 'src/**/*.ts'"
   },
   "dependencies": {
+    "canvas-joystick": "^0.0.9",
     "mithril": "^2.0.4"
   },
   "devDependencies": {

@@ -5,6 +5,7 @@
     "noImplicitAny": true,
     "module": "es6",
     "target": "es2017",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node"
   }
 }
