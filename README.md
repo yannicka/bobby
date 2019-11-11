@@ -13,6 +13,9 @@ Merci à oräkle - Ethan G. pour son assistance graphique.
 
 Merci à Alceste_ pour ses améliorations de code et de fonctionnement global.
 
+Merci à Polyson pour sa proposition de niveaux à bords ouverts et ses divers
+conseils et retours.
+
 Merci aux membres de Bit My Code pour leur soutien dans le développement du
 projet, et pour leurs divers retours.
 
