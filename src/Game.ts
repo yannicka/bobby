@@ -233,6 +233,10 @@ export class Game {
     this.canvas.style.width = `${appSize.size.width}px`
     this.canvas.style.height = `${appSize.size.height}px`
 
+    // Exécute l'évènement « resize » afin d'avoir l'écran de jeu à la bonne
+    // taille
+    window.dispatchEvent(new Event('resize'))
+
     this.joystick.setScale(this.zoom)
   }
 
