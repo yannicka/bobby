@@ -1,5 +1,11 @@
 # Bobby
 
+<div style="text-align: center;">
+    <img src="public/assets/img/banner.png" alt="" />
+</div>
+
+## Compilation
+
 ```shell
 npm install
 npm run serve # ou npm run build
