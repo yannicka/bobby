@@ -1,8 +1,6 @@
 # Bobby
 
-<div style="text-align: center;">
-    <img src="public/assets/img/banner.png" alt="" />
-</div>
+![Bannière de présentation du jeu Bobby](public/assets/img/banner.png)
 
 ## Compilation
 
