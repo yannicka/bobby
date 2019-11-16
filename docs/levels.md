@@ -1,11 +1,10 @@
-# Représentation interne de chaque cellule
+# Niveaux
+
+## Représentation interne de chaque cellule
 
 Chaque cellule est représentée sous la forme d'un ou plusieurs caractères.
 
 L'assemblage de ces caractères permet de former les niveaux.
-
-*Note : cela est mené à évoluer. Dans le cas où vous constatez que ce document
-n'est pas à jour, n'hésitez pas à le remonter.*
 
 - `.` : vide ;
 
@@ -21,8 +20,8 @@ n'est pas à jour, n'hésitez pas à le remonter.*
 gauche) ;
 
 - `T`, `F`, `J` et `L` : tourniquets à angle droit. Regarder où la lettre a un
-angle droit pour se rappeler, sauf pour T (respectivement haut-droit,
-haut-gauche, bas-droit et bas-gauche) ;
+angle droit pour se rappeler de la position de l'angle, sauf pour `T`
+(respectivement haut-droit, haut-gauche, bas-droit et bas-gauche) ;
 
 - `H` et `=` : tourniquets verticaux et horizontaux ;
 
@@ -35,4 +34,22 @@ bord haut, droit, bas et gauche) ;
 - `B`, `B2` et `B3` : bouton (respectivement avec 1, 2 et 3 passes
 autorisées) ;
 
-- `U` : motte de terre.
+- `U` : motte de terre / élévation.
+
+## Astuces de création
+
+- Les pièces servent à obliger le joueur à passer dans un endroit donné ;
+
+- Un tourniquet à angle droit peut être assemblé avec un bouton pour ne
+  permettre de le prendre qu'une fois dans un sens donné ;
+
+- Un niveau difficile « à lire » peut être plus complexe à jouer qu'un niveau
+  de difficulté similaire mais plus facile à lire, car le « bruit » déstabilise
+  le joueur, qui cherche à comprendre l'utilité de chaque case ;
+
+- Les tourniquets peuvent être utilisés pour de nombreux mécanismes :
+
+  - Bloquer l'accès après l'avoir utilisé ;
+  - Autoriser de multiples passages dans divers sens ;
+  - Rendre possible un chemin dans un sens, puis ensuite dans un autre ;
+  - Etc.
