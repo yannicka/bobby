@@ -33,13 +33,7 @@ Ce jeu s'inspire de :
 
 - Pokémon Rouge et Bleu.
 
-## Choses à faire
-
-### Bogues connus (et à corriger)
-
-- *Aucun*
-
-### Bogues connus (mais minimes)
+## Bogues connus
 
 - Lorsqu'on essaye de se déplacer vers un bloc solide, l'animation ne s'active
   qu'au moment où le clic est lâché. À la place, il ne faudrait soit aucun
@@ -55,8 +49,7 @@ Ce jeu s'inspire de :
 - Lors de la téléportation d'un coté de l'écran à l'autre, le joueur subit une
   petite accélération involontaire après la téléportation ;
 
-- Le déplacement lorsque trois touches sont appuyées n'est pas intuitif.
+- Le déplacement lorsque trois touches sont appuyées n'est pas intuitif ;
 
-### En bonus *(si possible)*
-
-- Ajouter une vue d'oiseau.
+- Lors du déplacement de la caméra, des traits fins apparaissent entre les
+  blocs. Cela se voit notamment sur la glace.
