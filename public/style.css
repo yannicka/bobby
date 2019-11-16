@@ -1,0 +1,273 @@
+:root {
+  --background-color: #f7f3ef;
+  --dark-background-color: #222;
+
+  --primary-color: #177355;
+  --primary-color-darker: #053123;
+
+  --secondary-color: #cf5600;
+  --secondary-color-darker: #642d06;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 1.2em;
+  scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.3);
+}
+
+/* Pour les écrans tactiles : barre de défilement fine */
+@media (pointer: coarse) {
+  html {
+    scrollbar-width: thin;
+  }
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: -apple-system, 'Ubuntu', system-ui, sans-serif;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+p {
+  padding: 8px;
+  margin: 8px;
+}
+
+h2 {
+  padding: 8px;
+  margin: 8px;
+  margin-bottom: 0;
+  font-size: 2em;
+}
+
+.center {
+  text-align: center;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.bg-dark {
+  background-color: var(--dark-background-color);
+}
+
+.end-game {
+  background-color: #ddd;
+}
+
+.end-game p {
+  font-size: 130%;
+}
+
+.btn {
+  padding: 10px 20px;
+  display: inline-block;
+  border: none;
+  background-color: var(--secondary-color);
+  text-align: center;
+  font-size: 1.2em;
+  color: white;
+  text-decoration: none;
+  margin: 16px auto;
+}
+
+.btn:focus,
+.btn:hover {
+  outline: 3px solid var(--secondary-color-darker);
+  cursor: pointer;
+}
+
+.btn-play {
+  padding: 20px 40px;
+  display: inline-block;
+  color: var(--secondary-color);
+  border: 2px solid currentColor;
+  border-bottom-width: 12px;
+  text-align: center;
+  font-size: 2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 16px auto;
+}
+
+.btn-play:focus,
+.btn-play:hover {
+  color: var(--secondary-color-darker);
+  cursor: pointer;
+  outline: none;
+}
+
+.levels {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 60px);
+  gap: 16px;
+  margin: 12px;
+  margin-top: 32px;
+  justify-content: center;
+  padding: 4px;
+}
+
+.level button {
+  display: block;
+  background-color: #999999;
+  padding: 20px 8px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  width: 100%;
+}
+
+.level button:focus,
+.level button:hover {
+  outline: 3px solid var(--primary-color-darker);
+  cursor: pointer;
+}
+
+.level.accessible button {
+  background-color: #842733;
+}
+
+.level.success.accessible button {
+  background-color: var(--primary-color);
+}
+
+#topbar {
+  background-color: var(--primary-color);
+  display: flex;
+}
+
+.topbar-gamename {
+  padding: 12px;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.topbar-level {
+  padding: 12px;
+  color: #fff;
+}
+
+.topbar-menu {
+  margin-left: auto;
+  position: relative;
+}
+
+.topbar-button {
+  padding: 12px 18px;
+  margin: 0;
+  border: none;
+  background: transparent;
+  display: inline-block;
+  color: #fff;
+  height: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.topbar-button:focus,
+.topbar-button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  outline: none;
+  cursor: pointer;
+}
+
+.topbar-menu-nav {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: 290px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.topbar-menu-nav-displayed {
+  display: block;
+}
+
+.topbar-nav-button {
+  padding: 12px 24px;
+  border: none;
+  background: #fff;
+  text-align: left;
+  width: 100%;
+  text-decoration: none;
+  display: inline-block;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.topbar-nav-button:focus,
+.topbar-nav-button:hover {
+  background: #ccc;
+  cursor: pointer;
+}
+
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow: auto;
+}
+
+.main-wrapper-unaligned {
+  align-items: initial;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#bottombar {
+  background-color: var(--primary-color);
+  display: flex;
+  font-size: 80%;
+}
+
+#bottombar .btn {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+#bottombar .btn:focus,
+#bottombar .btn:hover {
+  outline-color: var(--primary-color-darker);
+}
+
+#superapp {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#app-wrapper {
+  height: 100%;
+  display: grid;
+  align-content: center;
+}
+
+#app {
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+#joystick {
+  position: absolute;
+}
