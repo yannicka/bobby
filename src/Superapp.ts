@@ -49,5 +49,3 @@ export class Superapp {
     this.superapp.style.height = `${height}px`
   }
 }
-
-const superapp = new Superapp()
