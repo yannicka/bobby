@@ -29,8 +29,6 @@ export class Superapp {
 
     this.superapp = document.getElementById('superapp')
 
-    this.resize()
-
     m.route(this.superapp, '/', {
       '/': HomeScreen,
       '/options': OptionsScreen,
@@ -39,6 +37,8 @@ export class Superapp {
       '/level/:level': GameScreen,
       '/end-game': EndGameScreen,
     })
+
+    this.resize()
   }
 
   public resize(_e: UIEvent | null = null): void {
