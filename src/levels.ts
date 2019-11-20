@@ -557,7 +557,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Longmore': {
+  'Longmore': { // @todo Variante à voir : sortie dans la partie basse, au centre
     screenWidth: 13,
     screenHeight: 13,
     map: `
@@ -572,26 +572,6 @@ export const levels: LevelType = {
       # # # 2 B L # J B 2 # # #
       # . . . # . . . # . . . #
       # . $ . 4 . $ . 6 . $ . #
-      # . . . # . . . # . . . #
-      # # # # # # # # # # # # #
-    `,
-  },
-
-  'Longmore2': { // Copie du niveau Longmore, mais avec la sortie en bas
-    screenWidth: 13,
-    screenHeight: 13,
-    map: `
-      # # # # # # # # # # # # #
-      # . . . # . . . # . . . #
-      # . $ . 4 . $ . 6 . $ . #
-      # . . . # . . . # . . . #
-      # # # 8 B F # T B 8 # # #
-      # . . . # . . . # . . . #
-      # . $ . 6 . S . 4 . $ . #
-      # . . . # . . . # . . . #
-      # # # 2 B L # J B 2 # # #
-      # . . . # . . . # . . . #
-      # . $ . 4 . E . 6 . $ . #
       # . . . # . . . # . . . #
       # # # # # # # # # # # # #
     `,
@@ -617,7 +597,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Hermann': { // Variante à voir : sortie dans la même zone que le joueur
+  'Hermann': { // @todo Variante à voir : sortie dans la même zone que le joueur
     screenWidth: 13,
     screenHeight: 13,
     map: `
@@ -736,6 +716,54 @@ export const levels: LevelType = {
       # . . . # . < J # . . . #
       # . $ . . . # . . . $ . #
       # . . . . . # . . . . . #
+      # # # # # # # # # # # # #
+    `,
+  },
+
+  'Yeung': {
+    map: `
+      # # # # # # # # #
+      # S # . $ = $ . #
+      # . # . . # . . #
+      # $ = . B # B T #
+      # . F . J . T . #
+      # F B # # . B $ #
+      # . . # . . # . #
+      # . $ = $ . # E #
+      # # # # # # # # #
+    `,
+  },
+
+  'Mueller': {
+    map: `
+      # # # # # # # # #
+      # $ . . F . . . #
+      # # # B H B S . #
+      # . B . H . B . #
+      # L = = B = = J #
+      # . B . H . B $ #
+      # $ # B H B # # #
+      # E # . L . $ . #
+      # # # # # # # # #
+    `,
+  },
+
+  'Mrkos': { // @todo Complexifier le niveau
+    screenWidth: 13,
+    screenHeight: 13,
+    map: `
+      # # # # # # # # # # # # #
+      # $ . . . # $ . ! ! . $ #
+      # . . . . # . . ! ! . . #
+      # # # ! ! T ! ! ! ! # # #
+      # $ . ! ! ! B ! ! ! . $ #
+      # # v ! ! . # # ! ! # # #
+      # . . ! ! . $ . ! ! . $ #
+      # # # ! ! # B . ! ! # # #
+      # S . ! ! # ! ! ! ! . $ #
+      # # ! ! ! ! ! ! # ! # # #
+      # . . ! ! . . . # . . . #
+      # $ . ! ! . $ . # . . E #
       # # # # # # # # # # # # #
     `,
   },
