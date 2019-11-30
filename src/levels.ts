@@ -803,6 +803,22 @@ export const levels: LevelType = {
     `,
   },
 
+  'Tritton': {
+    screenWidth: 13,
+    screenHeight: 9,
+    map: `
+      # # # # # # # # # # # # #
+      # $ . B . . $ . . B . $ #
+      # . F = T # H # F = T . #
+      # . H $ H $ H $ H $ . . #
+      # # 4 = J # H # 4 = = # #
+      # . H . . . H . H . . . #
+      # . H . S . H . H . E . #
+      # . . . . . . . . . . . #
+      # # # # # # # # # # # # #
+    `,
+  },
+
   /*
 
   'Namcap': {
