@@ -191,6 +191,8 @@ export class Game {
   }
 
   public nextLevel(): void {
+    this.storage.successfulLevel(this.currentLevelName)
+
     const nextLevelName = this.storage.getNextLevelOf(this.currentLevelName).fixed.name
 
     if (typeof nextLevelName === 'undefined') {
