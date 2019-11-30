@@ -52,4 +52,7 @@ Ce jeu s'inspire de :
 - Le déplacement lorsque trois touches sont appuyées n'est pas intuitif ;
 
 - Lors du déplacement de la caméra, des traits fins apparaissent entre les
-  blocs. Cela se voit notamment sur la glace.
+  blocs. Cela se voit notamment sur la glace ;
+
+- Lorsqu'on charge un niveau qui n'a pas la forme initiale (carré) et qu'on
+  revient au menu, celui-ci n'est pas remis à sa forme initiale.
