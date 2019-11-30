@@ -69,7 +69,7 @@ export class GameScreen {
     updateTopbarLevel(levelName)
   }
 
-  public onremove(vnode: m.Vnode) {
+  public onremove(_vnode: m.Vnode) {
     this.game.stop()
     this.game.unlisten()
 

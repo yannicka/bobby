@@ -7,14 +7,18 @@
   "scripts": {
     "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "lint": "tslint 'src/**/*.ts'",
-    "lint-fix": "tslint --fix 'src/**/*.ts'"
+    "lint": "eslint src/**/*.ts",
+    "lint-fix": "eslint --fix src/**/*.ts"
   },
   "dependencies": {
     "mithril": "^2.0.4"
   },
   "devDependencies": {
     "@types/mithril": "^2.0.2",
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
+    "@typescript-eslint/parser": "^2.9.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.18.2",
     "html-webpack-plugin": "^3.2.0",
     "ts-loader": "^6.2.1",
     "tslint": "^5.20.1",
