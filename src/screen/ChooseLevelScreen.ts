@@ -1,5 +1,6 @@
 import m, { Attributes } from 'mithril'
 
+import { computeAppSize } from '../Game'
 import { Level } from '../Level'
 import { state } from '../State'
 
@@ -18,6 +19,16 @@ class LevelComponent {
     return m('div', { 'class': classesText }, [
       m('button', { 'onclick': () => this.gotoLevel(level.fixed.name) }, level.fixed.number),
     ])
+  }
+
+  public oncreate(): void {
+    const superapp = document.getElementById('superapp')
+
+    const appSize = computeAppSize()
+    const height = window.innerHeight
+
+    superapp.style.width = `${appSize.size.width}px`
+    superapp.style.height = `${height}px`
   }
 
   public gotoLevel(levelName: string): void {

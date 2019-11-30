@@ -16,10 +16,11 @@ import { state } from './State'
 import { Storage } from './Storage'
 import { clamp } from './Util'
 
-const screenSize = new Size(9 * CELL_SIZE, 9 * CELL_SIZE)
+const initialScreenSize = new Size(9 * CELL_SIZE, 9 * CELL_SIZE)
+const screenSize = initialScreenSize.clone()
 
-export function computeAppSize() {
-  const size = screenSize
+export function computeAppSize(ingame: boolean = false) {
+  const size = ingame ? screenSize : initialScreenSize
 
   const topbar = document.getElementById('topbar')
   const topbarHeight = (topbar instanceof HTMLElement ? topbar.clientHeight : 0)
@@ -219,7 +220,7 @@ export class Game {
   }
 
   private resize(_e: UIEvent | null = null): void {
-    const appSize = computeAppSize()
+    const appSize = computeAppSize(true)
 
     this.zoom = appSize.zoom
 
