@@ -42,7 +42,7 @@ export class Superapp {
   }
 
   public resize(_e: UIEvent | null = null): void {
-    const appSize = computeAppSize()
+    const appSize = computeAppSize(true)
     const height = window.innerHeight
 
     this.superapp.style.width = `${appSize.size.width}px`
