@@ -59,14 +59,18 @@ export class Storage {
     localStorage.clear()
   }
 
-  public getNextLevelOf(levelName: string): Level {
+  public getNextLevelOf(levelName: string): Level | null {
     const levels = this.getLevels()
 
     const keys = Object.keys(levels)
     const nextIndex = keys.indexOf(levelName) + 1
     const nextLevelName = keys[nextIndex]
 
-    return levels[nextLevelName]
+    if (nextLevelName in levels) {
+      return levels[nextLevelName]
+    }
+
+    return null
   }
 
   private getLevelsUser(): { [key: string]: LevelUser } {

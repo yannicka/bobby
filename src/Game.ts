@@ -194,14 +194,16 @@ export class Game {
   public nextLevel(): void {
     this.storage.successfulLevel(this.currentLevelName)
 
-    const nextLevelName = this.storage.getNextLevelOf(this.currentLevelName).fixed.name
+    const nextLevel = this.storage.getNextLevelOf(this.currentLevelName)
 
-    if (typeof nextLevelName === 'undefined') {
-      m.route.set('/end-game')
-    } else {
+    if (nextLevel) {
+      const nextLevelName = nextLevel.fixed.name
+  
       m.route.set(`/level/${nextLevelName}`, {}, {
         replace: true,
       })
+    } else {
+      m.route.set('/end-game')
     }
   }
 
