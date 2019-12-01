@@ -15,6 +15,7 @@ import { Size } from './Size'
 import { state } from './State'
 import { Storage } from './Storage'
 import { clamp } from './Util'
+import { Superapp } from './Superapp'
 
 const initialScreenSize = new Size(9 * CELL_SIZE, 9 * CELL_SIZE)
 const screenSize = initialScreenSize.clone()
@@ -236,10 +237,7 @@ export class Game {
 
     this.joystick.setScale(this.zoom)
 
-    const superapp = document.getElementById('superapp')
-
-    superapp.style.width = `${appSize.size.width}px`
-    superapp.style.height = `${height}px`
+    Superapp.resize()
   }
 
   private getScreenSize(): Size {

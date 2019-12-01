@@ -1,4 +1,5 @@
 import m from 'mithril'
+import { Superapp } from '../Superapp'
 
 async function delay(ms: number): Promise<unknown> {
   return new Promise((resolve: () => void) => setTimeout(resolve, ms))
@@ -23,6 +24,8 @@ export class EndGameScreen {
   }
 
   public oncreate(_vnode: m.Vnode) {
+    Superapp.resize()
+
     const SECOND = 1000
 
     document.body.classList.add('end-game')

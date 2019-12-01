@@ -7,6 +7,7 @@ import { Pointer } from '../input/Pointer'
 import { Touch } from '../input/Touch'
 import { state } from '../State'
 import { isTouchDevice } from '../Util'
+import { Superapp } from '../Superapp'
 
 export class GameScreen {
   private game: Game
@@ -35,6 +36,8 @@ export class GameScreen {
   }
 
   public oncreate(vnode: m.Vnode) {
+    Superapp.resize()
+
     this.keyboard = new Keyboard()
 
     if (isTouchDevice()) {

@@ -1,4 +1,5 @@
 import m from 'mithril'
+import { Superapp } from '../Superapp'
 
 export class HomeScreen {
   public view() {
@@ -18,5 +19,9 @@ export class HomeScreen {
         m(m.route.Link, { 'href': '/options', 'class': 'btn' }, 'Options'),
       ]),
     ]
+  }
+
+  public oncreate(): void {
+    Superapp.resize()
   }
 }

@@ -25,7 +25,7 @@ export class Superapp {
   }
 
   public init() {
-    window.addEventListener('resize', this.resize)
+    window.addEventListener('resize', Superapp.resize)
 
     this.superapp = document.getElementById('superapp')
 
@@ -38,14 +38,17 @@ export class Superapp {
       '/end-game': EndGameScreen,
     })
 
-    this.resize()
+    Superapp.resize()
   }
 
-  public resize(_e: UIEvent | null = null): void {
-    const appSize = computeAppSize(true)
+  public static resize(_e: UIEvent | null = null): void {
+    const superapp = document.getElementById('superapp')
+    const app = document.getElementById('app')
+
+    const appSize = computeAppSize(app ? true : false)
     const height = window.innerHeight
 
-    this.superapp.style.width = `${appSize.size.width}px`
-    this.superapp.style.height = `${height}px`
+    superapp.style.width = `${appSize.size.width}px`
+    superapp.style.height = `${height}px`
   }
 }

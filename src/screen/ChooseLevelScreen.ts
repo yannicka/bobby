@@ -3,6 +3,7 @@ import m, { Attributes } from 'mithril'
 import { computeAppSize } from '../Game'
 import { Level } from '../Level'
 import { state } from '../State'
+import { Superapp } from '../Superapp'
 
 class LevelComponent {
   public view(vnode: m.Vnode) {
@@ -22,13 +23,7 @@ class LevelComponent {
   }
 
   public oncreate(): void {
-    const superapp = document.getElementById('superapp')
-
-    const appSize = computeAppSize()
-    const height = window.innerHeight
-
-    superapp.style.width = `${appSize.size.width}px`
-    superapp.style.height = `${height}px`
+    Superapp.resize()
   }
 
   public gotoLevel(levelName: string): void {

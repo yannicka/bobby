@@ -1,6 +1,7 @@
 import m from 'mithril'
 
 import { state } from '../State'
+import { Superapp } from '../Superapp'
 
 export class OptionsScreen {
   public view() {
@@ -19,6 +20,10 @@ export class OptionsScreen {
         ]),
       ]),
     ]
+  }
+
+  public oncreate(): void {
+    Superapp.resize()
   }
 }
 

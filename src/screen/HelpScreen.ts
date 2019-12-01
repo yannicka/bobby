@@ -1,4 +1,5 @@
 import m from 'mithril'
+import { Superapp } from '../Superapp'
 
 export class HelpScreen {
   public view() {
@@ -25,5 +26,9 @@ export class HelpScreen {
         ]),
       ]),
     ]
+  }
+
+  public oncreate(): void {
+    Superapp.resize()
   }
 }
