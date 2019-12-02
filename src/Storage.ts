@@ -73,6 +73,18 @@ export class Storage {
     return null
   }
 
+  public areAreLevelsSucceeded(): boolean {
+    const levels = this.getLevels()
+
+    for (const [name, level] of Object.entries(levels)) {
+      if (!level.user.success) {
+        return false
+      }
+    }
+
+    return true
+  }
+
   private getLevelsUser(): { [key: string]: LevelUser } {
     const levels: { [key: string]: LevelUser } = {}
 

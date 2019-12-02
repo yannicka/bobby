@@ -1,5 +1,6 @@
 import m from 'mithril'
 import { Superapp } from '../Superapp'
+import { state } from '../State'
 
 async function delay(ms: number): Promise<unknown> {
   return new Promise((resolve: () => void) => setTimeout(resolve, ms))
@@ -24,6 +25,10 @@ export class EndGameScreen {
   }
 
   public oncreate(_vnode: m.Vnode) {
+    if (!state.getStorage().areAreLevelsSucceeded()) {
+      m.route.set('/choose-level')
+    }
+
     Superapp.resize()
 
     const SECOND = 1000
