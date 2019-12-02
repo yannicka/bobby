@@ -113,9 +113,8 @@ h2 {
   grid-template-columns: repeat(auto-fill, 60px);
   gap: 16px;
   margin: 12px;
-  margin-top: 32px;
   justify-content: center;
-  padding: 4px;
+  padding: 16px;
 }
 
 .level a {
