@@ -18,7 +18,10 @@ class LevelComponent {
     const classesText = classes.join(' ')
 
     return m('div', { 'class': classesText }, [
-      m('button', { 'onclick': () => this.gotoLevel(level.fixed.name) }, level.fixed.number),
+      m(m.route.Link, {
+        'href': `/level/${level.fixed.name}`,
+        'onclick': (event: MouseEvent) => this.gotoLevel(event, level.fixed.name)
+      }, level.fixed.number),
     ])
   }
 
@@ -26,7 +29,9 @@ class LevelComponent {
     Superapp.resize()
   }
 
-  public gotoLevel(levelName: string): void {
+  public gotoLevel(event: MouseEvent, levelName: string): void {
+    event.preventDefault()
+
     const storage = state.getStorage()
     const level = storage.getLevels()[levelName]
 

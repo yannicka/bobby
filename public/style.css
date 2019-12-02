@@ -118,7 +118,7 @@ h2 {
   padding: 4px;
 }
 
-.level button {
+.level a {
   display: block;
   background-color: #999999;
   padding: 20px 8px;
@@ -127,19 +127,20 @@ h2 {
   text-align: center;
   border: none;
   width: 100%;
+  box-sizing: border-box;
 }
 
-.level button:focus,
-.level button:hover {
+.level a:focus,
+.level a:hover {
   outline: 3px solid var(--primary-color-darker);
   cursor: pointer;
 }
 
-.level.accessible button {
+.level.accessible a {
   background-color: #842733;
 }
 
-.level.success.accessible button {
+.level.success.accessible a {
   background-color: var(--primary-color);
 }
 
