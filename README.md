@@ -11,7 +11,8 @@ npm run serve # ou npm run build
 
 ## Remerciements
 
-Merci à Aur36 pour son aide sur la réalisation de niveaux.
+Merci à Aur36 pour son aide sur la réalisation de niveaux, ses nombreux tests
+et retours et son enthousiasme sans limite.
 
 Merci à oräkle - Ethan G. pour son assistance graphique.
 
