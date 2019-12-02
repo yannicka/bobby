@@ -14,7 +14,7 @@ interface LevelType {
  * nouveaux niveaux n'importe où.
  */
 export const levels: LevelType = {
-  // Premier niveau, prise en main des déplacements, de la récupération des
+  // Premier niveau : prise en main des déplacements, de la récupération des
   // pièces et de la balise de fin de niveau
   'Halley': {
     map: `
@@ -420,20 +420,6 @@ export const levels: LevelType = {
     `,
   },
 
-  'Harrington': {
-    map: `
-      # # # # # # # # #
-      # S # . B . # . #
-      # . B $ # $ B # #
-      # . J . B . J . #
-      # . B # . # # . #
-      # . J $ J $ # . #
-      # E # # $ # # . #
-      # . < . B . . $ #
-      # # # # # # # # #
-    `,
-  },
-
   'Tsuchinshan': {
     map: `
       #  #  #  #  #  #  #  #  #
@@ -561,63 +547,17 @@ export const levels: LevelType = {
     `,
   },
 
-  'Longmore': { // @todo Variante à voir : sortie dans la partie basse, au centre
-    screenWidth: 13,
-    screenHeight: 13,
+  'Larsen': {
     map: `
-      # # # # # # # # # # # # #
-      # . . . # . . . # . . . #
-      # . $ . 4 . $ . 6 . $ . #
-      # . . . # . . . # . . . #
-      # # # 8 B F # T B 8 # # #
-      # . . . # . S . # . . . #
-      # . $ . 6 . . . 4 . $ . #
-      # . . . # . E . # . . . #
-      # # # 2 B L # J B 2 # # #
-      # . . . # . . . # . . . #
-      # . $ . 4 . $ . 6 . $ . #
-      # . . . # . . . # . . . #
-      # # # # # # # # # # # # #
-    `,
-  },
-
-  'Gehrels': {
-    screenWidth: 11,
-    screenHeight: 11,
-    map: `
-      # # # # # # # # # # # # #
-      # E . . . B . $ . $ . . #
-      # . . . . # # # # # # . #
-      # # # # B T $ $ $ $ . . #
-      # $ . . . H $ $ $ $ # . #
-      # # # $ . L = F = = T # #
-      # # # F = = = H = = J # #
-      # . . H . $ . H . $ . # #
-      # . . H # # # H # # # . #
-      # . . H . $ . ! . $ $ . #
-      # . . . . $ . ! . $ $ . #
-      # . . . S . . B . . . . #
-      # # # # # # # # # # # # #
-    `,
-  },
-
-  'Hermann': { // @todo Variante à voir : sortie dans la même zone que le joueur
-    screenWidth: 13,
-    screenHeight: 13,
-    map: `
-      # # # # # # # # # # # # #
-      # . . . # . . . # . . . #
-      # . $ . # . E . # . $ . #
-      # . . . F T . F T . . . #
-      # . . F J L = J L T . . #
-      # # # H $ . # . $ H # # #
-      # . . L T . # . F J . . #
-      # . . . L T # F J . . . #
-      # . . . . L F J . . . . #
-      # # . . . . H . . . . # #
-      # # # . . . . . . . # # #
-      # # # # . . S . . # # # #
-      # # # # # # # # # # # # #
+      #  #  #  #  #  #  #  #  #
+      #  $  L  $  8  =  8  .  #
+      #  .  F  B2 #  .  6  .  #
+      #  H  #  4  #  4  #  #  #
+      #  .  .  .  .  .  .  .  #
+      #  .  .  .  S  .  .  .  #
+      #  #  .  .  E  .  .  #  #
+      #  #  #  .  .  .  #  #  #
+      #  #  #  #  #  #  #  #  #
     `,
   },
 
@@ -632,42 +572,6 @@ export const levels: LevelType = {
       # ! . ! ! ! . ! #
       # ! S # E # . ! #
       # # # # # # # # #
-    `,
-  },
-
-  'Larsen': { // @todo Revoir le niveau, les boutons ne sont pas utiles
-    screenWidth: 10,
-    screenHeight: 9,
-    map: `
-      #  #  #  #  #  #  #  #  #  #
-      #  $  L  $  8  =  8  B  .  #
-      #  .  F  B2 #  .  6  B  .  #
-      #  H  #  4  #  .  #  #  #  #
-      #  .  .  .  .  .  .  .  .  #
-      #  .  .  .  S  .  .  E  .  #
-      #  #  .  .  .  .  .  .  #  #
-      #  #  #  .  .  .  .  #  #  #
-      #  #  #  #  #  #  #  #  #  #
-    `,
-  },
-
-  'Hergenrother': {
-    screenWidth: 13,
-    screenHeight: 13,
-    map: `
-      # # # # # # # # # # # # #
-      # ! ! ! ! # ! ! ! ! ! # #
-      # ! $ ! ! ! ! ! ! ! T . #
-      # ! ! ! ! ! ! ! ! # . . #
-      # ! ! ! ! # B # # . $ . #
-      # ! ! ! # . . . # . . . #
-      # 6 # # # . S . # # # 6 #
-      # . . . # . E . # . . . #
-      # . $ . # # B # # . $ . #
-      # . . # . . H . . # . . #
-      # . L = = T 6 F = = J . #
-      # # . . . L 2 J . . . . #
-      # # # # # # # # # # # # #
     `,
   },
 
@@ -703,21 +607,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Mueller': {
-    map: `
-      # # # # # # # # #
-      # $ . . F . . . #
-      # # # B H B S . #
-      # . B . H . B . #
-      # L = = B = = J #
-      # . B . H . B $ #
-      # $ # B H B # # #
-      # E # . L . $ . #
-      # # # # # # # # #
-    `,
-  },
-
-  'Mrkos': { // @todo Complexifier le niveau
+  'Mrkos': {
     screenWidth: 13,
     screenHeight: 13,
     map: `
@@ -734,6 +624,20 @@ export const levels: LevelType = {
       # . . ! ! . . . # . . . #
       # $ . ! ! . $ . # . . E #
       # # # # # # # # # # # # #
+    `,
+  },
+
+  'Helin': {
+    map: `
+      # # # # # # # # #
+      # S . B . # . $ #
+      # . $ J $ 6 . . #
+      # . B # . # # 4 #
+      # B $ . J v . . #
+      # 4 # # . < v # #
+      # . . B ^ < . $ #
+      # $ . < . $ < E #
+      # # # # # # # # #
     `,
   },
 
@@ -766,20 +670,6 @@ export const levels: LevelType = {
       . # B # . # B # .
       # $ . # $ # . $ #
       # # . # E # . # #
-    `,
-  },
-
-  'Helin': {
-    map: `
-      # # # # # # # # #
-      # S . B . # . $ #
-      # . $ J $ 6 . . #
-      # . B # . # # 4 #
-      # B $ . J v . . #
-      # 4 # # . < v # #
-      # . . B ^ < . $ #
-      # $ . < . $ < E #
-      # # # # # # # # #
     `,
   },
 
@@ -847,6 +737,114 @@ export const levels: LevelType = {
       # . L = 2 = J . #
       # $ . . # . . $ #
       # # # # # # # # #
+    `,
+  },
+
+  'Mueller': {
+    map: `
+      # # # # # # # # #
+      # $ . . F . . . #
+      # # # B H B S . #
+      # . B . H . B . #
+      # L = = B = = J #
+      # . B . H . B $ #
+      # $ # B H B # # #
+      # E # . L . $ . #
+      # # # # # # # # #
+    `,
+  },
+
+  'Harrington': {
+    map: `
+      # # # # # # # # #
+      # S # . B . # . #
+      # . B $ # $ B # #
+      # . J . B . J . #
+      # . B # . # # . #
+      # . J $ J $ # . #
+      # E # # $ # # . #
+      # . < . B . . $ #
+      # # # # # # # # #
+    `,
+  },
+
+  'Hergenrother': {
+    screenWidth: 13,
+    screenHeight: 13,
+    map: `
+      # # # # # # # # # # # # #
+      # ! ! ! ! # ! ! ! ! ! # #
+      # ! $ ! ! ! ! ! ! ! T . #
+      # ! ! ! ! ! ! ! ! # . . #
+      # ! ! ! ! # B # # . $ . #
+      # ! ! ! # . . . # . . . #
+      # 6 # # # . S . # # # 6 #
+      # . . . # . E . # . . . #
+      # . $ . # # B # # . $ . #
+      # . . # . . H . . # . . #
+      # . L = = T 6 F = = J . #
+      # # . . . L 2 J . . . . #
+      # # # # # # # # # # # # #
+    `,
+  },
+
+  'Gehrels': {
+    screenWidth: 11,
+    screenHeight: 11,
+    map: `
+      # # # # # # # # # # # # #
+      # E . . . B . $ . $ . . #
+      # . . . . # # # # # # . #
+      # # # # B T $ $ $ $ . . #
+      # $ . . . H $ $ $ $ # . #
+      # # # $ . L = F = = T # #
+      # # # F = = = H = = J # #
+      # . . H . $ . H . $ . # #
+      # . . H # # # H # # # . #
+      # . . H . $ . ! . $ $ . #
+      # . . . . $ . ! . $ $ . #
+      # . . . S . . B . . . . #
+      # # # # # # # # # # # # #
+    `,
+  },
+
+  'Hermann': {
+    screenWidth: 13,
+    screenHeight: 13,
+    map: `
+      # # # # # # # # # # # # #
+      # . . . # . . . # . . . #
+      # . $ . # . E . # . $ . #
+      # . . . F T . F T . . . #
+      # . . F J L = J L T . . #
+      # # # H $ . # . $ H # # #
+      # . . L T . # . F J . . #
+      # . . . L T # F J . . . #
+      # . . . . L F J . . . . #
+      # # . . . . H . . . . # #
+      # # # . . . . . . . # # #
+      # # # # . . S . . # # # #
+      # # # # # # # # # # # # #
+    `,
+  },
+
+  'Longmore': {
+    screenWidth: 13,
+    screenHeight: 13,
+    map: `
+      # # # # # # # # # # # # #
+      # . . . # . . . # . . . #
+      # . $ . 4 . $ . 6 . $ . #
+      # . . . # . . . # . . . #
+      # # # 8 B F # T B 8 # # #
+      # . . . # . . . # . . . #
+      # . $ . 6 . S . 4 . $ . #
+      # . . . # . . . # . . . #
+      # # # 2 B L # J B 2 # # #
+      # . . . # . . . # . . . #
+      # . $ . 4 . E . 6 . $ . #
+      # . . . # . . . # . . . #
+      # # # # # # # # # # # # #
     `,
   },
 
