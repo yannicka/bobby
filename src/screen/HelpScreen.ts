@@ -22,7 +22,6 @@ export class HelpScreen {
           m('p', 'Les boutons ne vous permettent qu\'un nombre restreint de passages.'),
           m('p', 'Les tourniquets vous bloque certaines directions et tournent dans le sens horaire quand vous en sortez.'),
           m('p', 'La glace vous fait glisser jusqu\'au prochain bloc solide que vous rencontrez.'),
-          // m('p', 'La motte de terrre n\'est traversable que de haut en bas.'),
         ]),
       ]),
     ]
