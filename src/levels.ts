@@ -10,6 +10,11 @@ interface LevelType {
  * Le nommage provient de :
  * https://fr.wikipedia.org/wiki/Liste_des_com%C3%A8tes_p%C3%A9riodiques_num%C3%A9rot%C3%A9es
  *
+ * Le nom ne doit être composé que de lettre (donc pas de tiret ou de caractère
+ * spécial) avec seulement la première en majuscule.
+ *
+ * Respecter l'ordre de la page citée n'a pas d'importance.
+ *
  * Avoir un nom à chaque niveau, plutôt qu'un numéro, permet d'intégrer des
  * nouveaux niveaux n'importe où.
  */
@@ -163,41 +168,8 @@ export const levels: LevelType = {
     `,
   },
 
-  /*
-
-  // Mottes de terre
-  'Brooks': {
-    map: `
-      # # # # # # # # #
-      # . . . S . . . #
-      # . . . . . . . #
-      # U U U U U U U #
-      # $ U $ U $ U $ #
-      # . . . E . . . #
-      # . . U . U . . #
-      # . . $ . $ . . #
-      # # # # # # # # #
-    `,
-  },
-
-  'Holmes': {
-    map: `
-      # # # # # # # # #
-      # S # $ $ $ $ $ #
-      # . # . . . . . #
-      # U # U U . U U #
-      # . . . . . . . #
-      # # # U # U # # #
-      # . . . # . . . #
-      # . . . # $ . E #
-      # # # # # # # # #
-    `,
-  },
-
-  */
-
   // Premiers « vrais » niveaux
-  'Borrelly': {
+  'Brooks': {
     map: `
       # # # # # # # # #
       # S . . # . . . #
@@ -211,7 +183,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Crommelin': {
+  'Holmes': {
     map: `
       # # # # # # # # #
       # . . . . . . . #
@@ -225,7 +197,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Westphal': {
+  'Borrelly': {
     map: `
       # # # # # # # # #
       # S # # # . ! # #
@@ -239,7 +211,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Kopff': {
+  'Westphal': {
     map: `
       # # # # # # # # # # # #
       # $ . = . . . . . . . #
@@ -253,7 +225,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Schaumasse': {
+  'Kopff': {
     map: `
       # # # # # # # # # # # # # # # # # # # #
       # S . . . . . . . . . . . . # . . . $ #
@@ -278,7 +250,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Klemola': {
+  'Schaumasse': {
     map: `
       # # # # # # # # #
       # $ . # S # $ . #
@@ -292,7 +264,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Reinmuth': {
+  'Crommelin': {
     map: `
       # # # # # # # # #
       # S . . ! . . . #
@@ -307,7 +279,7 @@ export const levels: LevelType = {
   },
 
   // Par Aur36
-  'Daniel': {
+  'Reinmuth': {
     map: `
       # # # # # # # # #
       # $ . . E . . $ #
@@ -328,7 +300,7 @@ export const levels: LevelType = {
   },
 
   // Par Aur36
-  'Gale': {
+  'Daniel': {
     screenWidth: 13,
     screenHeight: 13,
     map: `
@@ -350,7 +322,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Whipple': {
+  'Gale': {
     map: `
       #  #  #  #  #  #  #  #  #
       #  S  #  .  .  .  .  .  #
@@ -364,7 +336,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Forbes': {
+  'Whipple': {
     map: `
       #  #  #  #  #  #  #  #  #
       #  S  .  .  #  .  .  .  #
@@ -378,7 +350,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Oterma': {
+  'Forbes': {
     map: `
       # # # # # # # # #
       # # S . E . . # #
@@ -392,7 +364,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Clark': {
+  'Oterma': {
     screenWidth: 11,
     screenHeight: 9,
     map: `
@@ -450,7 +422,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Wild': {
+  'Harrington': {
     map: `
       # # # # . # # # #
       # S # # . . . . #
@@ -464,7 +436,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Gunn': {
+  'Tsuchinshan': {
     map: `
       #  #  #  #  #  #  #  #  #
       #  $  B  $  #  .  .  #  #
@@ -478,7 +450,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Taylor': {
+  'Wild': {
     map: `
       # # # # # # # # #
       # . . . . < . $ #
@@ -492,7 +464,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Mrkos': {
+  'Gunn': {
     screenWidth: 13,
     screenHeight: 13,
     map: `
@@ -512,7 +484,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Kojima': {
+  'Klemola': {
     screenWidth: 10,
     screenHeight: 10,
     map: `
@@ -529,7 +501,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Spahr': {
+  'Taylor': {
     map: `
       # # # # # # # # # # # # #
       # . . . . . # . . . . . #
@@ -547,7 +519,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Yeung': {
+  'Kojima': {
     map: `
       # # # # # # # # #
       # S # . $ = $ . #
@@ -561,7 +533,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Tsuchinshan': {
+  'Clark': {
     map: `
       #  #  #  #  #  #  #  #  #
       #  S  #  $  #  $  #  $  #
@@ -595,7 +567,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Larsen': {
+  'Longmore': {
     map: `
       #  #  #  #  #  #  #  #  #
       #  $  L  $  8  =  8  .  #
@@ -609,7 +581,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Vorobjov': {
+  'Gehrels': {
     map: `
       # # # # # # # # #
       # ! . . # . . ! #
@@ -637,7 +609,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Spacewatch': {
+  'Russell': {
     screenWidth: 11,
     screenHeight: 11,
     map: `
@@ -655,7 +627,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Brewington': {
+  'Giclas': {
     screenWidth: 13,
     screenHeight: 13,
     map: `
@@ -675,7 +647,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Tritton': {
+  'Boethin': {
     screenWidth: 13,
     screenHeight: 9,
     map: `
@@ -691,7 +663,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Christensen': {
+  'Bus': {
     screenWidth: 13,
     screenHeight: 10,
     map: `
@@ -708,7 +680,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Barnard': {
+  'Howell': {
     map: `
       # # # # # # # # #
       # $ . . # . . $ #
@@ -722,7 +694,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Mueller': {
+  'Sanguin': {
     map: `
       # # # # # # # # #
       # $ . . F . . . #
@@ -736,7 +708,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Harrington': {
+  'Lovas': {
     map: `
       # # # # # # # # #
       # S # . B . # . #
@@ -750,7 +722,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Hergenrother': {
+  'Chiron': {
     screenWidth: 13,
     screenHeight: 13,
     map: `
@@ -770,7 +742,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Kushida': {
+  'Machholz': {
     map: `
       # # . # . # . # #
       # $ . # $ # . $ #
@@ -784,7 +756,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Gehrels': {
+  'Takamizawa': {
     screenWidth: 11,
     screenHeight: 11,
     map: `
@@ -804,7 +776,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Hermann': {
+  'Kowal': {
     screenWidth: 13,
     screenHeight: 13,
     map: `
@@ -824,7 +796,7 @@ export const levels: LevelType = {
     `,
   },
 
-  'Longmore': {
+  'Hartley': {
     screenWidth: 13,
     screenHeight: 13,
     map: `
@@ -843,6 +815,39 @@ export const levels: LevelType = {
       # # # # # # # # # # # # #
     `,
   },
+
+  /*
+
+  // Mottes de terre
+  'Brooks': {
+    map: `
+      # # # # # # # # #
+      # . . . S . . . #
+      # . . . . . . . #
+      # U U U U U U U #
+      # $ U $ U $ U $ #
+      # . . . E . . . #
+      # . . U . U . . #
+      # . . $ . $ . . #
+      # # # # # # # # #
+    `,
+  },
+
+  'Holmes': {
+    map: `
+      # # # # # # # # #
+      # S # $ $ $ $ $ #
+      # . # . . . . . #
+      # U # U U . U U #
+      # . . . . . . . #
+      # # # U # U # # #
+      # . . . # . . . #
+      # . . . # $ . E #
+      # # # # # # # # #
+    `,
+  },
+
+  */
 
   /*
 
