@@ -21,8 +21,8 @@ Merci à Alceste_ pour ses améliorations de code et de fonctionnement global.
 Merci à Polyson pour sa proposition de niveaux à bords ouverts et ses divers
 conseils et retours.
 
-Merci aux membres de Bit My Code pour leur soutien dans le développement du
-projet, et pour leurs divers retours.
+Merci aux membres du groupe de développement dont je fais partie pour leur
+soutien dans le développement du projet, et pour leurs divers retours.
 
 ## Inspirations
 

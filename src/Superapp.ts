@@ -8,6 +8,7 @@ import { GameScreen } from './screen/GameScreen'
 import { HelpScreen } from './screen/HelpScreen'
 import { HomeScreen } from './screen/HomeScreen'
 import { OptionsScreen } from './screen/OptionsScreen'
+import { CreditsScreen } from './screen/CreditsScreen'
 
 export class Superapp {
   private superapp: HTMLElement
@@ -33,6 +34,7 @@ export class Superapp {
       '/': HomeScreen,
       '/options': OptionsScreen,
       '/help': HelpScreen,
+      '/credits': CreditsScreen,
       '/choose-level': ChooseLevelScreen,
       '/level/:level': GameScreen,
       '/end-game': EndGameScreen,
