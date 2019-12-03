@@ -30,9 +30,7 @@ Ce jeu s'inspire de :
 
 - [Pascal Penguin](http://www.luduminis.com/pascal/about/) ;
 
-- Bobby Carrot ;
-
-- Pokémon Rouge et Bleu.
+- [Bobby Carrot](https://en.wikipedia.org/wiki/Bobby_Carrot).
 
 ## Bogues connus
 
