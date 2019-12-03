@@ -309,7 +309,7 @@ export class End extends Cell {
 
     this.getAnimationManager().addAnimation('inactive', [ 20 ])
 
-    this.getAnimationManager().addAnimation('active', [ 21, 22 ], {
+    this.getAnimationManager().addAnimation('active', [ 21, 22, 23, 24, 23, 22 ], {
       frameDuration: 0.1,
     })
 
