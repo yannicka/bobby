@@ -73,7 +73,7 @@ export class Storage {
     return null
   }
 
-  public areAreLevelsSucceeded(): boolean {
+  public areAllLevelsSucceeded(): boolean {
     const levels = this.getLevels()
 
     for (const [name, level] of Object.entries(levels)) {

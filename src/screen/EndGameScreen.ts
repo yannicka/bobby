@@ -25,7 +25,7 @@ export class EndGameScreen {
   }
 
   public oncreate(_vnode: m.Vnode) {
-    if (!state.getStorage().areAreLevelsSucceeded()) {
+    if (!state.getStorage().areAllLevelsSucceeded()) {
       m.route.set('/choose-level')
     }
 
