@@ -4,8 +4,8 @@ export enum WheelDirection {
   Bottom,
 }
 
-export namespace WheelDirection {
-  export function toInt(wheelDirection: WheelDirection): number {
+export class WheelDirectionUrl {
+  public static toInt(wheelDirection: WheelDirection): number {
     switch (wheelDirection) {
       case WheelDirection.None:
         return 0
@@ -16,7 +16,5 @@ export namespace WheelDirection {
       case WheelDirection.Bottom:
         return 1
     }
-
-    return 0
   }
 }

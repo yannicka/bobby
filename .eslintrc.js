@@ -6,7 +6,9 @@ module.exports = {
 
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
 
   parser: '@typescript-eslint/parser',
@@ -14,6 +16,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
+    project: './tsconfig.json',
   },
 
   plugins: [
@@ -45,5 +48,11 @@ module.exports = {
     '@typescript-eslint/no-inferrable-types': 'off',
 
     '@typescript-eslint/no-use-before-define': 'off',
+
+    '@typescript-eslint/unbound-method': 'off',
+
+    '@typescript-eslint/no-namespace': 'off',
+
+    ''
   },
 }
