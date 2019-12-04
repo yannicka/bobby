@@ -79,7 +79,7 @@ export class Map {
     return this.getCell(new Point(x, y))
   }
 
-  public onAfterPlayerOut(position: Point) {
+  public onAfterPlayerOut(position: Point): void {
     const cell = this.getCellAt(position.x, position.y)
 
     if (cell !== null) {

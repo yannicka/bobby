@@ -2,7 +2,7 @@ import m from 'mithril'
 import { Superapp } from '../Superapp'
 
 export class HomeScreen {
-  public view() {
+  public view(): Array<m.Vnode> {
     return [
       m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),

@@ -25,7 +25,7 @@ export class Superapp {
     })
   }
 
-  public init() {
+  public init(): void {
     window.addEventListener('resize', Superapp.resize)
 
     this.superapp = document.getElementById('superapp')

@@ -293,7 +293,7 @@ export class Start extends Cell {
     super(position)
   }
 
-  public render(ctx: CanvasRenderingContext2D): void {
+  public render(_ctx: CanvasRenderingContext2D): void {
     // Pas de rendu
   }
 }

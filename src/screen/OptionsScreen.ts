@@ -4,7 +4,7 @@ import { state } from '../State'
 import { Superapp } from '../Superapp'
 
 export class OptionsScreen {
-  public view() {
+  public view(): Array<m.Vnode> {
     return [
       m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),

@@ -14,7 +14,7 @@ export class GameScreen {
   private keyboard: Keyboard
   private pointer: Pointer
 
-  public view() {
+  public view(): Array<m.Vnode> {
     return [
       m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-level' }, 'Niveau X/Y'),
@@ -35,7 +35,7 @@ export class GameScreen {
     ]
   }
 
-  public oncreate(vnode: m.Vnode) {
+  public oncreate(vnode: m.Vnode): void {
     Superapp.resize()
 
     this.keyboard = new Keyboard()
@@ -59,7 +59,7 @@ export class GameScreen {
     document.body.classList.add('bg-dark', 'overflow-hidden')
   }
 
-  public onupdate(vnode: m.Vnode) {
+  public onupdate(vnode: m.Vnode): void {
     const attrs = vnode.attrs as { level: string }
 
     this.game.stop()
@@ -72,7 +72,7 @@ export class GameScreen {
     updateTopbarLevel(levelName)
   }
 
-  public onremove(_vnode: m.Vnode) {
+  public onremove(_vnode: m.Vnode): void {
     this.game.stop()
     this.game.unlisten()
 
@@ -113,7 +113,7 @@ function restartLevel(e: { redraw: boolean }): void {
   }
 }
 
-function updateTopbarLevel(levelName: string) {
+function updateTopbarLevel(levelName: string): void {
   const topbarLevel = document.querySelector('.topbar-level')
 
   if (topbarLevel instanceof HTMLElement) {
@@ -125,7 +125,7 @@ function updateTopbarLevel(levelName: string) {
   }
 }
 
-function documentClickEvent(e: MouseEvent) {
+function documentClickEvent(e: MouseEvent): void {
   const button = document.querySelector('.topbar-button-menu')
   const nav = document.querySelector('.topbar-menu-nav')
   const target = e.target as Node

@@ -20,7 +20,7 @@ import { Superapp } from './Superapp'
 const initialScreenSize = new Size(9 * CELL_SIZE, 9 * CELL_SIZE)
 const screenSize = initialScreenSize.clone()
 
-export function computeAppSize(ingame: boolean = false) {
+export function computeAppSize(ingame: boolean = false): { size: Size, zoom: number } {
   const size = ingame ? screenSize : initialScreenSize
 
   const topbar = document.getElementById('topbar')
@@ -40,7 +40,7 @@ export function computeAppSize(ingame: boolean = false) {
   }
 }
 
-export function changeScreenSize(width: number, height: number) {
+export function changeScreenSize(width: number, height: number): void {
   screenSize.width = width * CELL_SIZE
   screenSize.height = height * CELL_SIZE
 }

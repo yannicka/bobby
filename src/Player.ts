@@ -201,7 +201,7 @@ export class Player {
     return this.canmove
   }
 
-  private moveTo(position: Point) {
+  private moveTo(position: Point): void {
     this.previousPosition = this.position
     this.position = position
     this.canmove = false
@@ -227,7 +227,7 @@ export class Player {
     this.immobility = immobility
   }
 
-  private moveFromBound(bound: Direction) {
+  private moveFromBound(bound: Direction): void {
     const mapSize = this.map.getSize()
 
     this.canmove = true

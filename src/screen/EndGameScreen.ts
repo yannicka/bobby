@@ -7,7 +7,7 @@ async function delay(ms: number): Promise<unknown> {
 }
 
 export class EndGameScreen {
-  public view() {
+  public view(): Array<m.Vnode> {
     return [
       m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),
@@ -24,7 +24,7 @@ export class EndGameScreen {
     ]
   }
 
-  public oncreate(_vnode: m.Vnode) {
+  public oncreate(_vnode: m.Vnode): void {
     if (!state.getStorage().areAllLevelsSucceeded()) {
       m.route.set('/choose-level')
     }
@@ -72,7 +72,7 @@ export class EndGameScreen {
     })
   }
 
-  public onremove(_vnode: m.Vnode) {
+  public onremove(_vnode: m.Vnode): void {
     document.body.classList.remove('end-game')
   }
 }

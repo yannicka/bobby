@@ -22,7 +22,7 @@ const THANKS = [
 ]
 
 export class CreditsScreen {
-  public view() {
+  public view(): Array<m.Vnode> {
     return [
       m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),

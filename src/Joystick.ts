@@ -88,7 +88,7 @@ export class Joystick {
     this.canvas.style.display = 'block'
   }
 
-  public hide() {
+  public hide(): void {
     this.canvas.style.display = 'none'
   }
 

@@ -22,6 +22,7 @@ module.exports = {
   rules: {
     'semi': ['error', 'never'],
     'no-irregular-whitespace': 'off',
-    'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }]
+    'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
+    '@typescript-eslint/explicit-function-return-type': ['error'],
   },
 }

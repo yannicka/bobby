@@ -6,7 +6,7 @@ import { state } from '../State'
 import { Superapp } from '../Superapp'
 
 class LevelComponent {
-  public view(vnode: m.Vnode) {
+  public view(vnode: m.Vnode): m.Vnode {
     const attrs = vnode.attrs as { level: Level }
     const level: Level = attrs.level
 
@@ -42,11 +42,11 @@ class LevelComponent {
 }
 
 export class ChooseLevelScreen {
-  public oninit() {
+  public oninit(): void {
     state.loadLevels()
   }
 
-  public view(_vnode: m.Vnode) {
+  public view(_vnode: m.Vnode): Array<m.Vnode> {
     const levels = state.getLevels()
 
     const childrens = Object.values(levels).map((level: Level) => {
