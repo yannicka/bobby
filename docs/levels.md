@@ -34,7 +34,9 @@ bord haut, droit, bas et gauche) ;
 - `B`, `B2` et `B3` : bouton (respectivement avec 1, 2 et 3 passes
 autorisées) ;
 
-- `U` : motte de terre / élévation.
+- `U` : motte de terre / élévation. Ce type de cellule n'est pas utilisé
+  actuellement en jeu. Le passage de ce bloc n'est possible que du haut vers le
+  bas.
 
 ## Astuces de création
 
