@@ -35,6 +35,7 @@ export abstract class Cell {
 
   // Évènement : avant que le joueur n'entre dans la case
   public onBeforePlayerIn(_player: Player): void {
+    // À surcharger
   }
 
   // Évènement : lorsque le joueur est entièrement dans la case
@@ -44,6 +45,7 @@ export abstract class Cell {
 
   // Évènement : lorsque le joueur a quitté la case
   public onAfterPlayerOut(): void {
+    // À surcharger
   }
 
   // Est-ce qu'on peut rentrer sur la case ?

@@ -6,6 +6,7 @@ module.exports = {
 
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
 
   parser: '@typescript-eslint/parser',
@@ -21,8 +22,28 @@ module.exports = {
 
   rules: {
     'semi': ['error', 'never'],
+
     'no-irregular-whitespace': 'off',
-    'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
-    '@typescript-eslint/explicit-function-return-type': ['error'],
+
+    'no-unused-vars': ['error', {
+      'argsIgnorePattern': '^_'
+    }],
+
+    '@typescript-eslint/no-unused-vars': ['error', {
+      'argsIgnorePattern': '^_'
+    }],
+
+    '@typescript-eslint/member-delimiter-style': ['error', {
+      'singleline': {
+        'delimiter': 'comma'
+      },
+      'multiline': {
+        'delimiter': 'none'
+      }
+    }],
+
+    '@typescript-eslint/no-inferrable-types': 'off',
+
+    '@typescript-eslint/no-use-before-define': 'off',
   },
 }

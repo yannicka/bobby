@@ -63,14 +63,6 @@ function parseStringLevel(level: string): Array<Array<string>> {
 
 export class LevelManager {
   public getLevels(): { [key: string]: LevelFixed } {
-    interface LevelType {
-      [key: string]: {
-        map: string;
-        screenWidth?: number;
-        screenHeight?: number;
-      }
-    }
-
     const levelsReturned: { [key: string]: LevelFixed } = {}
 
     let i = 1

@@ -1,8 +1,8 @@
 interface LevelType {
   [key: string]: {
-    map: string;
-    screenWidth?: number;
-    screenHeight?: number;
+    map: string
+    screenWidth?: number
+    screenHeight?: number
   }
 }
 

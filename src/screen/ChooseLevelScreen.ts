@@ -1,6 +1,5 @@
 import m, { Attributes } from 'mithril'
 
-import { computeAppSize } from '../Game'
 import { Level } from '../Level'
 import { state } from '../State'
 import { Superapp } from '../Superapp'

@@ -233,8 +233,6 @@ export class Game {
     this.canvas.style.width = `${appSize.size.width}px`
     this.canvas.style.height = `${appSize.size.height}px`
 
-    const height = window.innerHeight
-
     this.joystick.setScale(this.zoom)
 
     Superapp.resize()
