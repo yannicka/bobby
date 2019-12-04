@@ -30,14 +30,23 @@ export class Keyboard {
     }
   }
 
+  /**
+   * Tant que la touche est levée (non enfoncée)
+   */
   public up(k: string): boolean {
     return !this.keys[k]
   }
 
+  /**
+   * Tant que la touche est enfoncée
+   */
   public down(k: string): boolean {
     return this.keys[k]
   }
 
+  /**
+   * Lorsque la touche a été enfoncée
+   */
   public press(k: string): boolean {
     const v = this.keys[k]
     this.keys[k] = false
@@ -45,6 +54,9 @@ export class Keyboard {
     return v
   }
 
+  /**
+   * Lorsque la touche a été relâchée
+   */
   public release(k: string): boolean {
     const last = this.lasts[this.lasts.indexOf(k)]
 

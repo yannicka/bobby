@@ -6,32 +6,34 @@ export interface AnimationOptions {
 }
 
 export class Animation {
-  // Image de l'animation *(sprite)*
+  /** Image de l'animation (sprite) */
   private readonly image: HTMLImageElement
 
-  // Frames utilisées pour l'animation
+  /** Frames utilisées pour l'animation */
   private readonly frames: Array<number>
 
-  // Taille d'une frame
+  /** Taille d'une frame */
   private readonly frameWidth: number
   private readonly frameHeight: number
 
-  // Durée de chaque frame
+  /** Durée de chaque frame */
   private readonly frameDuration: number
 
-  // Boucle d'animation
-  //
-  // Si `true`, l'animation tourne en boucle
-  // Si `false`, l'animation s'arrête sur la dernière frame
+  /**
+   * Boucle d'animation
+   *
+   * Si `true`, l'animation tourne en boucle
+   * Si `false`, l'animation s'arrête sur la dernière frame
+   */
   private readonly loop: boolean
 
-  // Compteur de temps de la frame courante
+  /** Compteur de temps de la frame courante */
   private timer: number
 
-  // Index vers la frame en cours
+  /** Index vers la frame en cours */
   private currentIndex: number
 
-  // L'animation est-elle terminée ?
+  /** L'animation est-elle terminée ? */
   private finished: boolean
 
   public constructor(

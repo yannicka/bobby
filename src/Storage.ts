@@ -73,10 +73,14 @@ export class Storage {
     return null
   }
 
+  /**
+   * Tous les niveaux ont-ils été réussis ?
+   */
   public areAllLevelsSucceeded(): boolean {
     const levels = this.getLevels()
 
     for (const [name, level] of Object.entries(levels)) {
+      // Dès qu'on rencontre un niveau non-réussi, on retourne `false`
       if (!level.user.success) {
         return false
       }

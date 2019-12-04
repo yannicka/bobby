@@ -33,27 +33,39 @@ export abstract class Cell {
     ctx.restore()
   }
 
-  // Évènement : avant que le joueur n'entre dans la case
+  /**
+   * Évènement : avant que le joueur n'entre dans la case
+   */
   public onBeforePlayerIn(_player: Player): void {
     // À surcharger
   }
 
-  // Évènement : lorsque le joueur est entièrement dans la case
+  /**
+   * Évènement : lorsque le joueur est entièrement dans la case
+   * 
+   * @return `this` si la case est inchangée ou `null` pour la supprimer
+   */
   public onAfterPlayerIn(_player: Player, _game: Game): this | null {
     return this
   }
 
-  // Évènement : lorsque le joueur a quitté la case
+  /**
+   * Évènement : lorsque le joueur a quitté la case
+   */
   public onAfterPlayerOut(): void {
     // À surcharger
   }
 
-  // Est-ce qu'on peut rentrer sur la case ?
+  /**
+   * Est-ce qu'on peut rentrer sur la case ?
+   */
   public canEnter?(_direction: Direction): boolean {
     return false
   }
 
-  // Est-ce qu'on peut sortir de la case ?
+  /**
+   * Est-ce qu'on peut sortir de la case ?
+   */
   public canLeave?(_direction: Direction): boolean {
     return false
   }
@@ -62,7 +74,7 @@ export abstract class Cell {
     return this.position
   }
 
-  public getAnimationManager(): AnimationManager {
+  protected getAnimationManager(): AnimationManager {
     return this.animationManager
   }
 }

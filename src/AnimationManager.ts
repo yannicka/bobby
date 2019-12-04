@@ -1,18 +1,20 @@
 import { Animation, AnimationOptions } from './Animation'
 
 export class AnimationManager {
-  // Image qui sert de sprite aux animations
+  /** Image qui sert de sprite aux animations */
   private readonly image: HTMLImageElement
 
-  // La taille d'une frame doit être fixée car les frames sont référencées par
-  // des index
+  /**
+   * La taille d'une frame doit être fixée car les frames sont référencées par
+   * des index
+   */
   private readonly frameWidth: number
   private readonly frameHeight: number
 
-  // Liste des animations
+  /** Liste des animations */
   private readonly animations: { [key: string]: Animation }
 
-  // Animation courante
+  /** Animation courante */
   private currentAnimation: Animation | null
 
   public constructor(
