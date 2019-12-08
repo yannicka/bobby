@@ -169,6 +169,7 @@ export class Player {
       case 'walk':
         this.animationManager.play(`walk-${direction.toString()}`, true)
         break
+
       case 'idle':
         this.animationManager.play(`idle-${direction.toString()}`, true)
         break

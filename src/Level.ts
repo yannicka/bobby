@@ -41,7 +41,7 @@ function parseStringLevel(level: string): Array<Array<string>> {
   // Retire les espaces au début de chaque ligne
   let levelWithoutSpace = level.replace(/^ +/gm, '')
 
-  // Remplace les espaces consécutifs par une seule espace
+  // Remplace les espaces consécutives par une seule espace
   levelWithoutSpace = levelWithoutSpace.replace(/ +/g, ' ')
 
   // Coupe à chaque ligne

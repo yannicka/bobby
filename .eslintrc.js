@@ -29,19 +29,19 @@ module.exports = {
     'no-irregular-whitespace': 'off',
 
     'no-unused-vars': ['error', {
-      'argsIgnorePattern': '^_'
+      'argsIgnorePattern': '^_',
     }],
 
     '@typescript-eslint/no-unused-vars': ['error', {
-      'argsIgnorePattern': '^_'
+      'argsIgnorePattern': '^_',
     }],
 
     '@typescript-eslint/member-delimiter-style': ['error', {
       'singleline': {
-        'delimiter': 'comma'
+        'delimiter': 'comma',
       },
       'multiline': {
-        'delimiter': 'none'
+        'delimiter': 'none',
       }
     }],
 
@@ -52,7 +52,5 @@ module.exports = {
     '@typescript-eslint/unbound-method': 'off',
 
     '@typescript-eslint/no-namespace': 'off',
-
-    ''
   },
 }

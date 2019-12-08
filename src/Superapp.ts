@@ -11,7 +11,7 @@ import { OptionsScreen } from './screen/OptionsScreen'
 import { CreditsScreen } from './screen/CreditsScreen'
 
 export class Superapp {
-  private superapp: HTMLElement
+  private readonly superapp: HTMLElement
 
   public constructor() {
     const imagesLoader = ImageManager.load('assets/img/', {
@@ -20,6 +20,8 @@ export class Superapp {
       'background': 'background.png',
     })
 
+    this.superapp = document.getElementById('superapp')
+
     Promise.all(imagesLoader).then(() => {
       this.init()
     })
@@ -27,8 +29,6 @@ export class Superapp {
 
   public init(): void {
     window.addEventListener('resize', Superapp.resize)
-
-    this.superapp = document.getElementById('superapp')
 
     m.route(this.superapp, '/', {
       '/': HomeScreen,
