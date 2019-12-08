@@ -61,14 +61,6 @@ h2 {
   background-color: var(--dark-background-color);
 }
 
-.end-game {
-  background-color: #ddd;
-}
-
-.end-game p {
-  font-size: 130%;
-}
-
 .btn {
   padding: 10px 20px;
   display: inline-block;
@@ -271,4 +263,27 @@ h2 {
 
 #joystick {
   position: absolute;
+}
+
+@keyframes end-game-text-animation {
+  0% {
+    color: var(--primary-color-darker);
+  }
+
+  100% {
+    color: var(--secondary-color-darker);
+  }
+}
+
+#end-game {
+  position: absolute;
+  top: 44%;
+  left: 0;
+  right: 0;
+  font-size: 140%;
+  font-weight: bold;
+  animation: end-game-text-animation 2s;
+  animation-direction: alternate-reverse;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }

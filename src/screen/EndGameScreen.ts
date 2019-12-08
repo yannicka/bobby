@@ -1,8 +1,11 @@
 import m from 'mithril'
 import { Superapp } from '../Superapp'
 import { state } from '../State'
+import { EndGame } from '../EndGame'
 
 export class EndGameScreen {
+  private endGame: EndGame
+
   public view(): Array<m.Vnode> {
     return [
       m('div', { 'id': 'topbar' }, [
@@ -12,12 +15,11 @@ export class EndGameScreen {
         ]),
       ]),
 
-      m('div', { 'class': 'main-wrapper' }, [
-        m('div', { 'class': 'main-content' }, [
-          m('div', { 'id': 'end' }, [
-            m('p', { 'class': 'center' }, 'Félicitations, vous avez fini le jeu. 🎉'),
-            m('p', { 'class': 'center' }, '🥳 Merci d\'avoir joué !'),
-          ]),
+      m('div', { 'id': 'app-wrapper' }, [
+        m('canvas', { 'id': 'app' }),
+        m('div', { 'id': 'end-game' }, [
+          m('p', { 'class': 'center' }, 'Félicitations, vous avez fini le jeu. 🎉'),
+          m('p', { 'class': 'center' }, '🥳 Merci d\'avoir joué !'),
         ]),
       ]),
     ]
@@ -29,10 +31,12 @@ export class EndGameScreen {
     }
 
     Superapp.resize()
+
+    this.endGame = new EndGame()
   }
 
   public onremove(_vnode: m.Vnode): void {
-    document.body.classList.remove('end-game')
-
+    this.endGame.stop()
+    this.endGame.unlisten()
   }
 }
