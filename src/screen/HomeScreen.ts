@@ -14,7 +14,7 @@ export class HomeScreen {
         ]),
       ]),
 
-      m('div', { 'id': 'bottombar' }, [
+      m('div', { 'id': 'bottombar', 'role': 'main' }, [
         m(m.route.Link, { 'href': '/help', 'class': 'btn' }, 'Instructions'),
         m(m.route.Link, { 'href': '/credits', 'class': 'btn' }, 'Crédits'),
         m(m.route.Link, { 'href': '/options', 'class': 'btn' }, 'Options'),

@@ -15,7 +15,7 @@ export class EndGameScreen {
         ]),
       ]),
 
-      m('div', { 'id': 'app-wrapper' }, [
+      m('div', { 'id': 'app-wrapper', 'role': 'main' }, [
         m('canvas', { 'id': 'game' }),
         m('div', { 'id': 'end-game' }, [
           m('p', { 'class': 'center' }, 'Félicitations, vous avez fini le jeu. 🎉'),

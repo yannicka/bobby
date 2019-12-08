@@ -28,7 +28,7 @@ export class GameScreen {
         ]),
       ]),
 
-      m('div', { 'id': 'app-wrapper' }, [
+      m('div', { 'id': 'app-wrapper', 'role': 'main' }, [
         m('canvas', { 'id': 'game' }),
         m('canvas', { 'id': 'joystick', 'style': 'display: none;' }),
       ]),

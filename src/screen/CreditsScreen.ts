@@ -31,7 +31,7 @@ export class CreditsScreen {
         ]),
       ]),
 
-      m('div', { 'class': 'main-wrapper main-wrapper-unaligned' }, [
+      m('div', { 'class': 'main-wrapper main-wrapper-unaligned', 'role': 'main' }, [
         m('div', { 'class': 'main-content' }, [
           m('h2', 'Crédits'),
           CREDITS.map((text: string) => m('p', text)),

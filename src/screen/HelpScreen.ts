@@ -11,7 +11,7 @@ export class HelpScreen {
         ]),
       ]),
 
-      m('div', { 'class': 'main-wrapper main-wrapper-unaligned' }, [
+      m('div', { 'class': 'main-wrapper main-wrapper-unaligned', 'role': 'main' }, [
         m('div', { 'class': 'main-content' }, [
           m('h2', 'Touches'),
           m('p', 'Déplacer le personnage avec les flèches directionnelles 🡨 🡪 🡩 🡫 ou ZQSD, ou bien via la souris ou l\'écran tactile.'),

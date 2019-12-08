@@ -13,7 +13,7 @@ export class OptionsScreen {
         ]),
       ]),
 
-      m('div', { 'class': 'main-wrapper' }, [
+      m('div', { 'class': 'main-wrapper', 'role': 'main' }, [
         m('div', { 'class': 'main-content' }, [
           m('button', { 'onclick': reset, 'class': 'btn' }, 'Remise à zéro'),
           m('p', { 'class': 'center' }, 'Cela effacera votre progression et vous ramènera au niveau 1.'),

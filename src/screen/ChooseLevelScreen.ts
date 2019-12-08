@@ -62,7 +62,7 @@ export class ChooseLevelScreen {
         ]),
       ]),
 
-      m('div', { 'class': 'main-wrapper main-wrapper-unaligned' }, [
+      m('div', { 'class': 'main-wrapper main-wrapper-unaligned', 'role': 'main' }, [
         m('div', { 'class': 'main-content' }, [
           m('div', { 'class': 'levels' }, childrens),
         ]),
