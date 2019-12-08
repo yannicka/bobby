@@ -1,5 +1,5 @@
 import m from 'mithril'
-import { Superapp } from '../Superapp'
+import { App } from '../App'
 
 export class HomeScreen {
   public view(): Array<m.Vnode> {
@@ -23,6 +23,6 @@ export class HomeScreen {
   }
 
   public oncreate(): void {
-    Superapp.resize()
+    App.resize()
   }
 }

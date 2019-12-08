@@ -1,5 +1,5 @@
 import m from 'mithril'
-import { Superapp } from '../Superapp'
+import { App } from '../App'
 import { state } from '../State'
 import { EndGame } from '../EndGame'
 
@@ -16,7 +16,7 @@ export class EndGameScreen {
       ]),
 
       m('div', { 'id': 'app-wrapper' }, [
-        m('canvas', { 'id': 'app' }),
+        m('canvas', { 'id': 'game' }),
         m('div', { 'id': 'end-game' }, [
           m('p', { 'class': 'center' }, 'Félicitations, vous avez fini le jeu. 🎉'),
           m('p', { 'class': 'center' }, '🥳 Merci d\'avoir joué !'),
@@ -30,7 +30,7 @@ export class EndGameScreen {
       m.route.set('/choose-level')
     }
 
-    Superapp.resize()
+    App.resize()
 
     this.endGame = new EndGame()
   }

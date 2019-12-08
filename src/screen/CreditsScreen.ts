@@ -1,5 +1,5 @@
 import m from 'mithril'
-import { Superapp } from '../Superapp'
+import { App } from '../App'
 
 const CREDITS = [
   `Yannick A. « Pif » : idée, code, graphisme.`,
@@ -48,6 +48,6 @@ export class CreditsScreen {
   }
 
   public oncreate(): void {
-    Superapp.resize()
+    App.resize()
   }
 }

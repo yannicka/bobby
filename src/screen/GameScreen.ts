@@ -7,7 +7,7 @@ import { Pointer } from '../input/Pointer'
 import { Touch } from '../input/Touch'
 import { state } from '../State'
 import { isTouchDevice } from '../Util'
-import { Superapp } from '../Superapp'
+import { App } from '../App'
 
 export class GameScreen {
   private game: Game
@@ -29,14 +29,14 @@ export class GameScreen {
       ]),
 
       m('div', { 'id': 'app-wrapper' }, [
-        m('canvas', { 'id': 'app' }),
+        m('canvas', { 'id': 'game' }),
         m('canvas', { 'id': 'joystick', 'style': 'display: none;' }),
       ]),
     ]
   }
 
   public oncreate(vnode: m.Vnode): void {
-    Superapp.resize()
+    App.resize()
 
     this.keyboard = new Keyboard()
 

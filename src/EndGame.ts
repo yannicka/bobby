@@ -1,6 +1,6 @@
 import { Point } from './Point'
 import { computeAppSize } from './Game'
-import { Superapp } from './Superapp'
+import { App } from './App'
 
 function randomNumber(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -69,7 +69,7 @@ export class EndGame {
   private lastUpdate: number
 
   public constructor() {
-    this.canvas = document.getElementById('app') as HTMLCanvasElement
+    this.canvas = document.getElementById('game') as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d')
 
     this.canvas.width = 800
@@ -144,6 +144,6 @@ export class EndGame {
     this.canvas.style.width = `${appSize.size.width}px`
     this.canvas.style.height = `${appSize.size.height}px`
 
-    Superapp.resize()
+    App.resize()
   }
 }

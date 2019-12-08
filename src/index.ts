@@ -1,3 +1,3 @@
-import { Superapp } from './Superapp'
+import { App } from './App'
 
-const app = new Superapp()
+const app = new App()

@@ -1,7 +1,7 @@
 import m from 'mithril'
 
 import { state } from '../State'
-import { Superapp } from '../Superapp'
+import { App } from '../App'
 
 export class OptionsScreen {
   public view(): Array<m.Vnode> {
@@ -23,7 +23,7 @@ export class OptionsScreen {
   }
 
   public oncreate(): void {
-    Superapp.resize()
+    App.resize()
   }
 }
 

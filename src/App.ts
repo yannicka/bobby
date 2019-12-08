@@ -10,8 +10,8 @@ import { HomeScreen } from './screen/HomeScreen'
 import { OptionsScreen } from './screen/OptionsScreen'
 import { CreditsScreen } from './screen/CreditsScreen'
 
-export class Superapp {
-  private readonly superapp: HTMLElement
+export class App {
+  private readonly app: HTMLElement
 
   public constructor() {
     const imagesLoader = ImageManager.load('assets/img/', {
@@ -20,7 +20,7 @@ export class Superapp {
       'background': 'background.png',
     })
 
-    this.superapp = document.getElementById('superapp')
+    this.app = document.getElementById('app')
 
     Promise.all(imagesLoader).then(() => {
       this.init()
@@ -28,9 +28,9 @@ export class Superapp {
   }
 
   public init(): void {
-    window.addEventListener('resize', Superapp.resize)
+    window.addEventListener('resize', App.resize)
 
-    m.route(this.superapp, '/', {
+    m.route(this.app, '/', {
       '/': HomeScreen,
       '/options': OptionsScreen,
       '/help': HelpScreen,
@@ -40,17 +40,17 @@ export class Superapp {
       '/end-game': EndGameScreen,
     })
 
-    Superapp.resize()
+    App.resize()
   }
 
   public static resize(_e: UIEvent | null = null): void {
-    const superapp = document.getElementById('superapp')
     const app = document.getElementById('app')
+    const game = document.getElementById('game')
 
-    const appSize = computeAppSize(app ? true : false)
+    const appSize = computeAppSize(game ? true : false)
     const height = window.innerHeight
 
-    superapp.style.width = `${appSize.size.width}px`
-    superapp.style.height = `${height}px`
+    app.style.width = `${appSize.size.width}px`
+    app.style.height = `${height}px`
   }
 }

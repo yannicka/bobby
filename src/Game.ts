@@ -15,7 +15,7 @@ import { Size } from './Size'
 import { state } from './State'
 import { Storage } from './Storage'
 import { clamp } from './Util'
-import { Superapp } from './Superapp'
+import { App } from './App'
 
 const initialScreenSize = new Size(9 * CELL_SIZE, 9 * CELL_SIZE)
 const screenSize = initialScreenSize.clone()
@@ -64,7 +64,7 @@ export class Game {
   public constructor(gameScreen: GameScreen, levelName: string) {
     this.gameScreen = gameScreen
 
-    this.canvas = document.getElementById('app') as HTMLCanvasElement
+    this.canvas = document.getElementById('game') as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d')
 
     this.lastUpdate = Date.now()
@@ -235,7 +235,7 @@ export class Game {
 
     this.joystick.setScale(this.zoom)
 
-    Superapp.resize()
+    App.resize()
   }
 
   private getScreenSize(): Size {

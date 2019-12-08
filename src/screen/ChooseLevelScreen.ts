@@ -2,7 +2,7 @@ import m, { Attributes } from 'mithril'
 
 import { Level } from '../Level'
 import { state } from '../State'
-import { Superapp } from '../Superapp'
+import { App } from '../App'
 
 class LevelComponent {
   public view(vnode: m.Vnode): m.Vnode {
@@ -25,7 +25,7 @@ class LevelComponent {
   }
 
   public oncreate(): void {
-    Superapp.resize()
+    App.resize()
   }
 
   public gotoLevel(event: MouseEvent, levelName: string): void {
