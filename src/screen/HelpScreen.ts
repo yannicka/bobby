@@ -14,7 +14,7 @@ export class HelpScreen {
       m('div', { 'class': 'main-wrapper main-wrapper-unaligned', 'role': 'main' }, [
         m('div', { 'class': 'main-content' }, [
           m('h2', 'Touches'),
-          m('p', 'Déplacer le personnage avec les flèches directionnelles 🡨 🡪 🡩 🡫 ou ZQSD, ou bien via la souris ou l\'écran tactile.'),
+          m('p', 'Déplacer le personnage avec les flèches directionnelles 🡨 🡪 🡩 🡫 ou ZQSD, ou bien via la souris ou l\'écran tactile (appuyer n\'importe où pour faire apparaitre le joystick).'),
 
           m('h2', 'Objectif'),
           m('p', 'Réussir tous les niveaux.'),
