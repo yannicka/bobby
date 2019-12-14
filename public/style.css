@@ -107,7 +107,7 @@ h2 {
   font-weight: normal;
 }
 
-@media (max-width: 600px) or (max-height: 600px) {
+@media (max-width: 600px), (max-height: 600px) {
   .logo {
     font-size: 80px;
     margin-bottom: 32px;
