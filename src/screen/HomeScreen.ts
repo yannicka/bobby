@@ -8,14 +8,14 @@ export class HomeScreen {
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),
       ]),
 
-      m('div', { 'class': 'main-wrapper' }, [
+      m('div', { 'class': 'main-wrapper', 'role': 'main' }, [
         m('div', { 'class': 'main-content' }, [
           m('h1', { 'class': 'logo' }, 'Bobby'),
           m(m.route.Link, { 'href': '/choose-level', 'class': 'btn-play' }, 'Jouer'),
         ]),
       ]),
 
-      m('div', { 'id': 'bottombar', 'role': 'main' }, [
+      m('div', { 'id': 'bottombar' }, [
         m(m.route.Link, { 'href': '/help', 'class': 'btn' }, 'Instructions'),
         m(m.route.Link, { 'href': '/credits', 'class': 'btn' }, 'Crédits'),
         m(m.route.Link, { 'href': '/options', 'class': 'btn' }, 'Options'),
