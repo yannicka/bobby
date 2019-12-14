@@ -99,6 +99,21 @@ h2 {
   outline: none;
 }
 
+.logo {
+  margin: 0 auto 64px auto;
+  font-size: 120px;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+@media (max-width: 600px) or (max-height: 600px) {
+  .logo {
+    font-size: 80px;
+    margin-bottom: 32px;
+  }
+}
+
 .levels {
   list-style: none;
   display: grid;

@@ -10,6 +10,7 @@ export class HomeScreen {
 
       m('div', { 'class': 'main-wrapper' }, [
         m('div', { 'class': 'main-content' }, [
+          m('h1', { 'class': 'logo' }, 'Bobby'),
           m(m.route.Link, { 'href': '/choose-level', 'class': 'btn-play' }, 'Jouer'),
         ]),
       ]),
