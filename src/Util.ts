@@ -64,7 +64,6 @@ export function clamp(num: number, min: number, max: number): number {
  * @see https://stackoverflow.com/a/4819886
  */
 export function isTouchDevice(): boolean {
-
   const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ')
 
   const mq = function(mediaQuery: string): boolean {
