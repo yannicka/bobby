@@ -30,7 +30,7 @@ export class ImageManager {
   }
 
   // Exécute le chargement des images
-  public static load(path: string, images: { [key: string]: string }): Array<Promise<HTMLImageElement>> {
+  public static load(images: { [key: string]: string }): Array<Promise<HTMLImageElement>> {
     const promises = new Array<Promise<HTMLImageElement>>()
 
     for (const [ name, url ] of Object.entries(images)) {
@@ -42,12 +42,14 @@ export class ImageManager {
           resolve(img)
         })
 
-        img.addEventListener('error', () => {
+        img.addEventListener('error', (e) => {
+          console.error(e)
+
           reject(`Impossible de charger l'image « ${url} »`)
         })
       })
 
-      img.src = path + url
+      img.src = url
 
       promises.push(promise)
     }

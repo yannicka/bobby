@@ -1,6 +1,5 @@
 /node_modules/
-/public/app-*.js
-/public/index.html
+/public/
 /unshared/
 
 /.idea/

@@ -10,14 +10,18 @@ import { HomeScreen } from './screen/HomeScreen'
 import { OptionsScreen } from './screen/OptionsScreen'
 import { CreditsScreen } from './screen/CreditsScreen'
 
+import imgBackground from './assets/img/background.png'
+import imgPlayer from './assets/img/player.png'
+import imgTiles from './assets/img/tiles.png'
+
 export class App {
   private readonly app: HTMLElement
 
   public constructor() {
-    const imagesLoader = ImageManager.load('assets/img/', {
-      'tiles': 'tiles.png',
-      'player': 'player.png',
-      'background': 'background.png',
+    const imagesLoader = ImageManager.load({
+      'background': imgBackground,
+      'player': imgPlayer,
+      'tiles': imgTiles,
     })
 
     this.app = document.getElementById('app')

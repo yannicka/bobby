@@ -27,7 +27,7 @@ export class OptionsScreen {
   }
 }
 
-function reset(_e: object): void {
+function reset(_e: Record<string, unknown>): void {
   if (confirm('Êtes-vous sûr de vouloir effacer votre progression ?')) {
     state.getStorage().reset()
 

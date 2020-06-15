@@ -12,3 +12,4 @@ pages:
       - public
   only:
     - master
+    - pwa
