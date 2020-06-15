@@ -51,7 +51,7 @@ module.exports = {
       short_name: 'Bobby',
       icons: [
         {
-          src: path.resolve('src/assets/icons/icon-512x512.png'),
+          src: path.resolve('src/assets/icons/icon.png'),
           sizes: [ 96, 128, 192, 256, 384, 512 ],
         },
       ],

@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100mm"
-   height="100mm"
-   viewBox="0 0 100 100"
-   version="1.1"
-   id="svg8"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="icon.svg"
-   inkscape:export-filename="/home/pi/Programmation/bobby/public/assets/icons/icon-512x512.png"
+   inkscape:export-ydpi="130.048"
    inkscape:export-xdpi="130.048"
-   inkscape:export-ydpi="130.048">
+   inkscape:export-filename="/home/pi/Programmation/bobby/public/assets/icons/icon-512x512.png"
+   sodipodi:docname="icon.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 100 100"
+   height="100mm"
+   width="100mm">
   <defs
      id="defs2" />
   <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="116.32089"
-     inkscape:cy="247.35313"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1009"
-     inkscape:window-x="0"
+     inkscape:document-rotation="0"
+     inkscape:window-maximized="1"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-x="0"
+     inkscape:window-height="1010"
+     inkscape:window-width="1920"
+     showgrid="false"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="258.99393"
+     inkscape:cx="252.8748"
+     inkscape:zoom="1"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -52,27 +52,67 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Tavolo 1"
-     inkscape:groupmode="layer"
+     transform="translate(0,-197)"
      id="layer1"
-     transform="translate(0,-197)">
+     inkscape:groupmode="layer"
+     inkscape:label="Tavolo 1">
     <rect
-       style="opacity:1;fill:#42c79c;fill-opacity:1;stroke:#000309;stroke-width:0.0609966;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect863"
-       width="99.939011"
-       height="99.939003"
+       ry="6"
+       rx="6"
+       y="197.0305"
        x="0.030498302"
-       y="197.0305" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:25.00853539px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.62521338"
-       x="7.9202085"
-       y="256.10345"
-       id="text867"><tspan
-         sodipodi:role="line"
-         id="tspan865"
-         x="7.9202085"
-         y="256.10345"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sawasdee;-inkscape-font-specification:Sawasdee;fill:#ffffff;fill-opacity:1;stroke-width:0.62521338">BOBBY</tspan></text>
+       height="99.939003"
+       width="99.939011"
+       id="rect863"
+       style="opacity:1;fill:#42c79c;fill-opacity:1;stroke:#000309;stroke-width:0.0609966;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <image
+       id="image34"
+       xlink:href="data:image/png;base64,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
+"
+       preserveAspectRatio="none"
+       height="69.618851"
+       width="50.622841"
+       x="24.68858"
+       y="212.19057" />
   </g>
 </svg>
