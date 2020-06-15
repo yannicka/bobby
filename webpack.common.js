@@ -61,15 +61,15 @@ module.exports = {
       theme_color: '#42c79c',
     }),
 
-		new OfflinePlugin({
-			caches: {
-				additional: [
-					':rest:',
-				]
+    new OfflinePlugin({
+      caches: {
+        additional: [
+          ':rest:',
+        ]
       },
-			safeToUseOptionalCaches: true,
-			updateStrategy: 'changed',
-		}),
+      safeToUseOptionalCaches: true,
+      updateStrategy: 'changed',
+    }),
     
     new WorkboxPlugin.GenerateSW({
       clientsClaim: true,
