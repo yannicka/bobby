@@ -271,11 +271,6 @@ h2 {
   align-content: center;
 }
 
-#game {
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
-}
-
 #joystick {
   position: fixed;
 }
