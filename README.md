@@ -1,6 +1,6 @@
 # Bobby
 
-![Bannière de présentation du jeu Bobby](public/assets/img/banner.png)
+![Bannière de présentation du jeu Bobby](src/assets/img/banner.png)
 
 ## Compilation
 
