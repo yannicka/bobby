@@ -8,7 +8,8 @@
     "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint 'src/**/*.ts'",
-    "lint-fix": "eslint --fix 'src/**/*.ts'"
+    "lint-fix": "eslint --fix 'src/**/*.ts'",
+    "electron-build": "npm run build && electron src/electron-index.js"
   },
   "dependencies": {
     "mithril": "^2.0.4"
@@ -18,6 +19,7 @@
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^3.2.0",
     "css-loader": "^3.6.0",
+    "electron": "^9.0.5",
     "eslint": "^7.2.0",
     "eslint-plugin-import": "^2.21.2",
     "file-loader": "^6.0.0",
