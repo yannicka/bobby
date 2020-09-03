@@ -476,23 +476,6 @@ export const levels: LevelType = {
     `,
   },
 
-  'Klemola': {
-    screenWidth: 10,
-    screenHeight: 10,
-    map: `
-      # # # # # # # # # #
-      # # # . . . . # # #
-      # # . . . . . . # #
-      # . . J J L L . . #
-      # S . H J $ H . . #
-      # . . H $ F H . E #
-      # . . T T F F . . #
-      # # . . . . . . # #
-      # # # . . . . # # #
-      # # # # # # # # # #
-    `,
-  },
-
   'Taylor': {
     map: `
       # # # # # # # # # # # # #
@@ -508,6 +491,23 @@ export const levels: LevelType = {
       # . $ . . . # . . . $ . #
       # . . . . . # . . . . . #
       # # # # # # # # # # # # #
+    `,
+  },
+
+  'Klemola': {
+    screenWidth: 10,
+    screenHeight: 10,
+    map: `
+      # # # # # # # # # #
+      # # # . . . . # # #
+      # # . . . . . . # #
+      # . . J J L L . . #
+      # S . H J $ H . . #
+      # . . H $ F H . E #
+      # . . T T F F . . #
+      # # . . . . . . # #
+      # # # . . . . # # #
+      # # # # # # # # # #
     `,
   },
 
