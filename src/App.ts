@@ -13,16 +13,24 @@ import { CreditsScreen } from './screen/CreditsScreen'
 import imgBackground from './assets/img/background.png'
 import imgPlayer from './assets/img/player.png'
 import imgTiles from './assets/img/tiles.png'
+import imgTilesContrasted from './assets/img/tilesContrasted.png'
 
 export class App {
   private readonly app: HTMLElement
 
   public constructor() {
-    const imagesLoader = ImageManager.load({
+    var imagesLoader = ImageManager.load({
       'background': imgBackground,
       'player': imgPlayer,
       'tiles': imgTiles,
     })
+    if (localStorage.getItem('useContrast') == 'true') {
+      imagesLoader = ImageManager.load({
+        'background': imgBackground,
+        'player': imgPlayer,
+        'tiles': imgTilesContrasted,
+      })
+    }
 
     this.app = document.getElementById('app')
 
@@ -43,7 +51,7 @@ export class App {
       '/level/:level': GameScreen,
       '/end-game': EndGameScreen,
     })
-
+    
     App.resize()
   }
 

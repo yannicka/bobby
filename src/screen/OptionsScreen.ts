@@ -17,6 +17,8 @@ export class OptionsScreen {
         m('div', { 'class': 'main-content' }, [
           m('button', { 'onclick': reset, 'class': 'btn' }, 'Remise à zéro'),
           m('p', { 'class': 'center' }, 'Cela effacera votre progression et vous ramènera au niveau 1.'),
+          m('button', { 'onclick': setContrast, 'class': 'btn' }, 'Utiliser un contraste fort'),
+          m('button', { 'onclick': setContrastno, 'class': 'btn' }, 'Utiliser un contraste faible'),
         ]),
       ]),
     ]
@@ -33,4 +35,15 @@ function reset(_e: Record<string, unknown>): void {
 
     alert('Votre progression a bien été effacée.')
   }
+}
+
+function setContrast(_e: Record<string, unknown>): void {
+  localStorage.setItem('useContrast', 'true')
+  alert('Vous utilisez désormais un contraste fort.')
+  window.location.reload(true)
+}
+function setContrastno(_e: Record<string, unknown>): void {
+  localStorage.setItem('useContrast', 'false')
+  alert('Vous utilisez désormais un contraste faible.')
+  window.location.reload(true)
 }
