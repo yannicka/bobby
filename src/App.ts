@@ -13,6 +13,7 @@ import { CreditsScreen } from './screen/CreditsScreen'
 import imgBackground from './assets/img/background.png'
 import imgPlayer from './assets/img/player.png'
 import imgTiles from './assets/img/tiles.png'
+import imgTilesHighContrast from './assets/img/tiles-high-contrast.png'
 
 export class App {
   private readonly app: HTMLElement
@@ -21,7 +22,7 @@ export class App {
     const imagesLoader = ImageManager.load({
       'background': imgBackground,
       'player': imgPlayer,
-      'tiles': imgTiles,
+      'tiles': localStorage.getItem('high-contrast') == '1' ? imgTilesHighContrast : imgTiles,
     })
 
     this.app = document.getElementById('app')
