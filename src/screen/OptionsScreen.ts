@@ -5,6 +5,13 @@ import { App } from '../App'
 
 export class OptionsScreen {
   public view(): Array<m.Vnode> {
+    var contrastText
+    if (localStorage.getItem('useContrast') == 'true') {
+    	contrastText = 'Utiliser un contraste faible'
+    }
+    else {
+        contrastText = 'Utiliser un contraste fort'
+    }
     return [
       m('div', { 'id': 'topbar' }, [
         m('div', { 'class': 'topbar-gamename' }, 'Bobby'),
@@ -17,8 +24,7 @@ export class OptionsScreen {
         m('div', { 'class': 'main-content' }, [
           m('button', { 'onclick': reset, 'class': 'btn' }, 'Remise à zéro'),
           m('p', { 'class': 'center' }, 'Cela effacera votre progression et vous ramènera au niveau 1.'),
-          m('button', { 'onclick': setContrast, 'class': 'btn' }, 'Utiliser un contraste fort'),
-          m('button', { 'onclick': setContrastno, 'class': 'btn' }, 'Utiliser un contraste faible'),
+          m('button', { 'onclick': setContrast, 'class': 'btn' }, contrastText),
         ]),
       ]),
     ]
@@ -38,12 +44,13 @@ function reset(_e: Record<string, unknown>): void {
 }
 
 function setContrast(_e: Record<string, unknown>): void {
-  localStorage.setItem('useContrast', 'true')
-  alert('Vous utilisez désormais un contraste fort.')
-  window.location.reload(true)
-}
-function setContrastno(_e: Record<string, unknown>): void {
-  localStorage.setItem('useContrast', 'false')
-  alert('Vous utilisez désormais un contraste faible.')
+  if (localStorage.getItem('useContrast') == 'true') {
+  	localStorage.setItem('useContrast', 'false')
+  	alert('Vous utilisez désormais un contraste faible.')
+  }
+  else {
+  	localStorage.setItem('useContrast', 'true')
+  	alert('Vous utilisez désormais un contraste fort.')
+  }
   window.location.reload(true)
 }
