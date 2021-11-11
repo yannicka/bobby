@@ -33,4 +33,4 @@ deploy_production:
     - ssh-add <(echo "$PRODUCTION_PRIVATE_KEY")
     - echo "$PRODUCTION_PRIVATE_KEY" > ~/.ssh/id_rsa
   script:
-    - rsync -avz --delete /builds/yannicka/test-ci/dist/ -e "ssh -i ~/.ssh/id_tmp" $PRODUCTION_SERVER
+    - rsync -avz --delete /builds/yannicka/bobby/public/ -e "ssh -i ~/.ssh/id_rsa" $PRODUCTION_SERVER
