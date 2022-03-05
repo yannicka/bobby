@@ -1,36 +1,34 @@
-image: node:12
-
-variables:
-  APP_ENV: production
-
 stages:
   - build
   - deploy
 
-build:
-  stage: build
-  before_script:
-    - npm install
-  script:
-    - npm run build
-  artifacts:
-    paths:
-      - public
+variables:
+  TAG_LATEST: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:latest
+  TAG_COMMIT: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:$CI_COMMIT_SHORT_SHA
 
-deploy_production:
+build:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - docker build -t $TAG_COMMIT -t $TAG_LATEST -f docker/Dockerfile .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push $TAG_COMMIT
+    - docker push $TAG_LATEST
+
+deploy:
+  image: alpine:latest
   stage: deploy
+  script:
+    - chmod og= $SSH_PRIVATE_KEY
+    - apk update && apk add openssh-client
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "docker pull $TAG_COMMIT"
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "docker container rm -f bobby || true"
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "docker run -d -p 9001:80 --name bobby $TAG_COMMIT"
   environment:
     name: production
-    url: https://bobby.yannicka.fr
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-    - apt-get update -y && apt-get install rsync -y
-    - mkdir -p ~/.ssh
-    - eval $(ssh-agent -s)
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - ssh-add <(echo "$PRODUCTION_PRIVATE_KEY")
-    - echo "$PRODUCTION_PRIVATE_KEY" > ~/.ssh/id_rsa
-  script:
-    - rsync -avz --delete /builds/yannicka/bobby/public/ -e "ssh -i ~/.ssh/id_rsa" $PRODUCTION_SERVER
+    url: http://bobby.yannicka.fr/
+  only:
+    - master
