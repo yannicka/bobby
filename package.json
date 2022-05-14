@@ -7,12 +7,10 @@
   "scripts": {
     "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "start": "webpack --config webpack.prod.js && http-server -p 5000 public",
     "lint": "eslint 'src/**/*.ts'",
     "lint-fix": "eslint --fix 'src/**/*.ts'"
   },
   "dependencies": {
-    "http-server": "^14.1.0",
     "mithril": "^2.0.4"
   },
   "devDependencies": {
