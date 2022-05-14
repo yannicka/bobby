@@ -7,7 +7,7 @@
   "scripts": {
     "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "start": "webpack --config webpack.prod.js && http-server -p 80 public",
+    "start": "webpack --config webpack.prod.js && http-server -p 5000 public",
     "lint": "eslint 'src/**/*.ts'",
     "lint-fix": "eslint --fix 'src/**/*.ts'"
   },
