@@ -11,26 +11,26 @@
     "lint-fix": "eslint --fix 'src/**/*.ts'"
   },
   "dependencies": {
-    "mithril": "^2.0.4"
+    "mithril": "^2.2.2"
   },
   "devDependencies": {
-    "@types/mithril": "^2.0.7",
-    "@typescript-eslint/eslint-plugin": "^4.28.2",
-    "@typescript-eslint/parser": "^4.28.2",
-    "css-loader": "^4.3.0",
-    "eslint": "^7.30.0",
-    "eslint-plugin-import": "^2.23.4",
+    "@lcdp/offline-plugin": "^5.1.1",
+    "@types/mithril": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "css-loader": "^6.7.2",
+    "eslint": "^8.28.0",
+    "eslint-plugin-import": "^2.26.0",
     "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^4.5.2",
-    "offline-plugin": "^5.0.7",
-    "style-loader": "^1.3.0",
-    "ts-loader": "^8.3.0",
-    "typescript": "^4.3.5",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.2",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.9.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1",
     "webpack-merge": "^5.8.0",
     "webpack-pwa-manifest": "^4.3.0",
-    "workbox-webpack-plugin": "^5.1.4"
+    "workbox-webpack-plugin": "^6.5.4"
   }
 }

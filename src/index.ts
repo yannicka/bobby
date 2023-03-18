@@ -1,5 +1,5 @@
 import { App } from './App'
-import * as OfflinePluginRuntime from 'offline-plugin/runtime'
+import * as OfflinePluginRuntime from '@lcdp/offline-plugin/runtime'
 
 import './assets/style/style.css'
 
