@@ -1,0 +1,41 @@
+{
+  "icons": [
+    {
+      "src": "icon_512x512.c3d0e123e4b7b05bd8abf4c55b16a17b.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_384x384.8e839b784074f293079590ed79858ac4.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_256x256.952d9587fe7efa18d92629ef8f5dbf86.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_192x192.7d4b4c4c2a0e7d573d9090552f6a53ee.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_128x128.3366eb90b0456e3acb3ec5bfcc475be9.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_96x96.7b066309b33714645f7cf057930c446f.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "Bobby",
+  "short_name": "Bobby",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": "/",
+  "background_color": "#42c79c",
+  "theme_color": "#42c79c"
+}

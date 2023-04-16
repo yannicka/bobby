@@ -2,6 +2,13 @@
 /public/
 /unshared/
 
+/android/build/
+/android/gradle/
+/android/unshared/
+/android/local.properties
+/android/app/release/
+/android/app/build/
+
 /.idea/
 
 *~
