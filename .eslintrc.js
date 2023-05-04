@@ -6,7 +6,6 @@ module.exports = {
 
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
@@ -23,16 +22,21 @@ module.exports = {
     '@typescript-eslint',
   ],
 
+  root: true,
+
   rules: {
     'semi': ['error', 'never'],
 
     'no-irregular-whitespace': 'off',
 
-    'no-unused-vars': ['error', {
-      'argsIgnorePattern': '^_',
-    }],
+    'no-unused-vars': 'off',
+
+    '@typescript-eslint/no-unsafe-return': 'off',
+
+    '@typescript-eslint/no-floating-promises': 'off',
 
     '@typescript-eslint/no-unused-vars': ['error', {
+      'varsIgnorePattern': '^_',
       'argsIgnorePattern': '^_',
     }],
 

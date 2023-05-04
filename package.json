@@ -7,7 +7,7 @@
   "scripts": {
     "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "lint": "eslint 'src/**/*.ts'",
+    "lint": "eslint src",
     "lint-fix": "eslint --fix 'src/**/*.ts'"
   },
   "dependencies": {
