@@ -5,7 +5,7 @@ build:
   image: node:latest
   stage: build
   script:
-    - npm install
+    - npm clean-install
     - npm run build
     - npm run lint
     - mv public bobby
