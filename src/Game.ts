@@ -199,7 +199,7 @@ export class Game {
 
     if (nextLevel) {
       const nextLevelName = nextLevel.fixed.name
-  
+
       m.route.set(`/level/${nextLevelName}`, {}, {
         replace: true,
       })

@@ -2,14 +2,14 @@ import m from 'mithril'
 import { App } from '../App'
 
 const CREDITS = [
-  `Yannick A. « Pif » : idée, code, graphisme.`,
+  'Yannick A. « Pif » : idée, code, graphisme.',
 ]
 
 const THANKS = [
   `Merci à Aur36 pour son aide sur la réalisation de niveaux, ses nombreux
   tests et retours et son enthousiasme sans limite.`,
 
-  `Merci à oräkle - Ethan G. pour son assistance graphique.`,
+  'Merci à oräkle - Ethan G. pour son assistance graphique.',
 
   `Merci à Alceste_ pour ses améliorations de code et de fonctionnement
   global.`,

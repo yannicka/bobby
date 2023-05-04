@@ -31,6 +31,20 @@ module.exports = {
 
     'no-unused-vars': 'off',
 
+    'comma-dangle': ['error', 'always-multiline'],
+
+    'no-trailing-spaces': ['error', {
+      'ignoreComments': true,
+    }],
+
+    'prefer-template': 'error',
+
+    'quotes': ['error', 'single'],
+
+    'no-multiple-empty-lines': ['error'],
+
+    '@typescript-eslint/indent': ['error', 2],
+
     '@typescript-eslint/no-unsafe-return': 'off',
 
     '@typescript-eslint/no-floating-promises': 'off',

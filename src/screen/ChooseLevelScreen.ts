@@ -19,7 +19,7 @@ class LevelComponent {
     return m('div', { 'class': classesText }, [
       m(m.route.Link, {
         'href': `/level/${level.fixed.name}`,
-        'onclick': (event: MouseEvent) => this.gotoLevel(event, level.fixed.name)
+        'onclick': (event: MouseEvent) => this.gotoLevel(event, level.fixed.name),
       }, level.fixed.number),
     ])
   }
