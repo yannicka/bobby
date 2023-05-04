@@ -5,7 +5,6 @@ build:
   image: node:latest
   stage: build
   script:
-    - cd bobby
     - npm install
     - npm run build
     - npm run lint
