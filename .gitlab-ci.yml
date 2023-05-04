@@ -13,4 +13,4 @@ build:
     - zip bobby.zip -r bobby
   artifacts:
     paths:
-      - bobby/bobby.zip
+      - bobby.zip
