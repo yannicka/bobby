@@ -28,5 +28,5 @@ release_job:
     assets:
       links:
         - name: 'Bobby'
-          url: '$CI_REPOSITORY_URL/-/jobs/artifacts/$CI_COMMIT_TAG/download?job=build'
+          url: '$CI_PROJECT_URL/-/jobs/artifacts/$CI_COMMIT_TAG/download?job=build'
           link_type: package
