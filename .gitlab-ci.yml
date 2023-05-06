@@ -9,8 +9,6 @@ build:
     - npm run build
     - npm run lint
     - mv public bobby
-    - apt update -y && apt install -y zip
-    - zip bobby.zip -r bobby
   artifacts:
     paths:
-      - bobby.zip
+      - bobby
