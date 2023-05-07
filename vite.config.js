@@ -8,8 +8,6 @@ export default defineConfig({
         'src/**',
       ],
       exclude: [
-        'src/Rotation.ts',
-        'src/Direction.ts',
         'src/import-images.d.ts',
         'src/levels.ts',
         'src/index.ts',
