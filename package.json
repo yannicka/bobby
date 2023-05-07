@@ -10,13 +10,15 @@
     "lint": "eslint src",
     "lint-fix": "eslint --fix 'src/**/*.ts'",
     "tests": "vitest run",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "tests:playwright": "playwright test"
   },
   "dependencies": {
     "mithril": "^2.2.2"
   },
   "devDependencies": {
     "@lcdp/offline-plugin": "^5.1.1",
+    "@playwright/test": "^1.33.0",
     "@types/mithril": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",

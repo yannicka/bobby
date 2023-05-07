@@ -10,6 +10,7 @@ build:
     - npm run build
     - npm run coverage
     - npm run lint
+    - npm run tests:playwright
     - mv public bobby
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   artifacts:
