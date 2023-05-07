@@ -8,8 +8,10 @@ build:
   script:
     - npm clean-install
     - npm run build
+    - npm run coverage
     - npm run lint
     - mv public bobby
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   artifacts:
     paths:
       - bobby

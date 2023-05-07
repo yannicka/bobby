@@ -8,7 +8,9 @@
     "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint src",
-    "lint-fix": "eslint --fix 'src/**/*.ts'"
+    "lint-fix": "eslint --fix 'src/**/*.ts'",
+    "tests": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "mithril": "^2.2.2"
