@@ -8,6 +8,7 @@
 
 /android/build/
 /android/gradle/
+/android/.gradle/
 /android/unshared/
 /android/local.properties
 /android/app/release/
