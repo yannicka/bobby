@@ -4,7 +4,6 @@ apply plugin: "kotlin-android-extensions"
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.1"
 
     defaultConfig {
         applicationId "fr.yannicka.bobby"
@@ -22,6 +21,7 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
+    namespace 'fr.yannicka.bobby'
 }
 
 dependencies {

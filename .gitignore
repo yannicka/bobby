@@ -1,3 +1,6 @@
+.idea/
+*~
+
 /node_modules/
 /public/
 /unshared/
@@ -9,7 +12,3 @@
 /android/local.properties
 /android/app/release/
 /android/app/build/
-
-/.idea/
-
-*~
