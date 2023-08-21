@@ -2,16 +2,14 @@ apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 
 android {
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
+    namespace "fr.yannicka.bobby"
+    compileSdk 33
 
     defaultConfig {
         applicationId "fr.yannicka.bobby"
-        minSdk 33
-        compileSdk 33
-        versionCode 4
+        minSdk 24
+        targetSdk 33
+        versionCode 6
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -24,7 +22,10 @@ android {
         }
     }
 
-    namespace 'fr.yannicka.bobby'
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 }
 
 dependencies {
