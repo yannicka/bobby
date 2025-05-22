@@ -4,11 +4,16 @@
   "description": "Bobby",
   "author": "Yannick A.",
   "license": "AGPL-3.0-or-later",
+  "main": "electron/main.js",
   "scripts": {
     "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint src",
-    "lint-fix": "eslint --fix 'src/**/*.ts'"
+    "lint-fix": "eslint --fix 'src/**/*.ts'",
+    "electron": "electron --no-sandbox .",
+    "electron-dev": "concurrently \"cross-env ELECTRON_START_URL=http://localhost:8080 electron --no-sandbox .\" \"npm run serve\"",
+    "electron-pack": "npm run build && electron-builder build --publish never",
+    "electron-dist": "electron-builder build"
   },
   "dependencies": {
     "mithril": "^2.2.2"
@@ -18,7 +23,11 @@
     "@types/mithril": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
+    "electron": "^36.3.0",
+    "electron-builder": "^26.0.12",
     "eslint": "^8.39.0",
     "eslint-plugin-import": "^2.27.5",
     "file-loader": "^6.2.0",
@@ -26,11 +35,36 @@
     "style-loader": "^3.3.2",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.4",
+    "wait-on": "^8.0.3",
     "webpack": "^5.82.0",
     "webpack-cli": "^5.0.2",
     "webpack-dev-server": "^4.13.3",
     "webpack-merge": "^5.8.0",
     "webpack-pwa-manifest": "^4.3.0",
     "workbox-webpack-plugin": "^6.5.4"
+  },
+  "build": {
+    "appId": "com.bobby.app",
+    "productName": "Bobby",
+    "files": [
+      "public/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "src/assets/icons",
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.games",
+      "icon": "src/assets/icons/icon.png"
+    },
+    "win": {
+      "icon": "src/assets/icons/icon.png"
+    },
+    "linux": {
+      "icon": "src/assets/icons/icon.png",
+      "category": "Game"
+    }
   }
 }
