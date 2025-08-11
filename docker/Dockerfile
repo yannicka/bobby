@@ -1,15 +1,16 @@
-FROM httpd:2-alpine
+FROM node:24-alpine AS node
 
-WORKDIR /var/bobby
+COPY . /project
 
-COPY . .
+WORKDIR /project
 
-RUN apk add --update nodejs npm
+RUN ["npm", "install"]
+RUN ["npm", "run", "build"]
 
-RUN npm install && npm run build && rm node_modules -r && mv public/* /usr/local/apache2/htdocs/
+# -----
 
-RUN apk del nodejs npm
+FROM ghcr.io/static-web-server/static-web-server:2
 
-EXPOSE 80
+WORKDIR /
 
-CMD [ "httpd-foreground" ]
+COPY --from=node /project/public /public
