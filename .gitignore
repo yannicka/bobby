@@ -1,6 +1,7 @@
 /node_modules/
 /public/
 /unshared/
+/dist/
 
 /android/build/
 /android/gradle/
