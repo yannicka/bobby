@@ -1,3 +1,6 @@
+
+
+
 # Bobby
 
 ![Bannière de présentation du jeu Bobby](src/assets/img/banner.png)
@@ -26,9 +29,9 @@ soutien dans le développement du projet, et pour leurs divers retours.
 
 ## Inspirations
 
-Ce jeu s'inspire de :
+Ce jeu s'inspire de :
 
-- [Pascal Penguin](http://www.luduminis.com/pascal/about/) ;
+- [Pascal Penguin](http://www.luduminis.com/pascal/about/) ;
 
 - [Bobby Carrot](https://en.wikipedia.org/wiki/Bobby_Carrot).
 
@@ -36,19 +39,19 @@ Ce jeu s'inspire de :
 
 - Lorsqu'on essaye de se déplacer vers un bloc solide, l'animation ne s'active
   qu'au moment où le clic est lâché. À la place, il ne faudrait soit aucun
-  mouvement, soit un mouvement tout le long de l'appui ;
+  mouvement, soit un mouvement tout le long de l'appui ;
 
 - La première ligne de définition d'un niveau fait preuve de largeur de ce
   niveau. Par conséquent le dernier bloc de la ligne définit la largeur de jeu.
   Cela peut poser problème si on souhaite ne pas mettre de bloc sur toutes les
-  cellules de la première ligne ;
+  cellules de la première ligne ;
 
-- Il y un flou de mouvement sur le joueur lors du déplacement de la caméra ;
+- Il y a un flou de mouvement sur le joueur lors du déplacement de la caméra ;
 
 - Lors de la téléportation d'un coté de l'écran à l'autre, le joueur subit une
-  petite accélération involontaire après la téléportation ;
+  petite accélération involontaire après la téléportation ;
 
-- Le déplacement lorsque trois touches sont appuyées n'est pas intuitif ;
+- Le déplacement lorsque trois touches sont appuyées n'est pas intuitif ;
 
 - Lors du déplacement de la caméra, des traits fins apparaissent entre les
   blocs. Cela se voit notamment sur la glace.
