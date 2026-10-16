@@ -52,3 +52,7 @@ Ce jeu s'inspire de :
 
 - Lors du déplacement de la caméra, des traits fins apparaissent entre les
   blocs. Cela se voit notamment sur la glace.
+
+## Play online
+
+Also playable on [WASM Arcade](https://www.wasmarcade.online/arcade/bobby/) — free, no download.
